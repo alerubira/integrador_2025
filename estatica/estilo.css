@@ -1,0 +1,264 @@
+#divPrincipal {
+   
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; 
+    margin: 0;
+  }
+  h1{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+}
+h6{
+  margin: 0;
+  text-align: left; /* Alinea el texto del <li> a la izquierda */
+}
+h5 {
+  margin-bottom: 0;
+}
+
+.label {
+    display: inline-block;
+     /* Añadir padding opcionalmente para un mejor ajuste visual */
+     padding: 2px 5px;
+     /* Opcional: añadir un borde para ver claramente el tamaño del label */
+     border: 1px solid #000;
+     width: auto; /* Anula la regla width: 200px; */
+}
+#divCabecera {
+    /*position: fixed;*/
+    text-align: center;
+    background-color:antiquewhite;
+    width: 75%;
+    margin: 1%;
+    /*z-index: 1000;*/ 
+   /* box-shadow: 0 0 0 10px rgb(0, 255, 191);*/ 
+}
+#divLogo{
+    width: 20%;
+}
+.boton{
+    background-color: cornflowerblue;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 2px;
+}
+.boton:hover{
+    background-color: darkblue;
+}
+#divSecundario{
+      /*position: fixed;*/
+      text-align: center;
+     /* background-color:antiquewhite;*/
+      width: 85%;
+      margin: 1%;
+      height: auto; /* Ajusta según el tamaño de la ventana */
+      /*z-index: 1000;*/ 
+      /*box-shadow: 0 0 0 10px rgb(0, 255, 191);*/ 
+}
+#divLateral{
+    width: 10%;
+    background-color: darkslategrey;
+    text-align: center;
+    height: 400px; /* Añadir esta línea para un alto fijo */
+}
+.crear{
+  width: 60%;
+  margin: 0 auto; /* Centra el elemento horizontalmente */
+  text-align: center;
+}
+#divProfecional{
+    border-radius: 10px; /* Establece los bordes redondeados */
+    border: 2px solid black; /* Establece el borde de color negro */
+    width: 40%; /* Establece el ancho al 45% del contenedor */
+    display: inline-block; /* Para colocarlos uno al lado del otro */
+    vertical-align: top; /* Alinea los elementos superiormente */
+}
+#divReceta{
+    border-radius: 10px; /* Establece los bordes redondeados */
+    border: 2px solid black; /* Establece el borde de color negro */
+    height: auto; /* Ocupa el % del alto de su contenedor ,automatico al contenido*/
+}
+.divPr{
+  border:1px solid #FF69B4;
+}
+#divPaciente{
+   /* border-radius: 10px; /* Establece los bordes redondeados */
+   /* border: 2px solid black; /* Establece el borde de color negro */
+    width: 55%; /* Establece el ancho al 55% del contenedor */
+    display: inline-block; /* Para colocarlos uno al lado del otro */
+    vertical-align: top; /* Alinea los elementos superiormente */
+}
+
+
+#divDiagnostico {
+  /*border-radius: 10px; /* Establece los bordes redondeados */
+  /*border: 2px solid black; /* Establece el borde de color negro */
+  /*height: 30%; /* Ajusta el alto del contenedor */
+  width: 95%; /* Establece el ancho del contenedor */
+  padding: 10px; /* Añade un espacio interno para el contenido */
+  height: auto; /* Ocupa el % del alto de su contenedor ,automatico al contenido*/
+  resize: none; /* Evita que el usuario cambie el tamaño manualmente */
+  box-sizing: border-box; /* Incluye padding y borde en el ancho y alto */
+ /* overflow: visible; /* Permite que el contenido desborde si es necesario */
+ overflow: hidden; /* Asegura que el contenido adicional se oculte */ 
+ max-height: none; /* Asegura que no haya límite en la altura máxima */
+
+}
+#diagnostico {
+  width: 100%; /* Ocupa el 100% del ancho de su contenedor */
+  height: 30; /* Ocupa el % del alto de su contenedor ,automatico al contenido*/
+  resize: none; /* Evita que el usuario cambie el tamaño manualmente */
+  box-sizing: border-box; /* Incluye padding y borde en el ancho y alto */
+ 
+}
+
+  form label {
+    display: inline-block;
+    width: 200px; /* Ancho deseado para las etiquetas */
+    text-align: right; /* Alinea el texto de las etiquetas a la derecha */
+    margin-right: 5px; /* Espacio entre las etiquetas y los campos de entrada */
+    padding: 0.50rem 0; /* 0.75rem arriba y abajo, 0 en los lados */
+}
+label {
+  display: inline-block;
+  width: 200px; /* Ancho deseado para las etiquetas */
+  text-align: right; /* Alinea el texto de las etiquetas a la derecha */
+  margin-right: 5px; /* Espacio entre las etiquetas y los campos de entrada */
+  padding: 0.50rem 0; /* 0.75rem arriba y abajo, 0 en los lados */
+}
+.ocultar{
+    display: none;
+}
+ .ocultar2{
+  display: none;
+ }
+.div{
+border: 1px solid black;
+}
+.form{
+    background-color:antiquewhite;
+    border-radius: 5px;
+}
+/* Estilos para la alerta */
+#divAlerta {
+    position: fixed; /* Para que se sobreponga a otros elementos */
+    top: 12%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrar horizontal y verticalmente */
+    width: 60vw; /* 60% del ancho de la ventana */
+    background-color: #FF69B4; /* Fondo rosa */
+    /*border: 5px solid red; /* Bordes rojos */
+    /*padding: 20px;*/
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto de sobreposición */
+    z-index: 9999; /* Para asegurar que esté al frente */
+  }
+  #divExito{
+    position: fixed; /* Para que se sobreponga a otros elementos */
+    top: 12%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrar horizontal y verticalmente */
+    width: 60vw; /* 60% del ancho de la ventana */
+    background-color: #90EE90; /* Fondo verde claro */
+    
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto de sobreposición */
+    z-index: 9999; /* Para asegurar que esté al frente */
+  }
+  
+  /* Estilo para el mensaje dentro de la alerta */
+  #divAlerta p {
+    color: white;
+    font-size: 1.5em;
+    margin: 0;
+  }
+  #divExito p{
+    color: white;
+    font-size: 1.5em;
+    margin: 0;
+  }
+  body {
+    background-color: #ADD8E6; /* Código hexadecimal para un color celeste claro */
+  }
+  table {
+    background-color:black;
+    border-collapse: collapse; /* Colapsa los bordes para evitar doble borde */
+    width: 100%; /* Hace que la tabla ocupe todo el ancho disponible */
+    color: white; /* Cambia el color del texto a blanco */
+    font-weight: 2; /* Letras finas */
+    font:
+  italic normal bold normal 1em/ Helvetica,
+  Arial,
+  sans-serif;
+  }
+  
+  table, th, td {
+    border: 1px solid white; /* Agrega un borde sólido negro a la tabla, encabezados y celdas */
+  }
+  
+  th, td {
+    padding: 2px; /* Agrega un relleno dentro de las celdas */
+    text-align: left; /* Alinea el texto a la izquierda */
+  }
+  ul {
+    position: relative; /* Posiciona los <li> en relación al <ul> */
+    height: auto; /* Ajusta según el tamaño de la ventana */
+    overflow: auto; /* Asegura que el contenido no se desborde */
+    padding: 0; /* Elimina cualquier padding predeterminado */ 
+    margin: 0; /* Elimina cualquier margen predeterminado */
+    /*z-index: 9999; /* Asegura que el <ul> esté en una capa base */
+  }
+  
+  li {
+    position: relative; /* Para posicionar los <li> de manera relativa */
+    left: 0;
+    width: 100%; /* Que ocupen todo el ancho disponible */
+    text-align: left; /* Alinea el texto a la izquierda */
+    list-style-type: none; /* Elimina los puntos de la lista */
+    margin: 0; /* Elimina el margen entre los <li> */ 
+    padding: 0; /* Elimina el padding entre los <li> */
+   /* margin-bottom: -1px; /* Añade un margen negativo para eliminar el espacio */
+    /*z-index: 9999; /* Asegura que los <li> estén por encima de otros elementos */
+  }
+  #divMedPres,#divMedPres1{
+    position: relative;
+    height: auto; /* Ajusta según el tamaño de la ventana */
+    background-color: #f7af43; 
+    overflow: auto; /* Permite que el contenido desborde si es necesario */
+  }
+  
+  
+  .inputTotal {
+    width: 80%;         /* Ocupa el 100% del ancho del contenedor padre */
+    box-sizing: border-box; /* Incluye el padding y el borde en el cálculo del ancho */
+    padding: 5px;      /* Añade un poco de espacio interno */
+    margin: 0;          /* Elimina márgenes externos */
+  }
+  .divAuxiliar{
+    display: flex;
+    background-color: #f0f0f093; /* Fondo gris claro */
+    border-radius: 6px;/* Bordes redondeados de 2px */
+    border: 3px solid white;
+    
+  }
+  .divAuxiliar6{
+    background-color: #f0f0f093; /* Fondo gris claro */
+    border-radius: 6px;/* Bordes redondeados de 2px */
+    border: 3px solid white;
+  }
+  .divAuxiliar2{
+    width: 5%;
+  }
+  .divAuxiliar1{
+    width: 80%;
+  }
+
+ 
+  
+
+

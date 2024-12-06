@@ -1,0 +1,113 @@
+extends layout
+block script1 
+    script(src="domPrincipal.js", defer)
+block content 
+ 
+        form#formularioLogin.form(action="/verificarLogin", method="POST", autocomplete="off")
+            label(for="usuario") Usuario:
+            input.limpiar(type="text", id="usuario",name="usuario",placeholder="usuario",autocomplete="off")
+            br
+            label(for="clave1") Clave:
+            input.limpiar(type="password", id="clave1", name="clave1",placeholder="clave",autocomplete="off")
+            br
+            input.boton(type="submit", value="Ingresar")
+        button.boton(onclick="mostrar()") Modificar Clave
+        form#formularioModificarLogin.ocultar.form(action="/modificarLogin", method="POST", autocomplete="off")
+            label(for="usuario2") Usuario:
+            input.limpiar(type="text", id="usuario2",name="usuario2",placeholder="usuario",autocomplete="off")
+            br
+            label(for="clave2") Clave:
+            input.limpiar(type="password", id="clave2", name="clave2",placeholder="clave",autocomplete="off")
+            br
+            label(for="clave3") Clave Nueva:
+            input.limpiar(type="password", id="clave3",name="clave3",placeholder="clave nueva",autocomplete="off")
+            br
+            label(for="clave4") Clave Nueva:
+            input.limpiar(type="password", id="clave4", name="clave4",placeholder="repita clave",autocomplete="off")
+            br
+            label(for="palabraClave2") Palabra Clave Nueva:
+            input.limpiar(type="text", id="palabraClave2",name="palabraClave2",placeholder="Palabra Clave Nueva",autocomplete="off")
+            br 
+            label(for="palabraClave3") Repita Palabra Clave Nueva:
+            input.limpiar(type="text", id="palabraClave3",name="palabraClave3",placeholder="Repita Palabra Clave Nueva",autocomplete="off")
+            br
+            input.boton(type="submit", value="Enviar")
+            
+        button.boton(onclick="mostrar1()") Olvidaste tu Clave?
+        form#formularioRecuperarLogin.ocultar.form(action="/recuperarLogin", method="POST", autocomplete="off")
+            p Para generar una clave nueva deve usar su usuario y Palabra Clave
+            label(for="usuario5") Usuario:
+            input.limpiar(type="text", id="usuario5",name="usuario5",placeholder="usuario",autocomplete="off")
+            br
+            label(for="palabraClave") Palabre Clave:
+            input.limpiar(type="text", id="palabraClave", name="palabraClave",placeholder="palabra clave",autocomplete="off")
+            br
+            label(for="clave6") Clave Nueva:
+            input.limpiar(type="password", id="clave6",name="clave6",placeholder="clave nueva",autocomplete="off")
+            br
+            label(for="clave7") Clave Nueva:
+            input.limpiar(type="password", id="clave7",placeholder="repita clave",autocomplete="off")
+            br
+            input.boton(type="submit", value="Recuperar")    
+                                                                                                                                  
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+    
+    
+             
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                                                                                    
+
+
+            
+
+             
