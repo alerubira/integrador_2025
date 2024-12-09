@@ -1,8 +1,10 @@
 import express from 'express';
+import { Login } from './modelo/claseLogin';
 const ruta1 = express.Router();
 ruta1.get('/', (req, res) => {
     encabezado="Bienvenido al Ministerio de Salud";
-    let errLogin;
+    //probar generar un login
+    //necesito un profecional y una persona,hacer las calses entidad y data de persona y profecional
      res.render('vistaPrincipal',{encabezado,errLogin:true});
     
    });
