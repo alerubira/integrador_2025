@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 //import { dirname } from 'path';
 import bodyParser from'body-parser';
 import {ruta1} from './rutas1.js';
+import { ruta2 } from './rutas2.js'; 
 const app = express();
 
 // Convierte import.meta.url a __dirname
@@ -38,7 +39,8 @@ app.use(express.json());
 // Definir una ruta para renderizar una vista Pug
 // Definir tus rutas aquí
 app.use('/', ruta1);
-app.use('/secundaria',ruta1);
+app.use('/',ruta2);
+app.use('/buscarProfesiones',ruta2);
  // Iniciar el servidor
  app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);

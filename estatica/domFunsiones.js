@@ -183,14 +183,14 @@ async function fechProtegidoPost(endpoin,objeto){
     }
      }
 
-async function fechProtegido(ruta) {
+async function fechGetProtegido(ruta) {
     const token = localStorage.getItem('token');
     
     try {
       const response = await fetch(ruta, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${token}`
+         // 'Authorization': `Bearer ${token}`
         }
       });
       
@@ -200,7 +200,7 @@ async function fechProtegido(ruta) {
       } else {
         let error = await response.json();
         console.log(error);
-       
+        alerta(pagina,`Error en la respuesta de la consulta: ${error.message}`);
         return { data: null, error: new Error(error.message) };
       }
     } catch (error) {

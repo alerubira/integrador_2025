@@ -9,10 +9,7 @@ ruta1.get('/', (req, res) => {
      res.render('vistaPrincipal',{encabezado});
     
    });
-ruta1.get('/secundaria',(req,res)=>{
-  encabezado='pagina secundaria';
-  res.render('vistasecundaria',{encabezado});
-})   
+  
 ruta1.post('/verificarLogin',(req,res) =>{
    manejadorLogin(req,res,'verificarLogin');
   });

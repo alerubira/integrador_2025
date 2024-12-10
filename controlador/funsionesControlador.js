@@ -9,4 +9,10 @@ function retornarErrorSinRes(message) {
     console.log(message);
     return new Error(message);
 }
-export{retornarError,retornarErrorSinRes}
+function retornarExito(res,mensaje){
+    return res.status(200).send({
+        success: true,
+        message: mensaje,
+    });
+}
+export{retornarError,retornarErrorSinRes,retornarExito}
