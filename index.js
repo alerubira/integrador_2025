@@ -38,6 +38,7 @@ app.use(express.json());
 // Definir una ruta para renderizar una vista Pug
 // Definir tus rutas aquí
 app.use('/', ruta1);
+app.use('/secundaria',ruta1);
  // Iniciar el servidor
  app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);

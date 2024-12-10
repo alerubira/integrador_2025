@@ -1,7 +1,7 @@
 import { genSalt, hash as _hash, compare } from 'bcrypt';
 import { crearLogin } from './loginData';
 
-class usuarioClave{
+class UsuarioClave{
     constructor(usuario,clave){
         this.usuario=usuario;
         this.clave=clave;
@@ -14,7 +14,7 @@ class usuarioClave{
         
     }
 }
-class Login extends usuarioClave{
+class Login extends UsuarioClave{
     constructor(idLogin,idProfecional,usuario, clave,tipoAutorizacion,instancia,activoLogin) {
         super(usuario,clave);
         this.idLogin=idLogin;

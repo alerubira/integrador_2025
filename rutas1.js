@@ -1,13 +1,18 @@
 import express from 'express';
-import { Login } from './modelo/claseLogin';
+//import { Login } from './modelo/claseLogin';
 const ruta1 = express.Router();
+let encabezado;
 ruta1.get('/', (req, res) => {
     encabezado="Bienvenido al Ministerio de Salud";
     //probar generar un login
     //necesito un profecional y una persona,hacer las calses entidad y data de persona y profecional
-     res.render('vistaPrincipal',{encabezado,errLogin:true});
+     res.render('vistaPrincipal',{encabezado});
     
    });
+ruta1.get('/secundaria',(req,res)=>{
+  encabezado='pagina secundaria';
+  res.render('vistasecundaria',{encabezado});
+})   
 ruta1.post('/verificarLogin',(req,res) =>{
    manejadorLogin(req,res,'verificarLogin');
   });
