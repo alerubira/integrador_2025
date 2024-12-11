@@ -8,6 +8,8 @@ let limpiarM=document.querySelectorAll('.limpiarM');
 let divAlerta=document.getElementById('divAlerta');
 let divExito=document.getElementById('divExito');
 let pagina;
+let bandera;
+
 let cla=/^(?=(?:.*[A-Z]){1,})(?=(?:.*[a-zA-Z]){3,})(?=(?:.*\d){3,}).*$/;
 limpiarCampos(limpiar);
 function eliminarObjetoPorId(arreglo, id, propiedad) {
@@ -90,7 +92,7 @@ function llenarDl(dl,array,atributo){
         dl.appendChild(op2);
    }
 }        
- async function fech(input, endpoint) {
+ async function fechPost( endpoint,input) {
             try {
                 const token = localStorage.getItem('token');
                 

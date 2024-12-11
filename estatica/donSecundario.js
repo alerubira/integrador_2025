@@ -1,6 +1,8 @@
 pagina="secundaria";
 let aux;
 let slctCrudProfecion=document.getElementById('slctCrudProfesion');
+let divCrearProfesion=document.getElementById('divCrearProfesion');
+let inputNombreProfesion=document.getElementById('inputNombreProfesion');
 slctCrudProfecion.addEventListener('change',async function() {
     limpiarCampos(limpiar);
     fOcultar2();
@@ -16,11 +18,10 @@ slctCrudProfecion.addEventListener('change',async function() {
               presentaciones=await traerPresentaciones();
               llenarDl(dlNombreGenerico,nombresGenericos.data,'nombre_generico');
               llenarDl(dlForma,formas.data,'nombre_forma');
-              llenarDl(dlPresentacion,presentaciones.data,'nombre_presentacion');
-             
+              llenarDl(dlPresentacion,presentaciones.data,'nombre_presentacion');*/
+              limpiarCampos(limpiar);
+              mostrar(divCrearProfesion);
               
-              mostrar(divCMedicamento);*/
-              cartelExito(pagina,'crear profesion');
               break;
          
          case 'buscarProfesiones':
@@ -79,3 +80,12 @@ slctCrudProfecion.addEventListener('change',async function() {
     }
     slctCrudProfecion.selectedIndex = 0;
 });
+async function crearProfesion(){
+bandera=true;     
+let p={nombreProfesion:inputNombreProfesion.value}  ;
+if(!validar(p.nombreProfesion.length<1||p.nombreProfesion.length>parametros.tamaño1,pagina,`El Nombre de la Profesion es Obligatorio y no debe superar los ${parametros.tamaño1} caracteres`)){bandera=false}
+if(bandera){
+     console.log(p);
+     fechPost('/crearProfesion',p)
+}
+}

@@ -8,5 +8,8 @@ ruta2.get('/secundaria',(req,res)=>{
   }) 
 ruta2.get('/buscarProfesiones',(req,res)=>{
     manejadorSecundaria(req,res,'buscarProfesiones');
-})  
+}) 
+ruta2.post('/crearProfesion',(req,res)=>{
+  manejadorSecundaria(req,res,'crearProfesion');
+}) 
 export{ruta2};  

@@ -1,5 +1,7 @@
 import { Profesion } from "../modelo/claseProfesion.js";
 import { retornarError } from "./funsionesControlador.js";
+import { parametros } from "../parametros.js";
+import { verificarYup } from "./verificaryup.js";
 async function manejadorSecundaria(req,res,accion){
 let aux;
 let object;
@@ -8,7 +10,7 @@ try{
     switch (accion) {
         case 'ingresar':
             encabezado='pagina secundaria';
-            res.render('vistasecundaria',{encabezado});
+            res.render('vistasecundaria',{encabezado,parametros});
             break;
         case 'buscarProfesiones':
             aux=await Profesion.consulta();
@@ -19,7 +21,14 @@ try{
                 prs.push(pr);
             }
             return res.send(prs);
-            break;    
+            break; 
+        case 'crearProfesion':
+            object=req.body;
+            console.log(object.nombreProfesion);
+            aux= verificarYup(object,'profesion');
+            console.log(aux);
+            res.send(aux);
+            break;       
         default:
             let m=`Seleccion ${accion} dentro del manejador secundaria Invalida `  ;
             console.error(m);

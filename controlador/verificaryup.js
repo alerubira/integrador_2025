@@ -1,5 +1,6 @@
 import * as yup from 'yup';  // Importa todas las exportaciones de yup
 import { retornarErrorSinRes } from './funsionesControlador.js';
+import { parametros } from '../parametros.js';
 
 const dniY=yup.object().shape({
     dni: yup.string()
@@ -92,9 +93,9 @@ const usuarioClaveY= yup.object().shape({
     });
 
  
- const profecionY=yup.object().shape({
+ const profesionY=yup.object().shape({
     nombreProfecion:yup.string()
-    .max(28,'El nombre de la Profecion debe tener como maximo 28 caracteres')
+    .max(parametros.tamaño1,`El nombre de la Profecion debe tener como maximo ${parametros.tamaño1} caracteres`)
     .required('El nombre de la Profecion es obligatorio')
  })  
 
@@ -115,7 +116,7 @@ async function verificarYup(objeto,nombre){
                 return aux;
                break;  
             case 'profecion':
-                return await verificarY(objeto.profecionY);
+                return await verificarY(objeto,profesionY);
                                     
              default:
                 return retornarErrorSinRes('Seleccion no valida en verificar para yup');
