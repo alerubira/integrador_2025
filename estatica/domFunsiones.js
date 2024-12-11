@@ -99,12 +99,12 @@ function llenarDl(dl,array,atributo){
                 const response = await fetch(endpoint, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'text/plain'
+                        'Content-Type': 'application/json'
                         
 
                     },
                     
-                        body: input
+                        body:JSON.stringify( input)
                     
                     
                 });

@@ -94,9 +94,9 @@ const usuarioClaveY= yup.object().shape({
 
  
  const profesionY=yup.object().shape({
-    nombreProfecion:yup.string()
-    .max(parametros.tamaño1,`El nombre de la Profecion debe tener como maximo ${parametros.tamaño1} caracteres`)
-    .required('El nombre de la Profecion es obligatorio')
+    nombreProfesion:yup.string()
+    .max(parametros.tamaño1,`El nombre de la Profesion debe tener como maximo ${parametros.tamaño1} caracteres`)
+    .required('El nombre de la Profesion es obligatorio')
  })  
 
 async function verificarYup(objeto,nombre){
@@ -115,7 +115,7 @@ async function verificarYup(objeto,nombre){
                 aux=await verificarY(objeto,MedicoY);
                 return aux;
                break;  
-            case 'profecion':
+            case 'profesion':
                 return await verificarY(objeto,profesionY);
                                     
              default:
@@ -136,7 +136,7 @@ async function verificarYup(objeto,nombre){
     })
     .catch(err => {
         console.error("Errores de validación en yup:", err.errors);
-        return err;
+        return retornarErrorSinRes(`Error de validacion yup :${err.errors}`);
     });
   }     
 

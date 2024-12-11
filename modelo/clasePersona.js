@@ -8,8 +8,24 @@ class Persona{
         this.activoPersona=activoPersona;
         }
         // Método para mostrar la información del usuario
-    async alta(per) {
-        await altaPersona(per);
-        
-    }
+        static async alta(per) {
+                await altaPersona(per);
+        }
+        static async consulta() {
+            return await PersonaData.consultaPersona();
+        }
+    
+        async modificarActivo() {
+            this.activoPersona = !this.activoPersona;
+            return await PersonaData.modificarActivoPersona(this);
+        }
+    
+        async modificarNombre() {
+            return await PersonaData.modificarNombrePersona(this);
+        }
+        async modificarApellido() {
+            return await PersonaData.modificarApellidoPersona(this);    
+        }
+        async modificarDni() {
+            return await PersonaData.modificarDniPersona(this);
 }

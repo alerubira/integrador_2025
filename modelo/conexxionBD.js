@@ -56,7 +56,7 @@ async function existeNombreBd(nombre,tabla,columna){
 try {
     // Ejecuta el procedimiento almacenado
     //await consulta1('CALL VerificarEstaBd(?, ?, ?, @existe)',nombre,tabla ,columna);
-  let a=  await consulta1('CALL VerificarEstaNombreBD(?, ?, ?, @resultado)',nombre,tabla,columna);
+  let a=  await consulta1('CALL VerificarEstaNombreBD(?, ?, ?, @resultado)',tabla,columna,nombre);
    /* CALL VerificarEstaNombreBD('valor_a_buscar', 'nombre_de_tabla', 'nombre_de_columna', @resultado);
 SELECT @resultado; -- Para ver el resultado*/
 

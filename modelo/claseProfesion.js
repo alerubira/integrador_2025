@@ -7,8 +7,8 @@ class Profesion {
         this.activoProfesion=activoProfesion;
     }
 
-    async alta() {
-        return await ProfesionData.altaProfesion(this);
+    static async alta(pro) {
+        return await ProfesionData.altaProfesion(pro);
     }
 
     static async consulta() {

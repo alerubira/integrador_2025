@@ -29,7 +29,8 @@ app.use(express.text());
 app.use(serveStatic(path.join(__dirname, '..','estatica')));
 // Configuración del directorio de archivos estáticos
 app.use(express.static(path.join(__dirname, 'estatica')));
-
+// Middleware para procesar JSON
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 // Configurar Express para usar Pug como motor de plantillas y establecer la carpeta de vistas
 app.set('view engine', 'pug');

@@ -2,6 +2,7 @@ import { Profesion } from "../modelo/claseProfesion.js";
 import { retornarError } from "./funsionesControlador.js";
 import { parametros } from "../parametros.js";
 import { verificarYup } from "./verificaryup.js";
+import { existeNombreBd } from "../modelo/conexxionBD.js";
 async function manejadorSecundaria(req,res,accion){
 let aux;
 let object;
@@ -24,8 +25,11 @@ try{
             break; 
         case 'crearProfesion':
             object=req.body;
-            console.log(object.nombreProfesion);
             aux= verificarYup(object,'profesion');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
+            aux=await existeNombreBd(object.nombreProfesion,'profesion','nombre_profesion');
+            if(aux){return retornarError(res,'El nombre de la Profesion ya existe en la base de datos')}
+            aux=await Profesion.alta(object);
             console.log(aux);
             res.send(aux);
             break;       
