@@ -1,4 +1,4 @@
-import { altaPersona } from "./personaData";
+//import { altaPersona } from "./personaData";
 class Persona{
     constructor(idPersona,dniPersona,nombrePersona,apellidoPersona,activoPersona){
         this.idPersona=idPersona;
@@ -28,4 +28,6 @@ class Persona{
         }
         async modificarDni() {
             return await PersonaData.modificarDniPersona(this);
-}
+        }
+    }
+export{Persona}    

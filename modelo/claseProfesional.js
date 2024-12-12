@@ -1,13 +1,25 @@
-class Profesional{
-    constructor(idProfesional,idPersona,idProfesion,activoProfesional){
+import { Persona } from "./clasePersona.js";
+import { ProfesionalData } from "./profesionalData.js";
+class Profesional extends Persona{
+    constructor(idProfesional,idProfesion,activoProfesional,idPersona,dniPersona,nombrePersona,apellidoPersona,activoPersona){
+        super(idPersona,dniPersona,nombrePersona,apellidoPersona,activoPersona)
         this.idProfesional=idProfesional;
-        this.idPersona=idPersona;
         this.idProfesion=idProfesion;
         this.activoProfesional=activoProfesional;
         }
         // Método para mostrar la información del usuario
-    async alta(per) {
-        await altaPersona(per);
-        
+    static async alta(prof) {
+       return await ProfesionalData.alta(prof);
+     }
+    static async consulta(){
+        return await ProfesionalData.consulta();
+    } 
+    async modificarActivo(){
+        this.activoPersona = !this.activoPersona;
+        return await ProfesionalData.modificarActivoProfesional(this)
+    }
+    async modificarProfesion(){
+        return await ProfesionalData.modificarProfesionProfesional(this);
     }
 }
+export{Profesional}
