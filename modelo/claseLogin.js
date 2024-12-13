@@ -1,6 +1,5 @@
 import { genSalt, hash as _hash, compare } from 'bcrypt';
-import { crearLogin } from './loginData';
-
+import { LoginData } from './loginData.js';
 
 class Login {
     constructor(idLogin,idProfecional,usuario, clave,tipoAutorizacion,instancia,activoLogin) {
@@ -17,10 +16,20 @@ class Login {
     static async alta(log) {
             let clave=await crearHash(log.clave);
             log.clave=clave;
-            await crearLogin(log);
-            
-     }
-     //realizar todos lo metodos,consulta,modificar clave,baja,hacer loginData
+            await LoginData.altaLogin(log);
+         }
+    async modificarActivo(){
+        this.activoLogin = !this.activoLogin;
+        return await LoginData.modificarActivoLogin(this)
+    } 
+    static async consultaPorUsuario(usuario){
+      return await  LoginData.buscarLoginPorUsuario(usuario)
+    } 
+    async modificarClave(){
+        let clave=await crearHash(this.clave);
+        this.clave=clave;
+        return await LoginData.modificarClaveLogin(this)
+    }
 }
 
 // Función para hashear una contraseña

@@ -1,9 +1,49 @@
-import { consulta1 } from "./conexxionBD";
+import { consulta1,existeBd } from "./conexxionBD.js";
+import { PersonaData } from "./personaData.js";
 let query;
-class ProfesionalData {
+class ProfesionalData extends PersonaData {
     static async altaProfesional(prof) {//hacer las consultas y modificar los nombres
-        const query = 'INSERT INTO `persona` (`dni_persona``nombre_persona`,`apellido_persona`,`activo_persona`) VALUES (?,?,?,?)';
-        return await consulta1(query,per.dniPersona,per.nombrePersona,per.apellidoPersona, true);
+        let connection;
+        try {
+            connection = await pool.getConnection();
+            await connection.beginTransaction();
+            let p=await existeBd(prof.dniPersona,'persona','dni_persona');
+            let id_persona;
+            if(p){
+                let resultado=await  buscarIdPorDni(prof.dniPersona);
+                if(!resultado.error){
+                    id_persona=resultado[0].id_persona;
+                }
+            }else{
+                let per={dniPersona:prof.dniPersona,nombrePersona:prof.nombrePersona,apellidoPersona:prof.apellidoPersona,activoPersona:true};
+                const [personaResult] = await connection.execute(
+                    this.altaPersona(per)
+                );
+        
+                 id_persona = personaResult.insertId;
+            }
+            
+            const [profecionalResult] = await connection.execute(
+                'INSERT INTO `profesional`(`id_persona`, `id_profesion`, `activo_prfesional`) VALUES (?,?,?)',
+                [id_persona, prof.idProfesion, true]
+            );
+    
+            const id_medico = profecionalResult.insertId;
+            
+           
+            await connection.commit();
+            return { success: true };
+        } catch (error) {
+            if (connection) {
+                await connection.rollback();
+            }
+            console.error('Error en la transacción:', error);
+            throw new Error(`Error en la Transaccion:${error}`);
+        } finally {
+            if (connection) {
+                connection.release(); // Devolvemos la conexión al pool
+            }
+        }
     }
 
     static async consultaProfesional() {
@@ -11,7 +51,7 @@ class ProfesionalData {
         return await consulta1(query);
     }
 
-    static async modificarActivoProfesional(prof) {//terminado
+    static async modificarActivoProfesional(prof) {
         const query = 'UPDATE `profesional` SET `activo_profesional` = ? WHERE `id_profesional` = ?';
         return await consulta1(query, prof.activoProfesional, prof.idProfesional);
     }

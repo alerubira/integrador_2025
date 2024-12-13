@@ -6,11 +6,43 @@ block content
                         option(value="") Elija una opcion
                         option(value="crearProfesion") Inscribir Profesion
                         option(value="buscarProfesiones") Ver todos las Profesiones 
-            #divCrearProfesion.ocultar 
+                        option(value="crearProfesional") Crear Profesional 
+                        option(value="crearLogin")
+            #divCrearProfesion.ocultar.form 
                 label(for="inputNombreProfesion") Nombre Profesion 
                 input.limpiar(type="text",id="inputNombreProfesion",name="inputNombreProfesion",placeHolder="Nombre Profesion") 
                 br
                 button.boton(type="button",onclick='crearProfesion()') Crear 
             script.
                      const parametros = !{JSON.stringify(parametros)};               
-                            
+            #divCrearProfesional.ocultar.crear.form 
+                        label(for="dniPersona") DNI del Profecional:
+                        input#dniPersona.limpiar(name="dniPersona",type="number")    
+                        br
+                        label(for="nombrePersona") Nombre del profecional 
+                        input.limpiar(type="text", id="nombrePrersona" ,name="nombrePrersona")
+                        br
+                        label(for="apellidoPersona") Apellido  del Profecional:
+                        input.limpiar(type="text", id="apellidoPersona", name="apellidoPersona")
+                        br
+                        label(for="profesionProfecional") Profesion del profecional 
+                        input.limpiar.ocultar(type="number",id="idProfesion",name="idProfesion",autocomplete="off")
+                        input.limpiar(type="text", id="profesionProfesional" ,name="profesionProfesional",list="dylProfesion", autocomplete="off")
+                        datalist#dtlProfesion
+                        br
+                        button.boton(type="button",onclick='crearProfesional()') Crear 
+            #divCrearLogin.ocultar.crear.form 
+                        //traer id profesional            
+                        label(for="usuario") Usuario Provisorio 
+                        input.limpiar(type="text",id="usuario",name="usuario",placeHolder="maximo 6 caracteres") 
+                        br  
+                        label(for="clave") Clave  
+                        input.limpiar(type="text",id="clave",name="clave",placeHolder="3letras(minimo 1 may)3numeros")
+                        br
+                        label(for="tipoAutorizacion") Nivel de Autorizacion:
+                        input.limpiar(type="number", id="tipoAutorizacion", name="tipoAutorizacion",list="dtlTipoAutorizacion", autocomplete="off")
+                        datalist#dtlTipoAutorizacion 
+                            option(value="1") 
+                            option(value="2") 
+                            option(value="3")  
+                        button.boton(type="button",onclick='crearLogin()') Crear                   

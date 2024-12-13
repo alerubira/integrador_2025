@@ -14,6 +14,9 @@ class Persona{
         static async consulta() {
             return await PersonaData.consultaPersona();
         }
+        static async buscarIdPorDni(dni){
+           return await PersonaData.buscarIdPorDni(dni);
+        }
     
         async modificarActivo() {
             this.activoPersona = !this.activoPersona;

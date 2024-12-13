@@ -1,23 +1,25 @@
-import { pool , consulta1} from "./conexxionBD.js";
-import { Login } from "./loginn.js";
-let logins=[];
+import {  consulta1} from "./conexxionBD.js";
 let query;
-
-async function buscarLoginPorUsuario(usuario){
-let query=  'SELECT * FROM `login` WHERE usuario_login = ?';
-  let result=await consulta1(query,usuario);
-  return result;
-}
-async function crearLogin(uC){
+class LoginData{
+  static async  altaLogin(log){
     
     query= 'INSERT INTO `login`(`id_profecional`, `usuario_login`, `clave_login`, `tipo_autorizacion`, `instancia`,`activo_login`) VALUES (?,?,?,?,?,?)';
-   return await consulta1(query,uC.idProfecional,uC.login,clave,uC.tipoAutorizacion,1,true);
+   return await consulta1(query,log.idProfecional,log.login,clave,log.tipoAutorizacion,1,true);
 }
-async function modificarLogin(l){
-    const query = "UPDATE `login` SET `clave_login`=?, `instancia`=?,`palabra_clave`=? WHERE id_login=?";
-  //  const values = [l.clave,l.instancia, 6];
-    
-let result=await consulta1(query,l.clave,l.instancia,l.palabraClave,l.idLogin);
-return result;
-}
-export{logins,buscarLoginPorUsuario,modificarLogin,crearLogin};
+static async  buscarLoginPorUsuario(usuario){
+  query=  'SELECT * FROM `login` WHERE usuario_login = ?';
+    return await consulta1(query,usuario);
+  }
+ static async  modificarClaveLogin(log){
+   query = "UPDATE `login` SET `clave_login`=?, `instancia_login`=?WHERE id_login=?";
+    return await consulta1(query,log.clave,log.instancia,log.idLogin);
+   }
+static async modificarActivoLogin(log){
+  query = "UPDATE `login` SET `activo_login`=? WHERE id_login=?";
+  return await consulta1(query,log.activoLogin,log.idLogin);
+   }
+  }
+
+
+
+export{LoginData};

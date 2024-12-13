@@ -72,7 +72,12 @@ slctCrudProfecion.addEventListener('change',async function() {
                  
                break;
          
-
+          case "crearProfesional":
+               //habilitar div
+               break;
+          case "crearLogin":
+               //habilitar div
+               break;     
               
          default:
               console.log('Selección no válida');
@@ -80,6 +85,12 @@ slctCrudProfecion.addEventListener('change',async function() {
     }
     slctCrudProfecion.selectedIndex = 0;
 });
+async function crearProfesional(){
+
+}
+async function crearLogin(){
+     
+}
 async function crearProfesion(){
 bandera=true;     
 let p={nombreProfesion:inputNombreProfesion.value}  ;
