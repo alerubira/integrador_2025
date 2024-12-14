@@ -84,14 +84,17 @@ function validar(codicion,pagina,mensage,event){
         }else{
             return true;
         }}
-function llenarDl(dl,array,atributo){
+function llenarDl(dl,array,atributoTexto,atributoValue){
     for(let e of array){
         let op2=document.createElement('option');
-        op2.textContent=e[atributo];
-        op2.value=e[atributo];
+        op2.textContent=e[atributoTexto];
+        op2.value=e[atributoValue];
         dl.appendChild(op2);
    }
-}        
+} 
+function convertirExpresionRegular(stirng){
+return new RegExp(stirng.replace(/^\/|\/$/g, ""));
+}       
  async function fechPost( endpoint,input) {
             try {
                 const token = localStorage.getItem('token');

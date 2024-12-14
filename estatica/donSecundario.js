@@ -1,11 +1,15 @@
 pagina="secundaria";
 let aux;
+let profesiones;
 let slctCrudProfecion=document.getElementById('slctCrudProfesion');
 let divCrearProfesion=document.getElementById('divCrearProfesion');
+let divCrearProfesional=document.getElementById('divCrearProfesional');
+let divCrearLogin=document.getElementById('divCrearLogin');
+let dtlProfesion=document.getElementById('dtlProfesionProfesional');
 let inputNombreProfesion=document.getElementById('inputNombreProfesion');
 slctCrudProfecion.addEventListener('change',async function() {
     limpiarCampos(limpiar);
-    fOcultar2();
+    fOcultar();
     let selectedValue = this.value;
     fOcultar();
     switch(selectedValue) {
@@ -27,6 +31,7 @@ slctCrudProfecion.addEventListener('change',async function() {
          case 'buscarProfesiones':
              fOcultar();
              aux=await fechGetProtegido('/buscarProfesiones');
+             profesiones=aux.data;
              if(!aux.error){
                console.log(aux.data);
              }
@@ -73,10 +78,14 @@ slctCrudProfecion.addEventListener('change',async function() {
                break;
          
           case "crearProfesional":
-               //habilitar div
+               divCrearProfesional.style.display='block';
+               aux=await fechGetProtegido('/buscarProfesiones');
+               profesiones=aux.data;
+               llenarDl(dtlProfesion,profesiones,'nombreProfesion','idProfesion');
+               
                break;
           case "crearLogin":
-               //habilitar div
+               divCrearLogin.style.display='block';
                break;     
               
          default:
@@ -85,8 +94,21 @@ slctCrudProfecion.addEventListener('change',async function() {
     }
     slctCrudProfecion.selectedIndex = 0;
 });
+let inputDniPersona=document.getElementById('dniPersona');
+let inputNombrePersona=document.getElementById('nombrePersona');
+let inputApellidoPersona=document.getElementById('apellidoPersona');
+let profesionProfesional=document.getElementById('profesionProfesional');
 async function crearProfesional(){
-
+console.log(inputDniPersona.value);
+let regDni =convertirExpresionRegular(parametros.dni);
+let regNombres=convertirExpresionRegular(parametros.nombres);
+console.log(regNombres);
+bandera=true;
+bandera=validar(!regDni.test(inputDniPersona.value),pagina,`${parametros.cartelDni}`);
+bandera=validar(!regNombres.test(inputNombrePersona.value),pagina,`en el Nombre ${parametros.cartelNombres}`)
+console.log(inputNombrePersona.value);
+//validar tamaño y apellido completo
+console.log(bandera);
 }
 async function crearLogin(){
      

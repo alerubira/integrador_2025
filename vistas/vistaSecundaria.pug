@@ -7,8 +7,8 @@ block content
                         option(value="crearProfesion") Inscribir Profesion
                         option(value="buscarProfesiones") Ver todos las Profesiones 
                         option(value="crearProfesional") Crear Profesional 
-                        option(value="crearLogin")
-            #divCrearProfesion.ocultar.form 
+                        option(value="crearLogin") Crear Login
+            #divCrearProfesion.ocultar.form.crear 
                 label(for="inputNombreProfesion") Nombre Profesion 
                 input.limpiar(type="text",id="inputNombreProfesion",name="inputNombreProfesion",placeHolder="Nombre Profesion") 
                 br
@@ -20,15 +20,14 @@ block content
                         input#dniPersona.limpiar(name="dniPersona",type="number")    
                         br
                         label(for="nombrePersona") Nombre del profecional 
-                        input.limpiar(type="text", id="nombrePrersona" ,name="nombrePrersona")
+                        input.limpiar(type="text", id="nombrePersona" ,name="nombrePersona")
                         br
                         label(for="apellidoPersona") Apellido  del Profecional:
                         input.limpiar(type="text", id="apellidoPersona", name="apellidoPersona")
                         br
                         label(for="profesionProfecional") Profesion del profecional 
-                        input.limpiar.ocultar(type="number",id="idProfesion",name="idProfesion",autocomplete="off")
-                        input.limpiar(type="text", id="profesionProfesional" ,name="profesionProfesional",list="dylProfesion", autocomplete="off")
-                        datalist#dtlProfesion
+                        input.limpiar(type="text", id="profesionProfesional" ,name="profesionProfesional",list="dtlProfesionProfesional", autocomplete="off")
+                        datalist#dtlProfesionProfesional
                         br
                         button.boton(type="button",onclick='crearProfesional()') Crear 
             #divCrearLogin.ocultar.crear.form 
@@ -44,5 +43,6 @@ block content
                         datalist#dtlTipoAutorizacion 
                             option(value="1") 
                             option(value="2") 
-                            option(value="3")  
+                            option(value="3")
+                        br      
                         button.boton(type="button",onclick='crearLogin()') Crear                   
