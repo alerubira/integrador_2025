@@ -15,4 +15,12 @@ function retornarExito(res,mensaje){
         message: mensaje,
     });
 }
-export{retornarError,retornarErrorSinRes,retornarExito}
+function transformarstrinAExpReg(string) {
+    // Escapar las barras invertidas dobles (\\) y convertir a un literal
+    const expreg = string.replace(/\\\\/g, '\\');
+    return new RegExp(expreg);
+}
+
+
+
+export{retornarError,retornarErrorSinRes,retornarExito,transformarstrinAExpReg}

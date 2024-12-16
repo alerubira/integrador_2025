@@ -1,3 +1,5 @@
+
+
 pagina="secundaria";
 let aux;
 let profesiones;
@@ -78,14 +80,14 @@ slctCrudProfecion.addEventListener('change',async function() {
                break;
          
           case "crearProfesional":
-               divCrearProfesional.style.display='block';
+               mostrar(divCrearProfesional);
                aux=await fechGetProtegido('/buscarProfesiones');
                profesiones=aux.data;
                llenarDl(dtlProfesion,profesiones,'nombreProfesion','idProfesion');
                
                break;
           case "crearLogin":
-               divCrearLogin.style.display='block';
+               mostrar(divCrearLogin);
                break;     
               
          default:
@@ -98,20 +100,33 @@ let inputDniPersona=document.getElementById('dniPersona');
 let inputNombrePersona=document.getElementById('nombrePersona');
 let inputApellidoPersona=document.getElementById('apellidoPersona');
 let profesionProfesional=document.getElementById('profesionProfesional');
+
 async function crearProfesional(){
-console.log(inputDniPersona.value);
 let regDni =convertirExpresionRegular(parametros.dni);
 let regNombres=convertirExpresionRegular(parametros.nombres);
-console.log(regNombres);
+let idProfesionProfesionalValue=parseInt(profesionProfesional.value);
+let dniPersonaValue=parseInt(inputDniPersona.value);
 bandera=true;
-bandera=validar(!regDni.test(inputDniPersona.value),pagina,`${parametros.cartelDni}`);
-bandera=validar(!regNombres.test(inputNombrePersona.value),pagina,`en el Nombre ${parametros.cartelNombres}`)
-console.log(inputNombrePersona.value);
-//validar tamaño y apellido completo
-console.log(bandera);
+bandera=validar(!regDni.test(dniPersonaValue),pagina,`${parametros.cartelDni}`);
+bandera=validar(!regNombres.test(inputNombrePersona.value),pagina,`en el Nombre ${parametros.cartelNombres}`);
+bandera=validar(inputNombrePersona.value.length<1||inputNombrePersona.value.length>parametros.tamaño1,pagina,`El Nombre es obligatorio y ${parametros.cartelTamaño1}`)
+bandera=validar(!regNombres.test(inputApellidoPersona.value),pagina,`en el Apellido ${parametros.cartelNombres}`);
+bandera=validar(inputApellidoPersona.value.length<1||inputApellidoPersona.value.length>parametros.tamaño1,pagina,`El Apellido es obligatorio y ${parametros.cartelTamaño1}`)
+let aux=profesiones.filter(prof=>prof.idProfesion===idProfesionProfesionalValue);
+bandera=(validar(!aux,pagina,"La Profesion es obligatoria y debe existir"));
+if(bandera){
+let prof={
+     dniPersona:dniPersonaValue,
+     nombrePersona:inputNombrePersona.value,
+     apellidoPersona:inputApellidoPersona.value,
+     idProfesionProfesional:idProfesionProfesionalValue
+}
+aux=await fechProtegidoPost('/crearProfesional',prof);
+console.log(aux);
+}
 }
 async function crearLogin(){
-     
+     console.log("crear login");
 }
 async function crearProfesion(){
 bandera=true;     

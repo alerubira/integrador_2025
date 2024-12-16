@@ -1,8 +1,9 @@
 import { Profesion } from "../modelo/claseProfesion.js";
-import { retornarError } from "./funsionesControlador.js";
+import { Profesional } from "../modelo/claseProfesional.js";
+import { retornarError, retornarExito } from "./funsionesControlador.js";
 import { parametros } from "../parametros.js";
 import { verificarYup } from "./verificaryup.js";
-import { existeNombreBd } from "../modelo/conexxionBD.js";
+import { existeBd, existeNombreBd } from "../modelo/conexxionBD.js";
 async function manejadorSecundaria(req,res,accion){
 let aux;
 let object;
@@ -28,11 +29,23 @@ try{
             aux= verificarYup(object,'profesion');
             if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
             aux=await existeNombreBd(object.nombreProfesion,'profesion','nombre_profesion');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar si la Profesion existe :${aux}`)}
             if(aux){return retornarError(res,'El nombre de la Profesion ya existe en la base de datos')}
             aux=await Profesion.alta(object);
             console.log(aux);
-            res.send(aux);
-            break;       
+            return res.send(aux);
+            break;  
+        case 'crearProfesional':
+            object=req.body;
+            aux=await existeBd(object.idProfesionProfesional,'profesion','id_profesion');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar si exite la profesion :${aux}`)}
+            if(!aux){return retornarError(res,'La Profesion en el Profesional no existe')}
+            aux=await verificarYup(object,'persona');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
+            aux=await Profesional.alta(object);
+            if(aux instanceof Error){return retornarError(res,`Error al crear y guardar Profesional:${aux}`)}
+            return retornarExito(res,"Profesional generado y guardado con exito");
+            break;         
         default:
             let m=`Seleccion ${accion} dentro del manejador secundaria Invalida `  ;
             console.error(m);

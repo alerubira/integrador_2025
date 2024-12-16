@@ -12,4 +12,7 @@ ruta2.get('/buscarProfesiones',(req,res)=>{
 ruta2.post('/crearProfesion',(req,res)=>{
   manejadorSecundaria(req,res,'crearProfesion');
 }) 
+ruta2.post('/crearProfesional',(req,res)=>{
+  manejadorSecundaria(req,res,'crearProfesional');
+})
 export{ruta2};  

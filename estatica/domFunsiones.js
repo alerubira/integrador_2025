@@ -10,7 +10,7 @@ let divExito=document.getElementById('divExito');
 let pagina;
 let bandera;
 
-let cla=/^(?=(?:.*[A-Z]){1,})(?=(?:.*[a-zA-Z]){3,})(?=(?:.*\d){3,}).*$/;
+//let cla=/^(?=(?:.*[A-Z]){1,})(?=(?:.*[a-zA-Z]){3,})(?=(?:.*\d){3,}).*$/;
 limpiarCampos(limpiar);
 function eliminarObjetoPorId(arreglo, id, propiedad) {
    const indice = arreglo.findIndex(objeto => objeto[propiedad] === Number(id));
@@ -142,7 +142,7 @@ function contienePalabra(array,propiedad,palabra) {
    // console.log(array);
     //console.log(propiedad);
     //console.log(palabra);
-    return array.some(objeto => objeto.propiedad === palabra);
+    return array.some(objeto => objeto[propiedad] === palabra);
   }
  
 limpiarCampos(limpiar);

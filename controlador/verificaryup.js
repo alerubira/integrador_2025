@@ -1,5 +1,5 @@
 import * as yup from 'yup';  // Importa todas las exportaciones de yup
-import { retornarErrorSinRes } from './funsionesControlador.js';
+import { retornarErrorSinRes,transformarstrinAExpReg } from './funsionesControlador.js';
 import { parametros } from '../parametros.js';
 
 const dniY=yup.object().shape({
@@ -91,9 +91,24 @@ const usuarioClaveY= yup.object().shape({
         .required('La clave es obligatoria'),
     
     });
-
+const dniReg=transformarstrinAExpReg(parametros.dni);  
+const nombresReg=transformarstrinAExpReg(parametros.nombres);  
+const PersonaY= yup.object().shape({//dejar
+    dniPersona: yup.string()
+        .matches(dniReg, parametros.cartelDni)
+        .required('El DNI es obligatorio'),
+    nombrePersona: yup.string()
+        .matches(nombresReg, `Para el Nombre ${parametros.cartelNombres}`)
+        .max(parametros.tamaño1, `El nombre ${parametros.cartelTamaño1}`)
+        .required('El nombre es obligatorio'),
+    apellidoPersona: yup.string()
+        .matches(nombresReg, `Para el apellido ${parametros.cartelNombres}`)
+        .max(parametros.tamaño1, `El Apellido ${parametros.cartelTamaño1}`)
+        .required('El apellido es obligatorio'),
+        
+        });
  
- const profesionY=yup.object().shape({
+ const profesionY=yup.object().shape({//dejar
     nombreProfesion:yup.string()
     .max(parametros.tamaño1,`El nombre de la Profesion debe tener como maximo ${parametros.tamaño1} caracteres`)
     .required('El nombre de la Profesion es obligatorio')
@@ -117,7 +132,10 @@ async function verificarYup(objeto,nombre){
                break;  
             case 'profesion':
                 return await verificarY(objeto,profesionY);
-                                    
+             break;
+             case 'persona':
+                return await verificarY(objeto,PersonaY);
+                break;                       
              default:
                 return retornarErrorSinRes('Seleccion no valida en verificar para yup');
        }
