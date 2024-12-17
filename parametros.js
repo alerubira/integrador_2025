@@ -6,7 +6,9 @@ const parametros={
     clave:"^(?=.*[A-Z])(?=.*[a-zA-Z]{2})(?=.*\d{3}).*$",
     cartelClave:"La clave debe contener 6 caracteres,como minimo una letra mayuscula,dos letras consecutivas y tres numeros",
     dni:"^\\d{7,8}$",//se agregauna barra invertida para la transformacion con la funsion en el cliente
-    cartelDni:"El dni debe contener 7 u 8 numeros unicamente"
+    cartelDni:"El dni debe contener 7 u 8 numeros unicamente",
+    tamaño2:6,
+    cartelTamaño2:"no debe superar los 6 caracteres"
 
 }
 /*/^[a-zA-Z\s]+$/ expresion regular:a-zA-Z: Permite letras minúsculas y mayúsculas.

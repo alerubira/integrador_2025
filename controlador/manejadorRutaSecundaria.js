@@ -27,14 +27,13 @@ try{
         case 'buscarProfesionales':
             aux=await Profesional.consulta();
             if(aux instanceof Error){return retornarError(res,`Error al buscar profesionales :${aux}`)}
-            console.log(aux[0]);
-            //hacer arreglo de objetos profesional
-           /* let prof=[];
-            for(let p of aux){
-                let pr=new Profesion(p.id_profesion,p.nombre_profesion,p.activo_profesion);
-                prs.push(pr);
-            }*/
-            return res.send(aux[0]);
+            //
+            let prof=[];
+            for(let p of aux[0]){
+                let pr=new Profesional(p.id_profesional,p.id_profesion,p.nombre_profesion,p.activo_profesional,p.id_persona,p.dni_persona,p.nombre_persona,p.apellido_persona,p.activo_persona);
+                prof.push(pr);
+            }
+            return res.send(prof);
             break;    
         case 'crearProfesion':
             object=req.body;

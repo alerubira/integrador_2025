@@ -2,10 +2,10 @@ import { genSalt, hash as _hash, compare } from 'bcrypt';
 import { LoginData } from './loginData.js';
 
 class Login {
-    constructor(idLogin,idProfecional,usuario, clave,tipoAutorizacion,instancia,activoLogin) {
+    constructor(idLogin,idProfesional,usuario, clave,tipoAutorizacion,instancia,activoLogin) {
        
         this.idLogin=idLogin;
-        this.idProfecional=idProfecional;
+        this.idProfesional=idProfesional;
         this.usuario=usuario;
         this.clave=clave;
         this.tipoAutorizacion=tipoAutorizacion;

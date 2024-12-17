@@ -7,7 +7,6 @@ block content
                         option(value="crearProfesion") Inscribir Profesion
                         option(value="buscarProfesiones") Ver todos las Profesiones 
                         option(value="crearProfesional") Crear Profesional 
-                        option(value="crearLogin") Crear Login
                         option(value="buscarProfesionales") Ver Todos Los Profesionales
             #divCrearProfesion.ocultar.form.crear 
                 label(for="inputNombreProfesion") Nombre Profesion 
@@ -31,8 +30,40 @@ block content
                         datalist#dtlProfesionProfesional
                         br
                         button.boton(type="button",onclick='crearProfesional()') Crear 
-            #divCrearLogin.ocultar.crear.form 
-                        //traer id profesional            
+            
+            #divMostrarProfesionales.ocultar
+                    table#todosMedicos
+                        thead#cabecera
+                            tr
+                                th Id Persona
+                                th Id Profesional
+                                th Dni
+                                th Apellido 
+                                th Nombre 
+                                th Id Profesion
+                                th Profesion 
+                                th Estado Actual Persona
+                                th Estado Actual Profesional
+                                th Seleccionar
+                        tbody#cuerpo 
+            #divModificarProfesional.ocultar  
+                    table#medico
+                        thead#cabecera2
+                            tr
+                                th Id Persona
+                                th Id Profesional
+                                th Dni
+                                th Apellido 
+                                th Nombre 
+                                th Id Profesion
+                                th Profesion 
+                                th Estado Actual Persona
+                                th Estado Actual Profesional
+                        tbody#cuerpo2  
+                    select(id="slctModificarProfesional", name="slctModificarProfesional")
+                        option(value="") Elija una opcion
+                        option(value="crearLogin") Crear Login
+            #divCrearLogin.ocultar.crear.form           
                         label(for="usuario") Usuario Provisorio 
                         input.limpiar(type="text",id="usuario",name="usuario",placeHolder="maximo 6 caracteres") 
                         br  
@@ -46,19 +77,4 @@ block content
                             option(value="2") 
                             option(value="3")
                         br      
-                        button.boton(type="button",onclick='crearLogin()') Crear 
-            #divMostrarProfesionales.ocultar
-                    table#todosMedicos
-                        thead#cabecera
-                            tr
-                                th Id Persona
-                                th Id Profesional
-                                th Dni
-                                th Apellido 
-                                th Nombre 
-                                th Id Profecion
-                                th Profecion 
-                                th Estado Actual Persona
-                                th Estado Actual Profesional
-                                th Seleccionar
-                        tbody#cuerpo                                
+                        button.boton(type="button",onclick='crearLogin()') Crear                                                          
