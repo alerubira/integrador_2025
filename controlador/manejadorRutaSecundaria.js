@@ -24,6 +24,18 @@ try{
             }
             return res.send(prs);
             break; 
+        case 'buscarProfesionales':
+            aux=await Profesional.consulta();
+            if(aux instanceof Error){return retornarError(res,`Error al buscar profesionales :${aux}`)}
+            console.log(aux[0]);
+            //hacer arreglo de objetos profesional
+           /* let prof=[];
+            for(let p of aux){
+                let pr=new Profesion(p.id_profesion,p.nombre_profesion,p.activo_profesion);
+                prs.push(pr);
+            }*/
+            return res.send(aux[0]);
+            break;    
         case 'crearProfesion':
             object=req.body;
             aux= verificarYup(object,'profesion');

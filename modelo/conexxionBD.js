@@ -11,6 +11,26 @@ const pool = mysql.createPool({
     connectionLimit: 10,
     queueLimit: 0
 });
+async function consulta2(query,connection,...params) {
+    let localConnection = connection;
+    let shouldRelease = false;
+    try {
+        if (!localConnection) {
+            localConnection = await pool.getConnection();
+            shouldRelease = true; // Solo liberamos si esta función obtuvo la conexión
+        }
+        const [results] = await localConnection.query(query, params);
+        return results;
+    } catch (error) {
+        console.error('Error en la consulta:', error);
+        throw error;
+    } finally {
+        if (shouldRelease && localConnection) {
+            localConnection.release();
+        }
+    }
+}
+
 async function consulta1(query, ...params) {
     
     let connection;
@@ -115,7 +135,7 @@ async function existeConjuntoBD(tabla,nombreId,tabla1,tabla2,id1,id2){
     }
 }
 
-export {pool,consulta1,existeBd,existeNombreBd,existeConjuntoBD,traerPorId} ;
+export {pool,consulta1,existeBd,existeNombreBd,existeConjuntoBD,traerPorId,consulta2} ;
 
 
 

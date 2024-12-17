@@ -1,9 +1,9 @@
-import { consulta1 } from "./conexxionBD";
+import { consulta1,consulta2 } from "./conexxionBD.js";
 let query;
 class PersonaData {
-    static async altaPersona(per) {
-         query = 'INSERT INTO `persona` (`dni_persona``nombre_persona`,`apellido_persona`,`activo_persona`) VALUES (?,?,?,?)';
-        return await consulta1(query,per.dniPersona,per.nombrePersona,per.apellidoPersona, true);
+    static async altaPersona(per,connection) {
+         query = 'INSERT INTO `persona` (`dni_persona`,`nombre_persona`,`apellido_persona`,`activo_persona`) VALUES (?,?,?,?)';
+        return await consulta2(query,connection,per.dniPersona,per.nombrePersona,per.apellidoPersona, true);
     }
 
     static async consultaPersona() {
@@ -28,9 +28,9 @@ class PersonaData {
          query = 'UPDATE `persona` SET `dni_persona` = ? WHERE `id_persona` = ?';
         return await consulta1(query, per.dniPersona, per.idPersona);
     }
-    static async buscarIdPorDni(dni){
+    static async buscarIdPorDni(dni,connection){
         query='SELECT id_persona FROM `persona` WHERE dni_persona=?';
-        return await consulta1(query,dni);
+        return await consulta2(query,connection,dni);
     }
 
 }

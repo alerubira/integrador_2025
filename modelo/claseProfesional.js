@@ -9,10 +9,10 @@ class Profesional extends Persona{
         }
         // Método para mostrar la información del usuario
     static async alta(prof) {
-       return await ProfesionalData.alta(prof);
+       return await ProfesionalData.altaProfesional(prof);
      }
     static async consulta(){
-        return await ProfesionalData.consulta();
+        return await ProfesionalData.consultaProfesional();
     } 
     async modificarActivo(){
         this.activoPersona = !this.activoPersona;

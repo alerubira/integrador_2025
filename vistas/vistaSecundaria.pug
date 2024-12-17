@@ -8,6 +8,7 @@ block content
                         option(value="buscarProfesiones") Ver todos las Profesiones 
                         option(value="crearProfesional") Crear Profesional 
                         option(value="crearLogin") Crear Login
+                        option(value="buscarProfesionales") Ver Todos Los Profesionales
             #divCrearProfesion.ocultar.form.crear 
                 label(for="inputNombreProfesion") Nombre Profesion 
                 input.limpiar(type="text",id="inputNombreProfesion",name="inputNombreProfesion",placeHolder="Nombre Profesion") 
@@ -45,4 +46,19 @@ block content
                             option(value="2") 
                             option(value="3")
                         br      
-                        button.boton(type="button",onclick='crearLogin()') Crear                   
+                        button.boton(type="button",onclick='crearLogin()') Crear 
+            #divMostrarProfesionales.ocultar
+                    table#todosMedicos
+                        thead#cabecera
+                            tr
+                                th Id Persona
+                                th Id Profesional
+                                th Dni
+                                th Apellido 
+                                th Nombre 
+                                th Id Profecion
+                                th Profecion 
+                                th Estado Actual Persona
+                                th Estado Actual Profesional
+                                th Seleccionar
+                        tbody#cuerpo                                

@@ -1,4 +1,4 @@
-import { consulta1,existeBd } from "./conexxionBD.js";
+import { consulta1,existeBd,pool } from "./conexxionBD.js";
 import { PersonaData } from "./personaData.js";
 let query;
 class ProfesionalData extends PersonaData {
@@ -10,22 +10,21 @@ class ProfesionalData extends PersonaData {
             let p=await existeBd(prof.dniPersona,'persona','dni_persona');
             let id_persona;
             if(p){
-                let resultado=await  buscarIdPorDni(prof.dniPersona);
+                let resultado=await  this.buscarIdPorDni(prof.dniPersona,connection);
                 if(!resultado.error){
                     id_persona=resultado[0].id_persona;
                 }
             }else{
                 let per={dniPersona:prof.dniPersona,nombrePersona:prof.nombrePersona,apellidoPersona:prof.apellidoPersona,activoPersona:true};
-                const [personaResult] = await connection.execute(
-                    this.altaPersona(per)
-                );
-        
-                 id_persona = personaResult.insertId;
+                const personaResult = await  this.altaPersona(per,connection)
+                   
+                id_persona = await personaResult.insertId;
+                 
             }
             
             const [profecionalResult] = await connection.execute(
-                'INSERT INTO `profesional`(`id_persona`, `id_profesion`, `activo_prfesional`) VALUES (?,?,?)',
-                [id_persona, prof.idProfesion, true]
+                'INSERT INTO `profesional`(`id_persona`, `id_profesion`, `activo_profesional`) VALUES (?,?,?)',
+                [id_persona, prof.idProfesionProfesional, true]
             );
     
             const id_medico = profecionalResult.insertId;
@@ -47,7 +46,7 @@ class ProfesionalData extends PersonaData {
     }
 
     static async consultaProfesional() {
-        const query = '';//hacer selc con join
+        const query = 'CALL obtenerProfesionales()';
         return await consulta1(query);
     }
 

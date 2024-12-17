@@ -42,6 +42,7 @@ app.use(express.json());
 app.use('/', ruta1);
 app.use('/',ruta2);
 app.use('/buscarProfesiones',ruta2);
+app.use('/buscarProfesionales',ruta2);
 app.use('/crearProfesion',ruta2);
 app.use('/crearProfesional',ruta2);
  // Iniciar el servidor
