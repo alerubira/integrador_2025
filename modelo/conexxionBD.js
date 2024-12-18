@@ -1,5 +1,6 @@
 import { query } from 'express';
 import mysql from 'mysql2/promise';
+import { retornarErrorSinRes } from '../controlador/funsionesControlador.js';
 
 const pool = mysql.createPool({
     host: 'localhost',
@@ -23,7 +24,7 @@ async function consulta2(query,connection,...params) {
         return results;
     } catch (error) {
         console.error('Error en la consulta:', error);
-        throw error;
+        return retornarErrorSinRes(`Error en la consulta2 ${error}`)
     } finally {
         if (shouldRelease && localConnection) {
             localConnection.release();
@@ -41,8 +42,7 @@ async function consulta1(query, ...params) {
         return results;
     } catch (error) {
         console.error('Error en la consulta:', error);
-       // throw error;
-       return error;
+       return  retornarErrorSinRes(`Error en la consulta1 ${error}`)
     } finally {
         if (connection) {
             connection.release();

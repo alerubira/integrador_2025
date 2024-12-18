@@ -16,7 +16,7 @@ class Login {
     static async alta(log) {
             let clave=await crearHash(log.clave);
             log.clave=clave;
-            await LoginData.altaLogin(log);
+           return await LoginData.altaLogin(log);
          }
     async modificarActivo(){
         this.activoLogin = !this.activoLogin;

@@ -3,7 +3,7 @@ const parametros={
     cartelTamaño1:"no debe superar los 28 caracteres",
     nombres:"^[a-zA-Z\\s]+$",//se agrega una barra invertida par ña transformacion con la funsion en el cliente
     cartelNombres:"solo se permiten letras",
-    clave:"^(?=.*[A-Z])(?=.*[a-zA-Z]{2})(?=.*\d{3}).*$",
+    clave: "^(?=.*[A-Z])(?=.*[a-zA-Z]{2})(?=.*\\d{3}).*$",
     cartelClave:"La clave debe contener 6 caracteres,como minimo una letra mayuscula,dos letras consecutivas y tres numeros",
     dni:"^\\d{7,8}$",//se agregauna barra invertida para la transformacion con la funsion en el cliente
     cartelDni:"El dni debe contener 7 u 8 numeros unicamente",

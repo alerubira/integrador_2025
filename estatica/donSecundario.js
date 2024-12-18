@@ -133,6 +133,7 @@ async function seleccionarProfesional(event){
                          }else{
                               agregarTdCuerpo('Inactivo',tr2);
                          }
+     eliminarHijos(cuerpo);                    
      
      }
 let inputDniPersona=document.getElementById('dniPersona');
@@ -171,26 +172,32 @@ let inputUsuario=document.getElementById('usuario');
 let inputClave=document.getElementById('clave');
 let inputTipoAutorizacion=document.getElementById('tipoAutorizacion');
 async function crearLogin(){
-     console.log(profesional);
      let idProfesional=profesional.idProfesional;
      let usuarioValue=inputUsuario.value;
      let claveValue=inputClave.value;
      let tipoAutorizasionValue=parseInt(inputTipoAutorizacion.value);
      let regClave =convertirExpresionRegular(parametros.clave);
-     //hacer verificacion si esta el nivel de autorizacion y el id del profesional,
      bandera=true;
      if(!validar(usuarioValue.length<1||usuarioValue.length>parametros.tamaño2,pagina,`El Usuario es obligatorio y ${parametros.cartelTamaño2}`)){bandera=false}
-     if(!validar(regClave.test(claveValue),pagina,`${parametros.cartelClave}`)){bandera=false};
-console.log(bandera);
-     //si esta ok enviar login con post,crearendpoin,limpiar y borrar
-     login={
-          idProfesional:idProfesional,
-          usuario:usuarioValue,
-          clave:claveValue,
-          tipoAutorizacion:tipoAutorizasionValue
+     if(!validar(!regClave.test(claveValue),pagina,`${parametros.cartelClave}`)){bandera=false};
+     if(!validar(!profesionales.some(p=>p.idProfesional===idProfesional),pagina,'El Profesional no existe')){bandera=false}
+     if(!validar(tipoAutorizasionValue!=1&&tipoAutorizasionValue!=2&&tipoAutorizasionValue!=3,pagina,'El Tipo de autorizacion no es valido')){bandera=false}
+     
+     if(bandera){
+          login={
+               idProfesional:idProfesional,
+               usuario:usuarioValue,
+               clave:claveValue,
+               tipoAutorizacion:tipoAutorizasionValue
+          }
+        aux=await  fechProtegidoPost('/crearLogin',login);
+        if(aux.success){
+         limpiarCampos(limpiar);
+         fOcultar();
+        }
      }
      
-console.log(login);
+
 }
 async function crearProfesion(){
 bandera=true;     

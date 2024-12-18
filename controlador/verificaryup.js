@@ -79,15 +79,14 @@ palabraClave: yup.string()
      .max(35,'La palabra clave no deve superar los 35 caracteres')
      .required('La palabra clave es obligatoria')
 });
-const usuarioClaveY= yup.object().shape({
+const claveReg=transformarstrinAExpReg(parametros.clave);
+const loginY= yup.object().shape({
     
     usuario: yup.string()
-        .max(6, 'El usuario debe tener como máximo 6 caracteres')
+        .max(parametros.tamaño2, `El Usuario ${parametros.cartelTamaño2}`)
         .required('El usuario es obligatorio'),
     clave: yup.string()
-        .matches(/^(?=.*[A-Z])(?=.*[a-zA-Z]{2})(?=.*\d{3}).*$/, 'La clave debe tener al menos una mayúscula, tres letras y tres números')
-        .min(6, 'La clave debe tener como mínimo 6 caracteres')
-        .max(6, 'La clave debe tener como máximo 6 caracteres')
+        .matches(claveReg, `${parametros.cartelClave}`)
         .required('La clave es obligatoria'),
     
     });
@@ -121,15 +120,11 @@ async function verificarYup(objeto,nombre){
 
            
            switch (nombre) {
-             case 'usuarioClave':
-                aux=await verificarY(objeto,usuarioClaveY);
-                return aux;
+             case 'login':
+               return await verificarY(objeto,loginY);
                break;
             
-             case 'medico':
-                aux=await verificarY(objeto,MedicoY);
-                return aux;
-               break;  
+             
             case 'profesion':
                 return await verificarY(objeto,profesionY);
              break;

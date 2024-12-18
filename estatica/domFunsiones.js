@@ -92,9 +92,10 @@ function llenarDl(dl,array,atributoTexto,atributoValue){
         dl.appendChild(op2);
    }
 } 
-function convertirExpresionRegular(stirng){
-return new RegExp(stirng.replace(/^\/|\/$/g, ""));
-}       
+function convertirExpresionRegular(string) {
+  return new RegExp(string); // Crea la expresión regular directamente.
+}
+     
  async function fechPost( endpoint,input) {
             try {
                 const token = localStorage.getItem('token');
