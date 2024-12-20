@@ -30,6 +30,11 @@ class Login {
         this.clave=clave;
         return await LoginData.modificarClaveLogin(this)
     }
+    static async  verificarHash(password, hashedPassword) {
+    
+        const match = await compare(password, hashedPassword);
+        return match; // Devuelve true si la contraseña coincide, de lo contrario false
+    }
 }
 
 // Función para hashear una contraseña
@@ -41,10 +46,6 @@ async function crearHash(hashear) {
 }
 
 // Función para verificar una contraseña
-async function verificarHash(password, hashedPassword) {
-    
-    const match = await compare(password, hashedPassword);
-    return match; // Devuelve true si la contraseña coincide, de lo contrario false
-}
 
-export{verificarHash,Login};
+
+export{Login};

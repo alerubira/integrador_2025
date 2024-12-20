@@ -1,43 +1,30 @@
-
-
-import { verificar } from "./verificaryup.js";
-import { encabezado } from "../rutas.js";
-import { buscarLoginPorUsuario, modificarLogin } from "../modelo/loginData.js";
-import { verificarHash,crearHash,Login,usuarioClave } from "../modelo/loginn.js";
+import { verificarYup } from './verificaryup.js';
+import { Login } from '../modelo/claseLogin.js';
+//import { verificarHash,crearHash,Login,usuarioClave } from "../modelo/loginn.js";
 import jwt from 'jsonwebtoken';
-import { jwtSecret } from '../config.js';
+
 import { retornarError } from "./funsionesControlador.js";
-let errLogin;
-let objetAux={};
-let objet={};
+let object;
 let aux;
 async function manejadorLogin(req,res,objeto){
   try {
-    let boolean;
-    let login;
-   
-    let body=req.body;
-  
-    let usCl;
-    let l;
+    
     switch (objeto) {
       case 'verificarLogin':
-       // console.log(body);
-          usCl=new usuarioClave(body.usuario,body.clave1);  
-         aux=await verificar(usCl,'usuarioClave');
-         
+        object=req.body;
+         aux=await verificarYup(object,'login');
          if(aux.errors){
           return  retornarError(res,`Error al verificar la tipologia del usuario:${aux.errors}`)
          }
-         login=await buscarLoginPorUsuario(aux.usuario);
-         if(login instanceof Error){return retornarError(res,`Error al buscar el Login:${login}`)}
-         if(login.length<1){return retornarError(res,"El usuario no existe, intente nuevamente")}
-          l=new Login(login[0].id_login,login[0].id_medico,login[0].usuario_login,login[0].clave_login,login[0].tipo_autorizacion,login[0].instancia,login[0].palabra_clave);
-        // console.log(l);
-         
-          boolean=await verificarHash(usCl.clave,l.clave);
-          if(boolean) {
-              if(l.instancia===1){
+        let l=await Login.consultaPorUsuario(object.usuario);
+         if(l instanceof Error){return retornarError(res,`Error al buscar el Login:${l}`)}
+          if(l.length<1){return retornarError(res,"El usuario no existe, intente nuevamente")}
+          aux=await Login.verificarHash(object.clave,l[0].clave_login);
+          //verificar si el login esta activo
+         if(!l[0].activo_login){return retornarError(res,'El Login no esta activo')}
+         if(aux) {
+          let login=new Login(l[0].id_login,l[0].id_profesional,l[0].usuario_login,l[0].clave_login,l[0].tipo_autorizacion,l[0].instancia_login,l[0].activo_login)    
+          if(login.instancia===1){
                 return res.status(200).json({
             
                   message: 'Login nuevo , modificar login',
@@ -64,25 +51,23 @@ async function manejadorLogin(req,res,objeto){
            }else{
             return retornarError(res,"Clave o Usuario Incorrecta");
            }
-         
-        
         break;
       case 'modificarLogin':
-        objet=req.body;
+       object=req.body;
          
-         usCl=new usuarioClave(objet.usuario2,objet.clave2);
+         usCl=new usuarioClave(object.usuario2,object.clave2);
         aux=await verificar(usCl,'usuarioClave');
          if(aux.errors){
           return retornarError(res,`Error en la tipologia del Login:${aux.errors}`)
          }
-         if(objet.clave3!==objet.clave4){
+         if(object.clave3!==object.clave4){
           return retornarError(res,"La Confirmacion de la Clave debe ser igual a la Clave Nueva")
          }
-         if(objet.palabraClave2!==objet.palabraClave3){return retornarError(res,'La Confirmacion de la Palabra Clave es distinta')}
-         if(objet.palabraClave2.length<1||objet.palabraClave2.length>38){
+         if(object.palabraClave2!==object.palabraClave3){return retornarError(res,'La Confirmacion de la Palabra Clave es distinta')}
+         if(object.palabraClave2.length<1||object.palabraClave2.length>38){
           return retornarError(res,'La aplabra clave nueva es obligatoria y no debe superar los 38 caracteres')
          }
-         usCl=new usuarioClave(objet.usuario2,objet.clave3);
+         usCl=new usuarioClave(object.usuario2,object.clave3);
          aux=await verificar(usCl,'usuarioClave');
          if(aux.errors){
           return  retornarError(res,`Error al verificar la tipologia del usuario:${aux.errors}`);
@@ -93,11 +78,11 @@ async function manejadorLogin(req,res,objeto){
           return retornarError(res,"El usuario no se encuentra registrado");
          }
          
-        boolean=await verificarHash(objet.clave2,login[0].clave_login);
+        boolean=await verificarHash(object.clave2,login[0].clave_login);
           if(boolean) {
            
-           let b=await crearHash(objet.clave3);
-           let c=await crearHash(objet.palabraClave2)
+           let b=await crearHash(object.clave3);
+           let c=await crearHash(object.palabraClave2)
             //generar un objeto Login 
              l=new Login(login[0].id_login,login[0].id_medico,login[0].usuario_login,b,login[0].tipo_autorizacion,login[0].instancia+1,c);
             //res.send(l);
@@ -114,21 +99,21 @@ async function manejadorLogin(req,res,objeto){
          
         break;  
       case 'recuperarLogin':
-        aux=await verificar(body,'usuarioPalabra');
+        aux=await verificar(object,'usuarioPalabra');
         if(aux.errors){
           return  retornarError(res,`Error al verificar la tipologia del Usuario y la Palabra Clave:${aux.errors}`);
          }
-         if(body.clave6!==body.clave7){return retornarError(res,"La confirmacion de la Clave es distinta a la clave Nueva")}
-        login=await buscarLoginPorUsuario(body.usuario5);
+         if(object.clave6!==object.clave7){return retornarError(res,"La confirmacion de la Clave es distinta a la clave Nueva")}
+        login=await buscarLoginPorUsuario(object.usuario5);
         if(login instanceof Error){return retornarError(res,`Error al buscar el Usuario:${login}`)}
         if(login.length===1){
           l=new Login(login[0].id_login,login[0].id_medico,login[0].usuario_login,login[0].clave_login,login[0].tipo_autorizacion,login[0].instancia+1,login[0].palabra_clave);
        }else{
         return retornarError(res,"El Usuario no se encuentra Registrado");
        }
-        aux=await verificarHash(body.palabraClave,l.palabraClave)
+        aux=await verificarHash(object.palabraClave,l.palabraClave)
          if(aux){
-          let c=await crearHash(body.clave6);
+          let c=await crearHash(object.clave6);
           let l1=new Login(login[0].id_login,login[0].id_medico,login[0].usuario_login,c,login[0].tipo_autorizacion,login[0].instancia+1,login[0].palabra_clave);
           let result1=await modificarLogin(l1);
           if(result1 instanceof Error){return retornarError(`Error al modificar el Login:${result1}`)}

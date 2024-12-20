@@ -5,9 +5,7 @@ let inputClave=document.getElementById('clave1');
 let errLogin=document.getElementById('errLogin');
 let instancia=document.getElementById('instancia');
 let exito=document.getElementById('exito');
-let exitoValue=exito.textContent;
-let errLoginValue=errLogin.textContent;
-let instanciaValue=instancia.textContent;
+//let instanciaValue=instancia.textContent;
 let formModificarLogin=document.getElementById('formularioModificarLogin');
 let formRecuperarLogin=document.getElementById('formularioRecuperarLogin');
 let inputUsuari2=document.getElementById('usuario2');
@@ -23,14 +21,14 @@ let inputPalabraClave3=document.getElementById('palabraClave3');
 pagina="Principal";
 //limpiarCampos(limpiar);
 //console.log(instanciaValue);
-if(exitoValue==='true'){
+/*if(exitoValue==='true'){
     cartelExito(pagina,'La modificacion de la clave fue realizada con exito')
 }
  if(errLoginValue==='false'){
         alerta(pagina,'Algo esta mal con el login');
     }
- 
-function mostrar(){
+ */
+/*function mostrar(){
     limpiarCampos(limpiar);
     fOcultar();
     formModificarLogin.style.display = 'block';
@@ -40,7 +38,7 @@ function mostrar1(){
     limpiarCampos(limpiar);
 fOcultar();    
 formRecuperarLogin.style.display='block';
-}
+}*/
 formRecuperarLogin.addEventListener('submit',async function(event){
   event.preventDefault();
 let usuario5Value=inputUsuario5.value;
@@ -74,29 +72,33 @@ if(a&&b&&c&&d&&e){
     }
 }
 });
+let regClave =convertirExpresionRegular(parametros.clave);
 formLogin.addEventListener('submit',async function(event) {
     event.preventDefault();
+    bandera=true;
     let claveValue=inputClave.value ;
-    let usuarioValue=inputUsuario.value ;
-    let a=validar(usuarioValue.length<1||usuarioValue.length>6,pagina,'El usuario es obligatorio y no debe superar los 6 caracteres',event);
-    let b= validar(claveValue.length<1||!cla.test(claveValue),pagina,'La clave debe contener 3 letras(minimo una mayuscula) y debe contener 3 numeros',event);
-    if(a&&b){
+    let usuarioValue=inputUsuario.value ;//cuando ande bie modificar mensajes para que no sean muy informativos
+    if(!validar(usuarioValue.length<1||usuarioValue.length>parametros.tamaño2,pagina,`El usuario es obligatorio y ${parametros.cartelTamño2}`,event))bandera=false;
+    if(!validar(!regClave.test(claveValue),pagina,`${parametros.cartelClave}`,event)){bandera=false};
+
+    if(bandera){
+      let login={
+        usuario:usuarioValue,
+        clave:claveValue
+      }
         const response = await fetch('/verificarLogin', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({usuario: usuarioValue,clave1: claveValue })
+            body: JSON.stringify(login)
           });
-        
-          const data = await response.json();
-        
-        
-          if (response.ok) {
+         const data = await response.json();
+        if (response.ok) {
                         if (data.codigoPersonalizado === 801) {
-                          
-                          alerta(pagina,'Para continuar,deve modificar su clave');
-                          mostrar();
+                          limpiarCampos(limpiar);
+                          alerta(pagina,'Para continuar,debe modificar su clave');
+                          mostrar(formModificarLogin);
                           
                         }else{
                         // Almacenar el token en localStorage
@@ -123,7 +125,8 @@ formLogin.addEventListener('submit',async function(event) {
                               toke.idSolicitante=data.idSolicitante;
                               let tokeJ=JSON.stringify(toke);
                               let cadena=encodeURIComponent(tokeJ);
-                              window.location.href = `/prescripcion?datos=${cadena}`;
+                             // window.location.href = `/prescripcion?datos=${cadena}`;
+                              window.location.href = `/secundaria?datos=${cadena}`;
                             }    
                               }    
           } else {
@@ -225,7 +228,7 @@ formLogin.addEventListener('submit',async function(event) {
     accederEndpointProtegido();
   }*/
 formModificarLogin.addEventListener('submit',async function(event){
-  event.preventDefault();
+  event.preventDefault();//reacomodar
 let usuario2Value=inputUsuari2.value;
 let clave2Value=inputClave2.value;
 let clave3Value=inpuClave3.value;
