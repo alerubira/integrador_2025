@@ -2,7 +2,7 @@ extends layout
 block script1 
     script(src="domPrincipal.js", defer)
 block content 
- 
+       
         form#formularioLogin.form(action="/verificarLogin", method="POST", autocomplete="off")
             label(for="usuario") Usuario:
             input.limpiar(type="text", id="usuario",name="usuario",placeholder="usuario",autocomplete="off")
@@ -46,7 +46,7 @@ block content
         script.
                      const parametros = !{JSON.stringify(parametros)};      
                                                                                                                                   
-                                                                                                                                    
+                                                                                                                                  
                                                                                                                                     
                                                                                                                                     
                                                                                                                                     

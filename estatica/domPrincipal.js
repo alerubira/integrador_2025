@@ -233,22 +233,18 @@ let usuario2Value=inputUsuari2.value;
 let clave2Value=inputClave2.value;
 let clave3Value=inpuClave3.value;
 let clave4Value=inputClave4.value;
-let palabraClave2Value=inputPalabraClave2.value;
-let palabraClave3Value=inputPalabraClave3.value;
-let a=validar(usuario2Value.length<1||usuario2Value.length>6,pagina,'El usuario es obligatorio y no debe superar los 6 caracteres',event);
-let b=validar(clave2Value.length<1||!cla.test(clave2Value),pagina,'La clave debe contener 3 letras(minimo una mayuscula) y debe contener 3 numeros',event);
-let c=validar(clave3Value.length<1||!cla.test(clave3Value),pagina,'La nueva clave debe contener 3 letras(minimo una mayuscula) y debe contener 3 numeros',event);
-let d=validar(clave3Value!==clave4Value,pagina,'La confirmacion de la clave no es igual a la clave nueva',event);
-let e=validar(palabraClave2Value.length<1||palabraClave2Value.length>38,pagina,'La Palabra Clave es Oblogtoria y no debe superar los 30 caracteres',event);
-let f=validar(palabraClave2Value.length<1||palabraClave2Value.length>38,pagina,'La Palabra Clave es Oblogtoria y no debe superar los 30 caracteres',event);
-let g=validar(palabraClave2Value!==palabraClave3Value,pagina,'Las Palabras Claves deben ser iguales',event);
-if(a&&b&&c&&d&&e&&f&&g){
+if(!validar(usuario2Value.length<1||usuario2Value.length>parametros.tamaño2,pagina,`El usuario es obligatorio y ${parametros.cartelTamño2}`,event))bandera=false;
+if(!validar(!regClave.test(clave2Value),pagina,`${parametros.cartelClave}`,event)){bandera=false};
+if(!validar(!regClave.test(clave3Value),pagina,`${parametros.cartelClave}`,event)){bandera=false};
+if(!validar(clave3Value!==clave4Value,pagina,'La confirmacion de la clave no es igual a la clave nueva',event)){bandera=false};
+
+if(bandera){
   const response = await fetch('/modificarLogin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({usuario2: usuario2Value,clave2: clave2Value,clave3:clave3Value,clave4:clave4Value,palabraClave2:palabraClave2Value,palabraClave3:palabraClave3Value })
+      body: JSON.stringify({usuario: usuario2Value,clave: clave2Value,claveN:clave3Value,claveN2:clave4Value })
     });
   
     const data = await response.json();

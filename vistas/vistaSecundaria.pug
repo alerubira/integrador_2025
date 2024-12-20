@@ -1,7 +1,10 @@
 extends layout
 block script1 
     script(src="donSecundario.js",defer)    
-block content 
+block content
+            #divProfecionalAcceso 
+                                h3 PROFECIONAL
+                                        label=`${profesional.nombrePersona}  ${profesional.apellidoPersona}` 
             select(id="slctCrudProfesion", name="slctCrudProfesion")
                         option(value="") Elija una opcion
                         option(value="crearProfesion") Inscribir Profesion
@@ -77,4 +80,6 @@ block content
                             option(value="2") 
                             option(value="3")
                         br      
-                        button.boton(type="button",onclick='crearLogin()') Crear                                                          
+                        button.boton(type="button",onclick='crearLogin()') Crear
+block boton1 
+        button.boton(type="button",onclick='volver()') volver                                                                                    

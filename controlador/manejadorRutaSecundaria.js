@@ -12,8 +12,23 @@ let encabezado;
 try{
     switch (accion) {
         case 'ingresar':
-            encabezado='pagina secundaria';
-            res.render('vistasecundaria',{encabezado,parametros});
+            const datosEncoded = req.query.datos; 
+            const datosDecoded = decodeURIComponent(datosEncoded);
+             const toke = JSON.parse(datosDecoded);
+    
+            if(!toke){return retornarError(res,"Datos de acceso Invalido")}
+            
+                 if(toke.tipoAutorizacion!==2){return retornarError(res,"El Profecional no tiene el nivel de Autorizacion")}
+                 if (toke.tipoAutorizacion === 2) {
+                    let  encabezado = "Pagina Secundaria";
+                    let p1=await Profesional.consultaPorId(toke.idSolicitante);
+                   if(p1 instanceof Error){return retornarError(res,`Error al buscar el Profecional:${p}`)}
+                   let p=p1[0][0]
+                   if(p.activo_profesional!==1||p.activo_persona!==1){return retornarError(res,"El Profecional Esta dado de baja")}
+                  let profesional=new Profesional(p.id_profesional,p.id_profesion,p.nombre_profesion,p.activo_profesional,p.id_persona,p.dni_persona,p.nombre_persona,p.apellido_persona,p.activo_persona);
+                console.log(profesional);
+            res.render('vistasecundaria',{encabezado,parametros,profesional});
+                 }
             break;
         case 'buscarProfesiones':
             aux=await Profesion.consulta();
@@ -58,20 +73,7 @@ try{
             if(aux instanceof Error){return retornarError(res,`Error al crear y guardar Profesional:${aux}`)}
             return retornarExito(res,"Profesional generado y guardado con exito");
             break; 
-        case 'crearLogin':
-            object=req.body;
-            if(object.tipoAutorizacion!=1&&object.tipoAutorizacion!=2&&object.tipoAutorizacion!=3){
-                return retornarError(res,'El tipo de autorizacion no corresponde');
-            }
-            aux=await existeBd(object.idProfesional,'profesional','id_profesional');
-            if(aux instanceof Error){return retornarError(res,`Error al verificar si exite el Profesional :${aux}`)}
-            if(!aux){return retornarError(res,'El Profesional no existe')}
-            aux=await verificarYup(object,'login');
-            if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
-            aux=await Login.alta(object);
-            if(aux instanceof Error){return retornarError(res,`Error al crear y guardar Login:${aux}`)}
-            return retornarExito(res,"Login generado y guardado con exito");
-            break;            
+               
         default:
             let m=`Seleccion ${accion} dentro del manejador secundaria Invalida `  ;
             console.error(m);

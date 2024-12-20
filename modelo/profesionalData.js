@@ -49,7 +49,10 @@ class ProfesionalData extends PersonaData {
         const query = 'CALL obtenerProfesionales()';
         return await consulta1(query);
     }
-
+    static async consultaProfesionalPorId(id){
+        const query='CALL ObtenerProfesionalPorID(?)'; 
+        return await consulta1(query, id);
+    }
     static async modificarActivoProfesional(prof) {
         const query = 'UPDATE `profesional` SET `activo_profesional` = ? WHERE `id_profesional` = ?';
         return await consulta1(query, prof.activoProfesional, prof.idProfesional);

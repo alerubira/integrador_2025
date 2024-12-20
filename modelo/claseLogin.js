@@ -28,6 +28,7 @@ class Login {
     async modificarClave(){
         let clave=await crearHash(this.clave);
         this.clave=clave;
+        this.instancia=this.instancia +1;
         return await LoginData.modificarClaveLogin(this)
     }
     static async  verificarHash(password, hashedPassword) {

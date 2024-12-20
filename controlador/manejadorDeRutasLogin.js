@@ -1,15 +1,29 @@
 import { verificarYup } from './verificaryup.js';
 import { Login } from '../modelo/claseLogin.js';
-//import { verificarHash,crearHash,Login,usuarioClave } from "../modelo/loginn.js";
+import { jwtSecret } from '../config.js';
 import jwt from 'jsonwebtoken';
 
-import { retornarError } from "./funsionesControlador.js";
+import { retornarError, retornarExito } from "./funsionesControlador.js";
 let object;
 let aux;
 async function manejadorLogin(req,res,objeto){
   try {
     
     switch (objeto) {
+      case 'crearLogin':
+            object=req.body;
+            if(object.tipoAutorizacion!=1&&object.tipoAutorizacion!=2&&object.tipoAutorizacion!=3){
+                return retornarError(res,'El tipo de autorizacion no corresponde');
+            }
+            aux=await existeBd(object.idProfesional,'profesional','id_profesional');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar si exite el Profesional :${aux}`)}
+            if(!aux){return retornarError(res,'El Profesional no existe')}
+            aux=await verificarYup(object,'login');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
+            aux=await Login.alta(object);
+            if(aux instanceof Error){return retornarError(res,`Error al crear y guardar Login:${aux}`)}
+            return retornarExito(res,"Login generado y guardado con exito");
+            break;     
       case 'verificarLogin':
         object=req.body;
          aux=await verificarYup(object,'login');
@@ -22,7 +36,7 @@ async function manejadorLogin(req,res,objeto){
           aux=await Login.verificarHash(object.clave,l[0].clave_login);
           //verificar si el login esta activo
          if(!l[0].activo_login){return retornarError(res,'El Login no esta activo')}
-         if(aux) {
+         if(!aux) {return retornarError(res,"Clave o Usuario Incorrecta")}
           let login=new Login(l[0].id_login,l[0].id_profesional,l[0].usuario_login,l[0].clave_login,l[0].tipo_autorizacion,l[0].instancia_login,l[0].activo_login)    
           if(login.instancia===1){
                 return res.status(200).json({
@@ -32,69 +46,47 @@ async function manejadorLogin(req,res,objeto){
                 }); 
                // return res.render('vistaPrincipal',{encabezado,instancia:true})
               }
-              if(l.tipoAutorizacion===3||l.tipoAutorizacion===2){
+              if(login.tipoAutorizacion===3||login.tipoAutorizacion===2){
                 //generar token
                  // Datos que quieres almacenar en el token
                  const payload = {
-                  username: l.usuario,
-                  tipoAutorizacion: l.tipoAutorizacion, // Agregar tipo de autorización al payload
-                  idSolicitante:l.idMedico
+                  username: login.usuario,
+                  tipoAutorizacion: login.tipoAutorizacion, // Agregar tipo de autorización al payload
+                  idSolicitante:login.idProfesional
                 };// Genera el token
                 const token = jwt.sign(payload, jwtSecret, { expiresIn: '3h' });
                 // Devuelve el token al cliente
               return  res.json({ token: token ,
-                tipoAutorizacion: l.tipoAutorizacion, // Agregar tipo de autorización al payload});
-                idSolicitante:l.idMedico
+                tipoAutorizacion: login.tipoAutorizacion, // Agregar tipo de autorización al payload});
+                idSolicitante:login.idProfesional
                //return res.redirect('/acceso');
               })}
               
-           }else{
-            return retornarError(res,"Clave o Usuario Incorrecta");
-           }
+           
         break;
       case 'modificarLogin':
        object=req.body;
-         
-         usCl=new usuarioClave(object.usuario2,object.clave2);
-        aux=await verificar(usCl,'usuarioClave');
+       if(object.claveN!==object.claveN2){
+        return retornarError(res,"La Confirmacion de la Clave debe ser igual a la Clave Nueva")
+       }
+       let lo=await Login.consultaPorUsuario(object.usuario);
+       if(lo instanceof Error){return retornarError(res,`Error al buscar el Login:${lo}`)}
+        if(lo.length<1){return retornarError(res,"El usuario no existe, intente nuevamente")}
+        if(!lo[0].activo_login){return retornarError(res,'El Login no esta activo')}
+        aux=await Login.verificarHash(object.clave,lo[0].clave_login);
+       if(!aux) {return retornarError(res,"Clave o Usuario Incorrecta")}
+    
+        let log={usuario:object.usuario,clave:object.claveN};
+        aux=await verificarYup(log,'login');
          if(aux.errors){
           return retornarError(res,`Error en la tipologia del Login:${aux.errors}`)
          }
-         if(object.clave3!==object.clave4){
-          return retornarError(res,"La Confirmacion de la Clave debe ser igual a la Clave Nueva")
-         }
-         if(object.palabraClave2!==object.palabraClave3){return retornarError(res,'La Confirmacion de la Palabra Clave es distinta')}
-         if(object.palabraClave2.length<1||object.palabraClave2.length>38){
-          return retornarError(res,'La aplabra clave nueva es obligatoria y no debe superar los 38 caracteres')
-         }
-         usCl=new usuarioClave(object.usuario2,object.clave3);
-         aux=await verificar(usCl,'usuarioClave');
-         if(aux.errors){
-          return  retornarError(res,`Error al verificar la tipologia del usuario:${aux.errors}`);
-         }
-         login=await buscarLoginPorUsuario(aux.usuario);
-         
-         if(login.length<1){
-          return retornarError(res,"El usuario no se encuentra registrado");
-         }
-         
-        boolean=await verificarHash(object.clave2,login[0].clave_login);
-          if(boolean) {
-           
-           let b=await crearHash(object.clave3);
-           let c=await crearHash(object.palabraClave2)
-            //generar un objeto Login 
-             l=new Login(login[0].id_login,login[0].id_medico,login[0].usuario_login,b,login[0].tipo_autorizacion,login[0].instancia+1,c);
-            //res.send(l);
-            
-            let result=await modificarLogin(l);
-            if(result instanceof Error){return retornarError(res,`Error al modificar el Login:${result}`)}
-            if(result.affectedRows===1){
-              return res.send(result);
-            }
-           }else{
-           return retornarError(res,"La Clave no corresponde al usuario");
-           }
+         let logi=new Login(lo[0].id_login,lo[0].id_profesional,lo[0].usuario_login,object.claveN,lo[0].tipo_autorizacion,lo[0].instancia_login,lo[0].activo_login);
+        
+         aux= await logi.modificarClave();
+         if(aux instanceof Error){return retornarError(res,`Error al modificar el Login ${aux}`)}
+      
+          return retornarExito(res,"El Login fue modificado con exito");
          
          
         break;  

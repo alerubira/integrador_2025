@@ -9,7 +9,9 @@ ruta1.get('/', (req, res) => {
      res.render('vistaPrincipal',{encabezado,parametros});
     
    });
-  //
+ruta1.post('/crearLogin',(req,res)=>{
+    manejadorLogin(req,res,'crearLogin');
+  })
 ruta1.post('/verificarLogin',(req,res) =>{
    manejadorLogin(req,res,'verificarLogin');
   });

@@ -41,11 +41,13 @@ app.use(express.json());
 // Definir tus rutas aquí
 app.use('/', ruta1);
 app.use('/',ruta2);
+app.use('/crearLogin',ruta1);
+app.use('/modificarLogin',ruta1)
 app.use('/buscarProfesiones',ruta2);
 app.use('/buscarProfesionales',ruta2);
 app.use('/crearProfesion',ruta2);
 app.use('/crearProfesional',ruta2);
-app.use('/crearLogin',ruta2);
+
  // Iniciar el servidor
  app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);

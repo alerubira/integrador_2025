@@ -18,8 +18,6 @@ ruta2.post('/crearProfesion',(req,res)=>{
 ruta2.post('/crearProfesional',(req,res)=>{
   manejadorSecundaria(req,res,'crearProfesional');
 })
-ruta2.post('/crearLogin',(req,res)=>{
-  manejadorSecundaria(req,res,'crearLogin');
-})
+
 
 export{ruta2};  

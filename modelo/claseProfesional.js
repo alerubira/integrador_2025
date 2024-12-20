@@ -15,6 +15,9 @@ class Profesional extends Persona{
     static async consulta(){
         return await ProfesionalData.consultaProfesional();
     } 
+    static async consultaPorId(id){
+        return await ProfesionalData.consultaProfesionalPorId(id);
+    }
     async modificarActivo(){
         this.activoPersona = !this.activoPersona;
         return await ProfesionalData.modificarActivoProfesional(this)
