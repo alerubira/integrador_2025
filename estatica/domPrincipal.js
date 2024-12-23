@@ -136,6 +136,7 @@ formLogin.addEventListener('submit',async function(event) {
     }
   
 });
+//hacer funsion para mostrar formulario modificar login
 // Función para cargar el contenido de la página de acceso
 /*function cargarContenidoAcceso() {
   const token = localStorage.getItem('token');
@@ -261,5 +262,15 @@ if(bandera){
 }
 });
 
+function mostrarPassword() {
+  let inputPasswords = document.getElementsByClassName('inputPassword');
+  for (let inputPassword of inputPasswords) {
+    if (inputPassword.type === 'password') {
+      inputPassword.type = 'text';
+    } else {
+      inputPassword.type = 'password';
+    }
+  }
+}
 limpiarCampos(limpiar);
 setTimeout(() => limpiarCampos(limpiar), 1000);

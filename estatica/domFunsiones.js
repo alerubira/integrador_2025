@@ -21,6 +21,15 @@ function eliminarObjetoPorId(arreglo, id, propiedad) {
           console.log(`Objeto con ID ${id} no encontrado.`); 
         } 
   }
+  function cerrarSesion() {
+    // Eliminar el token de autenticación del localStorage
+    localStorage.removeItem('token');
+    
+    // Redirigir al usuario a la página de inicio de sesión
+    window.location.href = '/';
+  
+  
+  }
  function fOcultar(){
             
         for (let elemento of ocultar) {
@@ -33,7 +42,7 @@ function eliminarObjetoPorId(arreglo, id, propiedad) {
             }
  }       
  function mostrar(elemento){
-    //fOcultar();
+    fOcultar();
     elemento.style.display = 'block';
  }       
 function limpiarCampos(list){

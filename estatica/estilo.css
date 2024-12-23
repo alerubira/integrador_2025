@@ -50,6 +50,32 @@ h5 {
 .boton:hover{
     background-color: darkblue;
 }
+.boton2{
+    color:green;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 2px;
+  background-color: transparent;
+}
+.boton2:hover{
+  color: black;
+}
+.botonPassword {
+  height: 20px; /* Asegúrate de que coincida con la altura del input */
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.botonPassword img {
+  margin: 0; 
+  height: 100%;
+}
 #divSecundario{
       /*position: fixed;*/
       text-align: center;

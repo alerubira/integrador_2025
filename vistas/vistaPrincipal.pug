@@ -8,10 +8,13 @@ block content
             input.limpiar(type="text", id="usuario",name="usuario",placeholder="usuario",autocomplete="off")
             br
             label(for="clave1") Clave:
-            input.limpiar(type="password", id="clave1", name="clave1",placeholder="clave",autocomplete="off")
+            input.limpiar.inputPassword(type="password", id="clave1", name="clave1",placeholder="clave",autocomplete="off")
+            button.botonPassword(type="button", onclick="mostrarPassword()")
+                img(src="./icons8-mostrar-contraseña-50.png", alt="Mostrar/Ocultar")
             br
             input.boton(type="submit", value="Ingresar")
-        button.boton(onclick="mostrar()") Modificar Clave
+        button.boton2(onclick="mostrar()") Modificar Clave
+        br
         form#formularioModificarLogin.ocultar.form(action="/modificarLogin", method="POST", autocomplete="off")
             label(for="usuario2") Usuario:
             input.limpiar(type="text", id="usuario2",name="usuario2",placeholder="usuario",autocomplete="off")
@@ -27,7 +30,7 @@ block content
             br
             input.boton(type="submit", value="Enviar")
             
-        button.boton(onclick="mostrar1()") Olvidaste tu Clave?
+        button.boton2(onclick="mostrar1()") Olvidaste tu Clave?
         form#formularioRecuperarLogin.ocultar.form(action="/recuperarLogin", method="POST", autocomplete="off")
             p Para generar una clave nueva deve usar su usuario y Palabra Clave
             label(for="usuario5") Usuario:
@@ -45,7 +48,7 @@ block content
             input.boton(type="submit", value="Recuperar")  
         script.
                      const parametros = !{JSON.stringify(parametros)};      
-                                                                                                                                  
+                                                                                                                             
                                                                                                                                   
                                                                                                                                     
                                                                                                                                     
