@@ -47,7 +47,7 @@ app.use('/buscarProfesiones',ruta2);
 app.use('/buscarProfesionales',ruta2);
 app.use('/crearProfesion',ruta2);
 app.use('/crearProfesional',ruta2);
-
+app.use('/enviarMail',ruta1);
  // Iniciar el servidor
  app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);

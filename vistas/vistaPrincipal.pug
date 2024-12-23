@@ -13,7 +13,7 @@ block content
                 img(src="./icons8-mostrar-contraseña-50.png", alt="Mostrar/Ocultar")
             br
             input.boton(type="submit", value="Ingresar")
-        button.boton2(onclick="mostrar()") Modificar Clave
+        button.boton2(onclick="mostrarModificarClave()") Modificar Clave
         br
         form#formularioModificarLogin.ocultar.form(action="/modificarLogin", method="POST", autocomplete="off")
             label(for="usuario2") Usuario:
@@ -30,11 +30,14 @@ block content
             br
             input.boton(type="submit", value="Enviar")
             
-        button.boton2(onclick="mostrar1()") Olvidaste tu Clave?
+        button.boton2(onclick="mostrarRecuperarLogin()") Olvidaste tu Clave?
         form#formularioRecuperarLogin.ocultar.form(action="/recuperarLogin", method="POST", autocomplete="off")
-            p Para generar una clave nueva deve usar su usuario y Palabra Clave
+            p Para generar una clave nueva debe usar su usuario y enviar la solicitud de clave, la cual se mostraraen su mail 
+            br
             label(for="usuario5") Usuario:
             input.limpiar(type="text", id="usuario5",name="usuario5",placeholder="usuario",autocomplete="off")
+            br
+            button.boton(onclick="enviarMail(event)") solicitar clave
             br
             label(for="palabraClave") Palabre Clave:
             input.limpiar(type="text", id="palabraClave", name="palabraClave",placeholder="palabra clave",autocomplete="off")

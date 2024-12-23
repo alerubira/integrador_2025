@@ -21,6 +21,10 @@ ruta1.post('/modificarLogin',(req,res)=>{
 ruta1.post('/recuperarLogin',(req,res)=>{
     manejadorLogin(req,res,'recuperarLogin');
     })  ;
+ruta1.post('/enviarMail',(req,res)=>{
+    manejadorLogin(req,res,'enviarMail');
+    });
+
 //
 ruta1.get('/acceso',  (req, res) => {
   //manejadorAcceso(req,res);

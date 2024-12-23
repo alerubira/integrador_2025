@@ -2,6 +2,7 @@ import { verificarYup } from './verificaryup.js';
 import { Login } from '../modelo/claseLogin.js';
 import { jwtSecret } from '../config.js';
 import jwt from 'jsonwebtoken';
+import {enviarCorreo} from './sendMail.js';
 
 import { retornarError, retornarExito } from "./funsionesControlador.js";
 let object;
@@ -115,7 +116,11 @@ async function manejadorLogin(req,res,objeto){
           return retornarError(res,"La palabra clave no corresponde al Usuario");
          }
         break;  
-      
+      case 'enviarMail':
+        object=req.body;
+        enviarCorreo('arubira60@gmail.com','probar','123');
+     retornarExito(res,'correo enviado con exito'); 
+        break;
       default:
         break;
 }

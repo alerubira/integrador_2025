@@ -95,6 +95,8 @@ formLogin.addEventListener('submit',async function(event) {
           });
          const data = await response.json();
         if (response.ok) {
+          limpiarCampos(limpiar);
+          fOcultar();
                         if (data.codigoPersonalizado === 801) {
                           limpiarCampos(limpiar);
                           alerta(pagina,'Para continuar,debe modificar su clave');
@@ -136,7 +138,35 @@ formLogin.addEventListener('submit',async function(event) {
     }
   
 });
-//hacer funsion para mostrar formulario modificar login
+
+function mostrarRecuperarLogin(){
+  
+    limpiarCampos(limpiar);
+    fOcultar();
+    mostrar(formRecuperarLogin);
+}
+async function enviarMail(event){
+  event.preventDefault();
+  let usuario5Value=inputUsuario5.value;
+  let login={
+    usuario:usuario5Value
+  }
+  const response = await fetch('/enviarMail', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(login)
+  });
+  const data = await response.json();
+  if (response.ok) {
+    
+    cartelExito(pagina,'El correo fue enviado con exito');
+  } else {
+    console.error('Error al enviar correo:', data.message);
+    alerta(pagina,`Error al enviar el correo:${data.message}`);
+  }
+}
 // Función para cargar el contenido de la página de acceso
 /*function cargarContenidoAcceso() {
   const token = localStorage.getItem('token');
