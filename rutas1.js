@@ -1,6 +1,7 @@
 import express from 'express';
 import { parametros } from './parametros.js';
 import { manejadorLogin } from './controlador/manejadorDeRutasLogin.js';
+import { verificarToken } from './controlador/manejadorDeRutasLogin.js';
 //import { Login } from './modelo/claseLogin';
 const ruta1 = express.Router();
 let encabezado;
@@ -9,7 +10,7 @@ ruta1.get('/', (req, res) => {
      res.render('vistaPrincipal',{encabezado,parametros});
     
    });
-ruta1.post('/crearLogin',(req,res)=>{
+ruta1.post('/crearLogin',verificarToken,(req,res)=>{
     manejadorLogin(req,res,'crearLogin');
   })
 ruta1.post('/verificarLogin',(req,res) =>{

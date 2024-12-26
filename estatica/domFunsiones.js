@@ -205,7 +205,7 @@ async function fechGetProtegido(ruta) {
       const response = await fetch(ruta, {
         method: 'GET',
         headers: {
-         // 'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}`
         }
       });
       

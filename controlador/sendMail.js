@@ -20,13 +20,16 @@ function enviarCorreo(destinatario, asunto, mensaje) {
         text: mensaje
     };
 
-    transporter.sendMail(mailOptions, function(error, info) {
-        if (error) {
-            console.log('Error al enviar correo:', error);
-            retornarErrorSinRes(`Error al enviar el correo ${error}`);
-        } else {
-            console.log('Correo enviado:', info.response);
-        }
+    return new Promise((resolve, reject) => {
+        transporter.sendMail(mailOptions, function(error, info) {
+            if (error) {
+                console.log('Error al enviar correo:', error);
+                reject(`Error al enviar el correo: ${error}`);
+            } else {
+                console.log('Correo enviado:', info.response);
+                resolve(info.response);
+            }
+        });
     });
 }
 

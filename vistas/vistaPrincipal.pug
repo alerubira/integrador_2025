@@ -20,13 +20,19 @@ block content
             input.limpiar(type="text", id="usuario2",name="usuario2",placeholder="usuario",autocomplete="off")
             br
             label(for="clave2") Clave:
-            input.limpiar(type="password", id="clave2", name="clave2",placeholder="clave",autocomplete="off")
+            input.limpiar.inputPassword(type="password", id="clave2", name="clave2",placeholder="clave",autocomplete="off")
+            button.botonPassword(type="button", onclick="mostrarPassword()")
+                img(src="./icons8-mostrar-contraseña-50.png", alt="Mostrar/Ocultar")
             br
             label(for="clave3") Clave Nueva:
-            input.limpiar(type="password", id="clave3",name="clave3",placeholder="clave nueva",autocomplete="off")
+            input.limpiar.inputPassword(type="password", id="clave3",name="clave3",placeholder="clave nueva",autocomplete="off")
+            button.botonPassword(type="button", onclick="mostrarPassword()")
+                img(src="./icons8-mostrar-contraseña-50.png", alt="Mostrar/Ocultar")
             br
             label(for="clave4") Clave Nueva:
-            input.limpiar(type="password", id="clave4", name="clave4",placeholder="repita clave",autocomplete="off")
+            input.limpiar.inputPassword(type="password", id="clave4", name="clave4",placeholder="repita clave",autocomplete="off")
+            button.botonPassword(type="button", onclick="mostrarPassword()")
+                img(src="./icons8-mostrar-contraseña-50.png", alt="Mostrar/Ocultar")
             br
             input.boton(type="submit", value="Enviar")
             
@@ -39,16 +45,20 @@ block content
             br
             button.boton(onclick="enviarMail(event)") solicitar clave
             br
-            label(for="palabraClave") Palabre Clave:
+            label(for="palabraClave")  Clave en mail:
             input.limpiar(type="text", id="palabraClave", name="palabraClave",placeholder="palabra clave",autocomplete="off")
             br
             label(for="clave6") Clave Nueva:
-            input.limpiar(type="password", id="clave6",name="clave6",placeholder="clave nueva",autocomplete="off")
+            input.limpiar.inputPassword(type="password", id="clave6",name="clave6",placeholder="clave nueva",autocomplete="off")
+            button.botonPassword(type="button", onclick="mostrarPassword()")
+                img(src="./icons8-mostrar-contraseña-50.png", alt="Mostrar/Ocultar")
             br
             label(for="clave7") Clave Nueva:
-            input.limpiar(type="password", id="clave7",placeholder="repita clave",autocomplete="off")
+            input.limpiar.inputPassword(type="password", id="clave7",placeholder="repita clave",autocomplete="off")
+            button.botonPassword(type="button", onclick="mostrarPassword()")
+                img(src="./icons8-mostrar-contraseña-50.png", alt="Mostrar/Ocultar")
             br
-            input.boton(type="submit", value="Recuperar")  
+            input.boton(type="submit", value="Generar Clave")  
         script.
                      const parametros = !{JSON.stringify(parametros)};      
                                                                                                                              

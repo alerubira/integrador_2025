@@ -8,7 +8,7 @@ block content
             select(id="slctCrudProfesion", name="slctCrudProfesion")
                         option(value="") Elija una opcion
                         option(value="crearProfesion") Inscribir Profesion
-                        option(value="buscarProfesiones") Ver todos las Profesiones 
+                        option(value="buscarProfesiones") Ver todas las Profesiones 
                         option(value="crearProfesional") Crear Profesional 
                         option(value="buscarProfesionales") Ver Todos Los Profesionales
             #divCrearProfesion.ocultar.form.crear 
@@ -17,7 +17,33 @@ block content
                 br
                 button.boton(type="button",onclick='crearProfesion()') Crear 
             script.
-                     const parametros = !{JSON.stringify(parametros)};               
+                     const parametros = !{JSON.stringify(parametros)}; 
+            #divMostrarProfesiones.ocultar
+                    table#todasProfesiones
+                        thead#cabeceraProfesion
+                            tr
+                                th Id Profesion
+                                th Nombre Profesion
+                                th Estado Actual Profesion
+                                th Seleccionar
+                        tbody#cuerpoProfesion 
+            #divModificarProfesion.ocultar  
+                    table#profesion
+                        thead#cabeceraProfesion
+                            tr
+                                th Id Profesion
+                                th Nombre Profesion
+                                th Estado Actual Profesion
+                        tbody#cuerpoProfesion2  
+                    select(id="slctModificarProfesion", name="slctModificarProfesion")
+                        option(value="") Elija una opcion
+                        option(value="modificarNombre") Modificar Nombre 
+                        option(value="modificarEstado") Modificar Estado    
+            #divModificarNombreProfesion.ocultar 
+                        label(for="inputNuevoNombreProfesion") Nuevo Nombre Profesion 
+                        input.limpiar(type="text",id="inputNuevoNombreProfesion",name="inputNuevoNombreProfesion",placeHolder="Nombre Profesion") 
+                        br
+                        button.boton(type="button",onclick='modificarNombreProfesion()') Modificar                                                
             #divCrearProfesional.ocultar.crear.form 
                         label(for="dniPersona") DNI del Profecional:
                         input#dniPersona.limpiar(name="dniPersona",type="number")    

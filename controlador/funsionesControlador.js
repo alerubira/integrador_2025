@@ -6,7 +6,7 @@ function retornarError(res,mensaje){
     });
 }
 function retornarErrorSinRes(message) {
-    console.log(message);
+    //console.log(message);
     return new Error(message);
 }
 function retornarExito(res,mensaje){

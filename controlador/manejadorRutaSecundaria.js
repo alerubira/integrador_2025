@@ -26,7 +26,7 @@ try{
                    let p=p1[0][0]
                    if(p.activo_profesional!==1||p.activo_persona!==1){return retornarError(res,"El Profecional Esta dado de baja")}
                   let profesional=new Profesional(p.id_profesional,p.id_profesion,p.nombre_profesion,p.activo_profesional,p.id_persona,p.dni_persona,p.nombre_persona,p.apellido_persona,p.activo_persona);
-                console.log(profesional);
+                
             res.render('vistasecundaria',{encabezado,parametros,profesional});
                  }
             break;
@@ -40,6 +40,16 @@ try{
             }
             return res.send(prs);
             break; 
+        case 'modificarEstadoProfesion':
+            object=req.body;
+            aux=await existeBd(object.idProfesion,'profesion','id_profesion');  
+            if(aux instanceof Error){return retornarError(res,`Error al verificar si exite la profesion :${aux}`)}
+            if(!aux){return retornarError(res,'La Profesion no existe')}
+            let profesion=new Profesion(object.idProfesion,object.nombreProfesion,object.activoProfesion);
+            aux=await profesion.modificarActivo();
+            if(aux instanceof Error){return retornarError(res,`Error al modificar el estado de la Profesion:${aux}`)}   
+            return retornarExito(res,"Estado de la Profesion modificado con exito");
+            break;    
         case 'buscarProfesionales':
             aux=await Profesional.consulta();
             if(aux instanceof Error){return retornarError(res,`Error al buscar profesionales :${aux}`)}

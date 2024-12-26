@@ -92,33 +92,13 @@ async function manejadorLogin(req,res,objeto){
          
         break;  
       case 'recuperarLogin':
-        aux=await verificar(object,'usuarioPalabra');
-        if(aux.errors){
-          return  retornarError(res,`Error al verificar la tipologia del Usuario y la Palabra Clave:${aux.errors}`);
-         }
-         if(object.clave6!==object.clave7){return retornarError(res,"La confirmacion de la Clave es distinta a la clave Nueva")}
-        login=await buscarLoginPorUsuario(object.usuario5);
-        if(login instanceof Error){return retornarError(res,`Error al buscar el Usuario:${login}`)}
-        if(login.length===1){
-          l=new Login(login[0].id_login,login[0].id_medico,login[0].usuario_login,login[0].clave_login,login[0].tipo_autorizacion,login[0].instancia+1,login[0].palabra_clave);
-       }else{
-        return retornarError(res,"El Usuario no se encuentra Registrado");
-       }
-        aux=await verificarHash(object.palabraClave,l.palabraClave)
-         if(aux){
-          let c=await crearHash(object.clave6);
-          let l1=new Login(login[0].id_login,login[0].id_medico,login[0].usuario_login,c,login[0].tipo_autorizacion,login[0].instancia+1,login[0].palabra_clave);
-          let result1=await modificarLogin(l1);
-          if(result1 instanceof Error){return retornarError(`Error al modificar el Login:${result1}`)}
-          if(result1.affectedRows===1){
-            return res.send(result1);          }
-         }else{
-          return retornarError(res,"La palabra clave no corresponde al Usuario");
-         }
+        
         break;  
       case 'enviarMail':
         object=req.body;
-        enviarCorreo('arubira60@gmail.com','probar','123');
+        aux=await enviarCorreo('arubira60@gmail.com','probar','123');
+        if(aux instanceof Error){return retornarError(res,`Error al enviar el correo:${aux}`)}
+        console.log(aux);
      retornarExito(res,'correo enviado con exito'); 
         break;
       default:

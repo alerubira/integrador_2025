@@ -145,6 +145,12 @@ function mostrarRecuperarLogin(){
     fOcultar();
     mostrar(formRecuperarLogin);
 }
+function mostrarModificarClave(){
+  
+    limpiarCampos(limpiar);
+    fOcultar();
+    mostrar(formModificarLogin);
+}
 async function enviarMail(event){
   event.preventDefault();
   let usuario5Value=inputUsuario5.value;
