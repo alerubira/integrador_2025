@@ -9,6 +9,7 @@ async function manejadorSecundaria(req,res,accion){
 let aux;
 let object;
 let encabezado;
+let profesion;
 try{
     switch (accion) {
         case 'ingresar':
@@ -45,21 +46,35 @@ try{
             aux=await existeBd(object.idProfesion,'profesion','id_profesion');  
             if(aux instanceof Error){return retornarError(res,`Error al verificar si exite la profesion :${aux}`)}
             if(!aux){return retornarError(res,'La Profesion no existe')}
-            let profesion=new Profesion(object.idProfesion,object.nombreProfesion,object.activoProfesion);
+             profesion=new Profesion(object.idProfesion,object.nombreProfesion,object.activoProfesion);
             aux=await profesion.modificarActivo();
             if(aux instanceof Error){return retornarError(res,`Error al modificar el estado de la Profesion:${aux}`)}   
             return retornarExito(res,"Estado de la Profesion modificado con exito");
-            break;    
+            break;
+        case 'modificarNombreProfesion':
+            object=req.body;
+            aux=await existeBd(object.idProfesion,'profesion','id_profesion');  
+            if(aux instanceof Error){return retornarError(res,`Error al verificar si exite la profesion :${aux}`)}
+            if(!aux){return retornarError(res,'La Profesion no existe')}
+            aux=await verificarYup(object,'profesion');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
+            aux=await existeNombreBd(object.nombreProfesion,'profesion','nombre_profesion');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar si la Profesion existe :${aux}`)}
+            if(aux){return retornarError(res,'El nombre de la Profesion ya existe en la base de datos')}
+             profesion=new Profesion(object.idProfesion,object.nombreProfesion,object.activoProfesion);
+            aux=await profesion.modificarNombre();
+            if(aux instanceof Error){return retornarError(res,`Error al modificar el nombre de la Profesion:${aux}`)}   
+            return retornarExito(res,"Nombre de la Profesion modificado con exito");        
         case 'buscarProfesionales':
             aux=await Profesional.consulta();
             if(aux instanceof Error){return retornarError(res,`Error al buscar profesionales :${aux}`)}
             //
-            let prof=[];
+            let profesionales=[];
             for(let p of aux[0]){
                 let pr=new Profesional(p.id_profesional,p.id_profesion,p.nombre_profesion,p.activo_profesional,p.id_persona,p.dni_persona,p.nombre_persona,p.apellido_persona,p.activo_persona);
-                prof.push(pr);
+                profesionales.push(pr);
             }
-            return res.send(prof);
+            return res.send(profesionales);
             break;    
         case 'crearProfesion':
             object=req.body;
@@ -83,7 +98,18 @@ try{
             if(aux instanceof Error){return retornarError(res,`Error al crear y guardar Profesional:${aux}`)}
             return retornarExito(res,"Profesional generado y guardado con exito");
             break; 
-               
+        case 'modificarEstadoPersona':
+            object=req.body;
+            aux=await existeBd(object.idPersona,'persona','id_persona');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar si exite la persona :${aux}`)}    
+            if(!aux){return retornarError(res,'La Persona no existe')}
+            aux=await verificarYup(object,'persona');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
+            let persona=new Profesional(object.idProfesional,object.idProfesion,object.nombreProfesion,object.activoProfesional,object.idPersona,object.dniPersona,object.nombrePersona,object.apellidoPersona,object.activoPersona);
+            aux=await persona.modificarActivoPer();
+            if(aux instanceof Error){return retornarError(res,`Error al modificar el estado de la Persona:${aux}`)}
+            return retornarExito(res,"Estado de la Persona modificado con exito");
+            break;       
         default:
             let m=`Seleccion ${accion} dentro del manejador secundaria Invalida `  ;
             console.error(m);

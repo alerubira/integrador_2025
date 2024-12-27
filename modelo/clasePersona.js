@@ -1,4 +1,5 @@
 //import { altaPersona } from "./personaData";
+import { PersonaData } from "./personaData.js";
 class Persona{
     constructor(idPersona,dniPersona,nombrePersona,apellidoPersona,activoPersona){
         this.idPersona=idPersona;
@@ -18,7 +19,7 @@ class Persona{
            return await PersonaData.buscarIdPorDni(dni);
         }
     
-        async modificarActivo() {
+        async modificarActivoPer() {
             this.activoPersona = !this.activoPersona;
             return await PersonaData.modificarActivoPersona(this);
         }

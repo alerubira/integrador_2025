@@ -13,7 +13,7 @@ class PersonaData {
 
     static async modificarActivoPersona(per) {
          query = 'UPDATE `persona` SET `activo_persona` = ? WHERE `id_persona` = ?';
-        return await consulta1(query, pro.activoPersona, pro.idPersona);
+        return await consulta1(query, per.activoPersona, per.idPersona);
     }
 
     static async modificarNombrePersona(per) {

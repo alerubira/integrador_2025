@@ -1,6 +1,10 @@
 extends layout
 block script1 
-    script(src="donSecundario.js",defer)    
+    script(src="donSecundario.js",defer) 
+block script2 
+    script(src="domSecundarioProfesion.js",defer)    
+block script3 
+    script(src="domSecundarioProfesional.js",defer)        
 block content
             #divProfecionalAcceso 
                                 h3 PROFECIONAL
@@ -27,7 +31,7 @@ block content
                                 th Estado Actual Profesion
                                 th Seleccionar
                         tbody#cuerpoProfesion 
-            #divModificarProfesion.ocultar  
+            #divModificarProfesion.ocultar2  
                     table#profesion
                         thead#cabeceraProfesion
                             tr
@@ -92,6 +96,13 @@ block content
                     select(id="slctModificarProfesional", name="slctModificarProfesional")
                         option(value="") Elija una opcion
                         option(value="crearLogin") Crear Login
+                        option(value="modificarEstadoProfesional") Modificar Estado Profesional
+                        option(value="modificarEstadoPersona") Modificar Estado Persona
+                        option(value="modificarProfesion") Modificar Profesion
+                        option(value="modificarNombrePersona") Modificar Nombre Persona
+                        option(value="modificarApellidoPersona") Modificar Apellido Persona
+                        option(value="modificarDniPersona") Modificar Dni Persona
+                        
             #divCrearLogin.ocultar.crear.form           
                         label(for="usuario") Usuario Provisorio 
                         input.limpiar(type="text",id="usuario",name="usuario",placeHolder="maximo 6 caracteres") 
