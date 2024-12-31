@@ -95,10 +95,14 @@ async function manejadorLogin(req,res,objeto){
         
         break;  
       case 'enviarMail':
-        object=req.body;
-        aux=await enviarCorreo('arubira60@gmail.com','probar','123');
-        if(aux instanceof Error){return retornarError(res,`Error al enviar el correo:${aux}`)}
-        console.log(aux);
+        //const { destinatario, asunto, mensaje } = req.body;
+        try {
+          const response = await enviarCorreo('arubira60@gmail.com', 'prueba', '123');
+          res.send(`Correo enviado: ${response}`);
+        } catch (error) {
+         // res.status(500).send(error);
+         return retornarError(res,`Error al enviar el correo:${error}`);
+        }
      retornarExito(res,'correo enviado con exito'); 
         break;
       default:
