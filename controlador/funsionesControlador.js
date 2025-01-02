@@ -20,7 +20,11 @@ function transformarstrinAExpReg(string) {
     const expreg = string.replace(/\\\\/g, '\\');
     return new RegExp(expreg);
 }
+function generarNumeroAleatorio() {
+    return Math.floor(1000 + Math.random() * 9000).toString();
+}
 
 
 
-export{retornarError,retornarErrorSinRes,retornarExito,transformarstrinAExpReg}
+
+export{retornarError,retornarErrorSinRes,retornarExito,transformarstrinAExpReg,generarNumeroAleatorio}

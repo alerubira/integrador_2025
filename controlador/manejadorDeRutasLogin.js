@@ -4,7 +4,7 @@ import { jwtSecret } from '../config.js';
 import jwt from 'jsonwebtoken';
 import {enviarCorreo} from './sendMail.js';
 
-import { retornarError, retornarExito } from "./funsionesControlador.js";
+import { retornarError, retornarExito,generarNumeroAleatorio } from "./funsionesControlador.js";
 let object;
 let aux;
 async function manejadorLogin(req,res,objeto){
@@ -95,17 +95,17 @@ async function manejadorLogin(req,res,objeto){
         
         break;  
       case 'enviarMail':
+        let n=generarNumeroAleatorio();
         //const { destinatario, asunto, mensaje } = req.body;
         try {
-          const response = await enviarCorreo('arubira60@gmail.com', 'prueba', '123');
-          res.send(`Correo enviado: ${response}`);
+          const response = await enviarCorreo('arubira60@gmail.com', 'prueba', n);
+          res.json({ message: `Correo enviado: ${response}` });
         } catch (error) {
-         // res.status(500).send(error);
-         return retornarError(res,`Error al enviar el correo:${error}`);
+          retornarError(res, `Error al enviar el correo: ${error}`);
         }
-     retornarExito(res,'correo enviado con exito'); 
         break;
       default:
+        retornarError(res,`Seleccion no valida en el manejador Login ${objeto}`) 
         break;
 }
 //res.send(aux);
