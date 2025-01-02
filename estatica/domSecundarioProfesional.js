@@ -4,6 +4,7 @@ let cuerpo=document.getElementById('cuerpo');
 let divModificarProfesional=document.getElementById('divModificarProfesional');
 let profesional;
 let cuerpo2=document.getElementById('cuerpo2');
+
 async function seleccionarProfesional(event){
      fOcultar();
      mostrar(divModificarProfesional);

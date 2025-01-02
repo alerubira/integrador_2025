@@ -23,8 +23,8 @@ class ProfesionalData extends PersonaData {
             }
             
             const [profecionalResult] = await connection.execute(
-                'INSERT INTO `profesional`(`id_persona`, `id_profesion`, `activo_profesional`) VALUES (?,?,?)',
-                [id_persona, prof.idProfesionProfesional, true]
+                'INSERT INTO `profesional`(`id_persona`, `id_profesion`, `activo_profesional`,`e_mail`) VALUES (?,?,?,?)',
+                [id_persona, prof.idProfesionProfesional, true,prof.eMail]
             );
     
             const id_medico = profecionalResult.insertId;

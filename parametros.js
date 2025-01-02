@@ -8,7 +8,9 @@ const parametros={
     dni:"^\\d{7,8}$",//se agregauna barra invertida para la transformacion con la funsion en el cliente
     cartelDni:"El dni debe contener 7 u 8 numeros unicamente",
     tamaño2:6,
-    cartelTamaño2:"no debe superar los 6 caracteres"
+    cartelTamaño2:"no debe superar los 6 caracteres",
+    email: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+    cartelEmail: "El correo electrónico debe ser válido"
 
 }
 /*/^[a-zA-Z\s]+$/ expresion regular:a-zA-Z: Permite letras minúsculas y mayúsculas.
@@ -31,5 +33,12 @@ Un lookahead positivo que verifica si hay al menos 3 dígitos consecutivos (\d r
 Esto significa "cualquier cantidad de caracteres (incluyendo ninguno) después de haber pasado las verificaciones anteriores".
 Permite que la cadena tenga cualquier contenido adicional después de cumplir con los requisitos de los lookaheads.
 */
-
+/*
+Explicación de la expresión regular para email:
+^[a-zA-Z0-9._%+-]+: Comienza con uno o más caracteres que pueden ser letras, números, puntos, guiones bajos, porcentajes, signos más o guiones.
+@: Debe contener un símbolo de arroba.
+[a-zA-Z0-9.-]+: Después del arroba, debe contener uno o más caracteres que pueden ser letras, números, puntos o guiones.
+\\.: Debe contener un punto.
+[a-zA-Z]{2,}$: Debe terminar con dos o más letras.
+*/
 export {parametros}

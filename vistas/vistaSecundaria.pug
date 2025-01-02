@@ -62,6 +62,10 @@ block content
                         input.limpiar(type="text", id="profesionProfesional" ,name="profesionProfesional",list="dtlProfesionProfesional", autocomplete="off")
                         datalist#dtlProfesionProfesional
                         br
+                        label(for="eMail") E_mail del Profecional 
+                        input.limpiar(type="e_mail", id="eMail" ,name="eMail", autocomplete="off")
+                        br
+
                         button.boton(type="button",onclick='crearProfesional()') Crear 
             
             #divMostrarProfesionales.ocultar
