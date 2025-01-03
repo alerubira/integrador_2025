@@ -19,7 +19,7 @@ ruta1.post('/verificarLogin',(req,res) =>{
 ruta1.post('/modificarLogin',(req,res)=>{
     manejadorLogin(req,res,'modificarLogin');
     }) ;
-ruta1.post('/recuperarLogin',(req,res)=>{
+ruta1.post('/recuperarLogin',verificarToken,(req,res)=>{
     manejadorLogin(req,res,'recuperarLogin');
     })  ;
 ruta1.post('/enviarMail',(req,res)=>{

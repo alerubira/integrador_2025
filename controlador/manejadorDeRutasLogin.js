@@ -1,5 +1,6 @@
 import { verificarYup } from './verificaryup.js';
 import { Login } from '../modelo/claseLogin.js';
+import { Profesional } from '../modelo/claseProfesional.js';
 import { jwtSecret } from '../config.js';
 import jwt from 'jsonwebtoken';
 import {enviarCorreo} from './sendMail.js';
@@ -92,17 +93,35 @@ async function manejadorLogin(req,res,objeto){
          
         break;  
       case 'recuperarLogin':
-        
+        //traer de la bade de dato,hacer el objeto login,verificaryup,agregarar en yup clave provisoria(puede ser null)
+        object=req.body;  
+        //verificar que exista en la base de datos,verificar la clave provisoria con el metodo de Login
+        //hacer la modificacion de la clave principal
         break;  
       case 'enviarMail':
+        object=req.body;
         let n=generarNumeroAleatorio();
+        aux=await Login.consultaPorUsuario(object.usuario);
+        
+        if(aux instanceof Error){return retornarError(res,`Error al buscar el Login:${aux}`)}
+        if(aux.length<1){return retornarError(res,"El usuario no existe, intente nuevamente")}
+       let lP=new Login(aux[0].id_login,aux[0].id_profesional,aux[0].usuario_login,n,aux[0].tipo_autorizacion,aux[0].instancia_login,aux[0].activo_login,n);
+        aux=await Profesional.consultaPorId(lP.idProfesional);
+        if(aux instanceof Error){return retornarError(res,`Error al buscar el Profesional:${aux}`)}
+        if(aux.length<1){return retornarError(res,"El Profesional no existe")}
+        
+        let eMail=aux[0][0].e_mail;
+        aux=await lP.modificarClaveProvisoria();
+         if(aux instanceof Error){return retornarError(res,`Error al modificar la clave provisoria:${aux}`)}
         //const { destinatario, asunto, mensaje } = req.body;
         try {
-          const response = await enviarCorreo('arubira60@gmail.com', 'prueba', n);
-          res.json({ message: `Correo enviado: ${response}` });
+          const response = await enviarCorreo(eMail, 'Clave Provisoria', `Su clave provisoria es: ${n} y tiene una duracion de 4 horas`);	
+          const tokenP = jwt.sign(payload, jwtSecret, { expiresIn: '4h' });
+          res.json({ message: `Correo enviado: ${response}`,token:tokenP });
         } catch (error) {
           retornarError(res, `Error al enviar el correo: ${error}`);
         }
+       
         break;
       default:
         retornarError(res,`Seleccion no valida en el manejador Login ${objeto}`) 

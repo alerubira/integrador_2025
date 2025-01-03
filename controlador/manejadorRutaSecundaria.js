@@ -71,7 +71,7 @@ try{
             //
             let profesionales=[];
             for(let p of aux[0]){
-                let pr=new Profesional(p.id_profesional,p.id_profesion,p.nombre_profesion,p.activo_profesional,p.id_persona,p.dni_persona,p.nombre_persona,p.apellido_persona,p.activo_persona);
+                let pr=new Profesional(p.id_profesional,p.id_profesion,p.nombre_profesion,p.activo_profesional,p.id_persona,p.dni_persona,p.nombre_persona,p.apellido_persona,p.activo_persona,p.e_mail);   
                 profesionales.push(pr);
             }
             return res.send(profesionales);
@@ -94,6 +94,7 @@ try{
             if(!aux){return retornarError(res,'La Profesion en el Profesional no existe')}
             aux=await verificarYup(object,'persona');
             if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
+            //crear en yup profesional con meil y datos adicionales(los que se pida en el integrador)
             aux=await Profesional.alta(object);
             if(aux instanceof Error){return retornarError(res,`Error al crear y guardar Profesional:${aux}`)}
             return retornarExito(res,"Profesional generado y guardado con exito");

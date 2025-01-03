@@ -14,6 +14,10 @@ static async  buscarLoginPorUsuario(usuario){
    query = "UPDATE `login` SET `clave_login`=?, `instancia_login`=? WHERE id_login=?";
     return await consulta1(query,log.clave,log.instancia,log.idLogin);
    }
+static async  modificarClaveProvisoriaLogin(log){
+  query = "UPDATE `login` SET `clave_login_provisoria`=? WHERE id_login=?";
+  return await consulta1(query,log.claveProvisoria,log.idLogin);
+   }   
 static async modificarActivoLogin(log){
   query = "UPDATE `login` SET `activo_login`=? WHERE id_login=?";
   return await consulta1(query,log.activoLogin,log.idLogin);

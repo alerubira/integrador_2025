@@ -79,6 +79,7 @@ slctCrudProfesion.addEventListener('change',async function() {
                    agregarTdCuerpo(p.nombrePersona,tr);
                    agregarTdCuerpo(p.idProfesion,tr);
                    agregarTdCuerpo(p.nombreProfesion,tr);
+                   agregarTdCuerpo(p.eMail,tr);
                    if(p.activoPersona===1){
                         agregarTdCuerpo('Activo',tr);
                    }else{

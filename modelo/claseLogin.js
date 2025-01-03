@@ -2,7 +2,7 @@ import { genSalt, hash as _hash, compare } from 'bcrypt';
 import { LoginData } from './loginData.js';
 
 class Login {
-    constructor(idLogin,idProfesional,usuario, clave,tipoAutorizacion,instancia,activoLogin) {
+    constructor(idLogin,idProfesional,usuario, clave,tipoAutorizacion,instancia,activoLogin,claveProvisoria) {
        
         this.idLogin=idLogin;
         this.idProfesional=idProfesional;
@@ -11,6 +11,7 @@ class Login {
         this.tipoAutorizacion=tipoAutorizacion;
         this.instancia=instancia;
         this.activoLogin=activoLogin;
+        this.claveProvisoria=claveProvisoria;
     }
         // Método para alta de login
     static async alta(log) {
@@ -30,6 +31,11 @@ class Login {
         this.clave=clave;
         this.instancia=this.instancia +1;
         return await LoginData.modificarClaveLogin(this)
+    }
+    async modificarClaveProvisoria(){
+        let clave=await crearHash(this.claveProvisoria);
+        this.claveProvisoria=clave;
+        return await LoginData.modificarClaveProvisoriaLogin(this)
     }
     static async  verificarHash(password, hashedPassword) {
     

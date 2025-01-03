@@ -41,6 +41,7 @@ formRecuperarLogin.style.display='block';
 }*/
 formRecuperarLogin.addEventListener('submit',async function(event){
   event.preventDefault();
+  //hacer las verificaciones de los campos
 let usuario5Value=inputUsuario5.value;
 let palabraClaveValue=inputPalabraClave.value;
 let clave6Value=inputClave6.value;
@@ -50,13 +51,15 @@ let b=validar(palabraClaveValue.length<1||palabraClaveValue.length>35,pagina,'La
 let c=validar(clave6Value.length<1||!cla.test(clave6Value),pagina,'La clave debe contener 3 letras(minimo una mayuscula) y debe contener 3 numeros',event);
 let d=validar(clave7Value.length<1||!cla.test(clave7Value),pagina,'La nueva clave debe contener 3 letras(minimo una mayuscula) y debe contener 3 numeros',event);
 let e=validar(clave6Value!==clave7Value,pagina,'La confirmacion de la clave no es igual a la clave nueva',event);
+//hacer el objeto login para enviar por post
 if(a&&b&&c&&d&&e){
   const response = await fetch('/recuperarLogin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
+        //agregar el token
       },
-      body: JSON.stringify({usuario5: usuario5Value,clave6: clave6Value,clave7:clave7Value,palabraClave:palabraClaveValue })
+      body: JSON.stringify(/*enviar objeto login*/)
     });
   
     const data = await response.json();
@@ -166,7 +169,7 @@ async function enviarMail(event){
   });
   const data = await response.json();
   if (response.ok) {
-    
+    localStorage.setItem('token', data.token);
     cartelExito(pagina,'El correo fue enviado con exito');
   } else {
     console.error('Error al enviar correo:', data.message);

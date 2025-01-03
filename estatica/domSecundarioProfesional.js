@@ -31,6 +31,7 @@ async function seleccionarProfesional(event){
                          agregarTdCuerpo(profesional.nombrePersona,tr2);
                          agregarTdCuerpo(profesional.idProfesion,tr2);
                          agregarTdCuerpo(profesional.nombreProfesion,tr2);
+                         agregarTdCuerpo(profesional.eMail,tr2);
                          if(profesional.activoPersona===1){
                               agregarTdCuerpo('Activo',tr2);
                          }else{
@@ -49,18 +50,21 @@ async function seleccionarProfesional(event){
      let inputNombrePersona=document.getElementById('nombrePersona');
      let inputApellidoPersona=document.getElementById('apellidoPersona');
      let profesionProfesional=document.getElementById('profesionProfesional');
-     
+     let inputEMail=document.getElementById('eMail');
 async function crearProfesional(){
      let regDni =convertirExpresionRegular(parametros.dni);
      let regNombres=convertirExpresionRegular(parametros.nombres);
+     let regEMail=convertirExpresionRegular(parametros.eMail);
      let idProfesionProfesionalValue=parseInt(profesionProfesional.value);
      let dniPersonaValue=parseInt(inputDniPersona.value);
+     let eMailValue=inputEMail.value;
      bandera=true;
      if(!validar(!regDni.test(dniPersonaValue),pagina,`${parametros.cartelDni}`)){bandera=false};
      if(!validar(!regNombres.test(inputNombrePersona.value),pagina,`en el Nombre ${parametros.cartelNombres}`)){bandera=false};
      if(!validar(inputNombrePersona.value.length<1||inputNombrePersona.value.length>parametros.tamaño1,pagina,`El Nombre es obligatorio y ${parametros.cartelTamaño1}`)){bandera=false}
      if(!validar(!regNombres.test(inputApellidoPersona.value),pagina,`en el Apellido ${parametros.cartelNombres}`)){bandera=false};
      if(!validar(inputApellidoPersona.value.length<1||inputApellidoPersona.value.length>parametros.tamaño1,pagina,`El Apellido es obligatorio y ${parametros.cartelTamaño1}`)){bandera=false}
+     if(!validar(!regEMail.test(eMailValue)||eMailValue.length<1,pagina,`${parametros.cartelEMail}`)){bandera=false}
      let aux=profesiones.filter(prof=>prof.idProfesion===idProfesionProfesionalValue);
      if(!validar(!aux,pagina,"La Profesion es obligatoria y debe existir")){bandera=false};
      if(bandera){
@@ -68,7 +72,8 @@ async function crearProfesional(){
           dniPersona:dniPersonaValue,
           nombrePersona:inputNombrePersona.value,
           apellidoPersona:inputApellidoPersona.value,
-          idProfesionProfesional:idProfesionProfesionalValue
+          idProfesionProfesional:idProfesionProfesionalValue,
+          eMail:eMailValue
      }
      aux=await fechProtegidoPost('/crearProfesional',prof);
      if(aux.success){
