@@ -10,7 +10,9 @@ const parametros={
     tamaño2:6,
     cartelTamaño2:"no debe superar los 6 caracteres",
     email: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
-    cartelEmail: "El correo electrónico debe ser válido"
+    cartelEmail: "El correo electrónico debe ser válido",
+    tamaño3:4,
+    cartelTamaño3:"no debe superar los 4 caracteres",
 
 }
 /*/^[a-zA-Z\s]+$/ expresion regular:a-zA-Z: Permite letras minúsculas y mayúsculas.

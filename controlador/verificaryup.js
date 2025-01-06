@@ -75,20 +75,19 @@ claveProvisoria: yup.string()
 nivelAutorizacion: yup.string()
      .oneOf(['1', '2', '3'], 'El nivel debe ser 1, 2 o 3')
      .required('El nivel de autorizacion es obligatorio obligatorio'),
-palabraClave: yup.string()
-     .max(35,'La palabra clave no deve superar los 35 caracteres')
-     .required('La palabra clave es obligatoria')
+
 });
 const claveReg=transformarstrinAExpReg(parametros.clave);
 const loginY= yup.object().shape({
-    
     usuario: yup.string()
         .max(parametros.tamaño2, `El Usuario ${parametros.cartelTamaño2}`)
         .required('El usuario es obligatorio'),
     clave: yup.string()
         .matches(claveReg, `${parametros.cartelClave}`)
         .required('La clave es obligatoria'),
-    
+    claveProvisoria: yup.string()
+        .max(parametros.tamaño3, `La clave provisoria ${parametros.cartelTamaño3}`)
+        .nullable(),
     });
 const dniReg=transformarstrinAExpReg(parametros.dni);  
 const nombresReg=transformarstrinAExpReg(parametros.nombres);  

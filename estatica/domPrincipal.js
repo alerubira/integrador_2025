@@ -42,37 +42,28 @@ formRecuperarLogin.style.display='block';
 formRecuperarLogin.addEventListener('submit',async function(event){
   event.preventDefault();
   //hacer las verificaciones de los campos
+bandera=true;  
 let usuario5Value=inputUsuario5.value;
 let palabraClaveValue=inputPalabraClave.value;
 let clave6Value=inputClave6.value;
 let clave7Value=inputClave7.value;
-let a=validar(usuario5Value.length<1||usuario5Value.length>6,pagina,'El usuario es obligatorio y no debe superar los 6 caracteres',event);
-let b=validar(palabraClaveValue.length<1||palabraClaveValue.length>35,pagina,'La palabra clave es obligatorio y no debe superar los 35 caracteres',event);
-let c=validar(clave6Value.length<1||!cla.test(clave6Value),pagina,'La clave debe contener 3 letras(minimo una mayuscula) y debe contener 3 numeros',event);
-let d=validar(clave7Value.length<1||!cla.test(clave7Value),pagina,'La nueva clave debe contener 3 letras(minimo una mayuscula) y debe contener 3 numeros',event);
-let e=validar(clave6Value!==clave7Value,pagina,'La confirmacion de la clave no es igual a la clave nueva',event);
-//hacer el objeto login para enviar por post
-if(a&&b&&c&&d&&e){
-  const response = await fetch('/recuperarLogin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-        //agregar el token
-      },
-      body: JSON.stringify(/*enviar objeto login*/)
-    });
-  
-    const data = await response.json();
-  
-    if (response.ok) {
-               cartelExito(pagina,"El Login fue modificado con exito");  
-               limpiarCampos(limpiar);
-               fOcultar(); 
-                  
-    } else {
-      console.error('Error al modificarlogin:', data.message);
-      alerta(pagina,`Error al modificar el Login:${data.message}`);
-    }
+if(!validar(usuario5Value.length<1||usuario5Value.length>parametros.tamaño2,pagina,`El usuario es obligatorio y ${parametros.cartelTamño2}`,event))bandera=false;
+if(!validar(palabraClaveValue.length<1||palabraClaveValue.length>parametros.tamaño3,pagina,`La palabra clave es obligatoria y ${parametros.cartelTamño3}`,event))bandera=false;
+if(!validar(!regClave.test(clave6Value),pagina,`${parametros.cartelClave}`,event)){bandera=false};
+if(!validar(!regClave.test(clave7Value),pagina,`${parametros.cartelClave}`,event)){bandera=false};
+if(!validar(clave6Value!==clave7Value,pagina,'La confirmacion de la clave no es igual a la clave nueva',event)){bandera=false}
+let login={usuario:usuario5Value,claveProvisoria:palabraClaveValue,clave:clave6Value};
+if(bandera){
+     aux=await fechProtegidoPost('/recuperarLogin',login);
+     
+      if(aux.success){
+        cartelExito(pagina,'La modificacion de la clave fue realizada con exito');
+        limpiarCampos(limpiar);
+        fOcultar();
+        localStorage.clear(); // Limpia todo el localStorage
+        // O si solo quieres eliminar un ítem específico:
+        // localStorage.removeItem('nombreDelItem');
+      }
 }
 });
 let regClave =convertirExpresionRegular(parametros.clave);

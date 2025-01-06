@@ -22,6 +22,10 @@ static async modificarActivoLogin(log){
   query = "UPDATE `login` SET `activo_login`=? WHERE id_login=?";
   return await consulta1(query,log.activoLogin,log.idLogin);
    }
+static async borrarClaveProvisoriaLogin(log){
+  query = "UPDATE `login` SET `clave_login_provisoria`=null WHERE id_login=?";
+  return await consulta1(query,log.idLogin);
+   }   
   }
 
 

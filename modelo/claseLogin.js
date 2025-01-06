@@ -37,6 +37,10 @@ class Login {
         this.claveProvisoria=clave;
         return await LoginData.modificarClaveProvisoriaLogin(this)
     }
+    async borrarClaveProvisoria(){
+        this.claveProvisoria=null;
+        return await LoginData.borrarClaveProvisoriaLogin(this)
+    }
     static async  verificarHash(password, hashedPassword) {
     
         const match = await compare(password, hashedPassword);

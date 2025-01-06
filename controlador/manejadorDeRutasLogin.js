@@ -8,6 +8,7 @@ import {enviarCorreo} from './sendMail.js';
 import { retornarError, retornarExito,generarNumeroAleatorio } from "./funsionesControlador.js";
 let object;
 let aux;
+let login;
 async function manejadorLogin(req,res,objeto){
   try {
     
@@ -39,7 +40,7 @@ async function manejadorLogin(req,res,objeto){
           //verificar si el login esta activo
          if(!l[0].activo_login){return retornarError(res,'El Login no esta activo')}
          if(!aux) {return retornarError(res,"Clave o Usuario Incorrecta")}
-          let login=new Login(l[0].id_login,l[0].id_profesional,l[0].usuario_login,l[0].clave_login,l[0].tipo_autorizacion,l[0].instancia_login,l[0].activo_login)    
+          login=new Login(l[0].id_login,l[0].id_profesional,l[0].usuario_login,l[0].clave_login,l[0].tipo_autorizacion,l[0].instancia_login,l[0].activo_login)    
           if(login.instancia===1){
                 return res.status(200).json({
             
@@ -71,11 +72,11 @@ async function manejadorLogin(req,res,objeto){
        if(object.claveN!==object.claveN2){
         return retornarError(res,"La Confirmacion de la Clave debe ser igual a la Clave Nueva")
        }
-       let lo=await Login.consultaPorUsuario(object.usuario);
-       if(lo instanceof Error){return retornarError(res,`Error al buscar el Login:${lo}`)}
-        if(lo.length<1){return retornarError(res,"El usuario no existe, intente nuevamente")}
-        if(!lo[0].activo_login){return retornarError(res,'El Login no esta activo')}
-        aux=await Login.verificarHash(object.clave,lo[0].clave_login);
+        login=await Login.consultaPorUsuario(object.usuario);
+       if(login instanceof Error){return retornarError(res,`Error al buscar el Login:${login}`)}
+        if(login.length<1){return retornarError(res,"El usuario no existe, intente nuevamente")}
+        if(!login[0].activo_login){return retornarError(res,'El Login no esta activo')}
+        aux=await Login.verificarHash(object.clave,login[0].clave_login);
        if(!aux) {return retornarError(res,"Clave o Usuario Incorrecta")}
     
         let log={usuario:object.usuario,clave:object.claveN};
@@ -83,9 +84,9 @@ async function manejadorLogin(req,res,objeto){
          if(aux.errors){
           return retornarError(res,`Error en la tipologia del Login:${aux.errors}`)
          }
-         let logi=new Login(lo[0].id_login,lo[0].id_profesional,lo[0].usuario_login,object.claveN,lo[0].tipo_autorizacion,lo[0].instancia_login,lo[0].activo_login);
+         login=new Login(login[0].id_login,login[0].id_profesional,login[0].usuario_login,object.claveN,login[0].tipo_autorizacion,login[0].instancia_login,login[0].activo_login);
         
-         aux= await logi.modificarClave();
+         aux= await login.modificarClave();
          if(aux instanceof Error){return retornarError(res,`Error al modificar el Login ${aux}`)}
       
           return retornarExito(res,"El Login fue modificado con exito");
@@ -93,10 +94,23 @@ async function manejadorLogin(req,res,objeto){
          
         break;  
       case 'recuperarLogin':
-        //traer de la bade de dato,hacer el objeto login,verificaryup,agregarar en yup clave provisoria(puede ser null)
-        object=req.body;  
-        //verificar que exista en la base de datos,verificar la clave provisoria con el metodo de Login
-        //hacer la modificacion de la clave principal
+        object=req.body; 
+        login=new Login(null,null,object.usuario,object.clave,null,null,null,object.claveProvisoria);
+        aux=await verificarYup(login,'login');
+        if(aux.errors){ return retornarError(res,`Error en la tipologia del Login:${aux.errors}`)}
+        let lo=await Login.consultaPorUsuario(login.usuario);
+        if(lo instanceof Error){return retornarError(res,`Error al buscar el Login:${lo}`)} 
+        if(lo.length<1){return retornarError(res,"El usuario no existe, intente nuevamente")}
+        if(!lo[0].activo_login){return retornarError(res,'El Login no esta activo')}
+        aux=await Login.verificarHash(login.claveProvisoria,lo[0].clave_login_provisoria);
+        if(!aux) {return retornarError(res,"Clave Provisoria Incorrecta, verificar en su email")}
+        login=new Login(lo[0].id_login,lo[0].id_profesional,lo[0].usuario_login,object.clave,lo[0].tipo_autorizacion,lo[0].instancia_login,lo[0].activo_login,lo[0].clave_login_provisoria);
+        aux= await login.borrarClaveProvisoria();
+        if(aux instanceof Error){return retornarError(res,`Error al borrar la clave provisoria:${aux}`)}
+        aux=await login.modificarClave();
+        if(aux instanceof Error){return retornarError(res,`Error al modificar la clave:${aux}`)}
+        
+        return retornarExito(res,"La clave fue modificada con exito");
         break;  
       case 'enviarMail':
         object=req.body;
@@ -115,10 +129,16 @@ async function manejadorLogin(req,res,objeto){
          if(aux instanceof Error){return retornarError(res,`Error al modificar la clave provisoria:${aux}`)}
         //const { destinatario, asunto, mensaje } = req.body;
         try {
+          const payload = {
+            username: lP.usuario,
+            tipoAutorizacion: lP.tipoAutorizacion, // Agregar tipo de autorización al payload
+          
+          };
+          const tokenP = jwt.sign(payload,jwtSecret, { expiresIn: '4h' });
           const response = await enviarCorreo(eMail, 'Clave Provisoria', `Su clave provisoria es: ${n} y tiene una duracion de 4 horas`);	
-          const tokenP = jwt.sign(payload, jwtSecret, { expiresIn: '4h' });
-          res.json({ message: `Correo enviado: ${response}`,token:tokenP });
+         res.json({ message: `Correo enviado: ${response}`,token:tokenP });
         } catch (error) {
+          console.log(`Error al enviar el correo: ${error}`); 
           retornarError(res, `Error al enviar el correo: ${error}`);
         }
        
