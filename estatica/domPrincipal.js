@@ -293,12 +293,15 @@ if(bandera){
 });
 
 function mostrarPassword() {
+  let imgPassword = document.getElementById('imgPassword');
   let inputPasswords = document.getElementsByClassName('inputPassword');
   for (let inputPassword of inputPasswords) {
     if (inputPassword.type === 'password') {
       inputPassword.type = 'text';
+      imgPassword.src = '/ojo-cerrado.svg';
     } else {
       inputPassword.type = 'password';
+      imgPassword.src = '/ojo.svg';  
     }
   }
 }
