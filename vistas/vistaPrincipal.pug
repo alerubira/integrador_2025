@@ -6,6 +6,7 @@ block content
         form#formularioLogin.form(action="/verificarLogin", method="POST", autocomplete="off")
             label(for="usuario") Usuario:
             input.limpiar(type="text", id="usuario",name="usuario",placeholder="usuario",autocomplete="off")
+            img(id="imgUsuario",src="usuario.svg", alt="Usuario")
             br
             label(for="clave1") Clave:
             input.limpiar.inputPassword(type="password", id="clave1", name="clave1",placeholder="clave",autocomplete="off")
@@ -22,7 +23,7 @@ block content
             label(for="clave2") Clave:
             input.limpiar.inputPassword(type="password", id="clave2", name="clave2",placeholder="clave",autocomplete="off")
             button.botonPassword(type="button", onclick="mostrarPassword()")
-                img(src="./icons8-mostrar-contraseña-50.png", alt="Mostrar/Ocultar")
+                 img(id="imgPassword",src="ojo.svg", alt="Mostrar/Ocultar")
             br
             label(for="clave3") Clave Nueva:
             input.limpiar.inputPassword(type="password", id="clave3",name="clave3",placeholder="clave nueva",autocomplete="off")
@@ -32,7 +33,7 @@ block content
             label(for="clave4") Clave Nueva:
             input.limpiar.inputPassword(type="password", id="clave4", name="clave4",placeholder="repita clave",autocomplete="off")
             button.botonPassword(type="button", onclick="mostrarPassword()")
-                img(src="./icons8-mostrar-contraseña-50.png", alt="Mostrar/Ocultar")
+                 img(id="imgPassword",src="ojo.svg", alt="Mostrar/Ocultar")
             br
             input.boton(type="submit", value="Enviar")
             

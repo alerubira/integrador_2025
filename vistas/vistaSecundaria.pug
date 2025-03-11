@@ -112,12 +112,15 @@ block content
             #divCrearLogin.ocultar.crear.form           
                         label(for="usuario") Usuario Provisorio 
                         input.limpiar(type="text",id="usuario",name="usuario",placeHolder="maximo 6 caracteres") 
+                        img(id="imgUsuario",src="usuario.svg", alt="Usuario")
                         br  
                         label(for="clave") Clave  
-                        input.limpiar(type="text",id="clave",name="clave",placeHolder="3letras(minimo 1 may)3numeros")
+                        input.limpiar.inputPassword(type="text",id="clave",name="clave",placeHolder="3letras(minimo 1 may)3numeros")
+                        img(id="imgPassword",src="ojo.svg", alt="Mostrar/Ocultar")
                         br
                         label(for="tipoAutorizacion") Nivel de Autorizacion:
                         input.limpiar(type="number", id="tipoAutorizacion", name="tipoAutorizacion",list="dtlTipoAutorizacion", autocomplete="off")
+                        img(src="jerarquia.svg", alt="Nivel Autorizacion")                      
                         datalist#dtlTipoAutorizacion 
                             option(value="1") 
                             option(value="2") 

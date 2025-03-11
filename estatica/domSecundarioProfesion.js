@@ -44,6 +44,7 @@ async function seleccionarProfesion(event){
                     mostrar(divModificarNombreProfesion);
                     break;
                case "modificarEstado":
+                    fOcultar();
                     aux =await fechProtegidoPost('/modificarEstadoProfesion',profesion);
                     break; 
                        
@@ -71,7 +72,7 @@ async function modificarNombreProfesion(){
             }
            
        }
-       async function crearProfesion(){
+async function crearProfesion(){
         bandera=true;     
         let p={nombreProfesion:inputNombreProfesion.value}  ;
         if(!validar(p.nombreProfesion.length<1||p.nombreProfesion.length>parametros.tamaño1,pagina,`El Nombre de la Profesion es Obligatorio y no debe superar los ${parametros.tamaño1} caracteres`)){bandera=false}

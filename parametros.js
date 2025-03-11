@@ -13,7 +13,7 @@ const parametros={
     cartelEmail: "El correo electrónico debe ser válido",
     tamaño3:4,
     cartelTamaño3:"no debe superar los 4 caracteres",
-
+    cartelLoginMal:"Usuario o contraseña incorrectos",
 }
 /*/^[a-zA-Z\s]+$/ expresion regular:a-zA-Z: Permite letras minúsculas y mayúsculas.
 \s: Permite espacios en blanco.
