@@ -6,6 +6,7 @@ let divCrearLogin=document.getElementById('divCrearLogin');
 slctCrudProfesion.addEventListener('change',async function() {
     limpiarCampos(limpiar);
     fOcultar();
+    fOcultar2();
     eliminarHijos(cuerpo);
     eliminarHijos(cuerpo2);
     eliminarHijos(cuerpoProfesion);
@@ -25,11 +26,7 @@ slctCrudProfesion.addEventListener('change',async function() {
              eliminarHijos(cuerpoProfesion);
              limpiarCampos(limpiar);
              mostrar(divMostrarProfesiones);
-             aux=await fechGetProtegido('/buscarProfesiones');
-             profesiones=aux.data;
-             if(!aux.error){
-               console.log(aux.data);
-             }
+             profesiones=await buscarProfesiones();
              for(let p of profesiones){
                let tr=document.createElement('tr');
                cuerpoProfesion.appendChild(tr);
@@ -108,7 +105,14 @@ slctCrudProfesion.addEventListener('change',async function() {
     }
     slctCrudProfesion.selectedIndex = 0;
 });
-
+async function buscarProfesiones(){
+     aux=await fechGetProtegido('/buscarProfesiones');
+    // profesiones=aux.data;
+     if(!aux.error){
+       console.log(aux.data);
+     }
+     return aux.data;
+}
    
 
 

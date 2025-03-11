@@ -82,6 +82,8 @@ async function crearProfesional(){
      }
      }
      }
+let divModificarProfesionProfesional=document.getElementById('divModificarProfesionProfesional');     
+let dtlProfesiones=document.getElementById('dtlProfesiones');
 slctModificarProfesional.addEventListener('change',async function() {
    
         limpiarCampos(limpiar);
@@ -94,9 +96,15 @@ slctModificarProfesional.addEventListener('change',async function() {
                 aux=await fechProtegidoPost('/modificarEstadoPersona',profesional);
                 break;
             case "modificarEstadoProfesional":
+                aux=await fechProtegidoPost('/modificarEstadoProfesional',profesional);
                 break;
             case "modificarProfesion":
+                profesiones=await buscarProfesiones();
+                mostrar(divModificarProfesionProfesional);
+                llenarDl(dtlProfesiones,profesiones,'nombreProfesion','idProfesion');
                 break;
+            case "modificarEMail":
+                break;    
             case "modificarNombrePersona":
                 break;
             case "modificarApellidoPersona":
@@ -109,4 +117,7 @@ slctModificarProfesional.addEventListener('change',async function() {
                   alerta(pagina,('Seleccion no valida'));      
              }
              slctModificarProfesional.selectedIndex = 0;
-         });   
+         }); 
+async function modificarProfesionProfesional(){
+     console.log('modificarProfesionProfesional');
+}           

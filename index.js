@@ -50,6 +50,10 @@ app.use('/buscarProfesionales',ruta2);
 app.use('/crearProfesion',ruta2);
 app.use('/crearProfesional',ruta2);
 app.use('/modificarEstadoPersona',ruta2);
+app.use('/modificarEstadoProfesional',ruta2);
+app.use('/modificarNombrePersona',ruta2);
+app.use('/modificarApellidoPersona',ruta2);
+app.use('/modificarDniPersona',ruta2);
 app.use('/enviarMail',ruta1);
  // Iniciar el servidor
  app.listen(port, () => {

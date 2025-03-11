@@ -62,6 +62,10 @@ class ProfesionalData extends PersonaData {
         const query = 'UPDATE `profesional` SET `id_profesion` = ? WHERE `id_profesional` = ?';
         return await consulta1(query, prof.idProfesion, prof.idProfesional);
     }
+    static async modificarEMailProfesional(prof) {
+        const query = 'UPDATE `profesional` SET `e_mail` = ? WHERE `id_profesional` = ?';
+        return await consulta1(query, prof.eMail, prof.idProfesional);
+    }
     
 }
 

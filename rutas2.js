@@ -28,7 +28,19 @@ ruta2.post('/crearProfesional',verificarToken,(req,res)=>{
 })
 ruta2.post('/modificarEstadoPersona',verificarToken,(req,res)=>{
   manejadorSecundaria(req,res,'modificarEstadoPersona');
-})  
+}) 
+ruta2.post('/modificarEstadoProfesional',verificarToken,(req,res)=>{
+  manejadorSecundaria(req,res,'modificarEstadoProfesional');
+}) 
+ruta2.post('/modificarNombrePersona',verificarToken,(req,res)=>{
+  manejadorSecundaria(req,res,'modificarNombrePersona');
+})
+ruta2.post('/modificarApellidoPersona',verificarToken,(req,res)=>{
+  manejadorSecundaria(req,res,'modificarApellidoPersona');
+})
+ruta2.post('/modificarDniPersona',verificarToken,(req,res)=>{
+  manejadorSecundaria(req,res,'modificarDniPersona');
+})
 
 
 export{ruta2};  

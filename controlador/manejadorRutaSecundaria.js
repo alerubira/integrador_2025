@@ -110,7 +110,19 @@ try{
             aux=await persona.modificarActivoPer();
             if(aux instanceof Error){return retornarError(res,`Error al modificar el estado de la Persona:${aux}`)}
             return retornarExito(res,"Estado de la Persona modificado con exito");
-            break;       
+            break; 
+        case 'modificarEstadoProfesional':
+            object=req.body;
+            aux=await existeBd(object.idProfesional,'profesional','id_profesional');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar si exite el Profesional :${aux}`)}    
+            if(!aux){return retornarError(res,'El Profesional no existe')}
+            aux=await verificarYup(object,'profesional');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
+            let profesional=new Profesional(object.idProfesional,object.idProfesion,object.nombreProfesion,object.activoProfesional,object.idPersona,object.dniPersona,object.nombrePersona,object.apellidoPersona,object.activoPersona);
+            aux=await profesional.modificarActivoPro();
+            if(aux instanceof Error){return retornarError(res,`Error al modificar el estado del Profesional:${aux}`)}
+            return retornarExito(res,"Estado del Profesional modificado con exito");
+            break;          
         default:
             let m=`Seleccion ${accion} dentro del manejador secundaria Invalida `  ;
             console.error(m);

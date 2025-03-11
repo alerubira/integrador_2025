@@ -84,7 +84,7 @@ block content
                                 th Estado Actual Profesional
                                 th Seleccionar
                         tbody#cuerpo 
-            #divModificarProfesional.ocultar  
+            #divModificarProfesional.ocultar2  
                     table#medico
                         thead#cabecera2
                             tr
@@ -105,6 +105,7 @@ block content
                         option(value="modificarEstadoProfesional") Modificar Estado Profesional
                         option(value="modificarEstadoPersona") Modificar Estado Persona
                         option(value="modificarProfesion") Modificar Profesion
+                        option(value="modificarEMail") Modificar E_Mail
                         option(value="modificarNombrePersona") Modificar Nombre Persona
                         option(value="modificarApellidoPersona") Modificar Apellido Persona
                         option(value="modificarDniPersona") Modificar Dni Persona
@@ -127,6 +128,14 @@ block content
                             option(value="3")
                         br      
                         button.boton(type="button",onclick='crearLogin()') Crear
+            #divModificarProfesionProfesional.ocultar.form 
+                        label(for="inputNombreProfesionNuevaProfesional") Nombre Profesion 
+                        input.limpiar(type="text",id="inputNombreProfesionNuevaProfesional",name="inputNombreProfesionNuevaProfesional",placeHolder="Nombre Profesion ",list="dtlProfesiones", autocomplete="off") 
+                        datalist#dtlProfesiones
+                        br
+                        button.boton(type="button",onclick='modificarProfesionProfesional()') Modificar
+                        br
+            #divModificarEMailProfesional.ocultar.form            
 block boton1 
         button.boton2(type="button",onclick='volver()') volver  
 block boton2 
