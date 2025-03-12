@@ -9,9 +9,9 @@ block content
             img(id="imgUsuario",src="usuario.svg", alt="Usuario")
             br
             label(for="clave1") Clave:
-            input.limpiar.inputPassword(type="password", id="clave1", name="clave1",placeholder="clave",autocomplete="off")
-            button.botonPassword(type="button", onclick="mostrarPassword()")
-                     img.imgPassword(src="ojo.svg", alt="Mostrar/Ocultar")
+            input.limpiar#inputPassword1(type="password",  name="clave1",placeholder="clave",autocomplete="off")
+            button.botonPassword(type="button", onclick="mostrarPassword('img1','inputPassword1')")
+                     img#img1(src="ojo.svg", alt="Mostrar/Ocultar")
             br
             input.boton(type="submit", value="Ingresar")
         button.boton2(onclick="mostrarModificarClave()") Modificar Clave
@@ -22,21 +22,21 @@ block content
             img(id="imgUsuario",src="usuario.svg", alt="Usuario")
             br
             label(for="clave2") Clave:
-            input.limpiar.inputPassword(type="password", id="clave2", name="clave2",placeholder="clave",autocomplete="off")
-            button.botonPassword(type="button", onclick="mostrarPassword()")
-                 img(class="imgPassword",src="ojo.svg", alt="Mostrar/Ocultar")
+            input.limpiar#inputPassword2(type="password", name="clave2",placeholder="clave",autocomplete="off")
+            button.botonPassword(type="button", onclick="mostrarPassword('img2','inputPassword2')")
+                 img#img2(src="ojo.svg", alt="Mostrar/Ocultar")
             br
             label(for="clave3") Clave Nueva:
-            input.limpiar.inputPassword(type="password", id="clave3",name="clave3",placeholder="clave nueva",autocomplete="off")
-            button.botonPassword(type="button", onclick="mostrarPassword()")
-                 img(id="imgPassword",src="ojo.svg", alt="Mostrar/Ocultar")
+            input.limpiar#inputPassword3(type="password",name="clave3",placeholder="clave nueva",autocomplete="off")
+            button.botonPassword(type="button", onclick="mostrarPassword('img3','inputPassword3')")
+                 img#img3(src="ojo.svg", alt="Mostrar/Ocultar")
             br
             label(for="clave4") Clave Nueva:
-            input.limpiar.inputPassword(type="password", id="clave4", name="clave4",placeholder="repita clave",autocomplete="off")
-            button.botonPassword(type="button", onclick="mostrarPassword()")
-                 img(class="imgPassword",src="ojo.svg", alt="Mostrar/Ocultar")
+            input.limpiar#inputPassword4(type="password", name="clave4",placeholder="repita clave",autocomplete="off")
+            button.botonPassword(type="button", onclick="mostrarPassword('img4','inputPassword4')")
+                 img#img4(src="ojo.svg", alt="Mostrar/Ocultar")
             br
-            input.boton(type="submit", value="Enviar")
+            input.boton(type="submit", value="Modificar")
             
         button.boton2(onclick="mostrarRecuperarLogin()") Olvidaste tu Clave?
         form#formularioRecuperarLogin.ocultar.form(action="/recuperarLogin", method="POST", autocomplete="off")
@@ -53,14 +53,14 @@ block content
             img(src="e_mail.svg",alt="Correo Enviado")
             br
             label(for="clave6") Clave Nueva:
-            input.limpiar.inputPassword(type="password", id="clave6",name="clave6",placeholder="clave nueva",autocomplete="off")
-            button.botonPassword(type="button", onclick="mostrarPassword()")
-                 img(class="imgPassword",src="ojo.svg", alt="Mostrar/Ocultar")
+            input.limpiar#inputPassword5(type="password",name="clave6",placeholder="clave nueva",autocomplete="off")
+            button.botonPassword(type="button", onclick="mostrarPassword('img5','inputPassword5')")
+                 img#img5(src="ojo.svg", alt="Mostrar/Ocultar")
             br
             label(for="clave7") Clave Nueva:
-            input.limpiar.inputPassword(type="password", id="clave7",placeholder="repita clave",autocomplete="off")
-            button.botonPassword(type="button", onclick="mostrarPassword()")
-                 img(class="imgPassword",src="ojo.svg", alt="Mostrar/Ocultar")
+            input.limpiar#inputPassword6(type="password",placeholder="repita clave",autocomplete="off")
+            button.botonPassword(type="button", onclick="mostrarPassword('img6','inputPassword6')")
+                 img#img6(src="ojo.svg", alt="Mostrar/Ocultar")
             br
             input.boton(type="submit", value="Generar Clave")  
         script.

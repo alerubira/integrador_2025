@@ -72,19 +72,20 @@ async function manejadorLogin(req,res,objeto){
        if(object.claveN!==object.claveN2){
         return retornarError(res,"La Confirmacion de la Clave debe ser igual a la Clave Nueva")
        }
-        login=await Login.consultaPorUsuario(object.usuario);
+        login=await Login.consultaPorUsuario(object.usuario2);
+        console.log(object);
+        console.log(login);
        if(login instanceof Error){return retornarError(res,`Error al buscar el Login:${login}`)}
         if(login.length<1){return retornarError(res,"El usuario no existe, intente nuevamente")}
         if(!login[0].activo_login){return retornarError(res,'El Login no esta activo')}
-        aux=await Login.verificarHash(object.clave,login[0].clave_login);
+        aux=await Login.verificarHash(object.clave2,login[0].clave_login);
        if(!aux) {return retornarError(res,"Clave o Usuario Incorrecta")}
-    
-        let log={usuario:object.usuario,clave:object.claveN};
+       let log={usuario:object.usuario2,clave:object.clave3};
         aux=await verificarYup(log,'login');
          if(aux.errors){
           return retornarError(res,`Error en la tipologia del Login:${aux.errors}`)
          }
-         login=new Login(login[0].id_login,login[0].id_profesional,login[0].usuario_login,object.claveN,login[0].tipo_autorizacion,login[0].instancia_login,login[0].activo_login);
+         login=new Login(login[0].id_login,login[0].id_profesional,login[0].usuario_login,object.clave3,login[0].tipo_autorizacion,login[0].instancia_login,login[0].activo_login);
         
          aux= await login.modificarClave();
          if(aux instanceof Error){return retornarError(res,`Error al modificar el Login ${aux}`)}

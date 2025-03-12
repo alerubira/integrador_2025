@@ -1,7 +1,7 @@
 
  let formLogin=document.getElementById('formularioLogin');
 let inputUsuario=document.getElementById('usuario');
-let inputClave=document.getElementById('clave1');
+let inputPassword1=document.getElementById('inputPassword1');
 let errLogin=document.getElementById('errLogin');
 let instancia=document.getElementById('instancia');
 let exito=document.getElementById('exito');
@@ -9,13 +9,13 @@ let exito=document.getElementById('exito');
 let formModificarLogin=document.getElementById('formularioModificarLogin');
 let formRecuperarLogin=document.getElementById('formularioRecuperarLogin');
 let inputUsuari2=document.getElementById('usuario2');
-let inputClave2=document.getElementById('clave2');
-let inpuClave3=document.getElementById('clave3');
-let inputClave4=document.getElementById('clave4');
+let inputPassword2=document.getElementById('inputPassword2');
+let inputPassword3=document.getElementById('inputPassword3');
+let inputPassword4=document.getElementById('inputPassword4');
 let inputUsuario5=document.getElementById('usuario5');
 let inputPalabraClave=document.getElementById('palabraClave');
-let inputClave6=document.getElementById('clave6');
-let inputClave7=document.getElementById('clave7');
+let inputPassword5=document.getElementById('inputPaaword5');
+let inputPassword6=document.getElementById('inputPassword6');
 let inputPalabraClave2=document.getElementById('palabraClave2');
 let inputPalabraClave3=document.getElementById('palabraClave3');
 pagina="Principal";
@@ -45,8 +45,8 @@ formRecuperarLogin.addEventListener('submit',async function(event){
 bandera=true;  
 let usuario5Value=inputUsuario5.value;
 let palabraClaveValue=inputPalabraClave.value;
-let clave6Value=inputClave6.value;
-let clave7Value=inputClave7.value;
+let clave6Value=inputPassword5.value;
+let clave7Value=inputPassword6.value;
 if(!validar(usuario5Value.length<1||usuario5Value.length>parametros.tamaño2,pagina,`El usuario es obligatorio y ${parametros.cartelTamño2}`,event))bandera=false;
 if(!validar(palabraClaveValue.length<1||palabraClaveValue.length>parametros.tamaño3,pagina,`La palabra clave es obligatoria y ${parametros.cartelTamño3}`,event))bandera=false;
 if(!validar(!regClave.test(clave6Value),pagina,`${parametros.cartelClave}`,event)){bandera=false};
@@ -70,7 +70,7 @@ let regClave =convertirExpresionRegular(parametros.clave);
 formLogin.addEventListener('submit',async function(event) {
     event.preventDefault();
     bandera=true;
-    let claveValue=inputClave.value ;
+    let claveValue=inputPassword1.value ;
     let usuarioValue=inputUsuario.value ;//cuando ande bie modificar mensajes para que no sean muy informativos
     if(!validar(usuarioValue.length<1||usuarioValue.length>parametros.tamaño2,pagina,`El usuario es obligatorio y ${parametros.cartelTamño2}`,event))bandera=false;
     if(!validar(!regClave.test(claveValue),pagina,`${parametros.cartelClave}`,event)){bandera=false};
@@ -259,16 +259,17 @@ async function enviarMail(event){
     accederEndpointProtegido();
   }*/
 formModificarLogin.addEventListener('submit',async function(event){
-  event.preventDefault();//reacomodar
+ // event.preventDefault();//reacomodar
+bandera=true; 
 let usuario2Value=inputUsuari2.value;
-let clave2Value=inputClave2.value;
-let clave3Value=inpuClave3.value;
-let clave4Value=inputClave4.value;
+let clave2Value=inputPassword2.value;
+let clave3Value=inputPassword3.value;
+let clave4Value=inputPassword4.value;
 if(!validar(usuario2Value.length<1||usuario2Value.length>parametros.tamaño2,pagina,`El usuario es obligatorio y ${parametros.cartelTamño2}`,event))bandera=false;
 if(!validar(!regClave.test(clave2Value),pagina,`${parametros.cartelClave}`,event)){bandera=false};
 if(!validar(!regClave.test(clave3Value),pagina,`${parametros.cartelClave}`,event)){bandera=false};
 if(!validar(clave3Value!==clave4Value,pagina,'La confirmacion de la clave no es igual a la clave nueva',event)){bandera=false};
-
+console.log(bandera);
 if(bandera){
   const response = await fetch('/modificarLogin', {
       method: 'POST',
@@ -289,21 +290,19 @@ if(bandera){
       console.error('Error al modificarlogin:', data.message);
       alerta(pagina,`Error al modificar el Login:${data.message}`);
     }
-}
+}else{event.preventDefault();}
 });
 //probar con parametro(el nombre de id de img,template literals)
-function mostrarPassword() {
-  let imgPassword = document.getElementsByClassName('imgPassword');
-  let inputPasswords = document.getElementsByClassName('inputPassword');
-  for (let inputPassword of inputPasswords) {
-    if (inputPassword.type === 'password') {
+function mostrarPassword(idImg,idInput){ 
+  let imgPassword = document.getElementById(idImg);
+  let inputPassword = document.getElementById(idInput);
+   if (inputPassword.type === 'password') {
       inputPassword.type = 'text';
       imgPassword.src = '/ojo-cerrado.svg';
     } else {
       inputPassword.type = 'password';
       imgPassword.src = '/ojo.svg';  
     }
-  }
 }
 limpiarCampos(limpiar);
 setTimeout(() => limpiarCampos(limpiar), 1000);
