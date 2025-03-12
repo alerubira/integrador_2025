@@ -51,6 +51,8 @@ app.use('/crearProfesion',ruta2);
 app.use('/crearProfesional',ruta2);
 app.use('/modificarEstadoPersona',ruta2);
 app.use('/modificarEstadoProfesional',ruta2);
+app.use('/modificarProfesionProfesional',ruta2);
+app.use('/modificarEMailProfesional',ruta2);
 app.use('/modificarNombrePersona',ruta2);
 app.use('/modificarApellidoPersona',ruta2);
 app.use('/modificarDniPersona',ruta2);

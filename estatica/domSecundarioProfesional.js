@@ -84,6 +84,7 @@ async function crearProfesional(){
      }
 let divModificarProfesionProfesional=document.getElementById('divModificarProfesionProfesional');     
 let dtlProfesiones=document.getElementById('dtlProfesiones');
+let divModificarEMailProfesional=document.getElementById('divModificarEMailProfesional');
 slctModificarProfesional.addEventListener('change',async function() {
    
         limpiarCampos(limpiar);
@@ -104,6 +105,7 @@ slctModificarProfesional.addEventListener('change',async function() {
                 llenarDl(dtlProfesiones,profesiones,'nombreProfesion','idProfesion');
                 break;
             case "modificarEMail":
+                    mostrar(divModificarEMailProfesional);
                 break;    
             case "modificarNombrePersona":
                 break;
@@ -118,6 +120,35 @@ slctModificarProfesional.addEventListener('change',async function() {
              }
              slctModificarProfesional.selectedIndex = 0;
          }); 
+let inputNombreProfesionNuevaProfesional=document.getElementById('inputNombreProfesionNuevaProfesional');         
 async function modificarProfesionProfesional(){
-     console.log('modificarProfesionProfesional');
-}           
+     bandera=true;
+  let profesionModificar=inputNombreProfesionNuevaProfesional.value;
+  profesionModificar=parseInt(profesionModificar);
+  let aux=await profesiones.find(prof=>prof.idProfesion===profesionModificar); 
+  if(!validar(!aux,pagina,"La Profesion es obligatoria y debe existir")){bandera=false}; 
+  profesional.idProfesion=profesionModificar;
+  profesional.nombreProfesion=aux.nombreProfesion;
+     if(bandera){
+          aux=await fechProtegidoPost('/modificarProfesionProfesional',profesional);
+          if(aux.success){
+               limpiarCampos(limpiar);
+               fOcultar();
+          }
+     } 
+}
+let inputNuevoEMailProfesional=document.getElementById('inputNuevoEMailProfesional'); 
+async function modificarEMailProfesional(){
+     bandera=true;
+     let regEMail=convertirExpresionRegular(parametros.eMail);
+     let eMailValue=inputNuevoEMailProfesional.value;
+     if(!validar(!regEMail.test(eMailValue)||eMailValue.length<1,pagina,`${parametros.cartelEMail}`)){bandera=false}
+     profesional.eMail=eMailValue;
+     if(bandera){
+          aux=await fechProtegidoPost('/modificarEMailProfesional',profesional);
+          if(aux.success){
+               limpiarCampos(limpiar);
+               fOcultar();
+          }
+     }
+}

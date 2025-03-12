@@ -10,6 +10,7 @@ let aux;
 let object;
 let encabezado;
 let profesion;
+let profesional;
 try{
     switch (accion) {
         case 'ingresar':
@@ -26,7 +27,7 @@ try{
                    if(p1 instanceof Error){return retornarError(res,`Error al buscar el Profecional:${p}`)}
                    let p=p1[0][0]
                    if(p.activo_profesional!==1||p.activo_persona!==1){return retornarError(res,"El Profecional Esta dado de baja")}
-                  let profesional=new Profesional(p.id_profesional,p.id_profesion,p.nombre_profesion,p.activo_profesional,p.id_persona,p.dni_persona,p.nombre_persona,p.apellido_persona,p.activo_persona);
+                   profesional=new Profesional(p.id_profesional,p.id_profesion,p.nombre_profesion,p.activo_profesional,p.id_persona,p.dni_persona,p.nombre_persona,p.apellido_persona,p.activo_persona);
                 
             res.render('vistasecundaria',{encabezado,parametros,profesional});
                  }
@@ -118,11 +119,36 @@ try{
             if(!aux){return retornarError(res,'El Profesional no existe')}
             aux=await verificarYup(object,'profesional');
             if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
-            let profesional=new Profesional(object.idProfesional,object.idProfesion,object.nombreProfesion,object.activoProfesional,object.idPersona,object.dniPersona,object.nombrePersona,object.apellidoPersona,object.activoPersona);
+             profesional=new Profesional(object.idProfesional,object.idProfesion,object.nombreProfesion,object.activoProfesional,object.idPersona,object.dniPersona,object.nombrePersona,object.apellidoPersona,object.activoPersona);
             aux=await profesional.modificarActivoPro();
             if(aux instanceof Error){return retornarError(res,`Error al modificar el estado del Profesional:${aux}`)}
             return retornarExito(res,"Estado del Profesional modificado con exito");
-            break;          
+            break; 
+        case 'modificarProfesionProfesional':
+            object=req.body;
+            aux=await existeBd(object.idProfesion,'profesion','id_profesion');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar si exite la profesion :${aux}`)}    
+            if(!aux){return retornarError(res,'La Profesion no existe')}
+            aux=await verificarYup(object,'profesional');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
+            
+             profesional=new Profesional(object.idProfesional,object.idProfesion,object.nombreProfesion,object.activoProfesional,object.idPersona,object.dniPersona,object.nombrePersona,object.apellidoPersona,object.activoPersona);
+            aux=await profesional.modificarProfesion();
+            if(aux instanceof Error){return retornarError(res,`Error al modificar la Profesion del Profesional:${aux}`)}
+            return retornarExito(res,"Profesion del Profesional modificada con exito");
+            break;
+        case 'modificarEMailProfesional':
+            object=req.body;
+            aux=await verificarYup(object,'profesional');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
+            aux=await existeBd(object.idProfesional,'profesional','id_profesional');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar si exite el Profesional :${aux}`)}    
+            if(!aux){return retornarError(res,'El Profesional no existe')}
+             profesional=new Profesional(object.idProfesional,object.idProfesion,object.nombreProfesion,object.activoProfesional,object.idPersona,object.dniPersona,object.nombrePersona,object.apellidoPersona,object.activoPersona,object.eMail);
+            aux=await profesional.modificarEMail();
+            if(aux instanceof Error){return retornarError(res,`Error al modificar el EMail del Profesional:${aux}`)}
+            return retornarExito(res,"EMail del Profesional modificado con exito");
+            break;                 
         default:
             let m=`Seleccion ${accion} dentro del manejador secundaria Invalida `  ;
             console.error(m);

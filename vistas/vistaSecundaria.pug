@@ -135,7 +135,12 @@ block content
                         br
                         button.boton(type="button",onclick='modificarProfesionProfesional()') Modificar
                         br
-            #divModificarEMailProfesional.ocultar.form            
+            #divModificarEMailProfesional.ocultar.form    
+                        label(for="inputNuevoEMailProfesional") E_mail Nuevo del Profecional 
+                        input.limpiar(type="e_mail", id="inputNuevoEMailProfesional" ,name="inputNuevoEMailProfesional", autocomplete="off")
+                        br
+
+                        button.boton(type="button",onclick='modificarEMailProfesional()') Crear        
 block boton1 
         button.boton2(type="button",onclick='volver()') volver  
 block boton2 
