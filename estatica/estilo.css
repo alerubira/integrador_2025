@@ -97,7 +97,7 @@ h5 {
   margin: 0 auto; /* Centra el elemento horizontalmente */
   text-align: center;
 }
-#divProfecional{
+#divProfesional{
     border-radius: 10px; /* Establece los bordes redondeados */
     border: 2px solid black; /* Establece el borde de color negro */
     width: 40%; /* Establece el ancho al 45% del contenedor */

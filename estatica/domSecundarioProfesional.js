@@ -85,6 +85,9 @@ async function crearProfesional(){
 let divModificarProfesionProfesional=document.getElementById('divModificarProfesionProfesional');     
 let dtlProfesiones=document.getElementById('dtlProfesiones');
 let divModificarEMailProfesional=document.getElementById('divModificarEMailProfesional');
+let divModificarNombrePersona=document.getElementById('divModificarNombrePersona');
+let divModificarApellidoPersona=document.getElementById('divModificarApellidoPersona');
+let divModificarDniPersona=document.getElementById('divModificarDniPersona');
 slctModificarProfesional.addEventListener('change',async function() {
    
         limpiarCampos(limpiar);
@@ -108,10 +111,13 @@ slctModificarProfesional.addEventListener('change',async function() {
                     mostrar(divModificarEMailProfesional);
                 break;    
             case "modificarNombrePersona":
+                    mostrar(divModificarNombrePersona);
                 break;
             case "modificarApellidoPersona":
+                    mostrar(divModificarApellidoPersona);
                 break;
             case "modificarDniPersona":
+                   mostrar(divModificarDniPersona);
                 break;
 
              default:
@@ -146,6 +152,51 @@ async function modificarEMailProfesional(){
      profesional.eMail=eMailValue;
      if(bandera){
           aux=await fechProtegidoPost('/modificarEMailProfesional',profesional);
+          if(aux.success){
+               limpiarCampos(limpiar);
+               fOcultar();
+          }
+     }
+}
+let inputNuevoNombrePersona=document.getElementById('inputNuevoNombrePersona');
+async function modificarNombrePersona(){
+     bandera=true;
+     let regNombres=convertirExpresionRegular(parametros.nombres);
+     if(!validar(!regNombres.test(inputNuevoNombrePersona.value),pagina,`en el Nombre ${parametros.cartelNombres}`)){bandera=false};
+     if(!validar(inputNuevoNombrePersona.value.length<1||inputNuevoNombrePersona.value.length>parametros.tamaño1,pagina,`El Nombre es obligatorio y ${parametros.cartelTamaño1}`)){bandera=false}
+     profesional.nombrePersona=inputNuevoNombrePersona.value;
+     if(bandera){
+          aux=await fechProtegidoPost('/modificarNombrePersona',profesional);
+          if(aux.success){
+               limpiarCampos(limpiar);
+               fOcultar();
+          }
+     }
+}
+let inputNuevoApellidoPersona=document.getElementById('inputNuevoApellidoPersona');
+async function modificarApellidoPersona(){
+     bandera=true;
+     let regNombres=convertirExpresionRegular(parametros.nombres);
+     if(!validar(!regNombres.test(inputNuevoApellidoPersona.value),pagina,`en el Apellido ${parametros.cartelNombres}`)){bandera=false};
+     if(!validar(inputNuevoApellidoPersona.value.length<1||inputNuevoApellidoPersona.value.length>parametros.tamaño1,pagina,`El Apellido es obligatorio y ${parametros.cartelTamaño1}`)){bandera=false}
+     profesional.apellidoPersona=inputNuevoApellidoPersona.value;
+     if(bandera){
+          aux=await fechProtegidoPost('/modificarApellidoPersona',profesional);
+          if(aux.success){
+               limpiarCampos(limpiar);
+               fOcultar();
+          }
+     }
+}
+let inputNuevoDniPersona=document.getElementById('inputNuevoDniPersona');
+async function modificarDniPersona(){
+     bandera=true;
+     let regDni =convertirExpresionRegular(parametros.dni);
+     let dniPersonaValue=parseInt(inputNuevoDniPersona.value);
+     if(!validar(!regDni.test(dniPersonaValue),pagina,`${parametros.cartelDni}`)){bandera=false};
+     profesional.dniPersona=dniPersonaValue;
+     if(bandera){
+          aux=await fechProtegidoPost('/modificarDniPersona',profesional);
           if(aux.success){
                limpiarCampos(limpiar);
                fOcultar();

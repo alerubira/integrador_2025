@@ -6,8 +6,8 @@ block script2
 block script3 
     script(src="domSecundarioProfesional.js",defer)        
 block content
-            #divProfecionalAcceso 
-                                h3 PROFECIONAL
+            #divProfesionalAcceso 
+                                h3 PROFESIONAL
                                         label=`${profesional.nombrePersona}  ${profesional.apellidoPersona}` 
             select(id="slctCrudProfesion", name="slctCrudProfesion")
                         option(value="") Elija una opcion
@@ -139,8 +139,22 @@ block content
                         label(for="inputNuevoEMailProfesional") E_mail Nuevo del Profecional 
                         input.limpiar(type="e_mail", id="inputNuevoEMailProfesional" ,name="inputNuevoEMailProfesional", autocomplete="off")
                         br
-
-                        button.boton(type="button",onclick='modificarEMailProfesional()') Crear        
+                        button.boton(type="button",onclick='modificarEMailProfesional()') Modificar
+            #divModificarNombrePersona.ocultar.form 
+                        label(for="inputNuevoNombrePersona") Nuevo Nombre Persona 
+                        input.limpiar(type="text",id="inputNuevoNombrePersona",name="inputNuevoNombrePersona",placeHolder="Nombre Persona") 
+                        br
+                        button.boton(type="button",onclick='modificarNombrePersona()') Modificar 
+            #divModificarApellidoPersona.ocultar.form 
+                        label(for="inputNuevoApellidoPersona") Nuevo Apellido Persona 
+                        input.limpiar(type="text",id="inputNuevoApellidoPersona",name="inputNuevoApellidoPersona",placeHolder="Apellido Persona") 
+                        br
+                        button.boton(type="button",onclick='modificarApellidoPersona()') Modificar 
+            #divModificarDniPersona.ocultar.form 
+                        label(for="inputNuevoDniPersona") Nuevo Dni Persona 
+                        input.limpiar(type="number",id="inputNuevoDniPersona",name="inputNuevoDniPersona",placeHolder="Dni Persona") 
+                        br
+                        button.boton(type="button",onclick='modificarDniPersona()') Modificar                   
 block boton1 
         button.boton2(type="button",onclick='volver()') volver  
 block boton2 

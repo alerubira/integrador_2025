@@ -291,9 +291,9 @@ if(bandera){
     }
 }
 });
-
+//probar con parametro(el nombre de id de img,template literals)
 function mostrarPassword() {
-  let imgPassword = document.getElementById('imgPassword');
+  let imgPassword = document.getElementsByClassName('imgPassword');
   let inputPasswords = document.getElementsByClassName('inputPassword');
   for (let inputPassword of inputPasswords) {
     if (inputPassword.type === 'password') {

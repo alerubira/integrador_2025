@@ -11,6 +11,7 @@ let object;
 let encabezado;
 let profesion;
 let profesional;
+let persona;
 try{
     switch (accion) {
         case 'ingresar':
@@ -107,7 +108,7 @@ try{
             if(!aux){return retornarError(res,'La Persona no existe')}
             aux=await verificarYup(object,'persona');
             if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
-            let persona=new Profesional(object.idProfesional,object.idProfesion,object.nombreProfesion,object.activoProfesional,object.idPersona,object.dniPersona,object.nombrePersona,object.apellidoPersona,object.activoPersona);
+             persona=new Profesional(object.idProfesional,object.idProfesion,object.nombreProfesion,object.activoProfesional,object.idPersona,object.dniPersona,object.nombrePersona,object.apellidoPersona,object.activoPersona);
             aux=await persona.modificarActivoPer();
             if(aux instanceof Error){return retornarError(res,`Error al modificar el estado de la Persona:${aux}`)}
             return retornarExito(res,"Estado de la Persona modificado con exito");
@@ -148,7 +149,43 @@ try{
             aux=await profesional.modificarEMail();
             if(aux instanceof Error){return retornarError(res,`Error al modificar el EMail del Profesional:${aux}`)}
             return retornarExito(res,"EMail del Profesional modificado con exito");
-            break;                 
+            break;
+        case 'modificarNombrePersona':
+            object=req.body;
+            aux=await verificarYup(object,'persona');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
+            aux=await existeBd(object.idPersona,'persona','id_persona');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar si exite la persona :${aux}`)}    
+            if(!aux){return retornarError(res,'La Persona no existe')}
+             persona=new Profesional(object.idProfesional,object.idProfesion,object.nombreProfesion,object.activoProfesional,object.idPersona,object.dniPersona,object.nombrePersona,object.apellidoPersona,object.activoPersona);
+            aux=await persona.modificarNombre();
+            if(aux instanceof Error){return retornarError(res,`Error al modificar el nombre de la Persona:${aux}`)}
+            return retornarExito(res,"Nombre de la Persona modificado con exito");
+            break; 
+        case 'modificarApellidoPersona':
+            object=req.body;
+            aux=await verificarYup(object,'persona');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
+            aux=await existeBd(object.idPersona,'persona','id_persona');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar si exite la persona :${aux}`)}    
+            if(!aux){return retornarError(res,'La Persona no existe')}
+             persona=new Profesional(object.idProfesional,object.idProfesion,object.nombreProfesion,object.activoProfesional,object.idPersona,object.dniPersona,object.nombrePersona,object.apellidoPersona,object.activoPersona);
+            aux=await persona.modificarApellido();
+            if(aux instanceof Error){return retornarError(res,`Error al modificar el apellido de la Persona:${aux}`)}
+            return retornarExito(res,"Apellido de la Persona modificado con exito");
+            break;
+        case 'modificarDniPersona':
+            object=req.body;
+            aux=await verificarYup(object,'persona');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
+            aux=await existeBd(object.idPersona,'persona','id_persona');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar si exite la persona :${aux}`)}    
+            if(!aux){return retornarError(res,'La Persona no existe')}
+             persona=new Profesional(object.idProfesional,object.idProfesion,object.nombreProfesion,object.activoProfesional,object.idPersona,object.dniPersona,object.nombrePersona,object.apellidoPersona,object.activoPersona);
+            aux=await persona.modificarDni();
+            if(aux instanceof Error){return retornarError(res,`Error al modificar el dni de la Persona:${aux}`)}
+            return retornarExito(res,"Dni de la Persona modificado con exito");
+            break;                            
         default:
             let m=`Seleccion ${accion} dentro del manejador secundaria Invalida `  ;
             console.error(m);

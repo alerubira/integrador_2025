@@ -35,7 +35,7 @@ ruta2.post('/modificarEstadoProfesional',verificarToken,(req,res)=>{
 ruta2.post('/modificarProfesionProfesional',verificarToken,(req,res)=>{
   manejadorSecundaria(req,res,'modificarProfesionProfesional');
 })
-ruta2.post('/modificarEMailPROFESIONAL',verificarToken,(req,res)=>{
+ruta2.post('/modificarEMailProfesional',verificarToken,(req,res)=>{
   manejadorSecundaria(req,res,'modificarEMailProfesional');
 })
 ruta2.post('/modificarNombrePersona',verificarToken,(req,res)=>{
