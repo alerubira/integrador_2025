@@ -14,7 +14,7 @@ let inputPassword3=document.getElementById('inputPassword3');
 let inputPassword4=document.getElementById('inputPassword4');
 let inputUsuario5=document.getElementById('usuario5');
 let inputPalabraClave=document.getElementById('palabraClave');
-let inputPassword5=document.getElementById('inputPaaword5');
+let inputPassword5=document.getElementById('inputPassword5');
 let inputPassword6=document.getElementById('inputPassword6');
 let inputPalabraClave2=document.getElementById('palabraClave2');
 let inputPalabraClave3=document.getElementById('palabraClave3');
@@ -55,7 +55,7 @@ if(!validar(clave6Value!==clave7Value,pagina,'La confirmacion de la clave no es 
 let login={usuario:usuario5Value,claveProvisoria:palabraClaveValue,clave:clave6Value};
 if(bandera){
      aux=await fechProtegidoPost('/recuperarLogin',login);
-     
+     if(aux!=undefined){
       if(aux.success){
         cartelExito(pagina,'La modificacion de la clave fue realizada con exito');
         limpiarCampos(limpiar);
@@ -64,6 +64,8 @@ if(bandera){
         // O si solo quieres eliminar un ítem específico:
         // localStorage.removeItem('nombreDelItem');
       }
+     }
+      
 }
 });
 let regClave =convertirExpresionRegular(parametros.clave);
@@ -72,8 +74,8 @@ formLogin.addEventListener('submit',async function(event) {
     bandera=true;
     let claveValue=inputPassword1.value ;
     let usuarioValue=inputUsuario.value ;//cuando ande bie modificar mensajes para que no sean muy informativos
-    if(!validar(usuarioValue.length<1||usuarioValue.length>parametros.tamaño2,pagina,`El usuario es obligatorio y ${parametros.cartelTamño2}`,event))bandera=false;
-    if(!validar(!regClave.test(claveValue),pagina,`${parametros.cartelClave}`,event)){bandera=false};
+    if(!validar(usuarioValue.length<1||usuarioValue.length>parametros.tamaño2,pagina,`${parametros.cartelLoginMal}`,event))bandera=false;
+    if(!validar(!regClave.test(claveValue),pagina,`${parametros.cartelLoginMal}`,event)){bandera=false};
 
     if(bandera){
       let login={
@@ -145,12 +147,14 @@ function mostrarModificarClave(){
     fOcultar();
     mostrar(formModificarLogin);
 }
+let divEnviandoEMail=document.getElementById('divEnviandoEMail');
 async function enviarMail(event){
   event.preventDefault();
   let usuario5Value=inputUsuario5.value;
   let login={
     usuario:usuario5Value
   }
+  divEnviandoEMail.style.display='block';
   const response = await fetch('/enviarMail', {
     method: 'POST',
     headers: {
@@ -162,9 +166,11 @@ async function enviarMail(event){
   if (response.ok) {
     localStorage.setItem('token', data.token);
     cartelExito(pagina,'El correo fue enviado con exito');
+    divEnviandoEMail.style.display='none';
   } else {
     console.error('Error al enviar correo:', data.message);
     alerta(pagina,`Error al enviar el correo:${data.message}`);
+    divEnviandoEMail.style.display='none';
   }
 }
 // Función para cargar el contenido de la página de acceso
@@ -259,17 +265,16 @@ async function enviarMail(event){
     accederEndpointProtegido();
   }*/
 formModificarLogin.addEventListener('submit',async function(event){
- // event.preventDefault();//reacomodar
+ event.preventDefault();//reacomodar
 bandera=true; 
 let usuario2Value=inputUsuari2.value;
 let clave2Value=inputPassword2.value;
 let clave3Value=inputPassword3.value;
 let clave4Value=inputPassword4.value;
-if(!validar(usuario2Value.length<1||usuario2Value.length>parametros.tamaño2,pagina,`El usuario es obligatorio y ${parametros.cartelTamño2}`,event))bandera=false;
-if(!validar(!regClave.test(clave2Value),pagina,`${parametros.cartelClave}`,event)){bandera=false};
-if(!validar(!regClave.test(clave3Value),pagina,`${parametros.cartelClave}`,event)){bandera=false};
+if(!validar(usuario2Value.length<1||usuario2Value.length>parametros.tamaño2,pagina,` ${parametros.cartelLoginMal}`,event))bandera=false;
+if(!validar(!regClave.test(clave2Value),pagina,`${parametros.cartelLoginMal}`,event)){bandera=false};
+if(!validar(!regClave.test(clave3Value),pagina,`La Clave Nueva ${parametros.cartelClave}`,event)){bandera=false};
 if(!validar(clave3Value!==clave4Value,pagina,'La confirmacion de la clave no es igual a la clave nueva',event)){bandera=false};
-console.log(bandera);
 if(bandera){
   const response = await fetch('/modificarLogin', {
       method: 'POST',
@@ -292,7 +297,6 @@ if(bandera){
     }
 }else{event.preventDefault();}
 });
-//probar con parametro(el nombre de id de img,template literals)
 function mostrarPassword(idImg,idInput){ 
   let imgPassword = document.getElementById(idImg);
   let inputPassword = document.getElementById(idInput);

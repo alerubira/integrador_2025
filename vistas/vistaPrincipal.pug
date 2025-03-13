@@ -2,20 +2,27 @@ extends layout
 block script1 
     script(src="domPrincipal.js", defer)
 block content 
-       
-        form#formularioLogin.form(action="/verificarLogin", method="POST", autocomplete="off")
-            label(for="usuario") Usuario:
-            input.limpiar(type="text", id="usuario",name="usuario",placeholder="usuario",autocomplete="off")
-            img(id="imgUsuario",src="usuario.svg", alt="Usuario")
-            br
-            label(for="clave1") Clave:
-            input.limpiar#inputPassword1(type="password",  name="clave1",placeholder="clave",autocomplete="off")
-            button.botonPassword(type="button", onclick="mostrarPassword('img1','inputPassword1')")
-                     img#img1(src="ojo.svg", alt="Mostrar/Ocultar")
-            br
-            input.boton(type="submit", value="Ingresar")
-        button.boton2(onclick="mostrarModificarClave()") Modificar Clave
+        #DivIngreso.form
+               form#formularioLogin.form(action="/verificarLogin", method="POST", autocomplete="off")
+                    label(for="usuario") Usuario:
+                    input.limpiar(type="text", id="usuario",name="usuario",placeholder="usuario",autocomplete="off")
+                    img(id="imgUsuario",src="usuario.svg", alt="Usuario")
+                    br
+                    label(for="clave1") Clave:
+                    input.limpiar#inputPassword1(type="password",  name="clave1",placeholder="clave",autocomplete="off")
+                    button.botonPassword(type="button", onclick="mostrarPassword('img1','inputPassword1')")
+                              img#img1(src="ojo.svg", alt="Mostrar/Ocultar")
+                    br
+                    input.boton(type="submit", value="Ingresar")
+               br
+               button.boton2(onclick="mostrarModificarClave()") Modificar Clave
+               br
+               button.boton2(onclick="mostrarRecuperarLogin()") Olvidaste tu Clave?
         br
+        #divEnviandoEMail.form.ocultar
+               p Se ha enviado un mail con la clave nueva
+               img.animacionCorreo(src="e_mail.svg",alt="Correo Enviado")
+               p Espere Confirmacion
         form#formularioModificarLogin.ocultar.form(action="/modificarLogin", method="POST", autocomplete="off")
             label(for="usuario2") Usuario:
             input.limpiar(type="text", id="usuario2",name="usuario2",placeholder="usuario",autocomplete="off")
@@ -38,7 +45,7 @@ block content
             br
             input.boton(type="submit", value="Modificar")
             
-        button.boton2(onclick="mostrarRecuperarLogin()") Olvidaste tu Clave?
+            br
         form#formularioRecuperarLogin.ocultar.form(action="/recuperarLogin", method="POST", autocomplete="off")
             p Para generar una clave nueva debe usar su usuario y enviar la solicitud de clave, la cual se mostraraen su mail 
             br
