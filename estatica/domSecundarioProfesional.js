@@ -254,3 +254,10 @@ async function modificarDniPersona(){
           
      }
 }
+let inputFiltrarProfesion=document.getElementById('filtrarProfesion');
+dtlProfesionFiltrar.addEventListener('input',async function(event) {
+     let selectedValue = event.target.value;
+     console.log(selectedValue);
+          dtlProfesionFiltrar.selectedIndex = 0;
+     
+})

@@ -2,7 +2,7 @@ pagina="secundaria";
 let aux;
 let profesiones,profesionales;
 let divCrearLogin=document.getElementById('divCrearLogin');
-
+let dtlProfesionFiltrar=document.getElementById('dtlProfesion');
 slctCrudProfesion.addEventListener('change',async function() {
     limpiarCampos(limpiar);
     fOcultar();
@@ -56,7 +56,7 @@ slctCrudProfesion.addEventListener('change',async function() {
                mostrar(divCrearProfesional);
                aux=await fechGetProtegido('/buscarProfesiones');
                profesiones=aux.data;
-               llenarDl(dtlProfesion,profesiones,'nombreProfesion','idProfesion');
+               llenarDl(dtlProfesionFiltrar,profesiones,'nombreProfesion','idProfesion');
                
                break;
           
@@ -95,7 +95,8 @@ slctCrudProfesion.addEventListener('change',async function() {
                             td.appendChild(btn);
                             tr.appendChild(td);
                              }
-                 
+                    profesiones=await buscarProfesiones();
+                    llenarDl(dtlProfesionFiltrar,profesiones,'nombreProfesion','idProfesion');
           
               break;         
               

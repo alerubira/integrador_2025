@@ -69,6 +69,16 @@ block content
                         button.boton(type="button",onclick='crearProfesional()') Crear 
             
             #divMostrarProfesionales.ocultar
+                    #divBuscadorApellido.form
+                        label(for="inputBuscarApellidoPersona") Buscar Por Apellido:
+                        input.limpiar(type="text", id="inputBuscarApellidoPersona", name="inputBuscarApellidoPersona",placeHolder="Apellido") 
+                        img(id="imgUsuario",src="usuario.svg", alt="Usuario")
+                    #divFiltrarPorProfesion.form     
+                        label(for="filtrarPorProfesion") Filtrar Por Profesion:
+                        input.limpiar(type="text", id="filtrarPorProfesion", name="filtrarPorProfesion",list="dtlProfesion", autocomplete="off")
+                        img(id="imgUsuario",src="usuario.svg", alt="Usuario")
+                        datalist#dtlProfesion
+                    br
                     table#todosMedicos
                         thead#cabecera
                             tr
