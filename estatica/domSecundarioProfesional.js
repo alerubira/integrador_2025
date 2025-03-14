@@ -1,3 +1,4 @@
+// Objetivo: Código para la página domSecundarioProfesional.html
 let divCrearProfesional=document.getElementById('divCrearProfesional');
 let divMostrarPrefesionales=document.getElementById('divMostrarProfesionales');
 let cuerpo=document.getElementById('cuerpo');
@@ -97,10 +98,10 @@ slctModificarProfesional.addEventListener('change',async function() {
                   mostrar(divCrearLogin);
                   break;
              case "modificarEstadoPersona":
-                aux=await fechProtegidoPost('/modificarEstadoPersona',profesional);
+                modificarEstadoPersona();
                 break;
             case "modificarEstadoProfesional":
-                aux=await fechProtegidoPost('/modificarEstadoProfesional',profesional);
+                 modificarEstadoProfesional();
                 break;
             case "modificarProfesion":
                 profesiones=await buscarProfesiones();
@@ -127,6 +128,39 @@ slctModificarProfesional.addEventListener('change',async function() {
              slctModificarProfesional.selectedIndex = 0;
          }); 
 let inputNombreProfesionNuevaProfesional=document.getElementById('inputNombreProfesionNuevaProfesional');         
+async function modificarEstadoPersona(){
+     bandera=true; 
+     let prof={idProfesional:profesional.idProfesional,activoProfesional:profesional.activoProfesional};
+     if(!validar(!profesionales.some(p=>p.idProfesional===prof.idProfesional),pagina,'El Profesional no existe')){bandera=false}    
+    if(bandera){
+     aux=await fechProtegidoPost('/modificarEstadoPersona',profesional);
+     if(aux!=undefined){
+          if(aux.success){
+               eliminarHijos(cuerpo2);
+               limpiarCampos(limpiar);
+               fOcultar();
+               fOcultar2();
+          }
+     }
+    }
+     
+}
+async function modificarEstadoProfesional(){
+     bandera=true;
+     let prof={idProfesional:profesional.idProfesional,activoProfesional:profesional.activoProfesional};
+     if(!validar(!profesionales.some(p=>p.idProfesional===prof.idProfesional),pagina,'El Profesional no existe')){bandera=false}
+     if(bandera){
+     aux=await fechProtegidoPost('/modificarEstadoProfesional',profesional);
+     if(aux!=undefined){
+          if(aux.success){
+               eliminarHijos(cuerpo2);
+               limpiarCampos(limpiar);
+               fOcultar();
+               fOcultar2();
+          }
+     }
+}
+}
 async function modificarProfesionProfesional(){
      bandera=true;
   let profesionModificar=inputNombreProfesionNuevaProfesional.value;
@@ -135,13 +169,19 @@ async function modificarProfesionProfesional(){
   if(!validar(!aux,pagina,"La Profesion es obligatoria y debe existir")){bandera=false}; 
   profesional.idProfesion=profesionModificar;
   profesional.nombreProfesion=aux.nombreProfesion;
+  
      if(bandera){
           aux=await fechProtegidoPost('/modificarProfesionProfesional',profesional);
+          if(aux!=undefined){
           if(aux.success){
+               eliminarHijos(cuerpo2);
                limpiarCampos(limpiar);
                fOcultar();
+               fOcultar2();
           }
+     }
      } 
+
 }
 let inputNuevoEMailProfesional=document.getElementById('inputNuevoEMailProfesional'); 
 async function modificarEMailProfesional(){
@@ -153,8 +193,10 @@ async function modificarEMailProfesional(){
      if(bandera){
           aux=await fechProtegidoPost('/modificarEMailProfesional',profesional);
           if(aux.success){
+               eliminarHijos(cuerpo2);
                limpiarCampos(limpiar);
                fOcultar();
+               fOcultar2();
           }
      }
 }
@@ -168,8 +210,10 @@ async function modificarNombrePersona(){
      if(bandera){
           aux=await fechProtegidoPost('/modificarNombrePersona',profesional);
           if(aux.success){
+               eliminarHijos(cuerpo2);
                limpiarCampos(limpiar);
                fOcultar();
+               fOcultar2();
           }
      }
 }
@@ -183,8 +227,10 @@ async function modificarApellidoPersona(){
      if(bandera){
           aux=await fechProtegidoPost('/modificarApellidoPersona',profesional);
           if(aux.success){
+               eliminarHijos(cuerpo2);
                limpiarCampos(limpiar);
                fOcultar();
+               fOcultar2();
           }
      }
 }
@@ -197,9 +243,14 @@ async function modificarDniPersona(){
      profesional.dniPersona=dniPersonaValue;
      if(bandera){
           aux=await fechProtegidoPost('/modificarDniPersona',profesional);
-          if(aux.success){
-               limpiarCampos(limpiar);
-               fOcultar();
+          if(aux!=undefined){
+               if(aux.success){
+                    eliminarHijos(cuerpo2);
+                    limpiarCampos(limpiar);
+                    fOcultar();
+                    fOcultar2();
+               }
           }
+          
      }
 }

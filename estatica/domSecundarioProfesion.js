@@ -45,7 +45,7 @@ async function seleccionarProfesion(event){
                     break;
                case "modificarEstado":
                     fOcultar();
-                    aux =await fechProtegidoPost('/modificarEstadoProfesion',profesion);
+                    modificarEstadoProfesion();
                     break; 
                        
               default:
@@ -63,12 +63,14 @@ async function modificarNombreProfesion(){
             if(bandera){
                  let p={idProfesion:profesion.idProfesion,nombreProfesion:nombreProfesion.value,activoProfesion:profesion.activoProfesion};
                  aux=await fechProtegidoPost('/modificarNombreProfesion',p);
+                 if(aux!=undefined){
                  if(aux.success){
                       eliminarHijos(cuerpoProfesion2);
                       limpiarCampos(limpiar);
                       fOcultar();
                       fOcultar2();
                  }
+               }
             }
            
        }
@@ -77,6 +79,28 @@ async function crearProfesion(){
         let p={nombreProfesion:inputNombreProfesion.value}  ;
         if(!validar(p.nombreProfesion.length<1||p.nombreProfesion.length>parametros.tamaño1,pagina,`El Nombre de la Profesion es Obligatorio y no debe superar los ${parametros.tamaño1} caracteres`)){bandera=false}
         if(bandera){
-             fechPost('/crearProfesion',p)
+          aux=await fechProtegidoPost('/crearProfesion',p);
+          if(aux!=undefined){
+               if(aux.success){
+                    limpiarCampos(limpiar);
+                    fOcultar();
+               }
+          }
         }
         }
+async function modificarEstadoProfesion(){
+        bandera=true;
+        let p={idProfesion:profesion.idProfesion,nombreProfesion:profesion.nombreProfesion,activoProfesion:profesion.activoProfesion};
+        if(!validar(!profesiones.some(p=>p.idProfesion===profesion.idProfesion),pagina,'La Profesion no existe')){bandera=false}
+        if(bandera){
+             aux=await fechProtegidoPost('/modificarEstadoProfesion',p);
+             if(aux!=undefined){
+             if(aux.success){
+                  eliminarHijos(cuerpoProfesion2);
+                  limpiarCampos(limpiar);
+                  fOcultar();
+                  fOcultar2();
+             }
+           }
+        }
+       }        

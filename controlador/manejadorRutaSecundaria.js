@@ -42,7 +42,18 @@ try{
                 prs.push(pr);
             }
             return res.send(prs);
-            break; 
+            break;
+        case 'crearProfesion':
+            object=req.body;
+            aux=await verificarYup(object,'profesion');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
+            aux=await existeNombreBd(object.nombreProfesion,'profesion','nombre_profesion');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar si la Profesion existe :${aux}`)}
+            if(aux){return retornarError(res,'El nombre de la Profesion ya existe en la base de datos')}
+            aux=await Profesion.alta(object);
+            if(aux instanceof Error){return retornarError(res,`Error al crear y guardar Profesion:${aux}`)}
+            return retornarExito(res,"Profesion generada y guardada con exito");
+            break;     
         case 'modificarEstadoProfesion':
             object=req.body;
             aux=await existeBd(object.idProfesion,'profesion','id_profesion');  

@@ -43,26 +43,26 @@ block content
                         option(value="") Elija una opcion
                         option(value="modificarNombre") Modificar Nombre 
                         option(value="modificarEstado") Modificar Estado    
-            #divModificarNombreProfesion.ocultar 
+            #divModificarNombreProfesion.ocultar.form.crear 
                         label(for="inputNuevoNombreProfesion") Nuevo Nombre Profesion 
                         input.limpiar(type="text",id="inputNuevoNombreProfesion",name="inputNuevoNombreProfesion",placeHolder="Nombre Profesion") 
                         br
                         button.boton(type="button",onclick='modificarNombreProfesion()') Modificar                                                
             #divCrearProfesional.ocultar.crear.form 
-                        label(for="dniPersona") DNI del Profecional:
+                        label(for="dniPersona") DNI del Profesional:
                         input#dniPersona.limpiar(name="dniPersona",type="number")    
                         br
-                        label(for="nombrePersona") Nombre del profecional 
+                        label(for="nombrePersona") Nombre del Profesional: 
                         input.limpiar(type="text", id="nombrePersona" ,name="nombrePersona")
                         br
-                        label(for="apellidoPersona") Apellido  del Profecional:
+                        label(for="apellidoPersona") Apellido  del Profesional:
                         input.limpiar(type="text", id="apellidoPersona", name="apellidoPersona")
                         br
-                        label(for="profesionProfecional") Profesion del profecional 
+                        label(for="profesionProfecional") Profesion del Profesional: 
                         input.limpiar(type="text", id="profesionProfesional" ,name="profesionProfesional",list="dtlProfesionProfesional", autocomplete="off")
                         datalist#dtlProfesionProfesional
                         br
-                        label(for="eMail") E_mail del Profecional 
+                        label(for="eMail") E_mail del Profesional: 
                         input.limpiar(type="e_mail", id="eMail" ,name="eMail", autocomplete="off")
                         br
 
@@ -128,29 +128,29 @@ block content
                             option(value="3")
                         br      
                         button.boton(type="button",onclick='crearLogin()') Crear
-            #divModificarProfesionProfesional.ocultar.form 
+            #divModificarProfesionProfesional.ocultar.crear.form 
                         label(for="inputNombreProfesionNuevaProfesional") Nombre Profesion 
                         input.limpiar(type="text",id="inputNombreProfesionNuevaProfesional",name="inputNombreProfesionNuevaProfesional",placeHolder="Nombre Profesion ",list="dtlProfesiones", autocomplete="off") 
                         datalist#dtlProfesiones
                         br
                         button.boton(type="button",onclick='modificarProfesionProfesional()') Modificar
                         br
-            #divModificarEMailProfesional.ocultar.form    
+            #divModificarEMailProfesional.ocultar.crear.form    
                         label(for="inputNuevoEMailProfesional") E_mail Nuevo del Profecional 
                         input.limpiar(type="e_mail", id="inputNuevoEMailProfesional" ,name="inputNuevoEMailProfesional", autocomplete="off")
                         br
                         button.boton(type="button",onclick='modificarEMailProfesional()') Modificar
-            #divModificarNombrePersona.ocultar.form 
+            #divModificarNombrePersona.ocultar.crear.form 
                         label(for="inputNuevoNombrePersona") Nuevo Nombre Persona 
                         input.limpiar(type="text",id="inputNuevoNombrePersona",name="inputNuevoNombrePersona",placeHolder="Nombre Persona") 
                         br
                         button.boton(type="button",onclick='modificarNombrePersona()') Modificar 
-            #divModificarApellidoPersona.ocultar.form 
+            #divModificarApellidoPersona.ocultar.crear.form 
                         label(for="inputNuevoApellidoPersona") Nuevo Apellido Persona 
                         input.limpiar(type="text",id="inputNuevoApellidoPersona",name="inputNuevoApellidoPersona",placeHolder="Apellido Persona") 
                         br
                         button.boton(type="button",onclick='modificarApellidoPersona()') Modificar 
-            #divModificarDniPersona.ocultar.form 
+            #divModificarDniPersona.ocultar.crear.form 
                         label(for="inputNuevoDniPersona") Nuevo Dni Persona 
                         input.limpiar(type="number",id="inputNuevoDniPersona",name="inputNuevoDniPersona",placeHolder="Dni Persona") 
                         br

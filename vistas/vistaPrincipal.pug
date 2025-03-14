@@ -20,9 +20,9 @@ block content
                button.boton2(onclick="mostrarRecuperarLogin()") Olvidaste tu Clave?
         br
         #divEnviandoEMail.form.ocultar
-               p Se ha enviado un mail con la clave nueva
-               img.animacionCorreo(src="e_mail.svg",alt="Correo Enviado")
-               p Espere Confirmacion
+               h5 Se ha enviado un mail con la clave nueva
+               img.animacion(src="e_mail.svg",alt="Correo Enviado")
+               h5 Espere Confirmacion
         form#formularioModificarLogin.ocultar.form(action="/modificarLogin", method="POST", autocomplete="off")
             label(for="usuario2") Usuario:
             input.limpiar(type="text", id="usuario2",name="usuario2",placeholder="usuario",autocomplete="off")
