@@ -2,7 +2,8 @@ pagina="secundaria";
 let aux;
 let profesiones,profesionales;
 let divCrearLogin=document.getElementById('divCrearLogin');
-let dtlProfesionFiltrar=document.getElementById('dtlProfesion');
+let dtlProfesionProfesional=document.getElementById('dtlProfesionProfesional');
+let dtlProfesionFiltrar=document.getElementById('dtlProfesionFiltrar');
 slctCrudProfesion.addEventListener('change',async function() {
     limpiarCampos(limpiar);
     fOcultar();
@@ -11,6 +12,7 @@ slctCrudProfesion.addEventListener('change',async function() {
     eliminarHijos(cuerpo2);
     eliminarHijos(cuerpoProfesion);
     eliminarHijos(cuerpoProfesion2);
+    eliminarHijos(dtlProfesionProfesional);
     let selectedValue = this.value;
     fOcultar();
     switch(selectedValue) {
@@ -56,7 +58,7 @@ slctCrudProfesion.addEventListener('change',async function() {
                mostrar(divCrearProfesional);
                aux=await fechGetProtegido('/buscarProfesiones');
                profesiones=aux.data;
-               llenarDl(dtlProfesionFiltrar,profesiones,'nombreProfesion','idProfesion');
+               llenarDl(dtlProfesionProfesional,profesiones,'nombreProfesion','idProfesion');
                
                break;
           
@@ -65,8 +67,8 @@ slctCrudProfesion.addEventListener('change',async function() {
                eliminarHijos(cuerpo);   
                aux=await fechGetProtegido('/buscarProfesionales');
                profesionales=aux.data;
-               console.log(profesionales);
-               for(let p of profesionales){
+             //  console.log(profesionales);
+              /* for(let p of profesionales){
                    let tr=document.createElement('tr');
                    cuerpo.appendChild(tr);
                    agregarTdCuerpo(p.idPersona,tr);
@@ -94,8 +96,10 @@ slctCrudProfesion.addEventListener('change',async function() {
                             let td=document.createElement('td');
                             td.appendChild(btn);
                             tr.appendChild(td);
-                             }
+                             }*/
+                    llenarTablaProfesionales(profesionales);        
                     profesiones=await buscarProfesiones();
+                    eliminarHijos(dtlProfesionFiltrar);
                     llenarDl(dtlProfesionFiltrar,profesiones,'nombreProfesion','idProfesion');
           
               break;         

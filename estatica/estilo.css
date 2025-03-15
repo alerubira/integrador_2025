@@ -213,6 +213,14 @@ margin: auto;
     border: 2px solid black; /* Establece el borde de color negro */
     height: auto; /* Ocupa el % del alto de su contenedor ,automatico al contenido*/
 }
+#mensageNoEncontradoApellido{
+  display: inline-block; /* Hace que el contenedor se ajuste al contenido */
+  border-radius: 10px; /* Establece los bordes redondeados */
+  border: 2px solid black; /* Establece el borde de color negro */
+  padding: 5px; /* Añade un poco de espacio interno para mejorar la apariencia */
+  height: auto; /* Ajusta la altura automáticamente al contenido */
+  background-color: #FF69B4;
+}
 .divPr{
   border:1px solid #FF69B4;
 }

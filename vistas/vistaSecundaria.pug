@@ -75,9 +75,10 @@ block content
                         img(id="imgUsuario",src="usuario.svg", alt="Usuario")
                     #divFiltrarPorProfesion.form     
                         label(for="filtrarPorProfesion") Filtrar Por Profesion:
-                        input.limpiar(type="text", id="filtrarPorProfesion", name="filtrarPorProfesion",list="dtlProfesion", autocomplete="off")
+                        input.limpiar(type="text", id="filtrarPorProfesion", name="filtrarPorProfesion",list="dtlProfesionFiltrar", autocomplete="off")
                         img(id="imgUsuario",src="usuario.svg", alt="Usuario")
-                        datalist#dtlProfesion
+                        datalist#dtlProfesionFiltrar
+                    p#mensageNoEncontradoApellido.ocultar No se encontraron resulados para su busqueda    
                     br
                     table#todosMedicos
                         thead#cabecera

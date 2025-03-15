@@ -90,7 +90,7 @@ let divModificarNombrePersona=document.getElementById('divModificarNombrePersona
 let divModificarApellidoPersona=document.getElementById('divModificarApellidoPersona');
 let divModificarDniPersona=document.getElementById('divModificarDniPersona');
 slctModificarProfesional.addEventListener('change',async function() {
-   
+        eliminarHijos(dtlProfesiones);
         limpiarCampos(limpiar);
         let selectedValue = this.value;
         switch(selectedValue) {
@@ -254,10 +254,68 @@ async function modificarDniPersona(){
           
      }
 }
-let inputFiltrarProfesion=document.getElementById('filtrarProfesion');
-dtlProfesionFiltrar.addEventListener('input',async function(event) {
-     let selectedValue = event.target.value;
-     console.log(selectedValue);
-          dtlProfesionFiltrar.selectedIndex = 0;
+//let inputFiltrarProfesion=document.getElementById('filtrarProfesion');
+document.getElementById('filtrarPorProfesion').addEventListener('change',async function() {
+     let selectedValue = this.value;
+     mensageNoEncontradoApellido.style.display="none";
+     if(selectedValue==='0'){
+          llenarTablaProfesionales(profesionales);
+     }else{
+         let profesionaless=profesionales.filter(prof=>prof.idProfesion===parseInt(selectedValue));
+          if(profesionaless.length===0){
+           mensageNoEncontradoApellido.style.display = 'block';  
+           llenarTablaProfesionales(profesionales);
+         }else{
+          llenarTablaProfesionales(profesionaless);
+         }
+     }
+     selectedValue.value = 0;//controlar que no se quede seleccionado
+ });
+ async function llenarTablaProfesionales(profesionales){
+     eliminarHijos(cuerpo);
+     for(let prof of profesionales){
+          let tr=document.createElement('tr');
+          cuerpo.appendChild(tr);
+          agregarTdCuerpo(prof.idPersona,tr);
+          agregarTdCuerpo(prof.idProfesional,tr);
+          agregarTdCuerpo(prof.dniPersona,tr);
+          agregarTdCuerpo(prof.apellidoPersona,tr);
+          agregarTdCuerpo(prof.nombrePersona,tr);
+          agregarTdCuerpo(prof.idProfesion,tr);
+          agregarTdCuerpo(prof.nombreProfesion,tr);
+          agregarTdCuerpo(prof.eMail,tr);
+          if(prof.activoPersona===1){
+               agregarTdCuerpo('Activo',tr);
+          }else{
+               agregarTdCuerpo('Inactivo',tr);
+          }
+          if(prof.activoProfesional===1){
+               agregarTdCuerpo('Activo',tr);
+          }else{
+               agregarTdCuerpo('Inactivo',tr);
+          }
+          let btn=document.createElement('button');
+          btn.textContent='Seleccionar';
+          btn.className = 'boton';
+          btn.addEventListener('click', seleccionarProfesional);
+          let td=document.createElement('td');
+          td.appendChild(btn);
+          tr.appendChild(td);
+     }
+
+ }
+ let mensageNoEncontradoApellido=document.getElementById('mensageNoEncontradoApellido');
+ 
+ document.getElementById('inputBuscarApellidoPersona').addEventListener('keyup',async function(){
+     let filtro=this.value.toLowerCase();
+     mensageNoEncontradoApellido.style.display = 'none';
+     let profesionalesFiltrados=profesionales.filter(prof=>prof.apellidoPersona.toLowerCase().includes(filtro));
+     if(profesionalesFiltrados.length===0){
+          mensageNoEncontradoApellido.style.display = 'block';
+          llenarTablaProfesionales(profesionales);
+     }else{
+          llenarTablaProfesionales(profesionalesFiltrados);
+     }
      
-})
+filtro.value="";//controlar que no se quede seleccionado
+ });
