@@ -6,7 +6,7 @@ block script2
 block script3 
     script(src="domSecundarioProfesional.js",defer)        
 block content
-            #divProfesionalAcceso 
+            #divProfesionalAcceso.ajuste 
                                 h3 PROFESIONAL
                                         label=`${profesional.nombrePersona}  ${profesional.apellidoPersona}` 
             select(id="slctCrudProfesion", name="slctCrudProfesion")
@@ -15,15 +15,15 @@ block content
                         option(value="buscarProfesiones") Ver todas las Profesiones 
                         option(value="crearProfesional") Crear Profesional 
                         option(value="buscarProfesionales") Ver Todos Los Profesionales
-            #divCrearProfesion.ocultar.form.crear 
+            #divCrearProfesion.ocultar.form.crear.ajuste 
                 label(for="inputNombreProfesion") Nombre Profesion 
                 input.limpiar(type="text",id="inputNombreProfesion",name="inputNombreProfesion",placeHolder="Nombre Profesion") 
                 br
                 button.boton(type="button",onclick='crearProfesion()') Crear 
             script.
                      const parametros = !{JSON.stringify(parametros)}; 
-            #divMostrarProfesiones.ocultar
-                    table#todasProfesiones
+            #divMostrarProfesiones.ocultar.ajuste
+                    table#todasProfesiones.ajuste
                         thead#cabeceraProfesion
                             tr
                                 th Id Profesion
@@ -31,7 +31,7 @@ block content
                                 th Estado Actual Profesion
                                 th Seleccionar
                         tbody#cuerpoProfesion 
-            #divModificarProfesion.ocultar2  
+            #divModificarProfesion.ocultar2.ajuste  
                     table#profesion
                         thead#cabeceraProfesion
                             tr
@@ -43,12 +43,12 @@ block content
                         option(value="") Elija una opcion
                         option(value="modificarNombre") Modificar Nombre 
                         option(value="modificarEstado") Modificar Estado    
-            #divModificarNombreProfesion.ocultar.form.crear 
+            #divModificarNombreProfesion.ocultar.form.crear.ajuste 
                         label(for="inputNuevoNombreProfesion") Nuevo Nombre Profesion 
                         input.limpiar(type="text",id="inputNuevoNombreProfesion",name="inputNuevoNombreProfesion",placeHolder="Nombre Profesion") 
                         br
                         button.boton(type="button",onclick='modificarNombreProfesion()') Modificar                                                
-            #divCrearProfesional.ocultar.crear.form 
+            #divCrearProfesional.ocultar.crear.form.ajuste 
                         label(for="dniPersona") DNI del Profesional:
                         input#dniPersona.limpiar(name="dniPersona",type="number")    
                         br
@@ -69,18 +69,18 @@ block content
                         button.boton(type="button",onclick='crearProfesional()') Crear 
             
             #divMostrarProfesionales.ocultar
-                    #divBuscadorApellido.form
+                    #divBuscadorApellido.form.ajuste
                         label(for="inputBuscarApellidoPersona") Buscar Por Apellido:
                         input.limpiar(type="text", id="inputBuscarApellidoPersona", name="inputBuscarApellidoPersona",placeHolder="Apellido") 
                         img(id="imgLupa",src="./Iconos/lupa.svg", alt="Lupa")
-                    #divFiltrarPorProfesion.form     
+                    #divFiltrarPorProfesion.form.ajuste    
                         label(for="filtrarPorProfesion") Filtrar Por Profesion:
                         input.limpiar(type="text", id="filtrarPorProfesion", name="filtrarPorProfesion",list="dtlProfesionFiltrar", autocomplete="off")
                         img(id="imgFiltro",src="./Iconos/filtro.svg", alt="Filtro")
                         datalist#dtlProfesionFiltrar
                     p#mensageNoEncontradoApellido.ocultar No se encontraron resulados para su busqueda    
                     br
-                    table#todosMedicos
+                    table#todosMedicos.ajuste
                         thead#cabecera
                             tr
                                 th Id Persona
@@ -96,7 +96,7 @@ block content
                                 th Seleccionar
                         tbody#cuerpo 
             #divModificarProfesional.ocultar2  
-                    table#medico
+                    table#medico.ajuste
                         thead#cabecera2
                             tr
                                 th Id Persona
@@ -121,7 +121,7 @@ block content
                         option(value="modificarApellidoPersona") Modificar Apellido Persona
                         option(value="modificarDniPersona") Modificar Dni Persona
                         
-            #divCrearLogin.ocultar.crear.form           
+            #divCrearLogin.ocultar.crear.form.ajuste           
                         label(for="usuario") Usuario Provisorio 
                         input.limpiar(type="text",id="usuario",name="usuario",placeHolder="maximo 6 caracteres") 
                         img(id="imgUsuario",src="./Iconos/usuario.svg", alt="Usuario")
@@ -139,29 +139,29 @@ block content
                             option(value="3")
                         br      
                         button.boton(type="button",onclick='crearLogin()') Crear
-            #divModificarProfesionProfesional.ocultar.crear.form 
+            #divModificarProfesionProfesional.ocultar.crear.form.ajuste 
                         label(for="inputNombreProfesionNuevaProfesional") Nombre Profesion 
                         input.limpiar(type="text",id="inputNombreProfesionNuevaProfesional",name="inputNombreProfesionNuevaProfesional",placeHolder="Nombre Profesion ",list="dtlProfesiones", autocomplete="off") 
                         datalist#dtlProfesiones
                         br
                         button.boton(type="button",onclick='modificarProfesionProfesional()') Modificar
                         br
-            #divModificarEMailProfesional.ocultar.crear.form    
+            #divModificarEMailProfesional.ocultar.crear.form.ajuste    
                         label(for="inputNuevoEMailProfesional") E_mail Nuevo del Profecional 
                         input.limpiar(type="e_mail", id="inputNuevoEMailProfesional" ,name="inputNuevoEMailProfesional", autocomplete="off")
                         br
                         button.boton(type="button",onclick='modificarEMailProfesional()') Modificar
-            #divModificarNombrePersona.ocultar.crear.form 
+            #divModificarNombrePersona.ocultar.crear.form.ajuste 
                         label(for="inputNuevoNombrePersona") Nuevo Nombre Persona 
                         input.limpiar(type="text",id="inputNuevoNombrePersona",name="inputNuevoNombrePersona",placeHolder="Nombre Persona") 
                         br
                         button.boton(type="button",onclick='modificarNombrePersona()') Modificar 
-            #divModificarApellidoPersona.ocultar.crear.form 
+            #divModificarApellidoPersona.ocultar.crear.form.ajuste 
                         label(for="inputNuevoApellidoPersona") Nuevo Apellido Persona 
                         input.limpiar(type="text",id="inputNuevoApellidoPersona",name="inputNuevoApellidoPersona",placeHolder="Apellido Persona") 
                         br
                         button.boton(type="button",onclick='modificarApellidoPersona()') Modificar 
-            #divModificarDniPersona.ocultar.crear.form 
+            #divModificarDniPersona.ocultar.crear.form.ajuste 
                         label(for="inputNuevoDniPersona") Nuevo Dni Persona 
                         input.limpiar(type="number",id="inputNuevoDniPersona",name="inputNuevoDniPersona",placeHolder="Dni Persona") 
                         br

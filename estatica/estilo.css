@@ -82,6 +82,7 @@ h5 {
 }
 .boton2:hover{
   color: black;
+  border-bottom: 1px solid black; /* Añade una línea negra debajo del texto */
 }
 .botonPassword {
   height: 20px; /* Asegúrate de que coincida con la altura del input */
@@ -121,12 +122,12 @@ text-align: right; /* Alinea el texto de las etiquetas a la derecha */
 margin-right: 5px; /* Espacio entre las etiquetas y los campos de entrada */
 padding: 0.50rem 0; /* 0.75rem arriba y abajo, 0 en los lados */
 }
-.ocultar{
+.ocultar,.ocultar2,.ocultar3{
   display: none;
 }
-.ocultar2{
+/*.ocultar2{
 display: none;
-}
+}*/
 .crear{
   /*width: 60%;*/
   margin: 0 auto; /* Centra el elemento horizontalmente */
@@ -316,14 +317,14 @@ border: 1px solid black;
     .ajuste {
       width: 100%; /* Ocupa el 100% del ancho */
     }
-  
+    #divLateral,
     #divAlerta,
     #divExito,
     #divSecundario {
       width: 100%; /* Ocupa el 100% del ancho */
     }
     #divLateral{
-      display: none !important; /* Oculta el div lateral */
+      display: none; /* Oculta el div lateral */
     }
     #botonMenu{
       display: block; /* Muestra el botón del menú */
