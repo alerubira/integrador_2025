@@ -256,12 +256,12 @@ async function modificarDniPersona(){
 }
 //let inputFiltrarProfesion=document.getElementById('filtrarProfesion');
 document.getElementById('filtrarPorProfesion').addEventListener('change',async function() {
-     let selectedValue = this.value;
+     let selecValor = this.value;
      mensageNoEncontradoApellido.style.display="none";
-     if(selectedValue==='0'){
+     if(selecValor==='0'){
           llenarTablaProfesionales(profesionales);
      }else{
-         let profesionaless=profesionales.filter(prof=>prof.idProfesion===parseInt(selectedValue));
+         let profesionaless=profesionales.filter(prof=>prof.idProfesion===parseInt(selecValor));
           if(profesionaless.length===0){
            mensageNoEncontradoApellido.style.display = 'block';  
            llenarTablaProfesionales(profesionales);
@@ -269,7 +269,7 @@ document.getElementById('filtrarPorProfesion').addEventListener('change',async f
           llenarTablaProfesionales(profesionaless);
          }
      }
-     selectedValue.value = 0;//controlar que no se quede seleccionado
+     this.value= "";//controlar que no se quede seleccionado
  });
  async function llenarTablaProfesionales(profesionales){
      eliminarHijos(cuerpo);
@@ -317,5 +317,5 @@ document.getElementById('filtrarPorProfesion').addEventListener('change',async f
           llenarTablaProfesionales(profesionalesFiltrados);
      }
      
-filtro.value="";//controlar que no se quede seleccionado
+filtro="";//controlar que no se quede seleccionado
  });

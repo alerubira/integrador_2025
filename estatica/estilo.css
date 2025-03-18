@@ -312,6 +312,23 @@ border: 1px solid black;
   .divAuxiliar1{
     width: 80%;
   }
+  @media (max-width: 769px) {
+    .ajuste {
+      width: 100%; /* Ocupa el 100% del ancho */
+    }
+  
+    #divAlerta,
+    #divExito,
+    #divSecundario {
+      width: 100%; /* Ocupa el 100% del ancho */
+    }
+    #divLateral{
+      display: none !important; /* Oculta el div lateral */
+    }
+    #botonMenu{
+      display: block; /* Muestra el botón del menú */
+    }
+  }
 
  
   

@@ -224,7 +224,15 @@ async function fechGetProtegido(ruta) {
       return { data: null, error: error };
     }
   }
-  
+ let botonMenu=document.getElementById('botonMenu');
+ let divLateral=document.getElementById('divLateral');
+ function mostrarMenu(){
+    if(divLateral.style.display=='none'){
+        divLateral.style.display='block';
+    }else{
+        divLateral.style.display='none';
+    }
+ } 
   
   
 //export{Focultar};

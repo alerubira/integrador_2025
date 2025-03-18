@@ -2,7 +2,7 @@ html(lang="es")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        link(rel="shortcut icon", href="./icono.png", type="image/x-icon")
+        link(rel="shortcut icon", href="./Iconos/icono.png", type="image/x-icon")
         link(rel="stylesheet", href="estilo.css")
         script(src="domFunsiones.js",defer)
         block script1
@@ -17,7 +17,8 @@ html(lang="es")
             #divCabecera
                 h1= encabezado
             #divLogo
-                img(src="./icons8-medicina-100.png", alt="Logo")
+                img(src="./Iconos/icons8-medicina-100.png", alt="Logo")
+            button#botonMenu.ocultar(type="button" onclick="mostrarMenu()") Menu    
             #divLateral
                 block boton1 
                 br 

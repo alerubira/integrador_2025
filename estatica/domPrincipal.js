@@ -302,10 +302,10 @@ function mostrarPassword(idImg,idInput){
   let inputPassword = document.getElementById(idInput);
    if (inputPassword.type === 'password') {
       inputPassword.type = 'text';
-      imgPassword.src = '/ojo-cerrado.svg';
+      imgPassword.src = './Iconos/ojo-cerrado.svg';
     } else {
       inputPassword.type = 'password';
-      imgPassword.src = '/ojo.svg';  
+      imgPassword.src = './Iconos/ojo.svg';  
     }
 }
 limpiarCampos(limpiar);
