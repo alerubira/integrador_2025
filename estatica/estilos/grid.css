@@ -16,55 +16,36 @@
     grid-column-start: 1;/* inicia en la columna 1*/
     grid-row-start: 3;/* inicia en la fila 3 */
 }
-.grid3-1-2{
-    grid-column: span 3 / span 3;/* ocupa 3 columnas */
+.grid2-1-2{
+    grid-column: span 2 / span 2;/* ocupa 2 columnas */
     grid-column-start: 1;/* inicia en la columna 1*/
     grid-row-start: 2;/* inicia en la fila 2 */
 }
-.grid8-4-2{
-    grid-column: span 8 / span 8;/* ocupa 4 columnas */
-    grid-column-start: 4;/* inicia en la columna 4*/
+.grid10-3-2{
+    grid-column: span 10 / span 10;/* ocupa 4 columnas */
+    grid-column-start: 3;/* inicia en la columna 3*/
     grid-row-start: 2;/* inicia en la fila 2 */
 }
+.grid5-4-1{
+    grid-column: span 5 / span 5;/* ocupa 4 columnas */
+    grid-column-start: 4;/* inicia en la columna 4*/
+    grid-row-start: 1/* inicia en la fila 1 */
+}
+.grid5-4-2{
+    grid-column: span 5 / span 5;/* ocupa 4 columnas */
+    grid-column-start: 4;/* inicia en la columna 4*/
+    grid-row-start: 2/* inicia en la fila 2 */
+}
+.grid5-4-3{
+    grid-column: span 5 / span 5;/* ocupa 4 columnas */
+    grid-column-start: 4;/* inicia en la columna 4*/
+    grid-row-start: 3/* inicia en la fila 3 */
+}
+.grid5-4-4{
+    grid-column: span 5 / span 5;/* ocupa 4 columnas */
+    grid-column-start: 4;/* inicia en la columna 4*/
+    grid-row-start: 4/* inicia en la fila 4 */
+}
 
-
-@media (max-width: 426px) {
-    
-    .gridML12-1-1{
-        grid-column: span 12 / span 12;/* ocupa 12 columnas */
-        grid-column-start: 1;/* inicia en la columna 1*/
-        grid-row-start: 1;/* inicia en la fila 1 */
-    }
-    .gridML12-1-2{
-        grid-column: span 12 / span 12;/* ocupa 12 columnas */
-        grid-column-start: 1;/* inicia en la columna 1*/
-        grid-row-start: 2;/* inicia en la fila 2 */
-    }
-    .gridML12-1-3{
-        grid-column: span 12 / span 12;/* ocupa 12 columnas */
-        grid-column-start: 1;/* inicia en la columna 1*/
-        grid-row-start: 3;/* inicia en la fila 3 */
-    }
-    .div1 {
-        grid-column: span 6 / span 6;
-        grid-column-start: 1;
-        grid-row-start: 1;
-    }
-    .div2 {
-        grid-column: span 6 / span 6;
-        grid-column-start: 1;
-        grid-row-start: 2;
-    }
-    .div3 {
-        grid-column: span 6 / span 6;
-        grid-column-start: 1;
-        grid-row-start: 3;
-    }
-    .div4 {
-        grid-column: span 6 / span 6;
-        grid-column-start: 1;
-        grid-row-start: 4;
-    }
    
     
-}  

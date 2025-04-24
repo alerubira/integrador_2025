@@ -1,7 +1,7 @@
 #divCabecera {
     /*position: fixed;*/
     text-align: center;
-    background-color:antiquewhite;
+   
     width: 80%;
     /*z-index: 1000;*/ 
    /* box-shadow: 0 0 0 10px rgb(0, 255, 191);*/ 
@@ -12,13 +12,31 @@
     margin:1%;
     
 }
-#divLateral{
+#divLogo img{
+    width: 100%;
+    height: auto; /* Mantiene la proporción de la imagen */
+   /* border-radius: 50%; /* Hace que la imagen sea circular */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto de profundidad */
+}
+header{
+  background-color:antiquewhite; /* Fondo beige claro */
+  margin: 1%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto de profundidad */
+}
+body {
+  background-color: #ADD8E6; /* Código hexadecimal para un color celeste claro */
+}
+nav{
     /* width: 10%;*/
      background-color: darkslategrey;
      text-align: center;
     /* height: 400px; /* Añadir esta línea para un alto fijo */
      margin: 1%;
    }
+   footer{
+    background-color: #90EE90; /* Fondo verde claro */
+    color: black; /* Color del texto */
+  }   
 /* Estilos para la alerta */
 #divAlerta {
     position: fixed; /* Para que se sobreponga a otros elementos */

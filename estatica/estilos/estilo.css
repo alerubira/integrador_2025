@@ -5,10 +5,7 @@
     justify-content: space-around; 
     margin: 0;
   }*/
-  footer{
-    background-color: #90EE90; /* Fondo verde claro */
-    color: black; /* Color del texto */
-  }
+ 
   h1{
     font-family:Georgia, 'Times New Roman', Times, serif;
     margin: 0;
@@ -52,10 +49,11 @@ h5 {
     cursor: pointer;
     border-radius: 5px;
     margin: 2px;
-    transform: scale(1.25); /* Aumenta el tamaño al pasar el ratón */ 
+    
 }
 .boton:hover{
     background-color: darkblue;
+    transform: scale(1.25); /* Aumenta el tamaño al pasar el ratón */ 
 }
 .boton2{
     color:green;
@@ -117,9 +115,7 @@ display: none;
 }
 
 
-body {
-  background-color: #ADD8E6; /* Código hexadecimal para un color celeste claro */
-}
+
 table {
   background-color:black;
   border-collapse: collapse; /* Colapsa los bordes para evitar doble borde */
@@ -252,23 +248,7 @@ border: 1px solid black;
   .divAuxiliar1{
     width: 80%;
   }
-  @media (max-width: 769px) {
-   /* .ajuste {
-      width: 100%; /* Ocupa el 100% del ancho */
-    /*}*/
-    #divLateral,
-    #divAlerta,
-    #divExito,
-    #divSecundario {
-      width: 100%; /* Ocupa el 100% del ancho */
-    }
-    #divLateral{
-      display: none; /* Oculta el div lateral */
-    }
-    #botonMenu{
-      display: block; /* Muestra el botón del menú */
-    }
-  }
+ 
 
  
   

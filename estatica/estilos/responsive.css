@@ -1,0 +1,72 @@
+@media(max-width:1025px) {
+    .gridL12-1-1{
+        grid-column: span 12 / span 12;/* ocupa 12 columnas */
+        grid-column-start: 1;/* inicia en la columna 1*/
+        grid-row-start: 1;/* inicia en la fila 1 */ 
+    }
+    .gridL12-1-2{
+        grid-column: span 12 / span 12;/* ocupa 12 columnas */
+        grid-column-start: 1;/* inicia en la columna 1*/
+        grid-row-start: 2;/* inicia en la fila 2 */ 
+    }
+    .gridL12-1-3{
+        grid-column: span 12 / span 12;/* ocupa 12 columnas */
+        grid-column-start: 1;/* inicia en la columna 1*/
+        grid-row-start: 3;/* inicia en la fila 3 */ 
+    }
+    .gridL12-1-4{
+        grid-column: span 12 / span 12;/* ocupa 12 columnas */
+        grid-column-start: 1;/* inicia en la columna 1*/
+        grid-row-start: 4;/* inicia en la fila 4 */     
+    }
+}
+@media (max-width: 769px) {
+   
+    .gridT12-1-3{
+        grid-column: span 12 / span 12;/* ocupa 12 columnas */
+        grid-column-start: 1;/* inicia en la columna 1*/
+        grid-row-start: 3;/* inicia en la fila 1 */ 
+    }
+    .gridT12-1-2{
+        grid-column: span 12 / span 12;/* ocupa 12 columnas */
+        grid-column-start: 1;/* inicia en la columna 1*/
+        grid-row-start: 2;/* inicia en la fila 2 */ 
+    }
+    .gridT12-1-4 {
+        grid-column: span 12 / span 12;/* ocupa 12 columnas */
+        grid-column-start: 1;/* inicia en la columna 1*/
+        grid-row-start: 4;/* inicia en la fila 4 */ 
+    }
+    /* .ajuste {
+        width: 100%; /* Ocupa el 100% del ancho */
+        /*}*/
+        #divAlerta,
+        #divExito {
+        width: 100%; /* Ocupa el 100% del ancho */
+        }
+        nav{
+        display: none; /* Oculta el div lateral */
+        }
+        #botonMenu{
+        display: block; /* Muestra el botón del menú */
+        }
+    }    
+@media (max-width: 426px) {
+    
+    .gridML12-1-1{
+        grid-column: span 12 / span 12;/* ocupa 12 columnas */
+        grid-column-start: 1;/* inicia en la columna 1*/
+        grid-row-start: 1;/* inicia en la fila 1 */
+    }
+    .gridML12-1-2{
+        grid-column: span 12 / span 12;/* ocupa 12 columnas */
+        grid-column-start: 1;/* inicia en la columna 1*/
+        grid-row-start: 2;/* inicia en la fila 2 */
+    }
+    .gridML12-1-3{
+        grid-column: span 12 / span 12;/* ocupa 12 columnas */
+        grid-column-start: 1;/* inicia en la columna 1*/
+        grid-row-start: 3;/* inicia en la fila 3 */
+    }
+    
+}
