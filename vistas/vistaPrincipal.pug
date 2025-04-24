@@ -3,7 +3,7 @@ block script1
     script(src="domPrincipal.js", defer)
 block content 
         #DivIngreso.form.ajuste
-               form#formularioLogin.form.ajuste(action="/verificarLogin", method="POST", autocomplete="off")
+               form#formularioLogin.form(action="/verificarLogin", method="POST", autocomplete="off")
                     .ajuste
                          label(for="usuario") Usuario:
                          input.limpiar(type="text", id="usuario",name="usuario",placeholder="usuario",autocomplete="off")

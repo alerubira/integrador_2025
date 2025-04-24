@@ -1,9 +1,13 @@
-#divPrincipal {
+/*#divPrincipal {
    
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around; 
     margin: 0;
+  }*/
+  footer{
+    background-color: #90EE90; /* Fondo verde claro */
+    color: black; /* Color del texto */
   }
   h1{
     font-family:Georgia, 'Times New Roman', Times, serif;
@@ -11,7 +15,7 @@
 }
 h6{
   margin: 0;
-  text-align: left; /* Alinea el texto del <li> a la izquierda */
+  text-align: left; /* Alinea el texto del  a la izquierda */
 }
 h5 {
   margin-bottom: 0;
@@ -25,20 +29,7 @@ h5 {
      border: 1px solid #000;
      width: auto; /* Anula la regla width: 200px; */
 }
-#divCabecera {
-    /*position: fixed;*/
-    text-align: center;
-    background-color:antiquewhite;
-    width: 85%;
-    /*z-index: 1000;*/ 
-   /* box-shadow: 0 0 0 10px rgb(0, 255, 191);*/ 
-}
-#divLogo{
-    text-align: center;
-    width: 10%;
-    margin:1%;
-    
-}
+
 .animacion {
   animation: girar 2s infinite;
 }
@@ -51,13 +42,7 @@ h5 {
     transform: rotate(360deg);
   }
 }
-#divLateral{
-  width: 10%;
-  background-color: darkslategrey;
-  text-align: center;
-  height: 400px; /* Añadir esta línea para un alto fijo */
-  margin: 1%;
-}
+
 .boton{
     background-color: cornflowerblue;
     color: white;
@@ -67,6 +52,7 @@ h5 {
     cursor: pointer;
     border-radius: 5px;
     margin: 2px;
+    transform: scale(1.25); /* Aumenta el tamaño al pasar el ratón */ 
 }
 .boton:hover{
     background-color: darkblue;
@@ -98,16 +84,7 @@ h5 {
   margin: 0; 
   height: 100%;
 }
-#divSecundario{
-      /*position: fixed;*/
-      text-align: center;
-     /* background-color:antiquewhite;*/
-      width: 85%;
-      margin: 1%;
-      height: auto; /* Ajusta según el tamaño de la ventana */
-      /*z-index: 1000;*/ 
-      /*box-shadow: 0 0 0 10px rgb(0, 255, 191);*/ 
-}
+
 form label {
   display: inline-block;
   width: 200px; /* Ancho deseado para las etiquetas */
@@ -134,48 +111,12 @@ display: none;
   text-align: center;
 }
 .form{
-  width: 50vw; /* 60% del ancho de la ventana */
+ /* width: 50vw; /* 60% del ancho de la ventana */
   background-color:antiquewhite;
   border-radius: 5px;
 }
-/* Estilos para la alerta */
-#divAlerta {
-  position: fixed; /* Para que se sobreponga a otros elementos */
-  top: 12%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Centrar horizontal y verticalmente */
-  width: 60vw; /* 60% del ancho de la ventana */
-  background-color: #FF69B4; /* Fondo rosa */
-  /*border: 5px solid red; /* Bordes rojos */
-  /*padding: 20px;*/
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto de sobreposición */
-  z-index: 9999; /* Para asegurar que esté al frente */
-}
-#divExito{
-  position: fixed; /* Para que se sobreponga a otros elementos */
-  top: 12%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Centrar horizontal y verticalmente */
-  width: 60vw; /* 60% del ancho de la ventana */
-  background-color: #90EE90; /* Fondo verde claro */
-  
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto de sobreposición */
-  z-index: 9999; /* Para asegurar que esté al frente */
-}
 
-/* Estilo para el mensaje dentro de la alerta */
-#divAlerta p {
-  color: white;
-  font-size: 1.5em;
-  margin: 0;
-}
-#divExito p{
-  color: white;
-  font-size: 1.5em;
-  margin: 0;
-}
+
 body {
   background-color: #ADD8E6; /* Código hexadecimal para un color celeste claro */
 }
@@ -312,9 +253,9 @@ border: 1px solid black;
     width: 80%;
   }
   @media (max-width: 769px) {
-    .ajuste {
+   /* .ajuste {
       width: 100%; /* Ocupa el 100% del ancho */
-    }
+    /*}*/
     #divLateral,
     #divAlerta,
     #divExito,

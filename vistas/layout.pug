@@ -3,7 +3,10 @@ html(lang="es")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel="shortcut icon", href="./Iconos/icono.png", type="image/x-icon")
-        link(rel="stylesheet", href="estilo.css")
+        link(rel="stylesheet", href="./estilos/estilo.css")
+        link(rel="stylesheet", href="./estilos/grid.css")
+        link(rel="stylesheet", href="./estilos/flex.css")
+        link(rel="stylesheet", href="./estilos/estiloLayaut.css")
         script(src="domFunsiones.js",defer)
         block script1
         block script2
@@ -11,16 +14,16 @@ html(lang="es")
         block script4
         block script5
         title Integrador Laboratorio-2
-    body
-        #divPrincipal
-                            
-            #divCabecera
-                h1= encabezado
-            #divLogo
-                img.ajuste(src="./Iconos/icons8-medicina-100.png", alt="Logo")
-                button#botonMenu.boton2.ocultar3(type="button" onclick="mostrarMenu()") 
-                    img(src="./Iconos/menu.svg", alt="Menu")   
-            #divLateral
+    body.contenedorGrid
+            header.grid12-1-1 
+                .flex               
+                    #divCabecera
+                        h1= encabezado
+                    #divLogo
+                        img.ajuste(src="./Iconos/icons8-medicina-100.png", alt="Logo")
+                        button#botonMenu.boton2.ocultar3(type="button" onclick="mostrarMenu()") 
+                            img(src="./Iconos/menu.svg", alt="Menu")   
+            nav#divLateral.grid3-1-2
                 block boton1 
                 br 
                 block boton2
@@ -34,9 +37,10 @@ html(lang="es")
                 button(type="button") En Reparacion 
             #divAlerta
             #divExito         
-            #divSecundario
+            main.grid8-4-2
                 block content
-        
+            footer.grid12-1-3 
+                h4 Crado por Rubira Alejandro 
         
     
        

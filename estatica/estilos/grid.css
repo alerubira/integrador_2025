@@ -1,0 +1,70 @@
+.contenedorGrid {
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);/*genera 6 columnas*/
+    grid-auto-rows: min-content;/* genera filas automáticas según el contenido */
+    gap: 0,5rem;/* espacio entre filas y columnas */
+}
+.grid12-1-1{
+    grid-column: span 12 / span 12;/* ocupa 12 columnas */
+    grid-column-start: 1;/* inicia en la columna 1*/
+    grid-row-start: 1;/* inicia en la fila 1 */
+}
+
+.grid12-1-3{
+    grid-column: span 12 / span 12;/* ocupa 12 columnas */
+    grid-column-start: 1;/* inicia en la columna 1*/
+    grid-row-start: 3;/* inicia en la fila 3 */
+}
+.grid3-1-2{
+    grid-column: span 3 / span 3;/* ocupa 3 columnas */
+    grid-column-start: 1;/* inicia en la columna 1*/
+    grid-row-start: 2;/* inicia en la fila 2 */
+}
+.grid8-4-2{
+    grid-column: span 8 / span 8;/* ocupa 4 columnas */
+    grid-column-start: 4;/* inicia en la columna 4*/
+    grid-row-start: 2;/* inicia en la fila 2 */
+}
+
+
+@media (max-width: 426px) {
+    
+    .gridML12-1-1{
+        grid-column: span 12 / span 12;/* ocupa 12 columnas */
+        grid-column-start: 1;/* inicia en la columna 1*/
+        grid-row-start: 1;/* inicia en la fila 1 */
+    }
+    .gridML12-1-2{
+        grid-column: span 12 / span 12;/* ocupa 12 columnas */
+        grid-column-start: 1;/* inicia en la columna 1*/
+        grid-row-start: 2;/* inicia en la fila 2 */
+    }
+    .gridML12-1-3{
+        grid-column: span 12 / span 12;/* ocupa 12 columnas */
+        grid-column-start: 1;/* inicia en la columna 1*/
+        grid-row-start: 3;/* inicia en la fila 3 */
+    }
+    .div1 {
+        grid-column: span 6 / span 6;
+        grid-column-start: 1;
+        grid-row-start: 1;
+    }
+    .div2 {
+        grid-column: span 6 / span 6;
+        grid-column-start: 1;
+        grid-row-start: 2;
+    }
+    .div3 {
+        grid-column: span 6 / span 6;
+        grid-column-start: 1;
+        grid-row-start: 3;
+    }
+    .div4 {
+        grid-column: span 6 / span 6;
+        grid-column-start: 1;
+        grid-row-start: 4;
+    }
+   
+    
+}  
