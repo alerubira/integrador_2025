@@ -5,9 +5,12 @@
     justify-content: space-around; 
     margin: 0;
   }*/
-  #divMostrarProfesionales{
+  #divMostrarProfesionales , #divModificarProfesional{
     overflow-x: auto; /* Permite el desplazamiento horizontal si el contenido es más grande */
+    overflow-x: scroll; /* Fuerza la aparición de la barra de desplazamiento horizontal */
+   /* overflow-y: scroll; /* Fuerza la aparición de la barra de desplazamiento vertical */
   }
+
   h1{
     font-family:Georgia, 'Times New Roman', Times, serif;
     margin: 0;

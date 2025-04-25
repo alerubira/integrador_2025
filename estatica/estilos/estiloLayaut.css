@@ -33,9 +33,10 @@ nav{
     /* height: 400px; /* Añadir esta línea para un alto fijo */
      margin: 1%;
    }
-   footer{
+footer{
     background-color: #90EE90; /* Fondo verde claro */
     color: black; /* Color del texto */
+    margin: 1rem;
   }   
 /* Estilos para la alerta */
 #divAlerta {
