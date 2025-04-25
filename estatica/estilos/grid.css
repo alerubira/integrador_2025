@@ -10,17 +10,17 @@
     grid-column-start: 1;/* inicia en la columna 1*/
     grid-row-start: 1;/* inicia en la fila 1 */
 }
-
-.grid12-1-3{
-    grid-column: span 12 / span 12;/* ocupa 12 columnas */
-    grid-column-start: 1;/* inicia en la columna 1*/
-    grid-row-start: 3;/* inicia en la fila 3 */
-}
 .grid2-1-2{
     grid-column: span 2 / span 2;/* ocupa 2 columnas */
     grid-column-start: 1;/* inicia en la columna 1*/
     grid-row-start: 2;/* inicia en la fila 2 */
 }
+.grid12-1-3{
+    grid-column: span 12 / span 12;/* ocupa 12 columnas */
+    grid-column-start: 1;/* inicia en la columna 1*/
+    grid-row-start: 3;/* inicia en la fila 3 */
+}
+
 .grid10-3-2{
     grid-column: span 10 / span 10;/* ocupa 4 columnas */
     grid-column-start: 3;/* inicia en la columna 3*/

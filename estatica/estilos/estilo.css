@@ -5,7 +5,9 @@
     justify-content: space-around; 
     margin: 0;
   }*/
- 
+  #divMostrarProfesionales{
+    overflow-x: auto; /* Permite el desplazamiento horizontal si el contenido es más grande */
+  }
   h1{
     font-family:Georgia, 'Times New Roman', Times, serif;
     margin: 0;
