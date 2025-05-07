@@ -4,6 +4,7 @@ import { Profesional } from '../modelo/claseProfesional.js';
 import { jwtSecret } from '../config.js';
 import jwt from 'jsonwebtoken';
 import {enviarCorreo} from './sendMail.js';
+import { existeBd } from '../modelo/conexxionBD.js';
 
 import { retornarError, retornarExito,generarNumeroAleatorio } from "./funsionesControlador.js";
 let object;
@@ -33,6 +34,8 @@ async function manejadorLogin(req,res,objeto){
          if(aux.errors){
           return  retornarError(res,`Error al verificar la tipologia del usuario:${aux.errors}`)
          }
+         //buscar cin id el profesional
+         //verificar si estaactivo persona y profesional
         let l=await Login.consultaPorUsuario(object.usuario);
          if(l instanceof Error){return retornarError(res,`Error al buscar el Login:${l}`)}
           if(l.length<1){return retornarError(res,"El usuario no existe, intente nuevamente")}

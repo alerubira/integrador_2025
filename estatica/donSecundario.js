@@ -58,7 +58,7 @@ slctCrudProfesion.addEventListener('change',async function() {
                mostrar(divCrearProfesional);
                aux=await fechGetProtegido('/buscarProfesiones');
                profesiones=aux.data;
-               llenarDl(dtlProfesionProfesional,profesiones,'nombreProfesion','idProfesion');
+               llenarDl(dtlProfesionProfesional,profesiones,'nombreProfesion','nombreProfesion');//idProfesion
                
                break;
           

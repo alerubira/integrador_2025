@@ -1,3 +1,5 @@
+
+
 // Objetivo: Código para la página domSecundarioProfesional.html
 let divCrearProfesional=document.getElementById('divCrearProfesional');
 let divMostrarPrefesionales=document.getElementById('divMostrarProfesionales');
@@ -56,7 +58,8 @@ async function crearProfesional(){
      let regDni =convertirExpresionRegular(parametros.dni);
      let regNombres=convertirExpresionRegular(parametros.nombres);
      let regEMail=convertirExpresionRegular(parametros.eMail);
-     let idProfesionProfesionalValue=parseInt(profesionProfesional.value);
+    // let idProfesionProfesionalValue=parseInt(profesionProfesional.value);
+     let profesionProfesionalValue=profesionProfesional.value;
      let dniPersonaValue=parseInt(inputDniPersona.value);
      let eMailValue=inputEMail.value;
      bandera=true;
@@ -66,14 +69,15 @@ async function crearProfesional(){
      if(!validar(!regNombres.test(inputApellidoPersona.value),pagina,`en el Apellido ${parametros.cartelNombres}`)){bandera=false};
      if(!validar(inputApellidoPersona.value.length<1||inputApellidoPersona.value.length>parametros.tamaño1,pagina,`El Apellido es obligatorio y ${parametros.cartelTamaño1}`)){bandera=false}
      if(!validar(!regEMail.test(eMailValue)||eMailValue.length<1,pagina,`${parametros.cartelEMail}`)){bandera=false}
-     let aux=profesiones.filter(prof=>prof.idProfesion===idProfesionProfesionalValue);
+     let aux=profesiones.filter(prof=>prof.nombreProfesion===profesionProfesionalValue);
      if(!validar(!aux,pagina,"La Profesion es obligatoria y debe existir")){bandera=false};
+     aux[0].idProfesion=parseInt(aux[0].idProfesion);
      if(bandera){
      let prof={
           dniPersona:dniPersonaValue,
           nombrePersona:inputNombrePersona.value,
           apellidoPersona:inputApellidoPersona.value,
-          idProfesionProfesional:idProfesionProfesionalValue,
+          idProfesionProfesional:aux[0].idProfesion,
           eMail:eMailValue
      }
      aux=await fechProtegidoPost('/crearProfesional',prof);
@@ -106,7 +110,7 @@ slctModificarProfesional.addEventListener('change',async function() {
             case "modificarProfesion":
                 profesiones=await buscarProfesiones();
                 mostrar(divModificarProfesionProfesional);
-                llenarDl(dtlProfesiones,profesiones,'nombreProfesion','idProfesion');
+                llenarDl(dtlProfesiones,profesiones,'nombreProfesion','nombreProfesion');
                 break;
             case "modificarEMail":
                     mostrar(divModificarEMailProfesional);
@@ -164,10 +168,10 @@ async function modificarEstadoProfesional(){
 async function modificarProfesionProfesional(){
      bandera=true;
   let profesionModificar=inputNombreProfesionNuevaProfesional.value;
-  profesionModificar=parseInt(profesionModificar);
-  let aux=await profesiones.find(prof=>prof.idProfesion===profesionModificar); 
+  //profesionModificar=parseInt(profesionModificar);
+  let aux=await profesiones.find(prof=>prof.nombreProfesion===profesionModificar); 
   if(!validar(!aux,pagina,"La Profesion es obligatoria y debe existir")){bandera=false}; 
-  profesional.idProfesion=profesionModificar;
+  profesional.idProfesion=parseInt(aux.idProfesion);
   profesional.nombreProfesion=aux.nombreProfesion;
   
      if(bandera){
