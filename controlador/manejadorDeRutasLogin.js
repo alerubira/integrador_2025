@@ -34,8 +34,7 @@ async function manejadorLogin(req,res,objeto){
          if(aux.errors){
           return  retornarError(res,`Error al verificar la tipologia del usuario:${aux.errors}`)
          }
-         //buscar cin id el profesional
-         //verificar si estaactivo persona y profesional
+
         let l=await Login.consultaPorUsuario(object.usuario);
          if(l instanceof Error){return retornarError(res,`Error al buscar el Login:${l}`)}
           if(l.length<1){return retornarError(res,"El usuario no existe, intente nuevamente")}
@@ -43,6 +42,9 @@ async function manejadorLogin(req,res,objeto){
           //verificar si el login esta activo
          if(!l[0].activo_login){return retornarError(res,'El Login no esta activo')}
          if(!aux) {return retornarError(res,"Clave o Usuario Incorrecta")}
+         aux=await Login.consultaActivosPorUsuario(object.usuario);
+         if(aux instanceof Error){return retornarError(res,`Error al buscar el Login:${aux}`)} 
+          if(!aux[0][0].activo_persona||!aux[0][0].activo_profesional){return retornarError(res,'El Profesional no esta activo')}
           login=new Login(l[0].id_login,l[0].id_profesional,l[0].usuario_login,l[0].clave_login,l[0].tipo_autorizacion,l[0].instancia_login,l[0].activo_login)    
           if(login.instancia===1){
                 return res.status(200).json({

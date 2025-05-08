@@ -10,6 +10,10 @@ static async  buscarLoginPorUsuario(usuario){
   query=  'SELECT * FROM `login` WHERE usuario_login = ?';
     return await consulta1(query,usuario);
   }
+ static async buscarActivosPorUsuario(usuario){
+    query=  'CALL buscarActivosPorUsuario(?);';
+    return await consulta1(query,usuario);
+  } 
  static async  modificarClaveLogin(log){
    query = "UPDATE `login` SET `clave_login`=?, `instancia_login`=? WHERE id_login=?";
     return await consulta1(query,log.clave,log.instancia,log.idLogin);

@@ -26,6 +26,11 @@ class Login {
     static async consultaPorUsuario(usuario){
       return await  LoginData.buscarLoginPorUsuario(usuario)
     } 
+    static async consultaActivosPorUsuario(usuario){
+      return await  LoginData.buscarActivosPorUsuario(usuario)
+    }
+
+
     async modificarClave(){
         let clave=await crearHash(this.clave);
         this.clave=clave;
