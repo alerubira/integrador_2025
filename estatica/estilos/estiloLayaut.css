@@ -20,18 +20,22 @@
 }
 header{
   background-color:antiquewhite; /* Fondo beige claro */
-  margin: 1%;
+  margin: 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto de profundidad */
 }
 body {
-  background-color: #ADD8E6; /* Código hexadecimal para un color celeste claro */
+  /*background-color: #ADD8E6; /* Código hexadecimal para un color celeste claro */
+  background-image: url('../Iconos/fondo1.png'); /* Reemplaza URL_DE_TU_IMAGEN con la URL de tu imagen */
+  background-size: cover; /* Hace que la imagen cubra todo el fondo */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-position: center; /* Centra la imagen en el fondo */
 }
 nav{
     /* width: 10%;*/
      background-color: darkslategrey;
      text-align: center;
     /* height: 400px; /* Añadir esta línea para un alto fijo */
-     margin: 1%;
+     margin: 1rem;
    }
 footer{
     background-color: #90EE90; /* Fondo verde claro */
