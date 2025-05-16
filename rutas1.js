@@ -6,10 +6,20 @@ import { verificarToken } from './controlador/manejadorDeRutasLogin.js';
 const ruta1 = express.Router();
 let encabezado;
 ruta1.get('/', (req, res) => {
-    encabezado="Bienvenido al Ministerio de Salud";
+    encabezado="Artesanos.com";
+     res.render('vistaPrincipalGeneral',{encabezado,parametros});
+    
+   });
+ruta1.get('/principal', (req, res) => {
+    encabezado="Artesanos.com-Ingreso";
      res.render('vistaPrincipal',{encabezado,parametros});
     
    });
+ruta1.get('/registro', (req, res) => {
+    encabezado="Artesanos.com-Registro";
+     res.render('vistaRegistro',{encabezado,parametros});
+    
+   });   
 ruta1.post('/crearLogin',verificarToken,(req,res)=>{
     manejadorLogin(req,res,'crearLogin');
   })
