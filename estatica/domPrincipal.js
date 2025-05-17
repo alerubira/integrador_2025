@@ -297,16 +297,6 @@ if(bandera){
     }
 }else{event.preventDefault();}
 });
-function mostrarPassword(idImg,idInput){ 
-  let imgPassword = document.getElementById(idImg);
-  let inputPassword = document.getElementById(idInput);
-   if (inputPassword.type === 'password') {
-      inputPassword.type = 'text';
-      imgPassword.src = './Iconos/ojo-cerrado.svg';
-    } else {
-      inputPassword.type = 'password';
-      imgPassword.src = './Iconos/ojo.svg';  
-    }
-}
+
 limpiarCampos(limpiar);
 setTimeout(() => limpiarCampos(limpiar), 1000);

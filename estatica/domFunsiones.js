@@ -233,7 +233,17 @@ async function fechGetProtegido(ruta) {
         divLateral.style.display='none';
     }
  } 
-  
+ function mostrarPassword(idImg,idInput){ 
+  let imgPassword = document.getElementById(idImg);
+  let inputPassword = document.getElementById(idInput);
+   if (inputPassword.type === 'password') {
+      inputPassword.type = 'text';
+      imgPassword.src = './Iconos/ojo-cerrado.svg';
+    } else {
+      inputPassword.type = 'password';
+      imgPassword.src = './Iconos/ojo.svg';  
+    }
+} 
   
 //export{Focultar};
 

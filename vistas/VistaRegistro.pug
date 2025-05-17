@@ -6,4 +6,36 @@ block content
 block boton1 
         button.boton2(type="button",onclick='volver()') volver  
 block boton2 
-        button.boton2(onclick="cerrarSesion()") Cerrar Sesión   
+        button.boton2(onclick="cerrarSesion()") Cerrar Sesión
+block content
+        script.
+                     const parametros = !{JSON.stringify(parametros)};    
+        #divCrearUsuario.crear.form.grid5-4-3.gridL12-1-4
+                        label(for="dniPersona") DNI :
+                        input#dniPersona.limpiar(name="dniPersona",type="number")    
+                        br
+                        label(for="nombrePersona") Nombre : 
+                        input.limpiar(type="text", id="nombrePersona" ,name="nombrePersona")
+                        br
+                        label(for="apellidoPersona") Apellido :
+                        input.limpiar(type="text", id="apellidoPersona", name="apellidoPersona")
+                        br
+                        
+                        label(for="eMail") E_mail : 
+                        input.limpiar(type="e_mail", id="eMail" ,name="eMail", autocomplete="off")
+                        br
+                        label(for="usuario") Usuario Provisorio 
+                        input.limpiar(type="text",id="usuario",name="usuario",placeHolder="maximo 6 caracteres") 
+                        img(id="imgUsuario",src="./Iconos/usuario.svg", alt="Usuario")
+                        br  
+                        label(for="clave") Clave  
+                        input.limpiar.inputPassword(type="password",id="clave",name="clave",placeHolder="3letras(minimo 1 may)3numeros")
+                        button.botonPassword(type="button", onclick="mostrarPassword('imgC','clave')")
+                               img#imgC(src="./Iconos/ojo.svg", alt="Mostrar/Ocultar")
+                        br
+                        label(for="claveR") Repita Clave  
+                        input.limpiar.inputPassword(type="password",id="claveR",name="claveR",placeHolder="3letras(minimo 1 may)3numeros")
+                        button.botonPassword(type="button", onclick="mostrarPassword('imgCR','claveR')")
+                               img#imgCR(src="./Iconos/ojo.svg", alt="Mostrar/Ocultar")
+                        br        
+                        button.boton(type="button",onclick='crearUsuario()') Registrarse               
