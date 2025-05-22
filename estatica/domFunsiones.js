@@ -244,6 +244,11 @@ async function fechGetProtegido(ruta) {
       imgPassword.src = './Iconos/ojo.svg';  
     }
 } 
-  
+  function ingresarRutaPrincipal() {
+    window.location.href = '/principal';
+}
+function ingresarRegistro(){
+    window.location.href = '/registro';
+}
 //export{Focultar};
 

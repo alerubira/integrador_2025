@@ -5,7 +5,8 @@ import { fileURLToPath } from 'url';
 //import { dirname } from 'path';
 import bodyParser from'body-parser';
 import {ruta1} from './rutas1.js';
-import { ruta2 } from './rutas2.js'; 
+import { ruta2 } from './rutas2.js';
+import { rutaPerfil } from './rutaPerfil.js';
 const app = express();
 
 // Convierte import.meta.url a __dirname
@@ -57,6 +58,7 @@ app.use('/modificarNombrePersona',ruta2);
 app.use('/modificarApellidoPersona',ruta2);
 app.use('/modificarDniPersona',ruta2);
 app.use('/enviarMail',ruta1);
+app.use('/registarPerfil',rutaPerfil);
  // Iniciar el servidor
  app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);

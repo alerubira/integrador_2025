@@ -7,6 +7,8 @@ block boton1
         button.boton2(type="button",onclick='volver()') volver  
 block boton2 
         button.boton2(onclick="cerrarSesion()") Cerrar Sesión
+block boton3
+        button.boton2(type="button",onclick='ingresarRutaPrincipal()') Ingresar          
 block content
         script.
                      const parametros = !{JSON.stringify(parametros)};    
@@ -38,4 +40,4 @@ block content
                         button.botonPassword(type="button", onclick="mostrarPassword('imgCR','claveR')")
                                img#imgCR(src="./Iconos/ojo.svg", alt="Mostrar/Ocultar")
                         br        
-                        button.boton(type="button",onclick='crearUsuario()') Registrarse               
+                        button.boton(type="button",onclick='crearPerfil()') Registrarse               

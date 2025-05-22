@@ -1,6 +1,6 @@
 import { consulta1,existeBd,pool } from "./conexxionBD.js";
 import { PersonaData } from "./personaData.js";
-import{LoginUsuario} from "./claseLoginUsuario.js";
+import {Login} from "./claseLogin.js";
 let query;
 class PerfilData extends PersonaData {
     static async altaPerfil(perf) {//hacer las consultas y modificar los nombres
@@ -24,13 +24,16 @@ class PerfilData extends PersonaData {
             }
             
             const [perfilResult] = await connection.execute(
-                'INSERT INTO `perfil`(`id_persona`, `intereses`, `antecedentes`,`activo_perfil`,`e_mail_perfil`) VALUES (?,?,?,?,?)',
-                [id_persona, perf.intereses,perf.antecedentes, true,perf.eMailPerfil]
+                 'INSERT INTO `login`(`id_profesional_perfil`, `usuario_login`, `clave_login`, `tipo_autorizacion`, `instancia_login`,`activo_login`) VALUES (?,?,?,?,?,?)',
+                [id_persona, null,nill, true,perf.eMailPerfil]
             );
     
-            const id_perfil = perfilResult.insertId;
-            
+            const id_profesional_perfil = perfilResult.insertId;
+            let log=new Login(id_profesional_perfil,perf.usuario,perf.clave,5,0,false,null);
            //hacer el alta del login con el id_perfil
+           const [loginResult] = await connection.execute(
+               log.alta(log),
+            );
             await connection.commit();
             return { success: true };
         } catch (error) {

@@ -1,5 +1,5 @@
 import {  hash as _hash, compare } from 'bcrypt';
-import { crearHash } from '../utils/crearHash.js';
+//import { crearHash } from '../utils/crearHash.js';
 import { LoginData } from './loginData.js';
 
 class Login {
@@ -46,6 +46,12 @@ class Login {
     async borrarClaveProvisoria(){
         this.claveProvisoria=null;
         return await LoginData.borrarClaveProvisoriaLogin(this)
+    }
+    static async crearHash(password) {
+        // Genera un hash de la contraseña
+        const saltRounds = 10; // Número de rondas de sal
+        const hashedPassword = await _hash(password, saltRounds);
+        return hashedPassword; // Devuelve el hash generado
     }
     static async  verificarHash(password, hashedPassword) {
     
