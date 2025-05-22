@@ -11,8 +11,8 @@ class Perfil extends Persona{
         this.imgPerfil=imgPerfil;
     }
     // Método para mostrar la información del usuario
-    static async alta(per) {
-       return await PerfilData.altaPerfil(per);
+    static async alta(per,login) {
+       return await PerfilData.altaPerfil(per,login);
      }
     static async consulta(){
         return await PerfilData.consultaPerfil();

@@ -35,9 +35,12 @@ async function crearPerfil() {//crearPerfil
         dniPerson:dniValue,
         nombrePersona:nombreValue,
         apellidoPersona:apellidoValue,
-        eMailPersona:eMailValue,
-        usuario:usuarioValue,
-        clave:claveValue
+        eMailPerfil:eMailValue,
+        
+    }
+    let login={
+             usuario:usuarioValue,
+             clave:claveValue
     }
         const response = await fetch('/registrarPerfil', {
             method: 'POST',
@@ -45,7 +48,7 @@ async function crearPerfil() {//crearPerfil
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                perf:perf
+                perf,login
             })
         
             });

@@ -58,7 +58,7 @@ app.use('/modificarNombrePersona',ruta2);
 app.use('/modificarApellidoPersona',ruta2);
 app.use('/modificarDniPersona',ruta2);
 app.use('/enviarMail',ruta1);
-app.use('/registarPerfil',rutaPerfil);
+app.use('/registrarPerfil',rutaPerfil);
  // Iniciar el servidor
  app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);

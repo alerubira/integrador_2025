@@ -32,12 +32,15 @@ const BasePersonaY= yup.object().shape({//dejar
         });
 const PersonaY= BasePersonaY.shape({});//dejar        
 const ProfesionalY= BasePersonaY.shape({//dejar
-    idProfesion: yup.number()
-        .required('La Profesion es obligatoria'),
     eMail: yup.string()
         .email('El E-Mail es incorrecto')
         .required('El E-Mail es obligatorio'),
-    });        
+    }); 
+ const perfilY=BasePersonaY.shape({//dejar
+    eMailPerfil: yup.string()
+        .email('El E-Mail es incorrecto')
+        .required('El E-Mail es obligatorio'),
+ })          
  
  const profesionY=yup.object().shape({//dejar
     nombreProfesion:yup.string()

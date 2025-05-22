@@ -1,9 +1,9 @@
 import { consulta1,existeBd,pool } from "./conexxionBD.js";
 import { PersonaData } from "./personaData.js";
-import {Login} from "./claseLogin.js";
+import {Login} from "./loginData.js";
 let query;
 class PerfilData extends PersonaData {
-    static async altaPerfil(perf) {//hacer las consultas y modificar los nombres
+    static async altaPerfil(perf,login) {//hacer las consultas y modificar los nombres
         let connection;
         try {
             connection = await pool.getConnection();
@@ -29,10 +29,10 @@ class PerfilData extends PersonaData {
             );
     
             const id_profesional_perfil = perfilResult.insertId;
-            let log=new Login(id_profesional_perfil,perf.usuario,perf.clave,5,0,false,null);
+            let log=new Login(id_profesional_perfil,login.usuario,login.clave,5,0,false,null);
            //hacer el alta del login con el id_perfil
            const [loginResult] = await connection.execute(
-               log.alta(log),
+               Login.alta(log),
             );
             await connection.commit();
             return { success: true };
