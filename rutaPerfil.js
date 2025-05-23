@@ -4,4 +4,8 @@ const rutaPerfil = express.Router();
 rutaPerfil.post('/', (req, res) => {
        manejadorRutaPerfil(req, res, 'registrarPerfil');
 })
+rutaPerfil.get('/paginaPersonal', (req, res) => {
+       manejadorRutaPerfil(req, res, 'paginaPersonal');
+})
+
 export { rutaPerfil };

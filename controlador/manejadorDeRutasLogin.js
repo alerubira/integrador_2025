@@ -1,6 +1,7 @@
 import { verificarYup } from './verificaryup.js';
 import { Login } from '../modelo/claseLogin.js';
 import { Profesional } from '../modelo/claseProfesional.js';
+import { Perfil } from '../modelo/clasePerfil.js';
 import { jwtSecret } from '../config.js';
 import jwt from 'jsonwebtoken';
 import {enviarCorreo} from './sendMail.js';
@@ -36,34 +37,36 @@ async function manejadorLogin(req,res,objeto){
          }
 
         let l=await Login.consultaPorUsuario(object.usuario);
+        
          if(l instanceof Error){return retornarError(res,`Error al buscar el Login:${l}`)}
           if(l.length<1){return retornarError(res,"El usuario no existe, intente nuevamente")}
+           login=new Login(l[0].id_login,l[0].id_profesional_perfil,l[0].usuario_login,l[0].clave_login,l[0].tipo_autorizacion,l[0].instancia_login,l[0].activo_login)    
           aux=await Login.verificarHash(object.clave,l[0].clave_login);
           //verificar si el login esta activo
          if(!l[0].activo_login){return retornarError(res,'El Login no esta activo')}
          if(!aux) {return retornarError(res,"Clave o Usuario Incorrecta")}
-         aux=await Login.consultaActivosPorUsuario(object.usuario);
+         if(login.tipoAutorizacion===2||login.tipoAutorizacion==3){
+          aux=await Login.consultaActivosPorUsuario(object.usuario);
          if(aux instanceof Error){return retornarError(res,`Error al buscar el Login:${aux}`)} 
           if(!aux[0][0].activo_persona||!aux[0][0].activo_profesional){return retornarError(res,'El Profesional no esta activo')}
-          login=new Login(l[0].id_login,l[0].id_profesional,l[0].usuario_login,l[0].clave_login,l[0].tipo_autorizacion,l[0].instancia_login,l[0].activo_login)    
+         }
+        
+         
+         if(login.tipoAutorizacion===5&&login.instancia===2){
+          aux=await Perfil.modificarActivoPorId(login.idProfesionalPerfil);
+          if(aux instanceof Error){return retornarError(res,`Error al dar de alta  el Login:${aux}`)}
+         }
           if(login.instancia===1){
                 return res.status(200).json({
             
-                  message: 'Login nuevo , modificar login',
+                  message: 'Login nuevo , modificar login,Para finalizar el registro',
                   codigoPersonalizado: 801
                 }); 
                // return res.render('vistaPrincipal',{encabezado,instancia:true})
               }
-          if(login.instancia===1&&login.activoLogin===0){
-                return res.status(200).json({
-            
-                  message: 'Para finalizar el Registro, debe modificar su Login',
-                  codigoPersonalizado: 802
-                }); 
-               // return res.render('vistaPrincipal',{encabezado,instancia:true})
-              } 
           
-              if(login.tipoAutorizacion===3||login.tipoAutorizacion===2){
+          
+              if(login.tipoAutorizacion===3||login.tipoAutorizacion===2||login.tipoAutorizacion===5){ 
                 //generar token
                  // Datos que quieres almacenar en el token
                  const payload = {
@@ -112,6 +115,7 @@ async function manejadorLogin(req,res,objeto){
         aux=await Login.verificarHash(login.claveProvisoria,lo[0].clave_login_provisoria);
         if(!aux) {return retornarError(res,"Clave Provisoria Incorrecta, verificar en su email")}
         login=new Login(lo[0].id_login,lo[0].id_profesional,lo[0].usuario_login,object.clave,lo[0].tipo_autorizacion,lo[0].instancia_login,lo[0].activo_login,lo[0].clave_login_provisoria);
+       
         aux= await login.borrarClaveProvisoria();
         if(aux instanceof Error){return retornarError(res,`Error al borrar la clave provisoria:${aux}`)}
         aux=await login.modificarClave();

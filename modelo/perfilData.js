@@ -43,7 +43,7 @@ class PerfilData extends PersonaData {
                 claveHasheada,
                 5, // tipo_autorizacion
                 1, // instancia_login
-                false, // activo_login
+                true, // activo_login
                 null // clave_login_provisoria
             ]
         );
@@ -66,27 +66,31 @@ class PerfilData extends PersonaData {
         }
     }
 //revisar para abajo
-    static async consultaProfesional() {
+  /*  static async consultaProfesional() {
         const query = 'CALL obtenerProfesionales()';
         return await consulta1(query);
-    }
-    static async consultaProfesionalPorId(id){
-        const query='CALL ObtenerProfesionalPorID(?)'; 
+    }*/
+    static async consultaPerfilPorId(id){
+        const query='SELECT * FROM perfil JOIN persona ON perfil.id_persona=persona.id_persona WHERE id_perfil=?;'; 
         return await consulta1(query, id);
     }
-    static async modificarActivoProfesional(prof) {
-        const query = 'UPDATE `profesional` SET `activo_profesional` = ? WHERE `id_profesional` = ?';
-        return await consulta1(query, prof.activoProfesional, prof.idProfesional);
+    static async modificarActivoPerfil(perf) {
+        const query = 'UPDATE `perfil` SET `activo_perfil` = ? WHERE `id_profesional` = ?';
+        return await consulta1(query, perf.activoProfesional, perf.idProfesional);
+    }
+    static async modificarActivoPerfilPorId(id) {
+        const query = 'UPDATE `perfil` SET `activo_perfil` = ? WHERE `id_profesional` = ?';
+        return await consulta1(query,true, id);
     }
 
-    static async modificarProfesionProfesional(prof) {//terminado
+   /* static async modificarProfesionProfesional(prof) {//terminado
         const query = 'UPDATE `profesional` SET `id_profesion` = ? WHERE `id_profesional` = ?';
         return await consulta1(query, prof.idProfesion, prof.idProfesional);
     }
     static async modificarEMailProfesional(prof) {
         const query = 'UPDATE `profesional` SET `e_mail` = ? WHERE `id_profesional` = ?';
         return await consulta1(query, prof.eMail, prof.idProfesional);
-    }
+    }*/
     
 }
 

@@ -21,5 +21,12 @@ class Perfil extends Persona{
     static async consultaPorId(id){
         return await PerfilData.consultaPerfilPorId(id);
     }
+     async modificarActivoPerfil(){
+        this.activoPerfil = !this.activoPerfil;
+        return await ProfesionalData.modificarActivoProfesional(this)
+    }
+    async mofificarActivoPerfilPorId(id){
+        return await ProfesionalData.modificarActivoProfesionalPorId(id);
+    }
 }
 export{Perfil};

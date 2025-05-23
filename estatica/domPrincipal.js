@@ -101,7 +101,7 @@ formLogin.addEventListener('submit',async function(event) {
                         }else if(data.codigoPersonalizado===802){
                           limpiarCampos(limpiar);
                           alerta(pagina,'para finalizae el registro de modificar la Clave');
-                         //modificar mostrar(formLogin);
+                          mostrar(mostrarRecuperarLogin);
                         }else{
                         // Almacenar el token en localStorage
                         localStorage.setItem('token', data.token);
@@ -129,6 +129,16 @@ formLogin.addEventListener('submit',async function(event) {
                               let cadena=encodeURIComponent(tokeJ);
                              // window.location.href = `/prescripcion?datos=${cadena}`;
                               window.location.href = `/secundaria?datos=${cadena}`;
+                            }   
+                             if(data.tipoAutorizacion===5){
+                              let token=data.token;
+                              let toke={};
+                              toke.tipoAutorizacion=data.tipoAutorizacion;
+                              toke.idSolicitante=data.idSolicitante;
+                              let tokeJ=JSON.stringify(toke);
+                              let cadena=encodeURIComponent(tokeJ);
+                             // window.location.href = `/prescripcion?datos=${cadena}`;
+                              window.location.href = `/paginaPersonal?datos=${cadena}`;
                             }    
                               }    
           } else {
