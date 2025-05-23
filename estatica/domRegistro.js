@@ -32,7 +32,7 @@ async function crearPerfil() {//crearPerfil
     if(!validar(claveValue!==claveRValue,pagina,'La confirmacion de la clave no es igual a la clave nueva')){bandera=false};
    if(bandera){
     let perf={
-        dniPerson:dniValue,
+        dniPersona:dniValue,
         nombrePersona:nombreValue,
         apellidoPersona:apellidoValue,
         eMailPerfil:eMailValue,

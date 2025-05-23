@@ -2,9 +2,8 @@ import {  consulta1} from "./conexxionBD.js";
 let query;
 class LoginData{
   static async  altaLogin(log){
-    
-    query= 'INSERT INTO `login`(`id_profesional_perfil`, `usuario_login`, `clave_login`, `tipo_autorizacion`, `instancia_login`,`activo_login`) VALUES (?,?,?,?,?,?)';
-   return await consulta1(query,log.idProfesionalPerfil,log.usuario,log.clave,log.tipoAutorizacion,1,true);
+    query= 'INSERT INTO `login`(`id_profesional_perfil`, `usuario_login`, `clave_login`, `tipo_autorizacion`, `instancia_login`,`activo_login`,clave_login_provisoria) VALUES (?,?,?,?,?,?,?)';
+   return await consulta1(query,log.idProfesionalPerfil,log.usuario,log.clave,log.tipoAutorizacion,1,log.activoLogin,log.claveProvisoria);
 }
 static async  buscarLoginPorUsuario(usuario){
   query=  'SELECT * FROM `login` WHERE usuario_login = ?';

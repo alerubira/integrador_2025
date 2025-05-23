@@ -3,10 +3,10 @@ import {  hash as _hash, compare } from 'bcrypt';
 import { LoginData } from './loginData.js';
 
 class Login {
-    constructor(idLogin,idProfesional,usuario, clave,tipoAutorizacion,instancia,activoLogin,claveProvisoria) {
+    constructor(idLogin,idProfesionalPerfil,usuario, clave,tipoAutorizacion,instancia,activoLogin,claveProvisoria) {
        
         this.idLogin=idLogin;
-        this.idProfesional=idProfesional;
+        this.idProfesionalPerfil=idProfesionalPerfil;
         this.usuario=usuario;
         this.clave=clave;
         this.tipoAutorizacion=tipoAutorizacion;
@@ -16,7 +16,7 @@ class Login {
     }
         // Método para alta de login
     static async alta(log) {
-            let clave=await crearHash(log.clave);
+            let clave=await Login.crearHash(log.clave);
             log.clave=clave;
            return await LoginData.altaLogin(log);
          }

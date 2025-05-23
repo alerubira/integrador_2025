@@ -98,6 +98,10 @@ formLogin.addEventListener('submit',async function(event) {
                           alerta(pagina,'Para continuar,debe modificar su clave');
                           mostrar(formModificarLogin);
                           
+                        }else if(data.codigoPersonalizado===802){
+                          limpiarCampos(limpiar);
+                          alerta(pagina,'para finalizae el registro de modificar la Clave');
+                         //modificar mostrar(formLogin);
                         }else{
                         // Almacenar el token en localStorage
                         localStorage.setItem('token', data.token);

@@ -40,6 +40,15 @@ const ProfesionalY= BasePersonaY.shape({//dejar
     eMailPerfil: yup.string()
         .email('El E-Mail es incorrecto')
         .required('El E-Mail es obligatorio'),
+    interesesPerfil: yup.string()
+        .max(parametros.tamaño4, `Los intereses ${parametros.cartelTamaño4}`)
+        .nullable(),
+    antecedentesPerfil: yup.string()
+        .max(parametros.tamaño4, `Los antecedentes ${parametros.cartelTamaño4}`)
+        .nullable(),
+    imgPerfil: yup.string()
+        .max(parametros.tamaño4, `La imagen ${parametros.cartelTamaño4}`)
+        .nullable(),     
  })          
  
  const profesionY=yup.object().shape({//dejar
@@ -69,6 +78,9 @@ async function verificarYup(objeto,nombre){
             case 'profesional':
                 return await verificarY(objeto,ProfesionalY);
                 break;
+            case 'perfil':
+                return await verificarY(objeto,perfilY);
+                break;      
              default:
                 return retornarErrorSinRes('Seleccion no valida en verificar para yup');
        }

@@ -54,6 +54,15 @@ async function manejadorLogin(req,res,objeto){
                 }); 
                // return res.render('vistaPrincipal',{encabezado,instancia:true})
               }
+          if(login.instancia===1&&login.activoLogin===0){
+                return res.status(200).json({
+            
+                  message: 'Para finalizar el Registro, debe modificar su Login',
+                  codigoPersonalizado: 802
+                }); 
+               // return res.render('vistaPrincipal',{encabezado,instancia:true})
+              } 
+          
               if(login.tipoAutorizacion===3||login.tipoAutorizacion===2){
                 //generar token
                  // Datos que quieres almacenar en el token

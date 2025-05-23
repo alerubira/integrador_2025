@@ -1,9 +1,10 @@
 import { consulta1,existeBd,pool } from "./conexxionBD.js";
 import { PersonaData } from "./personaData.js";
-import {Login} from "./loginData.js";
+import {Login} from "./claseLogin.js";
 let query;
 class PerfilData extends PersonaData {
-    static async altaPerfil(perf,login) {//hacer las consultas y modificar los nombres
+    static async altaPerfil(perf,login) {
+       
         let connection;
         try {
             connection = await pool.getConnection();
@@ -11,7 +12,7 @@ class PerfilData extends PersonaData {
             let p=await existeBd(perf.dniPersona,'persona','dni_persona');
             let id_persona;
             if(p){
-                let resultado=await  this.buscarIdPorDni(prof.dniPersona,connection);
+                let resultado=await  this.buscarIdPorDni(perf.dniPersona,connection);
                 if(!resultado.error){
                     id_persona=resultado[0].id_persona;
                 }
@@ -24,16 +25,29 @@ class PerfilData extends PersonaData {
             }
             
             const [perfilResult] = await connection.execute(
-                 'INSERT INTO `login`(`id_profesional_perfil`, `usuario_login`, `clave_login`, `tipo_autorizacion`, `instancia_login`,`activo_login`) VALUES (?,?,?,?,?,?)',
-                [id_persona, null,nill, true,perf.eMailPerfil]
+                 'INSERT INTO `perfil`(`id_persona`, `intereses_perfil`, `antecedentes_perfil`, `activo_perfil`, `e_mail_perfil`,`img_perfil`) VALUES (?,?,?,?,?,?)',
+                [id_persona, null,null, false,perf.eMailPerfil,null]
             );
     
             const id_profesional_perfil = perfilResult.insertId;
-            let log=new Login(id_profesional_perfil,login.usuario,login.clave,5,0,false,null);
+            let log=new Login(0,id_profesional_perfil,login.usuario,login.clave,5,1,false,null);
+            
            //hacer el alta del login con el id_perfil
+             // Hashea la clave antes de guardar
+           const claveHasheada = await Login.crearHash(login.clave);
            const [loginResult] = await connection.execute(
-               Login.alta(log),
-            );
+             'INSERT INTO `login`(`id_profesional_perfil`, `usuario_login`, `clave_login`, `tipo_autorizacion`, `instancia_login`, `activo_login`, `clave_login_provisoria`) VALUES (?,?,?,?,?,?,?)',
+            [
+                id_profesional_perfil,
+                login.usuario,
+                claveHasheada,
+                5, // tipo_autorizacion
+                1, // instancia_login
+                false, // activo_login
+                null // clave_login_provisoria
+            ]
+        );
+            
             await connection.commit();
             return { success: true };
         } catch (error) {
@@ -41,6 +55,9 @@ class PerfilData extends PersonaData {
                 await connection.rollback();
             }
             console.error('Error en la transacción:', error);
+            if(error.code === 'ER_DUP_ENTRY'){
+                throw new Error ('error:El usuario ya existe');
+            }
             throw new Error(`Error en la Transaccion:${error}`);
         } finally {
             if (connection) {
