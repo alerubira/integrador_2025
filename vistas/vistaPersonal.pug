@@ -2,6 +2,32 @@ extends layout
 block script1 
     script(src="domPersonal.js", defer)
 block content 
-            #divProfesionalAcceso.grid12-1-1 
-                                h3 USUARIO
-                                        label=`${perfil.nombrePersona}  ${perfil.apellidoPersona}` 
+        #divProfesionalAcceso.grid12-1-1 
+                h3 USUARIO
+                        label=`${perfil.nombrePersona}  ${perfil.apellidoPersona}`
+                img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")        
+        #divContenedorPerfil.grid12-1-2.contenedorGrid
+                    section#sectionPerfil.grid6-1-1
+                        h5 PERFIL
+                        label=`${perfil.nombrePersona}  ${perfil.apellidoPersona}`
+                        img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")        
+                        label=`${perfil.eMail}`
+                    section#sectionModificar.grid6-7-1 
+                        select#selecModificar(name="modificar")
+                            option(value="0") Seleccionar
+                            option(value="1") Modificar Nombre
+                            option(value="2") Modificar Apellido
+                            option(value="3") Modificar eMail
+                            option(value="4") Modificar Imagen de Perfil
+                    
+                                                    
+block boton1 
+        button.boton2(type="button",onclick='volver()') volver  
+block boton2 
+        button.boton2(onclick="cerrarSesion()") Cerrar Sesión 
+block boton11 
+        button.boton2(type="button",onclick='verPerfil()') Ver Perfil 
+block boton12
+        button.boton2(type="button",onclick='buscarPersonas()') Buscar Personas                  
+            
+                                                               

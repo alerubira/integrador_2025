@@ -149,11 +149,11 @@ margin: auto;
     display: inline-block; /* Para colocarlos uno al lado del otro */
     vertical-align: top; /* Alinea los elementos superiormente */
 }
-#divReceta{
+/*#divReceta{
     border-radius: 10px; /* Establece los bordes redondeados */
-    border: 2px solid black; /* Establece el borde de color negro */
-    height: auto; /* Ocupa el % del alto de su contenedor ,automatico al contenido*/
-}
+   /* border: 2px solid black; /* Establece el borde de color negro */
+    /*height: auto; /* Ocupa el % del alto de su contenedor ,automatico al contenido*/
+/*}*/
 #mensageNoEncontradoApellido{
   display: inline-block; /* Hace que el contenedor se ajuste al contenido */
   border-radius: 10px; /* Establece los bordes redondeados */
@@ -162,39 +162,39 @@ margin: auto;
   height: auto; /* Ajusta la altura automáticamente al contenido */
   background-color: #FF69B4;
 }
-.divPr{
+/*.divPr{
   border:1px solid #FF69B4;
-}
-#divPaciente{
+}*/
+/*#divPaciente{
    /* border-radius: 10px; /* Establece los bordes redondeados */
    /* border: 2px solid black; /* Establece el borde de color negro */
-    width: 55%; /* Establece el ancho al 55% del contenedor */
-    display: inline-block; /* Para colocarlos uno al lado del otro */
-    vertical-align: top; /* Alinea los elementos superiormente */
-}
+   /* width: 55%; /* Establece el ancho al 55% del contenedor */
+   /* display: inline-block; /* Para colocarlos uno al lado del otro */
+   /* vertical-align: top; /* Alinea los elementos superiormente */
+/*}*/
 
 
-#divDiagnostico {
+/*#divDiagnostico {
   /*border-radius: 10px; /* Establece los bordes redondeados */
   /*border: 2px solid black; /* Establece el borde de color negro */
   /*height: 30%; /* Ajusta el alto del contenedor */
-  width: 95%; /* Establece el ancho del contenedor */
-  padding: 10px; /* Añade un espacio interno para el contenido */
-  height: auto; /* Ocupa el % del alto de su contenedor ,automatico al contenido*/
-  resize: none; /* Evita que el usuario cambie el tamaño manualmente */
-  box-sizing: border-box; /* Incluye padding y borde en el ancho y alto */
+ /* width: 95%; /* Establece el ancho del contenedor */
+ /* padding: 10px; /* Añade un espacio interno para el contenido */
+ /* height: auto; /* Ocupa el % del alto de su contenedor ,automatico al contenido*/
+ /* resize: none; /* Evita que el usuario cambie el tamaño manualmente */
+ /* box-sizing: border-box; /* Incluye padding y borde en el ancho y alto */
  /* overflow: visible; /* Permite que el contenido desborde si es necesario */
- overflow: hidden; /* Asegura que el contenido adicional se oculte */ 
- max-height: none; /* Asegura que no haya límite en la altura máxima */
+ /*overflow: hidden; /* Asegura que el contenido adicional se oculte */ 
+ /*max-height: none; /* Asegura que no haya límite en la altura máxima */
 
-}
+/*}
 #diagnostico {
   width: 100%; /* Ocupa el 100% del ancho de su contenedor */
-  height: 30; /* Ocupa el % del alto de su contenedor ,automatico al contenido*/
-  resize: none; /* Evita que el usuario cambie el tamaño manualmente */
-  box-sizing: border-box; /* Incluye padding y borde en el ancho y alto */
+ /* height: 30; /* Ocupa el % del alto de su contenedor ,automatico al contenido*/
+ /* resize: none; /* Evita que el usuario cambie el tamaño manualmente */
+ /* box-sizing: border-box; /* Incluye padding y borde en el ancho y alto */
  
-}
+/*}*/
 
  
 .div{
@@ -221,12 +221,12 @@ border: 1px solid black;
    /* margin-bottom: -1px; /* Añade un margen negativo para eliminar el espacio */
     /*z-index: 9999; /* Asegura que los <li> estén por encima de otros elementos */
   }
-  #divMedPres,#divMedPres1{
+  /*#divMedPres,#divMedPres1{
     position: relative;
     height: auto; /* Ajusta según el tamaño de la ventana */
-    background-color: #f7af43; 
+   /* background-color: #f7af43; 
     overflow: auto; /* Permite que el contenido desborde si es necesario */
-  }
+  /*}*/
   
   
   .inputTotal {
@@ -242,20 +242,7 @@ border: 1px solid black;
     border: 3px solid white;
     
   }
-  .divAuxiliar6{
-    background-color: #f0f0f093; /* Fondo gris claro */
-    border-radius: 6px;/* Bordes redondeados de 2px */
-    border: 3px solid white;
-  }
-  .divAuxiliar2{
-    width: 5%;
-  }
-  .divAuxiliar1{
-    width: 80%;
-  }
- 
-
- 
+  
   
 
 

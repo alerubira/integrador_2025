@@ -20,7 +20,8 @@ try{
                 aux=await Perfil.alta(object,object2);
                 if(aux instanceof Error){return retornarError(res,`Error al crear el perfil:${aux}`)}
                 return retornarExito(res,`El perfil fue creado con exito,ahora puede ingresar`);
-        case 'paginaPersonal':    
+        break;
+     case 'paginaPersonal':    
              const datosEncoded = req.query.datos; 
             const datosDecoded = decodeURIComponent(datosEncoded);
              const toke = JSON.parse(datosDecoded);
@@ -32,12 +33,15 @@ try{
                     let p1=await Perfil.consultaPorId(toke.idSolicitante);
                    if(p1 instanceof Error){return retornarError(res,`Error al buscar el Perfil:${p}`)}
                    let p=p1[0];
-                   console.log(p);
                    if(p.activo_perfil!==1||p.activo_persona!==1){return retornarError(res,"El Perfil Esta dado de baja")}
-                   perfil=new Perfil(p.id_perfil,p.id_persona,p.intereses_perfil.p.antecedentes_perfil,p.e_mail_perfil,p.img_perfil,p.activo_perfil,p.dni_persona,p.nombre_persona,p.apellido_persona,p.activo_persona);
-                
+                   perfil=new Perfil(p.id_perfil,p.id_persona,p.intereses_perfil,p.antecedentes_perfil,p.e_mail_perfil,p.img_perfil,p.activo_perfil,p.dni_persona,p.nombre_persona,p.apellido_persona,p.activo_persona);
+                 if(perfil instanceof Error){return retornarError(res,`Error al crear el objeto perfil:${perfil}`)}
+                 if(perfil.imgPerfil===null){
+                     perfil.imgPerfil="imagenes/fotoPerfil.svg";
+                 }
                    res.render('vistaPersonal',{encabezado,parametros,perfil});
                  }
+                 break;
             default:
             return retornarError(res,`No se encontro el objeto ${objeto}`);        
      }

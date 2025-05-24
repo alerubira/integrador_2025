@@ -10,9 +10,19 @@
     grid-column-start: 1;/* inicia en la columna 1*/
     grid-row-start: 1;/* inicia en la fila 1 */
 }
+.grid12-1-2{
+    grid-column: span 12 / span 12;/* ocupa 12 columnas */
+    grid-column-start: 1;/* inicia en la columna 1*/
+    grid-row-start: 2;/* inicia en la fila 2 */
+}
 .grid2-1-2{
     grid-column: span 2 / span 2;/* ocupa 2 columnas */
     grid-column-start: 1;/* inicia en la columna 1*/
+    grid-row-start: 2;/* inicia en la fila 2 */
+}
+.grid2-11-2{
+    grid-column: span 2 / span 2;/* ocupa 2 columnas */
+    grid-column-start: 11;/* inicia en la columna 11*/
     grid-row-start: 2;/* inicia en la fila 2 */
 }
 .grid12-1-3{
@@ -25,10 +35,25 @@
     grid-column-start: 1;/* inicia en la columna 1*/
     grid-row-start: 4;/* inicia en la fila 4 */
 }
-.grid10-3-2{
-    grid-column: span 10 / span 10;/* ocupa 4 columnas */
+.grid6-1-1{
+    grid-column: span 6 / span 6;/* ocupa 6 columnas */
+    grid-column-start: 1;/* inicia en la columna 1*/
+    grid-row-start: 1;/* inicia en la fila 1 */
+}
+.grid6-1-7{
+    grid-column: span 6 / span 6;/* ocupa 6 columnas */
+    grid-column-start: 7;/* inicia en la columna 7*/
+    grid-row-start: 1;/* inicia en la fila 1 */
+}
+.grid8-3-2{
+    grid-column: span 8 / span 8;/* ocupa 4 columnas */
     grid-column-start: 3;/* inicia en la columna 3*/
     grid-row-start: 2;/* inicia en la fila 2 */
+}
+.grid8-3-3{
+    grid-column: span 8 / span 8;/* ocupa 4 columnas */
+    grid-column-start: 3;/* inicia en la columna 3*/
+    grid-row-start: 3;/* inicia en la fila 3 */
 }
 .grid5-4-1{
     grid-column: span 5 / span 5;/* ocupa 4 columnas */
