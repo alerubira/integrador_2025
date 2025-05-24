@@ -78,8 +78,8 @@ class PerfilData extends PersonaData {
         const query = 'UPDATE `perfil` SET `activo_perfil` = ? WHERE `id_profesional` = ?';
         return await consulta1(query, perf.activoProfesional, perf.idProfesional);
     }
-    static async modificarActivoPerfilPorId(id) {
-        const query = 'UPDATE `perfil` SET `activo_perfil` = ? WHERE `id_profesional` = ?';
+    static async modificarActivoPorId(id) {
+        const query = 'UPDATE `perfil` SET `activo_perfil` = ? WHERE `id_perfil` = ?';
         return await consulta1(query,true, id);
     }
 

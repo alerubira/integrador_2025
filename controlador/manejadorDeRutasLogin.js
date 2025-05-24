@@ -56,6 +56,14 @@ async function manejadorLogin(req,res,objeto){
           aux=await Perfil.modificarActivoPorId(login.idProfesionalPerfil);
           if(aux instanceof Error){return retornarError(res,`Error al dar de alta  el Login:${aux}`)}
          }
+         if(login.instancia==1&&login.tipoAutorizacion===5){
+          return res.status(200).json({
+            
+                  message: 'Login nuevo , modificar login,Para finalizar el registro',
+                  codigoPersonalizado: 802
+                }); 
+         }
+
           if(login.instancia===1){
                 return res.status(200).json({
             
@@ -72,13 +80,13 @@ async function manejadorLogin(req,res,objeto){
                  const payload = {
                   username: login.usuario,
                   tipoAutorizacion: login.tipoAutorizacion, // Agregar tipo de autorización al payload
-                  idSolicitante:login.idProfesional
+                  idSolicitante:login.idProfesionalPerfil
                 };// Genera el token
-                const token = jwt.sign(payload, jwtSecret, { expiresIn: '3h' });
+                const token = jwt.sign(payload, jwtSecret, { expiresIn: '5h' });
                 // Devuelve el token al cliente
               return  res.json({ token: token ,
                 tipoAutorizacion: login.tipoAutorizacion, // Agregar tipo de autorización al payload});
-                idSolicitante:login.idProfesional
+                idSolicitante:login.idProfesionalPerfil
                //return res.redirect('/acceso');
               })}
               
@@ -98,7 +106,7 @@ async function manejadorLogin(req,res,objeto){
        let log={usuario:object.usuario,clave:object.claveN};
         aux=await verificarYup(log,'login');
          if(aux.errors){ return retornarError(res,`Error en la tipologia del Login:${aux.errors}`)}
-         login=new Login(login[0].id_login,login[0].id_profesional,login[0].usuario_login,object.claveN,login[0].tipo_autorizacion,login[0].instancia_login,login[0].activo_login);
+         login=new Login(login[0].id_login,login[0].id_profesional_perfil,login[0].usuario_login,object.claveN,login[0].tipo_autorizacion,login[0].instancia_login,login[0].activo_login);
         aux= await login.modificarClave();
          if(aux instanceof Error){return retornarError(res,`Error al modificar el Login ${aux}`)}
          return retornarExito(res,"El Login fue modificado con exito");
@@ -114,7 +122,7 @@ async function manejadorLogin(req,res,objeto){
         if(!lo[0].activo_login){return retornarError(res,'El Login no esta activo')}
         aux=await Login.verificarHash(login.claveProvisoria,lo[0].clave_login_provisoria);
         if(!aux) {return retornarError(res,"Clave Provisoria Incorrecta, verificar en su email")}
-        login=new Login(lo[0].id_login,lo[0].id_profesional,lo[0].usuario_login,object.clave,lo[0].tipo_autorizacion,lo[0].instancia_login,lo[0].activo_login,lo[0].clave_login_provisoria);
+        login=new Login(lo[0].id_login,lo[0].id_profesional_perfil,lo[0].usuario_login,object.clave,lo[0].tipo_autorizacion,lo[0].instancia_login,lo[0].activo_login,lo[0].clave_login_provisoria);
        
         aux= await login.borrarClaveProvisoria();
         if(aux instanceof Error){return retornarError(res,`Error al borrar la clave provisoria:${aux}`)}
@@ -125,17 +133,25 @@ async function manejadorLogin(req,res,objeto){
         break;  
       case 'enviarMail':
         object=req.body;
+        let eMail;
         let n=generarNumeroAleatorio();
         aux=await Login.consultaPorUsuario(object.usuario);
-        
         if(aux instanceof Error){return retornarError(res,`Error al buscar el Login:${aux}`)}
         if(aux.length<1){return retornarError(res,"El usuario no existe, intente nuevamente")}
-       let lP=new Login(aux[0].id_login,aux[0].id_profesional,aux[0].usuario_login,n,aux[0].tipo_autorizacion,aux[0].instancia_login,aux[0].activo_login,n);
+        let lP=new Login(aux[0].id_login,aux[0].id_profesional_perfil,aux[0].usuario_login,n,aux[0].tipo_autorizacion,aux[0].instancia_login,aux[0].activo_login,n);
+        if(lP.tipoAutorizacion===2||lP.tipoAutorizacion==3){
         aux=await Profesional.consultaPorId(lP.idProfesional);
         if(aux instanceof Error){return retornarError(res,`Error al buscar el Profesional:${aux}`)}
         if(aux.length<1){return retornarError(res,"El Profesional no existe")}
-        
-        let eMail=aux[0][0].e_mail;
+         eMail=aux[0][0].e_mail;
+        }
+        if(lP.tipoAutorizacion===5){
+          aux=await Perfil.consultaPorId(lP.idProfesionalPerfil);
+          if(aux instanceof Error){return retornarError(res,`Error al buscar el Profesional:${aux}`)}
+          if(aux.length<1){return retornarError(res,"El Perfil no existe")}
+           eMail=aux[0].e_mail_perfil;
+        }
+      
         aux=await lP.modificarClaveProvisoria();
          if(aux instanceof Error){return retornarError(res,`Error al modificar la clave provisoria:${aux}`)}
         //const { destinatario, asunto, mensaje } = req.body;

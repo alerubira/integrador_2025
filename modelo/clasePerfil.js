@@ -2,11 +2,11 @@
 import { Persona } from "./clasePersona.js";
 import { PerfilData } from "../modelo/PerfilData.js";
 class Perfil extends Persona{
-    constructor(idPerfil,idPersona,interese,antecedentes,eMail,imgPerfil,activoPerfil,dniPersona,nombrePersona,apellidoPersona,activoPersona){
+    constructor(idPerfil,idPersona,intereses,antecedentes,eMail,imgPerfil,activoPerfil,dniPersona,nombrePersona,apellidoPersona,activoPersona){
         super(idPersona,dniPersona,nombrePersona,apellidoPersona,activoPersona)
         this.idPerfil=idPerfil;
         this.activoPerfil=activoPerfil;
-        this.intereses=interese;
+        this.intereses=intereses;
         this.antecedentes=antecedentes; 
         this.eMail=eMail;
         this.imgPerfil=imgPerfil;
@@ -21,12 +21,12 @@ class Perfil extends Persona{
     static async consultaPorId(id){
         return await PerfilData.consultaPerfilPorId(id);
     }
-     async modificarActivoPerfil(){
+     static async modificarActivoPerfil(){
         this.activoPerfil = !this.activoPerfil;
-        return await ProfesionalData.modificarActivoProfesional(this)
+        return await PerfilData.modificarActivoProfesional(this)
     }
-    async mofificarActivoPerfilPorId(id){
-        return await ProfesionalData.modificarActivoProfesionalPorId(id);
+    static async modificarActivoPorId(id){
+        return await PerfilData.modificarActivoPorId(id);
     }
 }
 export{Perfil};

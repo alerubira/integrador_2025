@@ -33,13 +33,13 @@ class Login {
 
 
     async modificarClave(){
-        let clave=await crearHash(this.clave);
+        let clave=await Login.crearHash(this.clave);
         this.clave=clave;
         this.instancia=this.instancia +1;
         return await LoginData.modificarClaveLogin(this)
     }
     async modificarClaveProvisoria(){
-        let clave=await crearHash(this.claveProvisoria);
+        let clave=await Login.crearHash(this.claveProvisoria);
         this.claveProvisoria=clave;
         return await LoginData.modificarClaveProvisoriaLogin(this)
     }

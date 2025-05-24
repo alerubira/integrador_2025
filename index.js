@@ -43,7 +43,8 @@ app.use(express.json());
 app.use('/', ruta1);
 app.use('/',ruta2);
 app.use('/crearLogin',ruta1);
-app.use('/modificarLogin',ruta1)
+app.use('/modificarLogin',ruta1);
+app.use('/enviarMail',ruta1);
 app.use('/buscarProfesiones',ruta2);
 app.use('/modificarEstadoProfesion',ruta2);
 app.use('/modificarNombreProfesion',ruta2);
@@ -57,8 +58,8 @@ app.use('/modificarEMailProfesional',ruta2);
 app.use('/modificarNombrePersona',ruta2);
 app.use('/modificarApellidoPersona',ruta2);
 app.use('/modificarDniPersona',ruta2);
-app.use('/enviarMail',ruta1);
-app.use('/registrarPerfil',rutaPerfil);
+app.use('/',rutaPerfil);
+app.use('/paginaPersonal',rutaPerfil);
  // Iniciar el servidor
  app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);
