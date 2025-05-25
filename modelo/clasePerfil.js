@@ -28,5 +28,8 @@ class Perfil extends Persona{
     static async modificarActivoPorId(id){
         return await PerfilData.modificarActivoPorId(id);
     }
+    static async modificarImagenPorIdPerfil(id,img){
+        return await PerfilData.modificarImagenPorIdPerfil(id,img);
+    }
 }
 export{Perfil};

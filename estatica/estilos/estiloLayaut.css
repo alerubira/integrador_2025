@@ -88,4 +88,10 @@ footer{
     height: auto; /* Ajusta según el tamaño de la ventana */
     /*z-index: 1000;*/ 
     /*box-shadow: 0 0 0 10px rgb(0, 255, 191);*/ 
-}  
+} 
+.imgPerfil{
+    width: 20%;
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 50%; /* Hace que la imagen sea circular */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto de profundidad */
+} 

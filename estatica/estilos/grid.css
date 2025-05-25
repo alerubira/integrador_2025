@@ -40,7 +40,7 @@
     grid-column-start: 1;/* inicia en la columna 1*/
     grid-row-start: 1;/* inicia en la fila 1 */
 }
-.grid6-1-7{
+.grid6-7-1{
     grid-column: span 6 / span 6;/* ocupa 6 columnas */
     grid-column-start: 7;/* inicia en la columna 7*/
     grid-row-start: 1;/* inicia en la fila 1 */

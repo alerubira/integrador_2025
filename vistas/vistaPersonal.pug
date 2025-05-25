@@ -7,19 +7,34 @@ block content
                         label=`${perfil.nombrePersona}  ${perfil.apellidoPersona}`
                 img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")        
         #divContenedorPerfil.grid12-1-2.contenedorGrid
-                    section#sectionPerfil.grid6-1-1
+                    section#sectionPerfil.grid6-1-1.ocultar
                         h5 PERFIL
                         label=`${perfil.nombrePersona}  ${perfil.apellidoPersona}`
                         img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")        
                         label=`${perfil.eMail}`
-                    section#sectionModificar.grid6-7-1 
-                        select#selecModificar(name="modificar")
+                        label=`${perfil.intereses}`
+                        label=`${perfil.antecedentes}`
+                    section#sectionModificar.grid6-7-1.ocultar 
+                        select#selectModificar(name="modificar")
                             option(value="0") Seleccionar
                             option(value="1") Modificar Nombre
                             option(value="2") Modificar Apellido
                             option(value="3") Modificar eMail
                             option(value="4") Modificar Imagen de Perfil
-                    
+                            option(value="5") Modificar Intereses 
+                            option(value="6") Modificar Anrecedentes
+                    section#sectionModificarImagenPerfil.ocultar 
+                        img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")        
+                        form#formSubirImagen(method="POST", action="/subirImagenPerfil", enctype="multipart/form-data")
+                                label(for="imagen") Selecciona una imagen:
+                                input(type="file", id="imagen", name="imagen", accept="image/*", required, style="display:none")
+                                br                               
+                                button(type="button", onclick="document.getElementById('imagen').click()") Elegir archivo
+                                br
+                                span#nombreArchivo No se ha seleccionado archivo
+                                br
+                                input(type="hidden", name="idPerfil", value=perfil.idPerfil)
+                                button(type="submit") Subir Imagen
                                                     
 block boton1 
         button.boton2(type="button",onclick='volver()') volver  
@@ -28,6 +43,8 @@ block boton2
 block boton11 
         button.boton2(type="button",onclick='verPerfil()') Ver Perfil 
 block boton12
+        button.boton2(type="button",onclick='modificarPerfil()') Modificar Perfil      
+block boton13
         button.boton2(type="button",onclick='buscarPersonas()') Buscar Personas                  
             
                                                                

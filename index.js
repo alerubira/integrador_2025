@@ -60,6 +60,7 @@ app.use('/modificarApellidoPersona',ruta2);
 app.use('/modificarDniPersona',ruta2);
 app.use('/',rutaPerfil);
 app.use('/paginaPersonal',rutaPerfil);
+app.use('/subirImagenPerfil',rutaPerfil);
  // Iniciar el servidor
  app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);

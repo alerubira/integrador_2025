@@ -36,8 +36,8 @@ try{
                    if(p.activo_perfil!==1||p.activo_persona!==1){return retornarError(res,"El Perfil Esta dado de baja")}
                    perfil=new Perfil(p.id_perfil,p.id_persona,p.intereses_perfil,p.antecedentes_perfil,p.e_mail_perfil,p.img_perfil,p.activo_perfil,p.dni_persona,p.nombre_persona,p.apellido_persona,p.activo_persona);
                  if(perfil instanceof Error){return retornarError(res,`Error al crear el objeto perfil:${perfil}`)}
-                 if(perfil.imgPerfil===null){
-                     perfil.imgPerfil="imagenes/fotoPerfil.svg";
+                 if(perfil.imgPerfil===null||perfil.imgPerfil===undefined||perfil.imgPerfil===""){
+                     perfil.imgPerfil="imagenesPerfil/fotoPerfil.svg";
                  }
                    res.render('vistaPersonal',{encabezado,parametros,perfil});
                  }
