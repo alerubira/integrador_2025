@@ -9,10 +9,11 @@ function retornarErrorSinRes(message) {
     //console.log(message);
     return new Error(message);
 }
-function retornarExito(res,mensaje){
+function retornarExito(res,mensaje,urlImgen){
     return res.status(200).send({
         success: true,
         message: mensaje,
+        urlImagen: urlImgen
     });
 }
 function transformarstrinAExpReg(string) {

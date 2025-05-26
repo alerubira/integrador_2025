@@ -20,20 +20,41 @@ selectModificar.addEventListener('change',async function(){
     let selectedValue = this.value;
     switch(selectedValue) {
         case "1":
-            verPerfil();
+            modificarNombre();
             break;
         case "2":
-            modificarPerfil();
+            modificarApellido();
             break; 
         case "3":
+            modificarEmail();
             ;
             break; 
         case "4":
             mostrar(sectionModificarImagenPerfil);
-            break;    
+            break;  
+        case "5":
+            modificarIntereses();
+            break;
+        case "6":
+            modificarAntecedentes();
+            break;          
         default:
             console.log('Selección no válida');
             alerta(pagina,('Seleccion no valida'));         
     }
     selectModificar.selectedIndex = 0;
 });
+function modificarNombre(){
+
+}
+function modificarApellido(){
+
+}
+function modificarEmail(){
+}
+function modificarIntereses(){
+
+}
+function modificarAntecedentes(){
+
+}

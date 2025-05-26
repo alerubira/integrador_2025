@@ -2,6 +2,8 @@ import { retornarError ,retornarExito} from "./funsionesControlador.js";
 import {Perfil} from "../modelo/clasePerfil.js";
 import { verificarYup } from "../controlador/verificaryup.js";
 import { parametros } from "../parametros.js";
+
+
 let object;
 let object2;
 let aux;
@@ -42,6 +44,14 @@ try{
                    res.render('vistaPersonal',{encabezado,parametros,perfil});
                  }
                  break;
+            case 'subirImagenPerfil':
+                      let urlImagen = '/imagenesPerfil/' + req.file.filename;
+                     aux= await Perfil.modificarImagenPorIdPerfil(req.body.idPerfil, urlImagen);
+                      if(aux instanceof Error){return retornarError(res,`Error al modificar la imagen del perfil:${aux}`)}
+                      if(aux===0){return retornarError(res,`No se encontro el perfil con id ${req.body.idPerfil}`)}
+                      //return res.json({ success: true, url: urlImagen });
+                      return retornarExito(res,`La imagen del perfil fue modificada con exito`, urlImagen);
+              break;     
             default:
             return retornarError(res,`No se encontro el objeto ${objeto}`);        
      }

@@ -10,7 +10,10 @@
     overflow-x: scroll; /* Fuerza la aparición de la barra de desplazamiento horizontal */
    /* overflow-y: scroll; /* Fuerza la aparición de la barra de desplazamiento vertical */
   }
-
+p{
+  margin: 0;
+  padding: 0;
+}
   h1{
     font-family:Georgia, 'Times New Roman', Times, serif;
     margin: 0;

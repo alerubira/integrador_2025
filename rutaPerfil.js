@@ -1,10 +1,9 @@
 import express from 'express';
-import multer from 'multer';
-import path from 'path';
-import { Perfil } from './modelo/clasePerfil.js';
-
+import { verificarToken } from './controlador/manejadorDeRutasLogin.js';
 import { manejadorRutaPerfil } from './controlador/manejadorRutaPerfil.js';
 const rutaPerfil = express.Router();
+import path from 'path';
+import multer from 'multer';
 // Configuración de almacenamiento de Multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -25,8 +24,11 @@ rutaPerfil.post('/registrarPerfil', (req, res) => {
 rutaPerfil.get('/paginaPersonal', (req, res) => {
        manejadorRutaPerfil(req, res, 'paginaPersonal');
 })
+rutaPerfil.post('/subirImagenPerfil',upload.single('imagen') ,verificarToken, (req, res) => {
+       manejadorRutaPerfil(req, res, 'subirImagenPerfil');
+})
 // Ruta para subir imagen
-rutaPerfil.post('/subirImagenPerfil', upload.single('imagen'), async (req, res) => {
+/*rutaPerfil.post('/subirImagenPerfil', upload.single('imagen'), async (req, res) => {
   try {
     // La URL pública para acceder a la imagen
     const urlImagen = '/imagenesPerfil/' + req.file.filename;
@@ -38,6 +40,6 @@ Perfil.modificarImagenPorIdPerfil(req.body.idPerfil, urlImagen)
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
-});
+});*/
 
 export { rutaPerfil };

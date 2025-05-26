@@ -1,20 +1,29 @@
 extends layout
 block script1 
     script(src="domPersonal.js", defer)
+    script(src="domFunsionesPersonal.js",defer)
 block content 
         #divProfesionalAcceso.grid12-1-1 
                 h3 USUARIO
                         label=`${perfil.nombrePersona}  ${perfil.apellidoPersona}`
                 img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")        
         #divContenedorPerfil.grid12-1-2.contenedorGrid
-                    section#sectionPerfil.grid6-1-1.ocultar
+                    section#sectionPerfil.grid12-1-1.ocultar.form
                         h5 PERFIL
-                        label=`${perfil.nombrePersona}  ${perfil.apellidoPersona}`
-                        img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")        
-                        label=`${perfil.eMail}`
-                        label=`${perfil.intereses}`
-                        label=`${perfil.antecedentes}`
-                    section#sectionModificar.grid6-7-1.ocultar 
+                        img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")  
+                        br
+                        p=`DNI : ${perfil.dniPersona}`
+                        br
+                        p#PNombrePersona=`Nombre  : ${perfil.nombrePersona}`
+                        br   
+                        p#PApellidoPersona=`Apellido : ${perfil.apellidoPersona}`
+                        br    
+                        p#PEMail=`E_Mail : ${perfil.eMail}`
+                        br
+                        p#PIntereses=`Intereses : ${perfil.intereses}`
+                        br
+                        p#PAntecedentes=`Antecedentes: ${perfil.antecedentes}`
+                    section#sectionModificar.grid12-2-1.ocultar 
                         select#selectModificar(name="modificar")
                             option(value="0") Seleccionar
                             option(value="1") Modificar Nombre
@@ -27,7 +36,7 @@ block content
                         img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")        
                         form#formSubirImagen(method="POST", action="/subirImagenPerfil", enctype="multipart/form-data")
                                 label(for="imagen") Selecciona una imagen:
-                                input(type="file", id="imagen", name="imagen", accept="image/*", required, style="display:none")
+                                input.limpiar(type="file", id="imagen", name="imagen", accept="image/*", required, style="display:none")
                                 br                               
                                 button(type="button", onclick="document.getElementById('imagen').click()") Elegir archivo
                                 br
@@ -35,6 +44,8 @@ block content
                                 br
                                 input(type="hidden", name="idPerfil", value=perfil.idPerfil)
                                 button(type="submit") Subir Imagen
+                    section#sectionModificarNombre.ocultar 
+                               
                                                     
 block boton1 
         button.boton2(type="button",onclick='volver()') volver  
