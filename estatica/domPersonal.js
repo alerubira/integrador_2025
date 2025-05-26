@@ -44,17 +44,3 @@ selectModificar.addEventListener('change',async function(){
     }
     selectModificar.selectedIndex = 0;
 });
-function modificarNombre(){
-
-}
-function modificarApellido(){
-
-}
-function modificarEmail(){
-}
-function modificarIntereses(){
-
-}
-function modificarAntecedentes(){
-
-}

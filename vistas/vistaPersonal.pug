@@ -2,10 +2,11 @@ extends layout
 block script1 
     script(src="domPersonal.js", defer)
     script(src="domFunsionesPersonal.js",defer)
+    script(src="domDatosPersonales.js",defer)
 block content 
         #divProfesionalAcceso.grid12-1-1 
                 h3 USUARIO
-                        label=`${perfil.nombrePersona}  ${perfil.apellidoPersona}`
+                        label#lblNombreYApellido=`${perfil.nombrePersona}  ${perfil.apellidoPersona}`
                 img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")        
         #divContenedorPerfil.grid12-1-2.contenedorGrid
                     section#sectionPerfil.grid12-1-1.ocultar.form
@@ -44,9 +45,22 @@ block content
                                 br
                                 input(type="hidden", name="idPerfil", value=perfil.idPerfil)
                                 button(type="submit") Subir Imagen
-                    section#sectionModificarNombre.ocultar 
-                               
-                                                    
+                    section#sectionModificarNombre.ocultar
+                               p#pNombreActual=`Nombre Actual : ${perfil.nombrePersona}` 
+                               label(for="inputNuevoNombrePersonaPerfil") Nuevo Nombre Persona 
+                               input.limpiar(type="text",id="inputNuevoNombrePersonaPerfil",name="inputNuevoNombrePersonaPerfil",placeHolder="Nombre Persona") 
+                               br
+                               button.boton(type="button",onclick='modificarNombrePersonaPerfil()') Modificar
+                    section#sectionModificarApellido.ocultar
+                               p#pApellidoActual=`Apellido Actual : ${perfil.apellidoPersona}` 
+                               label(for="inputNuevoApellidoPersonaPerfil") Nuevo Apellido Persona 
+                               input.limpiar(type="text",id="inputNuevoApellidoPersonaPerfil",name="inputNuevoApellidoPersonaPerfil",placeHolder="Apellido Persona") 
+                               br
+                               button.boton(type="button",onclick='modificarApellidoPersonaPerfil()') Modificar            
+        script.
+                     const perfil = !{JSON.stringify(perfil)}; 
+        script. 
+                     const parametros = !{JSON.stringify(parametros)};                                                         
 block boton1 
         button.boton2(type="button",onclick='volver()') volver  
 block boton2 
