@@ -25,7 +25,7 @@ class PerfilData extends PersonaData {
             }
             
             const [perfilResult] = await connection.execute(
-                 'INSERT INTO `perfil`(`id_persona`, `intereses_perfil`, `antecedentes_perfil`, `activo_perfil`, `e_mail_perfil`,`img_perfil`,nombre_perfil) VALUES (?,?,?,?,?,?)',
+                 'INSERT INTO `perfil`(`id_persona`, `intereses_perfil`, `antecedentes_perfil`, `activo_perfil`, `e_mail_perfil`,`img_perfil`,`nombre_perfil`) VALUES (?,?,?,?,?,?,?)',
                 [id_persona, null,null, false,perf.eMailPerfil,null,perf.nombrePerfil]
             );
     

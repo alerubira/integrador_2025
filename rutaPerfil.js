@@ -1,6 +1,6 @@
 import express from 'express';
-import { verificarToken } from './controlador/manejadorDeRutasLogin.js';
-import { manejadorRutaPerfil } from './controlador/manejadorRutaPerfil.js';
+import manejadorDeRutasLogin from './controlador/manejadorDeRutasLogin.js';
+import manejadorRutaPerfil  from './controlador/manejadorRutaPerfil.js';
 const rutaPerfil = express.Router();
 import path from 'path';
 import multer from 'multer';
@@ -18,24 +18,24 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-rutaPerfil.post('/registrarPerfil', (req, res) => {
-       manejadorRutaPerfil(req, res, 'registrarPerfil');
-})
-rutaPerfil.get('/paginaPersonal', (req, res) => {
+rutaPerfil.post('/registrarPerfil', manejadorRutaPerfil.registrarPerfil)/*(req, res) => {
+      // manejadorRutaPerfil(req, res, 'registrarPerfil');
+})*/
+rutaPerfil.get('/paginaPersonal',manejadorRutaPerfil.paginaPersonal) /*(req, res) => {
        manejadorRutaPerfil(req, res, 'paginaPersonal');
-})
-rutaPerfil.post('/subirImagenPerfil',upload.single('imagen') ,verificarToken, (req, res) => {
+})*/
+rutaPerfil.post('/subirImagenPerfil',manejadorDeRutasLogin.verificarToken,upload.single('imagen') ,manejadorRutaPerfil.subirImagenPerfil)/* (req, res) => {
        manejadorRutaPerfil(req, res, 'subirImagenPerfil');
-})
-rutaPerfil.post('/modificarEMailPerfil', verificarToken, (req, res) => {
+})*/
+rutaPerfil.post('/modificarEMailPerfil', manejadorDeRutasLogin.verificarToken,manejadorRutaPerfil.modificarEMailPerfil) /*(req, res) => {
        manejadorRutaPerfil(req, res, 'modificarEMailPerfil');
-})
-rutaPerfil.post('/modificarInteresesPerfil', verificarToken, (req, res) => {
+})*/
+rutaPerfil.post('/modificarInteresesPerfil', manejadorDeRutasLogin.verificarToken, manejadorRutaPerfil.modificarInteresesPerfil)/*(req, res) => {
         manejadorRutaPerfil(req, res, 'modificarInteresesPerfil');
-  })
-rutaPerfil.post('/modificarAntecedentesPerfil', verificarToken, (req, res) => {
+  })*/
+rutaPerfil.post('/modificarAntecedentesPerfil', manejadorDeRutasLogin.verificarToken,manejadorRutaPerfil.modificarAntecedentesPerfil) /*(req, res) => {
        manejadorRutaPerfil(req, res, 'modificarAntecedentesPerfil');
-})
+})*/
 
 // Ruta para subir imagen
 /*rutaPerfil.post('/subirImagenPerfil', upload.single('imagen'), async (req, res) => {

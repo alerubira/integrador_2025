@@ -10,7 +10,7 @@ block content
                 img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")        
         #divContenedorPerfil.grid12-1-2.contenedorGrid
                     section#sectionPerfil.grid12-1-1.ocultar.form
-                        h5 PERFIL
+                        h5=`Perfil :${perfil.nombrePerfil}`
                         img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")  
                         br
                         p=`DNI : ${perfil.dniPersona}`

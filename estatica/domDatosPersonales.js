@@ -85,6 +85,7 @@ async function modificarEMailPerfil(){
             nombrePersona:perfil.nombrePersona,
             apellidoPersona:perfil.apellidoPersona,
            eMailPerfil: inputValue,
+           nombrePerfil:perfil.nombrePerfil,
         }
         aux=await fechProtegidoPost('/modificarEmailPerfil',perf);
         if(aux.success){
@@ -118,6 +119,7 @@ async function modificarInteresesPerfil(){
             nombrePersona:perfil.nombrePersona,
             apellidoPersona:perfil.apellidoPersona,
             eMailPerfil:perfil.eMail,
+            nombrePerfil:perfil.nombrePerfil,
             interesesPerfil: inputValue,
         }
         aux=await fechProtegidoPost('/modificarInteresesPerfil',perf);
@@ -153,6 +155,7 @@ async function modificarAntesedentesPerfil(){
             nombrePersona:perfil.nombrePersona,
             apellidoPersona:perfil.apellidoPersona,
             eMailPerfil:perfil.eMail,
+            nombrePerfil:perfil.nombrePerfil,
             antecedentesPerfil: inputValue,
         }
         aux=await fechProtegidoPost('/modificarAntecedentesPerfil',perf);

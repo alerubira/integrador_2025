@@ -1,5 +1,6 @@
 let dniPersona=document.getElementById("dniPersona");
 let nombrePersona=document.getElementById("nombrePersona");
+let nombrePerfil=document.getElementById("nombrePerfil");
 let apellidoPersona=document.getElementById("apellidoPersona");
 let eMail=document.getElementById("eMail");
 let usuario=document.getElementById("usuario");
@@ -15,6 +16,7 @@ async function crearPerfil() {//crearPerfil
     let dniValue =parseInt(dniPersona.value) ;
     let nombreValue = nombrePersona.value;
     let apellidoValue = apellidoPersona.value;
+    let nombrePerfilValue = nombrePerfil.value;
     let eMailValue = eMail.value;
     let usuarioValue = usuario.value;
     let claveValue = clave.value;
@@ -25,6 +27,7 @@ async function crearPerfil() {//crearPerfil
      if(!validar(nombreValue.length<1||nombreValue.length>parametros.tamaño1,pagina,`El Nombre es obligatorio y ${parametros.cartelTamaño1}`)){bandera=false}
      if(!validar(!regNombres.test(apellidoValue),pagina,`en el Apellido ${parametros.cartelNombres}`)){bandera=false};
      if(!validar(apellidoValue.length<1||apellidoValue.length>parametros.tamaño1,pagina,`El Apellido es obligatorio y ${parametros.cartelTamaño1}`)){bandera=false}
+     if(!validar(nombrePerfilValue.length<1||nombrePerfilValue.length>parametros.tamaño1,pagina,`El Nombre del Perfil es obligatorio y ${parametros.cartelTamaño1}`)){bandera=false}
      if(!validar(!regEMail.test(eMailValue)||eMailValue.length<1,pagina,`${parametros.cartelEMail}`)){bandera=false}
      if(!validar(usuarioValue.length<1||usuarioValue.length>parametros.tamaño2,pagina,` ${parametros.cartelLoginMal}`,event))bandera=false;
     if(!validar(!regClave.test(claveValue),pagina,`${parametros.cartelLoginMal}`)){bandera=false};
@@ -36,6 +39,7 @@ async function crearPerfil() {//crearPerfil
         nombrePersona:nombreValue,
         apellidoPersona:apellidoValue,
         eMailPerfil:eMailValue,
+        nombrePerfil:nombrePerfilValue,
         
     }
     let login={

@@ -49,7 +49,10 @@ const ProfesionalY= BasePersonaY.shape({//dejar
     imgPerfil: yup.string()
         .max(parametros.tamaño4, `La imagen ${parametros.cartelTamaño4}`)
         .nullable(),   
-        //agregar el nombrePerfil,tamañ1 de parametros  
+        //agregar el nombrePerfil,tamañ1 de parametros
+    nombrePerfil: yup.string()
+        .max(parametros.tamaño1, `El nombre del Perfil ${parametros.cartelTamaño1}`)
+        .required('El nombre del Perfil es obligatorio'),    
  })          
  
  const profesionY=yup.object().shape({//dejar

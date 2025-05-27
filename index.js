@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import bodyParser from'body-parser';
 import {ruta1} from './rutas1.js';
 import { ruta2 } from './rutas2.js';
+import { rutaLogin } from './rutaLogin.js';
 import { rutaPerfil } from './rutaPerfil.js';
 const app = express();
 
@@ -42,9 +43,10 @@ app.use(express.json());
 // Definir tus rutas aquí
 app.use('/', ruta1);
 app.use('/',ruta2);
-app.use('/crearLogin',ruta1);
-app.use('/modificarLogin',ruta1);
-app.use('/enviarMail',ruta1);
+app.use('/',rutaLogin);
+app.use('/crearLogin',rutaLogin);
+app.use('/modificarLogin',rutaLogin);
+app.use('/enviarMail',rutaLogin);
 app.use('/buscarProfesiones',ruta2);
 app.use('/modificarEstadoProfesion',ruta2);
 app.use('/modificarNombreProfesion',ruta2);
