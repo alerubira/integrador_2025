@@ -2,7 +2,7 @@
 import { Persona } from "./clasePersona.js";
 import { PerfilData } from "../modelo/PerfilData.js";
 class Perfil extends Persona{
-    constructor(idPerfil,idPersona,intereses,antecedentes,eMail,imgPerfil,activoPerfil,dniPersona,nombrePersona,apellidoPersona,activoPersona){
+    constructor(idPerfil,idPersona,intereses,antecedentes,eMail,imgPerfil,activoPerfil,nombrePerfil,dniPersona,nombrePersona,apellidoPersona,activoPersona){
         super(idPersona,dniPersona,nombrePersona,apellidoPersona,activoPersona)
         this.idPerfil=idPerfil;
         this.activoPerfil=activoPerfil;
@@ -10,6 +10,7 @@ class Perfil extends Persona{
         this.antecedentes=antecedentes; 
         this.eMail=eMail;
         this.imgPerfil=imgPerfil;
+        this.nombrePerfil=nombrePerfil;
     }
     // Método para mostrar la información del usuario
     static async alta(per,login) {
