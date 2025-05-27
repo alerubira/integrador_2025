@@ -27,6 +27,16 @@ rutaPerfil.get('/paginaPersonal', (req, res) => {
 rutaPerfil.post('/subirImagenPerfil',upload.single('imagen') ,verificarToken, (req, res) => {
        manejadorRutaPerfil(req, res, 'subirImagenPerfil');
 })
+rutaPerfil.post('/modificarEMailPerfil', verificarToken, (req, res) => {
+       manejadorRutaPerfil(req, res, 'modificarEMailPerfil');
+})
+rutaPerfil.post('/modificarInteresesPerfil', verificarToken, (req, res) => {
+        manejadorRutaPerfil(req, res, 'modificarInteresesPerfil');
+  })
+rutaPerfil.post('/modificarAntecedentesPerfil', verificarToken, (req, res) => {
+       manejadorRutaPerfil(req, res, 'modificarAntecedentesPerfil');
+})
+
 // Ruta para subir imagen
 /*rutaPerfil.post('/subirImagenPerfil', upload.single('imagen'), async (req, res) => {
   try {

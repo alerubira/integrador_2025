@@ -1,3 +1,4 @@
+pagina=`Pagina Personal de: ${perfil.nombrePersona} ${perfil.apellidoPersona}`;
 let sectionPerfil=document.getElementById("sectionPerfil");
 let sectionModificar=document.getElementById("sectionModificar");
 function verPerfil(){
@@ -26,7 +27,7 @@ selectModificar.addEventListener('change',async function(){
             modificarApellido();
             break; 
         case "3":
-            modificarEmail();
+            modificarEMail();
             ;
             break; 
         case "4":

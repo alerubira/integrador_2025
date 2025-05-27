@@ -64,12 +64,103 @@ if(bandera){
           }
         }
     }
-
-function modificarEmail(){
+let sectionModificarEMail=document.getElementById("sectionModificarEMail");
+function modificarEMail(){
+    limpiarCampos(limpiar);
+    fOcultar();
+    mostrar(sectionModificarEMail);
 }
+let inputNuevoEMailPerfil=document.getElementById("inputNuevoEMailPerfil");
+let pEMailActual=document.getElementById("pEMailActual");
+async function modificarEMailPerfil(){
+    bandera=true;
+    let inputValue=inputNuevoEMailPerfil.value;
+    let regEmail=convertirExpresionRegular(parametros.email);
+    if(!validar(!regEmail.test(inputValue),pagina,`en el Email ${parametros.cartelEmail}`)){bandera=false}
+    if(bandera){
+        perf={
+           idPerfil:perfil.idPerfil,
+           idPersona:perfil.idPersona,
+            dniPersona:perfil.dniPersona,
+            nombrePersona:perfil.nombrePersona,
+            apellidoPersona:perfil.apellidoPersona,
+           eMailPerfil: inputValue,
+        }
+        aux=await fechProtegidoPost('/modificarEmailPerfil',perf);
+        if(aux.success){
+            perfil.emailPersona=inputValue;
+            pEMailActual.textContent=`Email Actual :${inputValue}`;
+            limpiarCampos(limpiar);
+            fOcultar();
+        }
+    }
+}
+let sectionModificarIntereses=document.getElementById("sectionModificarIntereses");
 function modificarIntereses(){
-
+limpiarCampos(limpiar);
+fOcultar();
+mostrar(sectionModificarIntereses);
 }
+let inputNuevoInteresesPerfil=document.getElementById("inputNuevoInteresesPerfil");
+let pInteresesActual=document.getElementById("pInteresesActual");
+async function modificarInteresesPerfil(){
+    bandera=true;
+    let inputValue=inputNuevoInteresesPerfil.value;
+    if(inputValue.length>parametros.tamaño4){
+        alerta(pagina,`Los intereses no deben superar los ${parametros.tamaño4} caracteres`);
+        bandera=false;
+    }
+    if(bandera){
+        perf={
+            idPerfil:perfil.idPerfil,
+            idPersona:perfil.idPersona,
+            dniPersona:perfil.dniPersona,
+            nombrePersona:perfil.nombrePersona,
+            apellidoPersona:perfil.apellidoPersona,
+            eMailPerfil:perfil.eMail,
+            interesesPerfil: inputValue,
+        }
+        aux=await fechProtegidoPost('/modificarInteresesPerfil',perf);
+        if(aux.success){
+            perfil.interesesPersona=inputValue;
+            pInteresesActual.textContent=`Intereses Actual :${inputValue}`;
+            limpiarCampos(limpiar);
+            fOcultar();
+        }
+    }
+}
+let sectionModificarAntecedentes=document.getElementById("sectionModificarAntecedentes");
 function modificarAntecedentes(){
+limpiarCampos(limpiar);
+fOcultar(); 
+mostrar(sectionModificarAntecedentes);
+}
 
+let inputNuevoAntecedentesPerfil=document.getElementById("inputNuevoAntecedentesPerfil");
+let pAntecedentesActual=document.getElementById("pAntecedentesActual");
+async function modificarAntesedentesPerfil(){
+    bandera=true;
+    let inputValue=inputNuevoAntecedentesPerfil.value;
+    if(inputValue.length>parametros.tamaño4){
+        alerta(pagina,`Los antecedentes no deben superar los ${parametros.tamaño4} caracteres`);
+        bandera=false;
+    }
+    if(bandera){
+        perf={
+            idPerfil:perfil.idPerfil,
+            idPersona:perfil.idPersona,
+            dniPersona:perfil.dniPersona,
+            nombrePersona:perfil.nombrePersona,
+            apellidoPersona:perfil.apellidoPersona,
+            eMailPerfil:perfil.eMail,
+            antecedentesPerfil: inputValue,
+        }
+        aux=await fechProtegidoPost('/modificarAntecedentesPerfil',perf);
+        if(aux.success){
+            pAntecedentesActual.textContent=`Antecedentes Actual :${inputValue}`;
+            perfil.antecedentesPerfil=inputValue;
+            limpiarCampos(limpiar);
+            fOcultar();
+        }
+    }
 }

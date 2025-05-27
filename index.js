@@ -61,6 +61,9 @@ app.use('/modificarDniPersona',ruta2);
 app.use('/',rutaPerfil);
 app.use('/paginaPersonal',rutaPerfil);
 app.use('/subirImagenPerfil',rutaPerfil);
+app.use('/modificarEMailPerfil',rutaPerfil);
+app.use('/modificarInteresesPerfil',rutaPerfil);
+app.use('/modificarAntecedentesPerfil',rutaPerfil);
  // Iniciar el servidor
  app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);

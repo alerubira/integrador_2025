@@ -51,8 +51,35 @@ try{
                       if(aux===0){return retornarError(res,`No se encontro el perfil con id ${req.body.idPerfil}`)}
                       //return res.json({ success: true, url: urlImagen });
                       return retornarExito(res,`La imagen del perfil fue modificada con exito`, urlImagen);
-              break;     
-            default:
+              break;
+            case 'modificarEMailPerfil':
+                object= req.body;
+                aux=await verificarYup(object,'perfil');
+                if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
+                aux=await Perfil.modificarEMailPorIdPerfil(object.idPerfil,object.eMailPerfil);
+                if(aux instanceof Error){return retornarError(res,`Error al modificar el Email del perfil:${aux}`)}
+                if(aux===0){return retornarError(res,`No se encontro el perfil con id ${object.idPerfil}`)}
+                return retornarExito(res,`El Email del perfil fue modificado con exito`);     
+            break;
+            case 'modificarInteresesPerfil':
+                object= req.body;
+                aux=await verificarYup(object,'perfil');
+                if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
+                aux=await Perfil.modificarInteresesPorIdPerfil(object.idPerfil,object.interesesPerfil);
+                if(aux instanceof Error){return retornarError(res,`Error al modificar los intereses del perfil:${aux}`)}
+                if(aux===0){return retornarError(res,`No se encontro el perfil con id ${object.idPerfil}`)}
+                return retornarExito(res,`Los intereses del perfil fueron modificados con exito`);
+            break;
+            case 'modificarAntecedentesPerfil':
+                object= req.body;
+                aux=await verificarYup(object,'perfil');
+                if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
+                aux=await Perfil.modificarAntecedentesPorIdPerfil(object.idPerfil,object.antecedentesPerfil);
+                if(aux instanceof Error){return retornarError(res,`Error al modificar los antecedentes del perfil:${aux}`)}
+                if(aux===0){return retornarError(res,`No se encontro el perfil con id ${object.idPerfil}`)}
+                return retornarExito(res,`Los antecedentes del perfil fueron modificados con exito`);
+            break;            
+                default:
             return retornarError(res,`No se encontro el objeto ${objeto}`);        
      }
 

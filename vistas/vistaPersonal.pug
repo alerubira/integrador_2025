@@ -32,7 +32,7 @@ block content
                             option(value="3") Modificar eMail
                             option(value="4") Modificar Imagen de Perfil
                             option(value="5") Modificar Intereses 
-                            option(value="6") Modificar Anrecedentes
+                            option(value="6") Modificar Antecedentes
                     section#sectionModificarImagenPerfil.ocultar 
                         img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")        
                         form#formSubirImagen(method="POST", action="/subirImagenPerfil", enctype="multipart/form-data")
@@ -56,7 +56,25 @@ block content
                                label(for="inputNuevoApellidoPersonaPerfil") Nuevo Apellido Persona 
                                input.limpiar(type="text",id="inputNuevoApellidoPersonaPerfil",name="inputNuevoApellidoPersonaPerfil",placeHolder="Apellido Persona") 
                                br
-                               button.boton(type="button",onclick='modificarApellidoPersonaPerfil()') Modificar            
+                               button.boton(type="button",onclick='modificarApellidoPersonaPerfil()') Modificar
+                    section#sectionModificarEMail.ocultar
+                               p#pEMailActual=`E-Mail Actual : ${perfil.eMail}` 
+                               label(for="inputNuevoEMailPerfil") Nuevo E-Mail Persona 
+                               input.limpiar(type="email",id="inputNuevoEMailPerfil",name="inputNuevoEMailPerfil",placeHolder="E-Mail Persona") 
+                               br
+                               button.boton(type="button",onclick='modificarEMailPerfil()') Modificar
+                    section#sectionModificarIntereses.ocultar
+                               p#pInteresesActual=`Intereses Actuales : ${perfil.intereses}` 
+                               label(for="inputNuevoInteresesPerfil") Nuevos Intereses Persona 
+                               textarea.limpiar(type="text",id="inputNuevoInteresesPerfil",name="inputNuevoInteresesPerfil",placeHolder="Intereses Perfil") 
+                               br
+                               button.boton(type="button",onclick='modificarInteresesPerfil()') Modificar      
+                    section#sectionModificarAntecedentes.ocultar
+                               p#pAntecedentesActual=`Antecedentes Actuales : ${perfil.antecedentes}` 
+                               label(for="inputNuevoAntecedentesPerfil") Nuevos Antecedentes Persona 
+                               textarea.limpiar(type="text",id="inputNuevoAntecedentesPerfil",name="inputNuevoAntesedentesPerfil",placeHolder="Antesedentes Perfil") 
+                               br
+                               button.boton(type="button",onclick='modificarAntesedentesPerfil()') Modificar                                                 
         script.
                      const perfil = !{JSON.stringify(perfil)}; 
         script. 

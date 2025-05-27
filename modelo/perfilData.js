@@ -86,6 +86,18 @@ class PerfilData extends PersonaData {
         const query = 'UPDATE `perfil` SET `img_perfil` = ? WHERE `id_perfil` = ?';
         return await consulta1(query, img, id);
     }
+    static async modificarEMailPorIdPerfil(id,email) {
+        const query = 'UPDATE `perfil` SET `e_mail_perfil` = ? WHERE `id_perfil` = ?';
+        return await consulta1(query, email, id);
+    }
+    static async modificarInteresesPorIdPerfil(id,intereses) {
+        const query = 'UPDATE `perfil` SET `intereses_perfil` = ? WHERE `id_perfil` = ?';
+        return await consulta1(query, intereses, id);
+    }
+    static async modificarAntecedentesPorIdPerfil(id,antecedentes) {
+        const query = 'UPDATE `perfil` SET `antecedentes_perfil` = ? WHERE `id_perfil` = ?';
+        return await consulta1(query, antecedentes, id);
+    }
 
    /* static async modificarProfesionProfesional(prof) {//terminado
         const query = 'UPDATE `profesional` SET `id_profesion` = ? WHERE `id_profesional` = ?';
