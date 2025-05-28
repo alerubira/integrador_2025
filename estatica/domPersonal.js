@@ -46,5 +46,22 @@ selectModificar.addEventListener('change',async function(){
     selectModificar.selectedIndex = 0;
 });
 async function redirigirCarpetas(){
-    fechProtegidoPost("/accederCarpetas",perfil)
+    //obtener datos de la query
+    // Obtiene la query string de la URL
+const params = new URLSearchParams(window.location.search);
+
+// Obtiene el valor del parámetro 'datos'
+const datosEncoded = params.get('datos');
+let toke = {};
+if (datosEncoded) {
+    // Decodifica y parsea el objeto
+    const datosDecoded = decodeURIComponent(datosEncoded);
+    toke = JSON.parse(datosDecoded);
+}
+        
+        let tokeJ=JSON.stringify(toke);
+        let cadena=encodeURIComponent(tokeJ);
+    
+            window.location.href = `/accederCarpetas?datos=${cadena}`;
+                      
 }

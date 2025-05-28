@@ -1,10 +1,35 @@
 extends layout
 block script1 
-    script(src="domPersonal.js", defer)
-    script(src="domFunsionesPersonal.js",defer)
-    script(src="domDatosPersonales.js",defer)
+    script(src="domCarpetas.js", defer)
 block content
         #divProfesionalAcceso.grid12-1-1 
                 h3 USUARIO
                         label#lblNombreYApellido=`${perfil.nombrePersona}  ${perfil.apellidoPersona}`
                 img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")
+        #divContenedorAlbum.grid12-1-2.contenedorGrid
+                        section#sectionCrearAlbum.ocultar.grid12-1-1.form
+                                h5 Crear Album
+                                label(for="inputTituloAlbum") Titulo del Album
+                                input.limpiar(type="text", id="inputTituloAlbum", name="inputTituloAlbum", placeholder="Titulo del Album", required)
+                                br
+                                label(for="selectTags") Tags o Referencia 
+                                select#selectTags(name="tag")
+                                        option(value="") Selecciona un tag
+                                        each tag in tags
+                                                option(value=tag.id_tags)= tag.nombre_tags 
+                                br
+                                button.boton(type="button", onclick='crearAlbum()') Crear Album      
+        script.    
+                     const perfil = !{JSON.stringify(perfil)}; 
+        script. 
+                     const parametros = !{JSON.stringify(parametros)};  
+        script. 
+                     const tags = !{JSON.stringify(tags)};                                                                   
+block boton1 
+        button.boton2(type="button",onclick='volver()') volver 
+block boton2 
+        button.boton2(onclick="cerrarSesion()") Cerrar Sesión 
+block boton11 
+        button.boton2(type="button",onclick='verAlbumes()') Ver Albumes 
+block boton12 
+        button.boton2(type="button",onclick='mostrarCrearAlbum()') Crear Album                       

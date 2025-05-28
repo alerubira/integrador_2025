@@ -1,4 +1,4 @@
-import { TagsData } from "./tagsData";
+import { TagsData } from "./tagsData.js";
 class Tags{
     contructor(nombreTags){
         this.nombreTags = nombreTags;

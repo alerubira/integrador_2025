@@ -1,4 +1,4 @@
-import{ consulta1 } from '../conexion.js';
+import{ consulta1 } from './conexxionBD.js';
 class TagsData{
     static altaTags(tags) {
         let query = 'INSERT INTO `tags` (`nombre_tags`) VALUES (?)';
