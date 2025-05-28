@@ -8,6 +8,7 @@ import {ruta1} from './rutas1.js';
 import { ruta2 } from './rutas2.js';
 import { rutaLogin } from './rutaLogin.js';
 import { rutaPerfil } from './rutaPerfil.js';
+import { rutaCarpetas } from './rutaCarpetas.js';
 const app = express();
 
 // Convierte import.meta.url a __dirname
@@ -66,6 +67,7 @@ app.use('/subirImagenPerfil',rutaPerfil);
 app.use('/modificarEMailPerfil',rutaPerfil);
 app.use('/modificarInteresesPerfil',rutaPerfil);
 app.use('/modificarAntecedentesPerfil',rutaPerfil);
+app.use('/', rutaCarpetas);
  // Iniciar el servidor
  app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);

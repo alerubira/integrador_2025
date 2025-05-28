@@ -1,0 +1,10 @@
+extends layout
+block script1 
+    script(src="domPersonal.js", defer)
+    script(src="domFunsionesPersonal.js",defer)
+    script(src="domDatosPersonales.js",defer)
+block content
+        #divProfesionalAcceso.grid12-1-1 
+                h3 USUARIO
+                        label#lblNombreYApellido=`${perfil.nombrePersona}  ${perfil.apellidoPersona}`
+                img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")

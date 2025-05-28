@@ -45,3 +45,6 @@ selectModificar.addEventListener('change',async function(){
     }
     selectModificar.selectedIndex = 0;
 });
+async function redirigirCarpetas(){
+    fechProtegidoPost("/accederCarpetas",perfil)
+}
