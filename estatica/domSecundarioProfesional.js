@@ -308,14 +308,14 @@ document.getElementById('filtrarPorProfesion').addEventListener('change',async f
      }
 
  }
- let mensageNoEncontradoApellido=document.getElementById('mensageNoEncontradoApellido');
+ let mensageNoEncontrado=document.getElementById('mensageNoEncontrado');
  
  document.getElementById('inputBuscarApellidoPersona').addEventListener('keyup',async function(){
      let filtro=this.value.toLowerCase();
-     mensageNoEncontradoApellido.style.display = 'none';
+     mensageNoEncontrado.style.display = 'none';
      let profesionalesFiltrados=profesionales.filter(prof=>prof.apellidoPersona.toLowerCase().includes(filtro));
      if(profesionalesFiltrados.length===0){
-          mensageNoEncontradoApellido.style.display = 'block';
+          mensageNoEncontrado.style.display = 'block';
           llenarTablaProfesionales(profesionales);
      }else{
           llenarTablaProfesionales(profesionalesFiltrados);

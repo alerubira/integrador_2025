@@ -4,6 +4,7 @@ import manejadorDeRutasLogin from './controlador/manejadorDeRutasLogin.js';
 import manejadorRutaCarpetas  from './controlador/manejadorRutaCarpetas.js';
 import path from 'path';
 import multer from 'multer';
-rutaCarpetas.get('/accederCarpetas', manejadorRutaCarpetas.accederCarpetas);
-rutaCarpetas.post('/crearCarpeta',manejadorDeRutasLogin.verificarToken, manejadorRutaCarpetas.crearCarpeta);
+rutaCarpetas.get('/accederAlbumes', manejadorRutaCarpetas.accederAlbumes);
+rutaCarpetas.post('/crearAlbum',manejadorDeRutasLogin.verificarToken, manejadorRutaCarpetas.crearAlbum);
+rutaCarpetas.post('/buscarAlbumesPersonalesPorId', manejadorDeRutasLogin.verificarToken, manejadorRutaCarpetas.buscarAlbumesPersonalesPorId);
 export{rutaCarpetas}

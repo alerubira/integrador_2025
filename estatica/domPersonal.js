@@ -62,6 +62,6 @@ if (datosEncoded) {
         let tokeJ=JSON.stringify(toke);
         let cadena=encodeURIComponent(tokeJ);
     
-            window.location.href = `/accederCarpetas?datos=${cadena}`;
+            window.location.href = `/accederAlbumes?datos=${cadena}`;
                       
 }

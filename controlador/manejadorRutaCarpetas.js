@@ -2,7 +2,11 @@ import { Perfil } from "../modelo/clasePerfil.js";
 import { retornarError, retornarExito } from "./funsionesControlador.js";
 import{parametros} from "../parametros.js";
 import{Tags}from "../modelo/claseTags.js";
-export async function accederCarpetas(req, res) {
+import { verificarYup } from "./verificaryup.js";
+import { existeBd } from "../modelo/conexxionBD.js";
+import { AlbumPersonal } from "../modelo/claseAlbumPersonal.js";
+let aux;
+export async function accederAlbumes(req, res) {
     try {
         const datosEncoded = req.query.datos;
         const datosDecoded = decodeURIComponent(datosEncoded);
@@ -31,17 +35,43 @@ export async function accederCarpetas(req, res) {
         return retornarError(res, `Error al acceder a Carpetas: ${error}`);
     }
 }
-export async function crearCarpeta(req, res) {
+export async function crearAlbum(req, res) {
     try {
        let album=req.body;
        console.log(album);
-       return retornarExito(res, "Album Creado Exitosamente");       
+    aux=await verificarYup(album,'albumPersonal');
+        aux=await existeBd(album.idTags,'tags','id_tags');  
+            if(aux instanceof Error){return retornarError(res,`Error al verificar si el tags :${aux}`)}
+            if(!aux){return retornarError(res,'El tags no existe')}
+        aux=await existeBd(album.idPerfilPersonal,'perfil','id_perfil');
+            if(aux instanceof Error){return retornarError(res,`Error al verificar si el perfil :${aux}`)}   
+            if(!aux){return retornarError(res,'El perfil no existe')}
+        aux=await AlbumPersonal.alta(album);
+        if (aux instanceof Error) {
+            return retornarError(res, `Error al crear el album: ${aux}`);   
+        }       
+            return retornarExito(res, "Album Creado Exitosamente");       
     } catch (error) {
         console.error("Error al crear el album", error);
         return retornarError(res, `Error al crear el album: ${error}`);
     }
 }
+export async function buscarAlbumesPersonalesPorId(req, res) {
+    try {
+        const { idPerfilPersonal } = req.body;
+        //revisar y contruir
+        //verificar si el id esta en labd y ralizar la consulta 
+        if (!idPerfilPersonal) return retornarError(res, "El id del perfil personal es obligatorio");
+        let albumes = await AlbumPersonal.consultaPorIdPerfil(idPerfilPersonal);
+        if (albumes instanceof Error) return retornarError(res, `Error al buscar los albumes: ${albumes}`);
+        if (albumes.length === 0) return retornarExito(res, "No se encontraron albumes personales");
+        return retornarExito(res, "Albumes encontrados", albumes);
+    } catch (error) {
+        console.error("Error al buscar los albumes personales", error);
+        return retornarError(res, `Error al buscar los albumes personales: ${error}`);
+    }
+}
 export default {
-    accederCarpetas,
-    crearCarpeta
+    accederAlbumes,
+    crearAlbum
 };

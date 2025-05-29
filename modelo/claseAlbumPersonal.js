@@ -1,4 +1,4 @@
-import AlbumPersonalData from '../data/albumPersonalData.js';
+import { AlbumPersonalData } from "./albumPersonalData.js";
 class AlbumPersonal{
 constructor (idAlbumPersonal,tituloAlbumPersonal,cantidadImagenes,idPerfilPersonal,idTags,activoAlbumPersonal){
     this.idAlbumPersonal = idAlbumPersonal;
@@ -11,6 +11,9 @@ constructor (idAlbumPersonal,tituloAlbumPersonal,cantidadImagenes,idPerfilPerson
 
 static async alta(album) {
     return await AlbumPersonalData.altaAlbumPersonal(album);
+}
+static async consultaPorIdPerfilPersonal(idPerfilPersonal) {
+    return await AlbumPersonalData.consultaPorIdPersonal(idPerfilPersonal); 
 }
 }
 export{ AlbumPersonal

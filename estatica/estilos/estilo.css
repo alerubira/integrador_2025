@@ -157,7 +157,7 @@ margin: auto;
    /* border: 2px solid black; /* Establece el borde de color negro */
     /*height: auto; /* Ocupa el % del alto de su contenedor ,automatico al contenido*/
 /*}*/
-#mensageNoEncontradoApellido{
+#mensageNoEncontrado{
   display: inline-block; /* Hace que el contenedor se ajuste al contenido */
   border-radius: 10px; /* Establece los bordes redondeados */
   border: 2px solid black; /* Establece el borde de color negro */

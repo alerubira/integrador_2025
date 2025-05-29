@@ -59,8 +59,13 @@ const ProfesionalY= BasePersonaY.shape({//dejar
     nombreProfesion:yup.string()
     .max(parametros.tamaño1,`El nombre de la Profesion debe tener como maximo ${parametros.tamaño1} caracteres`)
     .required('El nombre de la Profesion es obligatorio')
- })  
-
+ })
+ const albumPersonalY=yup.object().shape({//dejar
+    tituloAlbumPersonal:yup.string()
+        .max(parametros.tamaño1,`El nombre del Album debe tener como maximo ${parametros.tamaño1} caracteres`)
+        .required('El nombre del Album es obligatorio'),
+ });
+    
 async function verificarYup(objeto,nombre){
     let aux;
         //console.log(objeto);
@@ -84,7 +89,10 @@ async function verificarYup(objeto,nombre){
                 break;
             case 'perfil':
                 return await verificarY(objeto,perfilY);
-                break;      
+                break; 
+            case'albumPersonal':
+                return await verificarY(objeto,albumPersonalY);
+                break;         
              default:
                 return retornarErrorSinRes('Seleccion no valida en verificar para yup');
        }

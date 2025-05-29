@@ -3,9 +3,13 @@ let query;
 class AlbumPersonalData {
     static async altaAlbumPersonal(alb) {
         query = 'INSERT INTO `album_personal` (`titulo_album_personal`,`cantidad_imagenes`,`id_perfil_personal`,`id_tags`,`activo_album_personal`) VALUES (?,?,?,?,?)';
-        return await consulta1(query, alb.tituloAlbum_personal,0,idPerfilPersonal,idTags, true);
+        return await consulta1(query, alb.tituloAlbumPersonal,0,alb.idPerfilPersonal,alb.idTags, true);
     }
-//revisar para abajo
+    static async consultaPorIdPersonal(idPerfilPersonal) {
+        query = 'SELECT * FROM `album_personal` WHERE `id_perfil_personal` = ?';
+        return await consulta1(query, idPerfilPersonal);
+    }
+    //revirsar para abajo
     static async consultaAlbumPersonal() {
         query = 'SELECT * FROM `album_personal` WHERE 1';
         return await consulta1(query);
