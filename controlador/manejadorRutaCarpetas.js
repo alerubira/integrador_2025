@@ -59,13 +59,25 @@ export async function crearAlbum(req, res) {
 export async function buscarAlbumesPersonalesPorId(req, res) {
     try {
         const { idPerfilPersonal } = req.body;
-        //revisar y contruir
-        //verificar si el id esta en labd y ralizar la consulta 
-        if (!idPerfilPersonal) return retornarError(res, "El id del perfil personal es obligatorio");
-        let albumes = await AlbumPersonal.consultaPorIdPerfil(idPerfilPersonal);
-        if (albumes instanceof Error) return retornarError(res, `Error al buscar los albumes: ${albumes}`);
-        if (albumes.length === 0) return retornarExito(res, "No se encontraron albumes personales");
-        return retornarExito(res, "Albumes encontrados", albumes);
+        aux=await existeBd('id_perfil','perfil',idPerfilPersonal);
+        if (aux instanceof Error) return retornarError(res, `Error al verificar el perfil: ${aux}`);
+        aux=await AlbumPersonal.consultaPorIdPerfilPersonal(idPerfilPersonal);
+        if (aux instanceof Error) return retornarError(res, `Error al buscar el album personal: ${aux}`);
+        if (!aux) return retornarExito(res, "No se encontraron albumes personales para el perfil especificado");
+
+        //recorrer el arreglo y hacer los ojetos
+        let albumes =await aux.map(alb => new AlbumPersonal(
+            alb.id_album, alb.titulo_album_personal, alb.cantidad_imagenes,
+            alb.id_perfil_personal, alb.id_tags, alb.activo_album_personal
+        ));
+         aux= await Tags.consulta();
+        if (aux instanceof Error) return retornarError(res, `Error al consultar los Tags: ${aux}`);
+        let tags =await  aux.map(tag => new Tags(
+            tag.id_tags, tag.nombre_tags, tag.activo_tags
+        ));
+
+       return ({success:true, albumes:albumes,tags:tags});
+        
     } catch (error) {
         console.error("Error al buscar los albumes personales", error);
         return retornarError(res, `Error al buscar los albumes personales: ${error}`);
@@ -73,5 +85,6 @@ export async function buscarAlbumesPersonalesPorId(req, res) {
 }
 export default {
     accederAlbumes,
-    crearAlbum
+    crearAlbum,
+    buscarAlbumesPersonalesPorId
 };

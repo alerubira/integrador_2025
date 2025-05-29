@@ -35,16 +35,18 @@ async function crearAlbum(){
         }
 }
 let divMostrarAlbumes = document.getElementById("divMostrarAlbumes");
-function mostrarAlbumes(){
+let albumes;
+async function mostrarAlbumes(){
     limpiarCampos(limpiar);
     fOcultar();
     mostrar(divMostrarAlbumes);
-//buscar y mostrar todos los albuen personales del perfil
+    aux=await fechProtegidoPost('/buscarAlbumesPersonalesPorId',{ idPerfilPersonal: perfil.idPerfil });
+    console.log(aux);
 }
  let mensageNoEncontrado=document.getElementById('mensageNoEncontrado');
- let albumes=await fechProtegidoPost('/buscarAlbumesPersonalesPorId',{ idPerfilPersonal: perfilPersonal.idPerfilPersonal });
+
  
- document.getElementById('inputBuscarApellidoPersona').addEventListener('keyup',async function(){
+ document.getElementById('inputBuscarTituloAlbum').addEventListener('keyup',async function(){
      let filtro=this.value.toLowerCase();
      mensageNoEncontrado.style.display = 'none';
      let profesionalesFiltrados=profesionales.filter(prof=>prof.apellidoPersona.toLowerCase().includes(filtro));

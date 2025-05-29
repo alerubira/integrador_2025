@@ -6,7 +6,8 @@ class AlbumPersonalData {
         return await consulta1(query, alb.tituloAlbumPersonal,0,alb.idPerfilPersonal,alb.idTags, true);
     }
     static async consultaPorIdPersonal(idPerfilPersonal) {
-        query = 'SELECT * FROM `album_personal` WHERE `id_perfil_personal` = ?';
+        query = 'CALL buscarAlbumesPersonalesPorIdPerfil(?)';
+;
         return await consulta1(query, idPerfilPersonal);
     }
     //revirsar para abajo
