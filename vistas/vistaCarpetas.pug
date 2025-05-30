@@ -34,10 +34,21 @@ block content
                     table#todosMedicos
                         thead#cabecera
                             tr
+                                th id Album
                                 th Titulo Album
                                 th Tags
+                                th Activo
                                 th Seleccionar
                         tbody#cuerpo
+        #divAlbumPersonalSeleccionado.ocultar.grid12-1-4.form 
+               p#pDatosAlbumSeleccionado 
+               buton.boton2(type="button",onclick='modificarTitulo()') Modificar Titulo del Album
+               buton.boton2(type="button",onclick='modificarTags()') Modificar Tags del Album
+               buton.boton2(type="button",onclick='eliminarAlbum()') Eliminar Album 
+               #divModificarTitulo.ocultar2 
+                           label(for="inputModificarTituloAlbum") Modificar Titulo del Album
+                           input.limpiar(type="text", id="inputModificarTituloAlbum", name="inputModificarTituloAlbum", placeholder="Nuevo Titulo del Album", required)
+                           button.boton2(type="button", onclick='modificarTituloAlbum()') Modificar Titulo              
         script.    
                      const perfil = !{JSON.stringify(perfil)}; 
         script. 

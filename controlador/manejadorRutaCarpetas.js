@@ -66,21 +66,42 @@ export async function buscarAlbumesPersonalesPorId(req, res) {
         if (!aux) return retornarExito(res, "No se encontraron albumes personales para el perfil especificado");
 
         //recorrer el arreglo y hacer los ojetos
-        let albumes =await aux.map(alb => new AlbumPersonal(
-            alb.id_album, alb.titulo_album_personal, alb.cantidad_imagenes,
-            alb.id_perfil_personal, alb.id_tags, alb.activo_album_personal
+        let albumes = aux[0].map(alb => new AlbumPersonal(
+            alb.id_album_personal, alb.titulo_album_personal, alb.cantidad_imagenes,
+            alb.id_perfil_personal, alb.id_tags, alb.activo_album_personal,alb.nombre_tags
         ));
          aux= await Tags.consulta();
         if (aux instanceof Error) return retornarError(res, `Error al consultar los Tags: ${aux}`);
-        let tags =await  aux.map(tag => new Tags(
-            tag.id_tags, tag.nombre_tags, tag.activo_tags
+        let tags = aux.map(tag => new Tags(
+            tag.id_tags, tag.nombre_tags,
         ));
-
-       return ({success:true, albumes:albumes,tags:tags});
+console.log(albumes);
+console.log(tags);
+        if (albumes.length === 0) {
+            return retornarExito(res, "No se encontraron albumes personales para el perfil especificado");
+        }
+        //retornar los albumes y tags
+       return res.json({success:true, albumes:albumes,tags:tags});
         
     } catch (error) {
         console.error("Error al buscar los albumes personales", error);
         return retornarError(res, `Error al buscar los albumes personales: ${error}`);
+    }
+}
+export async function modificarTituloAlbum(req, res) {
+    try {
+        const album=req.body;
+        aux=await existeBd(album.idAlbumPersonal,'album_personal','id_album_personal');
+        if (aux instanceof Error) return retornarError(res, `Error al verificar el album: ${aux}`);
+        if (!aux) return retornarError(res, "El album no existe");
+        aux= await verificarYup(album,'albumPersonal');
+        aux=await AlbumPersonal.modificarTitulo(album);
+        if (aux instanceof Error) return retornarError(res, `Error al modificar el título del album: ${aux}`);
+//hacer metodo clase y data
+        return retornarExito(res, "Título del album modificado exitosamente");
+    } catch (error) {
+        console.error("Error al modificar el título del album", error);
+        return retornarError(res, `Error al modificar el título del album: ${error}`);
     }
 }
 export default {

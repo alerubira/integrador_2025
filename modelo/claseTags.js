@@ -1,6 +1,7 @@
 import { TagsData } from "./tagsData.js";
 class Tags{
-    contructor(nombreTags){
+    constructor(idTags,nombreTags){
+        this.idTags = idTags;
         this.nombreTags = nombreTags;
     }
     static alta(tags) { 

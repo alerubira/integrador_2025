@@ -1,12 +1,13 @@
 import { AlbumPersonalData } from "./albumPersonalData.js";
 class AlbumPersonal{
-constructor (idAlbumPersonal,tituloAlbumPersonal,cantidadImagenes,idPerfilPersonal,idTags,activoAlbumPersonal){
+constructor (idAlbumPersonal,tituloAlbumPersonal,cantidadImagenes,idPerfilPersonal,idTags,activoAlbumPersonal,nombreTags){
     this.idAlbumPersonal = idAlbumPersonal;
     this.tituloAlbumPersonal = tituloAlbumPersonal;
     this.cantidadImagenes = cantidadImagenes;
     this.idPerfilPersonal = idPerfilPersonal;
     this.idTags = idTags;
     this.activoAlbumPersonal = activoAlbumPersonal;
+    this.nombreTags = nombreTags;
 }
 
 static async alta(album) {

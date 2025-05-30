@@ -35,28 +35,118 @@ async function crearAlbum(){
         }
 }
 let divMostrarAlbumes = document.getElementById("divMostrarAlbumes");
-let albumes;
+let albumes,tagss;
+dtlTagsFiltrar=document.getElementById('dtlTagsFiltrar');
 async function mostrarAlbumes(){
     limpiarCampos(limpiar);
     fOcultar();
     mostrar(divMostrarAlbumes);
     aux=await fechProtegidoPost('/buscarAlbumesPersonalesPorId',{ idPerfilPersonal: perfil.idPerfil });
-    console.log(aux);
+    if(aux.success){
+        albumes=aux.albumes;
+        tagss=aux.tags;
+        if(albumes.length>0){
+            llenarTablaAlbumes(albumes);
+        }else{
+            mensageNoEncontrado.style.display = 'block';
+            eliminarHijos(cuerpo);
+        }
+         llenarDl(dtlTagsFiltrar,tagss,'nombreTags','nombreTags');
+    }
+    else{
+        alerta(pagina,aux.mensaje);
+    }    
 }
- let mensageNoEncontrado=document.getElementById('mensageNoEncontrado');
 
- 
+ let mensageNoEncontrado=document.getElementById('mensageNoEncontrado');
+let cuerpo=document.getElementById('cuerpo');
+ async function llenarTablaAlbumes(albumes){
+     eliminarHijos(cuerpo);
+     for(let prof of albumes){
+          let tr=document.createElement('tr');
+          cuerpo.appendChild(tr);
+          agregarTdCuerpo(prof.idAlbumPersonal,tr);
+          agregarTdCuerpo(prof.tituloAlbumPersonal,tr);
+          agregarTdCuerpo(prof.nombreTags,tr);
+         
+          if(prof.activoAlbumPersonal===1){
+               agregarTdCuerpo('Activo',tr);
+          }else{
+               agregarTdCuerpo('Inactivo',tr);
+          }
+         
+          let btn=document.createElement('button');
+          btn.textContent='Seleccionar';
+          btn.className = 'boton';
+          btn.addEventListener('click', seleccionarAlbum);
+          let td=document.createElement('td');
+          td.appendChild(btn);
+          tr.appendChild(td);
+     }
+
+ }
+
  document.getElementById('inputBuscarTituloAlbum').addEventListener('keyup',async function(){
      let filtro=this.value.toLowerCase();
      mensageNoEncontrado.style.display = 'none';
-     let profesionalesFiltrados=profesionales.filter(prof=>prof.apellidoPersona.toLowerCase().includes(filtro));
-     if(profesionalesFiltrados.length===0){
-          mensageNoEncontradoApellido.style.display = 'block';
-          llenarTablaProfesionales(profesionales);
+     let albumesFiltrados=albumes.filter(alb=>alb.tituloAlbumPersonal.toLowerCase().includes(filtro));
+     if(albumesFiltrados.length===0){
+          mensageNoEncontrado.style.display = 'block';
+          llenarTablaAlbumes(albumes);
      }else{
-          llenarTablaProfesionales(profesionalesFiltrados);
+          llenarTablaAlbumes(albumesFiltrados);
      }
      
 filtro="";//controlar que no se quede seleccionado
  });
 
+ document.getElementById('filtrarPorTags').addEventListener('change',async function() {
+     let selecValor = this.value;
+     mensageNoEncontrado.style.display="none";
+     if(selecValor==='0'){
+          llenarTablaAlbumes(Albumes);
+     }else{
+         let albumFiltrado=albumes.filter(alb=>alb.nombreTags===selecValor);
+          if(albumFiltrado.length===0){
+           mensageNoEncontrado.style.display = 'block';  
+           llenarTablaAlbumes(albumes);
+         }else{
+          llenarTablaAlbumes(albumFiltrado);
+         }
+     }
+     this.value= "";//controlar que no se quede seleccionado
+ });
+ let albumSeleccionado;
+ let divAlbumSeleccionado= document.getElementById('divAlbumPERSONALSeleccionado');
+ let pDatosAlbumLSeleccionado=document.getElementById('pDatosAlbunmSeleccionado');
+ function seleccionarAlbum(){
+        let idAlbumPersonal = parseInt(this.parentNode.parentNode.firstChild.textContent);
+        albumSeleccionado = albumes.find(album => album.idAlbumPersonal === idAlbumPersonal);
+        eliminarHijos(cuerpo);
+        fOcultar();
+        mostrar(divAlbumPersonalSeleccionado);
+        pDatosAlbumSeleccionado.textContent = `Titulo: ${albumSeleccionado.tituloAlbumPersonal} - Tag: ${albumSeleccionado.nombreTags}`;
+    }
+async function ModificarTituloAlbum(){
+    let nuevoTitulo = inputTituloAlbum.value;
+    bandera=true;
+    if(!albumSeleccionado){
+        alerta(pagina,`Debe seleccionar un Album Personal`);
+        return;
+    }
+    if(!validar(nuevoTitulo.length<1||nuevoTitulo.length>parametros.tamaño1,pagina,`El Titulo es obligatorio y ${parametros.cartelTamño1}`,))bandera=false;
+    if(bandera){
+        albumSeleccionado.tituloAlbumPersonal = nuevoTitulo;
+        aux = await fechProtegidoPost('/modificarTituloAlbum', albumSeleccionado);
+        if(aux.success){
+            //hacer algo con el album modificado
+            albumSeleccionado.tituloAlbumPersonal = nuevoTitulo;
+            fOcultar2();
+        }else{
+            alerta(pagina,aux.mensaje);
+        }
+    }
+}
+
+        
+ 

@@ -70,6 +70,7 @@ app.use('/modificarAntecedentesPerfil',rutaPerfil);
 app.use('/', rutaCarpetas);
 app.use('/crearAlbum',rutaCarpetas);
 app.use('/buscarAlbumesPersonalesPorId',rutaCarpetas);
+app.use('/modificarTituloAlbum',rutaCarpetas);
  // Iniciar el servidor
  app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);
