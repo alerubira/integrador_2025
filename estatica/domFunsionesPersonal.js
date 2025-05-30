@@ -50,6 +50,7 @@ document.getElementById('formSubirImagen').addEventListener('submit', async func
     document.getElementById('nombreArchivo').textContent = 'No se ha seleccionado archivo';
      limpiarCampos(limpiar);
     fOcultar();
+    fOcultar2();
        //alerta('Imagen subida correctamente');
    }else{
         alerta('Hubo un inconveniente al subir la imagen: ' + errorData.message);

@@ -9,6 +9,7 @@ import { ruta2 } from './rutas2.js';
 import { rutaLogin } from './rutaLogin.js';
 import { rutaPerfil } from './rutaPerfil.js';
 import { rutaCarpetas } from './rutaCarpetas.js';
+import { rutaImagen } from './rutaImagen.js';
 const app = express();
 
 // Convierte import.meta.url a __dirname
@@ -71,6 +72,9 @@ app.use('/', rutaCarpetas);
 app.use('/crearAlbum',rutaCarpetas);
 app.use('/buscarAlbumesPersonalesPorId',rutaCarpetas);
 app.use('/modificarTituloAlbum',rutaCarpetas);
+app.use('/modificarTagsAlbum', rutaCarpetas);
+app.use('/modificarActivoAlbumPersonal', rutaCarpetas);
+app.use('/subirImagen', rutaImagen);
  // Iniciar el servidor
  app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);

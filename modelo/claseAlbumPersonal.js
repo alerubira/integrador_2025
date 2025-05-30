@@ -16,6 +16,20 @@ static async alta(album) {
 static async consultaPorIdPerfilPersonal(idPerfilPersonal) {
     return await AlbumPersonalData.consultaPorIdPersonal(idPerfilPersonal); 
 }
+static async modificarTitulo(album) {
+    return await AlbumPersonalData.modificarTitulo(album);
+}
+static async modificarTags(album) {
+    return await AlbumPersonalData.modificarTags(album);
+}
+static async modificarActivoAlbumPersonal(album) {
+    if(album.activoAlbumPersonal===1){
+        album.activoAlbumPersonal=0;
+    }else{
+        album.activoAlbumPersonal=1;
+    }
+    return await AlbumPersonalData.modificarActivoAlbumPersonal(album); 
+}
 }
 export{ AlbumPersonal
 };

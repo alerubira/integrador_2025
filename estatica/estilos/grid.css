@@ -35,6 +35,11 @@
     grid-column-start: 1;/* inicia en la columna 1*/
     grid-row-start: 4;/* inicia en la fila 4 */
 }
+.grid12-1-5{
+    grid-column: span 12 / span 12;/* ocupa 12 columnas */
+    grid-column-start: 1;/* inicia en la columna 1*/
+    grid-row-start: 5;/* inicia en la fila 5 */
+}
 .grid6-1-1{
     grid-column: span 6 / span 6;/* ocupa 6 columnas */
     grid-column-start: 1;/* inicia en la columna 1*/

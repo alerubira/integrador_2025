@@ -7,5 +7,7 @@ import multer from 'multer';
 rutaCarpetas.get('/accederAlbumes', manejadorRutaCarpetas.accederAlbumes);
 rutaCarpetas.post('/crearAlbum',manejadorDeRutasLogin.verificarToken, manejadorRutaCarpetas.crearAlbum);
 rutaCarpetas.post('/buscarAlbumesPersonalesPorId', manejadorDeRutasLogin.verificarToken, manejadorRutaCarpetas.buscarAlbumesPersonalesPorId);
-rutasCarpetas.post('/modificarTituloAlbum', manejadorDeRutasLogin.verificarToken, manejadorRutaCarpetas.modificarTituloAlbum);
+rutaCarpetas.post('/modificarTituloAlbum', manejadorDeRutasLogin.verificarToken, manejadorRutaCarpetas.modificarTituloAlbum);
+rutaCarpetas.post('/modificarTagsAlbum', manejadorDeRutasLogin.verificarToken, manejadorRutaCarpetas.modificarTagsAlbum);
+rutaCarpetas.post('/modificarActivoAlbumPersonal', manejadorDeRutasLogin.verificarToken, manejadorRutaCarpetas.modificarActivoAlbumPersonal);
 export{rutaCarpetas}

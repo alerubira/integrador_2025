@@ -117,18 +117,31 @@ filtro="";//controlar que no se quede seleccionado
      this.value= "";//controlar que no se quede seleccionado
  });
  let albumSeleccionado;
- let divAlbumSeleccionado= document.getElementById('divAlbumPERSONALSeleccionado');
- let pDatosAlbumLSeleccionado=document.getElementById('pDatosAlbunmSeleccionado');
+ let divAlbumSeleccionado= document.getElementById('divAlbumPersonalSeleccionado');
+ let pDatosAlbumSeleccionado=document.getElementById('pDatosAlbumSeleccionado');
  function seleccionarAlbum(){
         let idAlbumPersonal = parseInt(this.parentNode.parentNode.firstChild.textContent);
         albumSeleccionado = albumes.find(album => album.idAlbumPersonal === idAlbumPersonal);
         eliminarHijos(cuerpo);
         fOcultar();
         mostrar(divAlbumPersonalSeleccionado);
-        pDatosAlbumSeleccionado.textContent = `Titulo: ${albumSeleccionado.tituloAlbumPersonal} - Tag: ${albumSeleccionado.nombreTags}`;
+        let activo;
+        if(albumSeleccionado.activoAlbumPersonal===1){
+            activo = 'Activo';
+        }else{
+            activo = 'Inactivo';
+        }
+        pDatosAlbumSeleccionado.textContent = `Titulo: ${albumSeleccionado.tituloAlbumPersonal} - Tag: ${albumSeleccionado.nombreTags} - Estado: ${activo}`;
     }
-async function ModificarTituloAlbum(){
-    let nuevoTitulo = inputTituloAlbum.value;
+let divModificarTitulo = document.getElementById('divModificarTitulo');    
+function modificarTitulo(){
+    //fOcultar2();
+    limpiarCampos(limpiar);
+    mostrar(divModificarTitulo);
+}  
+let inputModificarTituloAlbum = document.getElementById('inputModificarTituloAlbum');  
+async function modificarTituloAlbum(){
+    let nuevoTitulo = inputModificarTituloAlbum.value;
     bandera=true;
     if(!albumSeleccionado){
         alerta(pagina,`Debe seleccionar un Album Personal`);
@@ -141,10 +154,62 @@ async function ModificarTituloAlbum(){
         if(aux.success){
             //hacer algo con el album modificado
             albumSeleccionado.tituloAlbumPersonal = nuevoTitulo;
+            limpiarCampos(limpiar);
             fOcultar2();
         }else{
             alerta(pagina,aux.mensaje);
         }
+    }
+}
+let divModificarTags = document.getElementById('divModificarTags');
+function modificarTags(){
+    limpiarCampos(limpiar);
+    mostrar(divModificarTags);
+    //llenarSelect(selectTags,tagss,'id_tags','nombre_tags');
+}
+let selectModificarTags = document.getElementById('selectModificarTags');
+async function modificarTagsAlbum(){
+bandera=true;
+    let selectValue = parseInt(selectModificarTags.value);
+    console.log(selectValue);
+    if(!albumSeleccionado){
+        alerta(pagina,`Debe seleccionar un Album Personal`);
+        return;
+    }
+    let a= await tags.some(tag => parseInt(tag.id_tags) === selectValue);
+    if(!a||!bandera){
+        alerta(pagina,`El Tag es Obligatorio`);
+    }else{
+        albumSeleccionado.idTags = selectValue;
+        aux = await fechProtegidoPost('/modificarTagsAlbum', albumSeleccionado);
+        if(aux.success){
+            //hacer algo con el album modificado
+            albumSeleccionado.idTags = selectValue;
+            limpiarCampos(limpiar);
+            fOcultar2();
+        }else{
+            alerta(pagina,aux.mensaje);
+        }
+    }
+}
+let divModificarEstadoAlbum=document.getElementById('divModificarEstadoAlbum');
+function modificarEstadoAlbum(){
+    limpiarCampos(limpiar);
+    mostrar(divModificarEstadoAlbum);
+}
+
+async function modificarEstadoAlbumPersonal(){
+    if(!albumSeleccionado){
+        alerta(pagina,`Debe seleccionar un Album Personal`);
+        return;
+    }
+   
+    aux = await fechProtegidoPost('/modificarActivoAlbumPersonal', albumSeleccionado);
+    if(aux.success){
+        limpiarCampos(limpiar);
+        fOcultar2();
+    }else{
+        alerta(pagina,aux.mensaje);
     }
 }
 

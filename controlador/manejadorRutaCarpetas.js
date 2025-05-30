@@ -75,8 +75,7 @@ export async function buscarAlbumesPersonalesPorId(req, res) {
         let tags = aux.map(tag => new Tags(
             tag.id_tags, tag.nombre_tags,
         ));
-console.log(albumes);
-console.log(tags);
+
         if (albumes.length === 0) {
             return retornarExito(res, "No se encontraron albumes personales para el perfil especificado");
         }
@@ -104,8 +103,47 @@ export async function modificarTituloAlbum(req, res) {
         return retornarError(res, `Error al modificar el título del album: ${error}`);
     }
 }
+export async function modificarTagsAlbum(req, res) {
+    try {
+        const album=req.body;
+        aux=await existeBd(album.idAlbumPersonal,'album_personal','id_album_personal');
+        if (aux instanceof Error) return retornarError(res, `Error al verificar el album: ${aux}`);
+        if (!aux) return retornarError(res, "El album no existe");
+        aux= await verificarYup(album,'albumPersonal');
+        aux=await existeBd(album.idTags,'tags','id_tags');
+        if (aux instanceof Error) return retornarError(res, `Error al verificar el tags: ${aux}`);
+        if (!aux) return retornarError(res, "El tags no existe");
+        aux=await AlbumPersonal.modificarTags(album);
+        if (aux instanceof Error) return retornarError(res, `Error al modificar los tags del album: ${aux}`);
+        //hacer metodo clase y data
+        return retornarExito(res, "Tags del album modificados exitosamente");
+    } catch (error) {
+        console.error("Error al modificar los tags del album", error);
+        return retornarError(res, `Error al modificar los tags del album: ${error}`);
+    }
+}
+export async function modificarActivoAlbumPersonal(req, res) {
+    try {
+        const album = req.body;
+        aux = await existeBd(album.idAlbumPersonal, 'album_personal', 'id_album_personal');
+        if (aux instanceof Error) return retornarError(res, `Error al verificar el album: ${aux}`);
+        if (!aux) return retornarError(res, "El album no existe");
+        aux = await verificarYup(album, 'albumPersonal');
+        if (aux instanceof Error) return retornarError(res, `Error al verificar el album: ${aux}`);
+        aux = await AlbumPersonal.modificarActivoAlbumPersonal(album);
+        if (aux instanceof Error) return retornarError(res, `Error al modificar el estado del album: ${aux}`);
+        //hacer metodo clase y data
+        return retornarExito(res, "Estado del album modificado exitosamente");
+    } catch (error) {
+        console.error("Error al modificar el estado del album", error);
+        return retornarError(res, `Error al modificar el estado del album: ${error}`);
+    }
+}
 export default {
     accederAlbumes,
     crearAlbum,
-    buscarAlbumesPersonalesPorId
+    buscarAlbumesPersonalesPorId,
+    modificarTituloAlbum,
+    modificarTagsAlbum,
+    modificarActivoAlbumPersonal
 };

@@ -10,16 +10,25 @@ class AlbumPersonalData {
 ;
         return await consulta1(query, idPerfilPersonal);
     }
+    static async modificarTitulo(album) {
+        query = 'UPDATE `album_personal` SET `titulo_album_personal` = ? WHERE `id_album_personal` = ?';
+        return await consulta1(query, album.tituloAlbumPersonal, album.idAlbumPersonal);
+    }
+    static async modificarTags(album) {
+        query = 'UPDATE `album_personal` SET `id_tags` = ? WHERE `id_album_personal` = ?';
+        return await consulta1(query, album.idTags, album.idAlbumPersonal);
+    }
+    static modificarActivoAlbumPersonal(alb) {  
+        query = 'UPDATE `album_personal` SET `activo_album_personal` = ? WHERE `id_album_personal` = ?';
+        return consulta1(query, alb.activoAlbumPersonal, alb.idAlbumPersonal);
+    }
     //revirsar para abajo
     static async consultaAlbumPersonal() {
         query = 'SELECT * FROM `album_personal` WHERE 1';
         return await consulta1(query);
     }
 
-    static async modificarActivoAlbumPersonal(alb) {
-        query = 'UPDATE `album_personal` SET `activo_album` = ? WHERE `id_album` = ?';
-        return await consulta1(query, alb.activoAlbum, alb.idAlbum);
-    }
+   
 
     static async modificarNombreAlbumPersonal(alb) {
         query = 'UPDATE `album_personal` SET `nombre_album` = ? WHERE `id_album` = ?';

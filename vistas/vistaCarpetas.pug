@@ -1,6 +1,8 @@
 extends layout
 block script1 
     script(src="domCarpetas.js", defer)
+    script(src="domImagenes.js", defer)
+    script(src="domFunsionesPersinal.js", defer)
 block content
         #divProfesionalAcceso.grid12-1-1 
                 h3 USUARIO
@@ -37,18 +39,44 @@ block content
                                 th id Album
                                 th Titulo Album
                                 th Tags
-                                th Activo
+                                th Estado
                                 th Seleccionar
                         tbody#cuerpo
-        #divAlbumPersonalSeleccionado.ocultar.grid12-1-4.form 
-               p#pDatosAlbumSeleccionado 
-               buton.boton2(type="button",onclick='modificarTitulo()') Modificar Titulo del Album
-               buton.boton2(type="button",onclick='modificarTags()') Modificar Tags del Album
-               buton.boton2(type="button",onclick='eliminarAlbum()') Eliminar Album 
-               #divModificarTitulo.ocultar2 
-                           label(for="inputModificarTituloAlbum") Modificar Titulo del Album
-                           input.limpiar(type="text", id="inputModificarTituloAlbum", name="inputModificarTituloAlbum", placeholder="Nuevo Titulo del Album", required)
-                           button.boton2(type="button", onclick='modificarTituloAlbum()') Modificar Titulo              
+        #divAlbumPersonalSeleccionado.ocultar2.grid12-1-4.form 
+                p#pDatosAlbumSeleccionado 
+                button.boton2(type="button",onclick='modificarTitulo()') Modificar Titulo 
+                button.boton2(type="button",onclick='modificarTags()') Modificar Tags 
+                button.boton2(type="button",onclick='modificarEstadoAlbum()') modificar Estado 
+                button.boton2(type="button",onclick='subirImagen()') Subir Imagen
+        #divModificarTitulo.ocultar2.form.grid12-1-5 
+                label(for="inputModificarTituloAlbum") Modificar Titulo del Album
+                br
+                input.limpiar(type="text", id="inputModificarTituloAlbum", name="inputModificarTituloAlbum", placeholder="Nuevo Titulo del Album", required)
+                br
+                button.boton(type="button", onclick='modificarTituloAlbum()') Modificar Titulo
+        #divModificarTags.ocultar2.form.grid12-1-5 
+                label(for="selectModificarTags") Modificar Tags del Album
+                br
+                select#selectModificarTags(name="tag")
+                        option(value="") Selecciona un tag
+                        each tag in tags
+                                option(value=tag.id_tags)= tag.nombre_tags 
+                br
+                button.boton(type="button", onclick='modificarTagsAlbum()') Modificar Tags 
+        #divModificarEstadoAlbum.ocultar2.form.grid12-1-5
+                button.boton(type="button", onclick='modificarEstadoAlbumPersonal()') Modificar Estado del Album
+        #divSubirImagen.ocultar2.form.grid12-1-5
+                form#formSubirImagenAlbum(method="POST", action="/subirImagen", enctype="multipart/form-data")
+                                label(for="imagenSubir") Selecciona una imagen:
+                                input.limpiar(type="file", id="imagenSubir", name="imagenSubir", accept="image/*", required, style="display:none")
+                                br                               
+                                button(type="button", onclick="document.getElementById('imagenSubir').click()") Elegir archivo
+                                br
+                                span#nombreArchivoSubir No se ha seleccionado archivo
+                                br
+                                input.limpiar(type="hidden", name="idPerfil")
+                                input.limpiar(type="hidden", name="idAlbumSeleccionado")
+                                button(type="submit") Subir Imagen                                    
         script.    
                      const perfil = !{JSON.stringify(perfil)}; 
         script. 
