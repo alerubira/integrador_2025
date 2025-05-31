@@ -13,5 +13,8 @@ class Imagen{
     static async alta(imagen,idAlbumPersonal) {
         return await ImagenData.alta(imagen,idAlbumPersonal);
     }
+    static async buscarImagenesPorIdAlbumPersonal(idAlbumPersonal) {
+        return await ImagenData.buscarImagenesPorIdAlbumPersonal(idAlbumPersonal);
+    }
 }
 export { Imagen };
