@@ -2,7 +2,7 @@ extends layout
 block script1 
     script(src="domCarpetas.js", defer)
     script(src="domImagenes.js", defer)
-    script(src="domFunsionesPersinal.js", defer)
+    script(src="domFunsionesPersonal.js", defer)
 block content
         #divProfesionalAcceso.grid12-1-1 
                 h3 USUARIO
@@ -74,8 +74,8 @@ block content
                                 br
                                 span#nombreArchivoSubir No se ha seleccionado archivo
                                 br
-                                input.limpiar(type="hidden", name="idPerfil")
-                                input.limpiar(type="hidden", name="idAlbumSeleccionado")
+                                input#idPerfil.limpiar(type="hidden", name="idPerfil")
+                                input#idAlbumSeleccionado.limpiar(type="hidden", name="idAlbumSeleccionado")
                                 button(type="submit") Subir Imagen                                    
         script.    
                      const perfil = !{JSON.stringify(perfil)}; 

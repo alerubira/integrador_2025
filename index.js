@@ -74,7 +74,7 @@ app.use('/buscarAlbumesPersonalesPorId',rutaCarpetas);
 app.use('/modificarTituloAlbum',rutaCarpetas);
 app.use('/modificarTagsAlbum', rutaCarpetas);
 app.use('/modificarActivoAlbumPersonal', rutaCarpetas);
-app.use('/subirImagen', rutaImagen);
+app.use('/', rutaImagen);
  // Iniciar el servidor
  app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);

@@ -5,6 +5,7 @@ import{Tags}from "../modelo/claseTags.js";
 import { verificarYup } from "./verificaryup.js";
 import { existeBd } from "../modelo/conexxionBD.js";
 import { AlbumPersonal } from "../modelo/claseAlbumPersonal.js";
+import { Imagen } from "../modelo/claseImagen.js";
 let aux;
 export async function subirImagen(req, res) {
     try {
