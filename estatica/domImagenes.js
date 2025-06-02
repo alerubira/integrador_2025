@@ -2,14 +2,18 @@ let divSubirImagen = document.getElementById('divSubirImagen');
 let idPerfil=document.getElementById('idPerfil');
 let idAlbumSeleccionado=document.getElementById('idAlbumSeleccionado');
 function subirImagen() {
-    limpiarCampos(limpiar);
+    bandera=true;
+    if(!validar(albumSeleccionado.cantidadImagenes>parametros.tamaño5,pagina,`la carpeta esta completa ${parametros.cartelTamño5}`,))bandera=false;
+    if(bandera){
+ limpiarCampos(limpiar);
     mostrar(divSubirImagen);
     idPerfil.value=perfil.idPerfil;
     idAlbumSeleccionado.value=parseInt(albumSeleccionado.idAlbumPersonal);
     document.getElementById('imagenSubir').addEventListener('change', function(){
     document.getElementById('nombreArchivoSubir').textContent = this.files[0]?.name || 'No se ha seleccionado archivo';
-});
+   });
 
+}
 }
 document.getElementById('formSubirImagenAlbum').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -37,8 +41,8 @@ if(aux.success){
 //agregar un evento click a cada imagen para capturar el idImagen
    aux.urlImagen.forEach(imagen => {
          let divImagen = document.createElement('div');
-         divImagen.className = 'imagenAlbum';
-         divImagen.innerHTML = `<img src="${imagen.urlImagen}" alt="Imagen del álbum" class="img-thumbnail">`;
+         divImagen.className = 'divContenedorImagen';
+         divImagen.innerHTML = `<img src="${imagen.urlImagen}" alt="Imagen del álbum" class="imagenAlbum">`;
          divImagen.addEventListener('click', function() {
               capturarImagenSeleccionada(imagen.idImagen);
          });

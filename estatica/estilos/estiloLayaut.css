@@ -36,6 +36,7 @@ nav{
      text-align: center;
     /* height: 400px; /* Añadir esta línea para un alto fijo */
      margin: 1rem;
+      aspect-ratio: 1 / 2;    /* Hace que el alto sea igual al ancho */
    }
 footer{
     background-color: #90EE90; /* Fondo verde claro */

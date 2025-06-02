@@ -1,7 +1,7 @@
 import { consulta1,existeBd,pool } from "./conexxionBD.js";
 let query;
 class ImagenData{
-    static async  alta(imagen,idAlbum) {
+    static async  alta(imagen,idAlbum,cantidad) {
         let connection;
         try {
             connection = await pool.getConnection();
@@ -17,7 +17,11 @@ class ImagenData{
                 'INSERT INTO `album_imagen`(`id_album`, `id_imagen`,`activo_album_imagen`) VALUES (?,?,?)',
                 [idAlbum, id_imagen,true]
             );
-           
+             let cant=cantidad+1;
+           const [sumarCantidadResult] = await connection.execute(
+                'UPDATE album_personal SET cantidad_imagenes=? WHERE id_album_personal = ?',
+                  [cant, idAlbum]
+            );
             await connection.commit();
             return { success: true };
         } catch (error) {

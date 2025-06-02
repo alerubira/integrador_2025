@@ -10,8 +10,8 @@ class Imagen{
         this.idVisivilidad = idVisivilidad;
         this.activoImagen = activoImagen;
     }
-    static async alta(imagen,idAlbumPersonal) {
-        return await ImagenData.alta(imagen,idAlbumPersonal);
+    static async alta(imagen,idAlbumPersonal,cantidad) {
+        return await ImagenData.alta(imagen,idAlbumPersonal,cantidad);
     }
     static async buscarImagenesPorIdAlbumPersonal(idAlbumPersonal) {
         return await ImagenData.buscarImagenesPorIdAlbumPersonal(idAlbumPersonal);

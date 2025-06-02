@@ -16,6 +16,8 @@ const parametros={
     cartelLoginMal:"Usuario o contraseña incorrectos",
     tamaño4:298,
     cartelTamaño4:"no debe superar los 298 caracteres",
+    tamaño5:20,
+    cartelTamaño5:"no debe superar las 20"
 }
 /*/^[a-zA-Z\s]+$/ expresion regular:a-zA-Z: Permite letras minúsculas y mayúsculas.
 \s: Permite espacios en blanco.

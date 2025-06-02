@@ -34,5 +34,9 @@ class AlbumPersonalData {
         query = 'UPDATE `album_personal` SET `nombre_album` = ? WHERE `id_album` = ?';
         return await consulta1(query, alb.nombreAlbum, alb.idAlbum);
     }
+    static async consultaCantidaImagenesPorId(id){
+        query='SELECT cantidad_imagenes FROM `album_personal` WHERE id_album_personal=?';
+        return await consulta1(query,id);
+    }
 }
 export{ AlbumPersonalData };

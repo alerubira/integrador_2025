@@ -30,6 +30,9 @@ static async modificarActivoAlbumPersonal(album) {
     }
     return await AlbumPersonalData.modificarActivoAlbumPersonal(album); 
 }
+static async consultaCantidaImagenesPorId(id){
+    return await AlbumPersonalData.consultaCantidaImagenesPorId(id);
+}
 }
 export{ AlbumPersonal
 };

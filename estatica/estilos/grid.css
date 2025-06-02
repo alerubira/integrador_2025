@@ -50,6 +50,11 @@
     grid-column-start: 7;/* inicia en la columna 7*/
     grid-row-start: 1;/* inicia en la fila 1 */
 }
+.grid6-4-5{
+    grid-column:span 6/ span 6;
+    grid-column-start:4;
+    grid-row-start: 5;
+}
 .grid8-3-2{
     grid-column: span 8 / span 8;/* ocupa 4 columnas */
     grid-column-start: 3;/* inicia en la columna 3*/
@@ -80,6 +85,7 @@
     grid-column-start: 4;/* inicia en la columna 4*/
     grid-row-start: 4/* inicia en la fila 4 */
 }
+
 
    
     

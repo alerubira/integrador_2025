@@ -120,6 +120,7 @@ filtro="";//controlar que no se quede seleccionado
  let divAlbumSeleccionado= document.getElementById('divAlbumPersonalSeleccionado');
  let pDatosAlbumSeleccionado=document.getElementById('pDatosAlbumSeleccionado');
  function seleccionarAlbum(){
+        
         let idAlbumPersonal = parseInt(this.parentNode.parentNode.firstChild.textContent);
         albumSeleccionado = albumes.find(album => album.idAlbumPersonal === idAlbumPersonal);
         eliminarHijos(cuerpo);

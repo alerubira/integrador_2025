@@ -9,6 +9,13 @@ import { Imagen } from "../modelo/claseImagen.js";
 let aux;
 export async function subirImagen(req, res) {
     try {
+        let cantidad=await AlbumPersonal.consultaCantidaImagenesPorId(req.body.idAlbumSeleccionado);
+        if(cantidad instanceof Error){
+            return retornarError(res,`Error al buscar la cantidad de imagenes en la carpeta ${cantidad}`)
+        }
+        if(cantidad>parametros.tamaño5){
+            return retornarError(res,`El Album esta completo ${parametros.cartelTamaño5}`)
+        }
         const urlImagen = '/imagenesAlbum/' + req.file.filename;
         aux=await existeBd(req.body.idAlbumSeleccionado,'album_personal','id_album_personal');
         if (aux instanceof Error) {
@@ -32,7 +39,7 @@ export async function subirImagen(req, res) {
             idVisivilidad: 4,
             activoImagen: false
         }
-        aux=await Imagen.alta(imagen, req.body.idAlbumSeleccionado);
+        aux=await Imagen.alta(imagen, req.body.idAlbumSeleccionado,cantidad);
         if(aux instanceof Error) {
             return retornarError(res, `Error al guardar la imagen: ${aux}`);
         }   
