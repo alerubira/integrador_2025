@@ -137,8 +137,10 @@ filtro="";//controlar que no se quede seleccionado
 let divModificarTitulo = document.getElementById('divModificarTitulo');    
 function modificarTitulo(){
     //fOcultar2();
+    fOcultar3();
     limpiarCampos(limpiar);
     mostrar(divModificarTitulo);
+    eliminarHijos(divMostrarImagenes);
 }  
 let inputModificarTituloAlbum = document.getElementById('inputModificarTituloAlbum');  
 async function modificarTituloAlbum(){
@@ -164,8 +166,10 @@ async function modificarTituloAlbum(){
 }
 let divModificarTags = document.getElementById('divModificarTags');
 function modificarTags(){
+    fOcultar3();
     limpiarCampos(limpiar);
     mostrar(divModificarTags);
+    eliminarHijos(divMostrarImagenes);
     //llenarSelect(selectTags,tagss,'id_tags','nombre_tags');
 }
 let selectModificarTags = document.getElementById('selectModificarTags');
@@ -187,7 +191,7 @@ bandera=true;
             //hacer algo con el album modificado
             albumSeleccionado.idTags = selectValue;
             limpiarCampos(limpiar);
-            fOcultar2();
+            fOcultar3();
         }else{
             alerta(pagina,aux.mensaje);
         }
@@ -195,8 +199,10 @@ bandera=true;
 }
 let divModificarEstadoAlbum=document.getElementById('divModificarEstadoAlbum');
 function modificarEstadoAlbum(){
+    fOcultar3();
     limpiarCampos(limpiar);
     mostrar(divModificarEstadoAlbum);
+    eliminarHijos(divMostrarImagenes);
 }
 
 async function modificarEstadoAlbumPersonal(){
@@ -208,7 +214,7 @@ async function modificarEstadoAlbumPersonal(){
     aux = await fechProtegidoPost('/modificarActivoAlbumPersonal', albumSeleccionado);
     if(aux.success){
         limpiarCampos(limpiar);
-        fOcultar2();
+        fOcultar3();
     }else{
         alerta(pagina,aux.mensaje);
     }

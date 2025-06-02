@@ -6,6 +6,8 @@ function subirImagen() {
     if(!validar(albumSeleccionado.cantidadImagenes>parametros.tamaño5,pagina,`la carpeta esta completa ${parametros.cartelTamño5}`,))bandera=false;
     if(bandera){
  limpiarCampos(limpiar);
+    eliminarHijos(divMostrarImagenes);
+    fOcultar3();
     mostrar(divSubirImagen);
     idPerfil.value=perfil.idPerfil;
     idAlbumSeleccionado.value=parseInt(albumSeleccionado.idAlbumPersonal);
@@ -26,6 +28,7 @@ document.getElementById('formSubirImagenAlbum').addEventListener('submit', async
      limpiarCampos(limpiar);
     fOcultar();
     fOcultar2();
+    fOcultar3();
        //alerta('Imagen subida correctamente');
    }else{
         alerta('Hubo un inconveniente al subir la imagen: ' );
@@ -35,7 +38,9 @@ let divMostrarImagenes = document.getElementById('divMostrarImagenes');
 let divImagenSeleccionada = document.getElementById('divImagenSeleccionada');
 async function verImagenes(){
 aux=await fechProtegidoPost('/buscarImagenesPorIdAlbumPersonal', {idAlbum: albumSeleccionado.idAlbumPersonal})
-
+eliminarHijos(divMostrarImagenes);
+fOcultar3();
+mostrar(divMostrarImagenes);
 if(aux.success){
 //recorrer aux.urlImagen crear un div con la imagen agregarle un evento click para recuperar el idImagen y agregarlo al divMostrarImagenes
 //agregar un evento click a cada imagen para capturar el idImagen
@@ -47,9 +52,11 @@ if(aux.success){
               capturarImagenSeleccionada(imagen.idImagen);
          });
          divMostrarImagenes.appendChild(divImagen);
+         //rescatar y agregar datos de la imagen
    });
 }}
 function capturarImagenSeleccionada(idImagen) {
+    eliminarHijos(divMostrarImagenes);
     console.log("Imagen seleccionada con ID:", idImagen);
     limpiarCampos(limpiar);
 }

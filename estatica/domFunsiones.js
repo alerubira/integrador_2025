@@ -1,6 +1,7 @@
 //console.log('dom funsiones');
  let ocultar=document.getElementsByClassName('ocultar');
  let ocultar2=document.getElementsByClassName('ocultar2');
+ let ocultar3=document.getElementsByClassName('ocultar3');
 let limpiar=document.querySelectorAll('.limpiar');
 let limpiarP=document.querySelectorAll('.limpiarP');
 let limpiarPr=document.querySelectorAll('.limpiarPr');
@@ -40,7 +41,12 @@ function eliminarObjetoPorId(arreglo, id, propiedad) {
     for (let elemento of ocultar2) {
         elemento.style.display = 'none';
             }
- }       
+ } 
+ function fOcultar3(){
+  for(let element of ocultar3){
+    element.style.display='none';
+  }
+ }      
  function mostrar(elemento){
     fOcultar();
     elemento.style.display = 'block';

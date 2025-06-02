@@ -13,7 +13,7 @@ export async function subirImagen(req, res) {
         if(cantidad instanceof Error){
             return retornarError(res,`Error al buscar la cantidad de imagenes en la carpeta ${cantidad}`)
         }
-        if(cantidad>parametros.tamaño5){
+        if(cantidad[0].cantidad_imagenes>parametros.tamaño5){
             return retornarError(res,`El Album esta completo ${parametros.cartelTamaño5}`)
         }
         const urlImagen = '/imagenesAlbum/' + req.file.filename;
@@ -39,7 +39,7 @@ export async function subirImagen(req, res) {
             idVisivilidad: 4,
             activoImagen: false
         }
-        aux=await Imagen.alta(imagen, req.body.idAlbumSeleccionado,cantidad);
+        aux=await Imagen.alta(imagen, req.body.idAlbumSeleccionado,cantidad[0].cantidad_imagenes);
         if(aux instanceof Error) {
             return retornarError(res, `Error al guardar la imagen: ${aux}`);
         }   
