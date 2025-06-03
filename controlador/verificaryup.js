@@ -65,6 +65,18 @@ const ProfesionalY= BasePersonaY.shape({//dejar
         .max(parametros.tamaño1,`El nombre del Album debe tener como maximo ${parametros.tamaño1} caracteres`)
         .required('El nombre del Album es obligatorio'),
  });
+ const imagenY=yup.object().shape({
+    urlImagen:yup.string()
+        .required('La Imagen debe contener una url'),
+    tituloImagen:yup.string()
+        .max(parametros.tamaño1,`El Titulo de la Imagen debe tener como maximo:${parametros.tamaño1} `)
+        .nullable(),
+    captionImagen:yup.string()
+        .max(parametros.tamaño1,`El Titulo de la Imagen debe tener como maximo:${parametros.tamaño1} `)
+        .nullable(),
+    idVisibilidad:yup.string()
+       .required('La imagen debe contener una visibilidad')    
+ })
     
 async function verificarYup(objeto,nombre){
     let aux;
@@ -92,7 +104,9 @@ async function verificarYup(objeto,nombre){
                 break; 
             case'albumPersonal':
                 return await verificarY(objeto,albumPersonalY);
-                break;         
+                break; 
+            case'imagen':
+            return await verificarYup(objeto,imagenY)            
              default:
                 return retornarErrorSinRes('Seleccion no valida en verificar para yup');
        }

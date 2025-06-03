@@ -21,6 +21,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 rutaImagen.post('/subirImagen', manejadorDeRutasLogin.verificarToken,upload.single('imagenSubir') , manejadorRutaImagen.subirImagen);
 rutaImagen.post('/buscarImagenesPorIdAlbumPersonal', manejadorDeRutasLogin.verificarToken, manejadorRutaImagen.buscarImagenesPorIdAlbumPersonal);
-rutaImagen.post('/modificarTituloPorId',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.modificarTituloPorId);
-rutaImagen.post('/modificarCaptionPorId',manejadorDeRutasLogin.verificarToken,manejadorRutaImagen.modificarCaptionPorId);
+rutaImagen.post('/modificarTituloImagenPorId',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.modificarTituloImagenPorId);
+rutaImagen.post('/modificarCaptionImagenPorId',manejadorDeRutasLogin.verificarToken,manejadorRutaImagen.modificarCaptionImagenPorId);
 export{rutaImagen}

@@ -76,7 +76,6 @@ let imagenSeleccionada;
 function capturarImagenSeleccionada(imagen) {
    imagenSeleccionada=imagen;
     eliminarHijos(divMostrarImagenes);
-    console.log(imagen);
     limpiarCampos(limpiar);
     fOcultar3();
     mostrar(divImagenSeleccionada);
@@ -112,7 +111,8 @@ async function modificarTituloImagen(){
    if(!bandera){
       alerta(pagina,"algo esta mal con el titulo seleccionado")
    }else{
-      let img=imagenSeleccionada;
+      let img={}
+      img=imagenSeleccionada;
       img.tituloImagen=inputValue;
        aux =await fechProtegidoPost('/modificarTituloImagenPorId',img);
         if(aux.success){
@@ -132,14 +132,17 @@ function mostrarModificarCaption(){
 }
 let inputModificarCaptionImagen=document.getElementById('inputModificarCaptionImagen');
 async function modificarCaptionImagen(){
+
  bandera=true;
     inputValue=inputModificarCaptionImagen.value;
 if(!validar(inputValue.length<1||inputValue.length>parametros.tamaño1,pagina,`El Caption es obligatorio y ${parametros.cartelTamño1}`,))bandera=false;
    if(!bandera){
       alerta(pagina,"algo esta mal con el Caption seleccionado")
    }else{
-      let img=imagenSeleccionada;
+      let img={}
+      img=imagenSeleccionada;
       img.captionImagen=inputValue;
+      
        aux =await fechProtegidoPost('/modificarCaptionImagenPorId',img);
         if(aux.success){
                     limpiarCampos(limpiar);

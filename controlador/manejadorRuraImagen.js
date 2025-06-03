@@ -80,17 +80,33 @@ export async function buscarImagenesPorIdAlbumPersonal(req, res) {
     });
     return retornarExito(res, "Imagenes encontradas", aux);
 }
-export async function modificarTituloPorId(req,res){
-console.log(req.body.img);
-return retornarExito(res,"Eltitulo em la image se modifico con exito");
+export async function modificarTituloImagenPorId(req,res){
+     let img=req.body;
+     aux=await existeBd(img.idImagen,'imagen','id_imagen');
+     if(aux instanceof Error){
+        return retornarError(res`Erroal buscar la Imagen`)
+     }
+     if(!aux){
+        return retornarError(res,'La imagen no existe')
+     }
+     aux =await verificarYup(img,'imagen');
+     if(aux instanceof Error){
+        return retornarError(res,`Error al verificar la tipologia de la Imagen:${aux}`)
+     }
+     aux await Imagen.modificarTituloImagenPorId(img);
+     if(aux instanceof Error){
+        return retornarError(res,`Error al modificar el titulo de la imagen:${aux}`)
+     }
+
+return retornarExito(res,"El titulo em la image se modifico con exito");
 }
-export async function modificarCaptionPorId(req,res){
+export async function modificarCaptionImagenPorId(req,res){
 console.log(req.body.img);
 return retornarExito(res,"El Caption se modofico con exito");
 }
 export default {
     subirImagen,
     buscarImagenesPorIdAlbumPersonal,
-    modificarTituloPorId,
-    modificarCaptionPorId
+    modificarTituloImagenPorId,
+    modificarCaptionImagenPorId
 }
