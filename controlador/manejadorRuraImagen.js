@@ -74,6 +74,7 @@ export async function buscarImagenesPorIdAlbumPersonal(req, res) {
             tituloImagen: imagen.titulo_imagen,
             captionImagen: imagen.caption_imagen,
             idVisivilidad: imagen.id_visibilidad,
+            tituloVisibilidad:imagen.titulo_visibilidad,
             activoImagen: imagen.activo_imagen
         };
     });

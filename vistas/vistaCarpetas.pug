@@ -50,8 +50,26 @@ block content
                 button.boton2(type="button",onclick='subirImagen()') Subir Imagen
                 button.boton2(type="button",onclick='verImagenes()') Ver Imagenes
         #divMostrarImagenes.grid6-4-5.ocultar3.form
-        #divImagenSeleccionada.ocultar3
-
+        #divImagenSeleccionada.ocultar3.form.grid6-4-6 
+                img#imgSeleccionada.imagenAlbum.limpiar
+        #divDatosImagenSeleccionada.ocultar3.form.grid6-4-7        
+                p#pImagenSeleccionada
+                button.boton2(type="button",onclick='mostrarModificarTituloImagen()') Modificar Titulo 
+                button.boton2(type="button",onclick='mostrarModificarCaption()') Modificar Caption 
+                button.boton2(type="button",onclick='mostrarModificarVisibilidad()') Modificar Visibilidad 
+                button.boton2(type="button",onclick='ModificarActivoImagen()') Habilitar Inavilitar
+        #divModificarTituloImagen.form.ocultar2.grid6-4-8
+                label(for="inputModificarTituloImagen") Modificar Titulo 
+                br
+                input.limpiar(type="text",id="inputModificarTituloImagen",name="inputModificarTituloImagen",placeHolder="Titulo Nuevo")
+                br
+                button.boton(type="button", onclick='modificarTituloImagen()') Modificar Titulo
+        #divModificarCaptionImagen.form.ocultar2.grid6-4-8
+                label(for="inputModificarCaptionImagen") Modificar Titulo 
+                br
+                input.limpiar(type="text",id="inputModificarCaptionImagen",name="inputModificarCaptionImagen",placeHolder="Caption Nuevo")
+                br
+                button.boton(type="button", onclick='modificarCaptionImagen()') Modificar Caption        
         #divModificarTitulo.ocultar3.form.grid12-1-5 
                 label(for="inputModificarTituloAlbum") Modificar Titulo del Album
                 br
@@ -80,7 +98,8 @@ block content
                                 br
                                 input#idPerfil.limpiar(type="hidden", name="idPerfil")
                                 input#idAlbumSeleccionado.limpiar(type="hidden", name="idAlbumSeleccionado")
-                                button(type="submit") Subir Imagen                                    
+                                button(type="submit") Subir Imagen  
+                                                                  
         script.    
                      const perfil = !{JSON.stringify(perfil)}; 
         script. 

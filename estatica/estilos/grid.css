@@ -40,6 +40,11 @@
     grid-column-start: 1;/* inicia en la columna 1*/
     grid-row-start: 5;/* inicia en la fila 5 */
 }
+.grid12-1-6{
+    grid-column: span 12 / span 12;
+    grid-column-start:1;
+    grid-row-start :6;
+}
 .grid6-1-1{
     grid-column: span 6 / span 6;/* ocupa 6 columnas */
     grid-column-start: 1;/* inicia en la columna 1*/
@@ -55,6 +60,22 @@
     grid-column-start:4;
     grid-row-start: 5;
 }
+.grid6-4-6{
+     grid-column:span 6/ span 6;
+    grid-column-start:4;
+    grid-row-start: 6;
+}
+.grid6-4-7 {
+     grid-column:span 6/ span 6;
+    grid-column-start:4;
+    grid-row-start: 7;
+}
+.grid6-4-8{
+     grid-column:span 6/ span 6;
+    grid-column-start:4;
+    grid-row-start: 8;
+}
+
 .grid8-3-2{
     grid-column: span 8 / span 8;/* ocupa 4 columnas */
     grid-column-start: 3;/* inicia en la columna 3*/

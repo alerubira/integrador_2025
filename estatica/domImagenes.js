@@ -35,7 +35,6 @@ document.getElementById('formSubirImagenAlbum').addEventListener('submit', async
    }
 });
 let divMostrarImagenes = document.getElementById('divMostrarImagenes');
-let divImagenSeleccionada = document.getElementById('divImagenSeleccionada');
 async function verImagenes(){
 aux=await fechProtegidoPost('/buscarImagenesPorIdAlbumPersonal', {idAlbum: albumSeleccionado.idAlbumPersonal})
 eliminarHijos(divMostrarImagenes);
@@ -49,14 +48,80 @@ if(aux.success){
          divImagen.className = 'divContenedorImagen';
          divImagen.innerHTML = `<img src="${imagen.urlImagen}" alt="Imagen del álbum" class="imagenAlbum">`;
          divImagen.addEventListener('click', function() {
-              capturarImagenSeleccionada(imagen.idImagen);
+              capturarImagenSeleccionada(imagen);
          });
          divMostrarImagenes.appendChild(divImagen);
+          let p=document.createElement('p');
+         let titulo,caption,fecha,estado;
+         fecha=formatearFecha(imagen.fechaCreacion);
+         if(!imagen.tituloImagen){
+            titulo="No contiene";
+         }else{titulo=imagen.tituloImagen}
+         if(!imagen.captionImagen){
+            caption="No contiene";
+         }else{caption=imagen.vaptionImagen}
+         if(imagen.activoImagen){
+            estado="Activo"
+         }else{estado="Inactivo"}
+         p.textContent=`fecha creacion:${fecha}--Titulo:${titulo}--Caption:${caption}---Visibilidad:${imagen.tituloVisibilidad}---Estado:${estado}`
+         divMostrarImagenes.appendChild(p);
          //rescatar y agregar datos de la imagen
    });
 }}
-function capturarImagenSeleccionada(idImagen) {
+let divImagenSeleccionada = document.getElementById('divImagenSeleccionada');
+let imgSeleccionada=document.getElementById('imgSeleccionada');
+let pImagenSeleccionada=document.getElementById('pImagenSeleccionada');
+let divDatosImagenSeleccionada=document.getElementById('divDatosImagenSeleccionada');
+let imagenSeleccionada;
+function capturarImagenSeleccionada(imagen) {
+   imagenSeleccionada=imagen;
     eliminarHijos(divMostrarImagenes);
-    console.log("Imagen seleccionada con ID:", idImagen);
+    console.log(imagen);
     limpiarCampos(limpiar);
+    fOcultar3();
+    mostrar(divImagenSeleccionada);
+    mostrar(divDatosImagenSeleccionada);
+    imgSeleccionada.src=imagen.urlImagen;
+     let titulo,caption,fecha,estado;
+         fecha=formatearFecha(imagen.fechaCreacion);
+         if(!imagen.tituloImagen){
+            titulo="No contiene";
+         }else{titulo=imagen.tituloImagen}
+         if(!imagen.captionImagen){
+            caption="No contiene";
+         }else{caption=imagen.vaptionImagen}
+         if(imagen.activoImagen){
+            estado="Activo"
+         }else{estado="Inactivo"}
+         pImagenSeleccionada.textContent=`fecha creacion:${fecha}--Titulo:${titulo}--Caption:${caption}---Visibilidad:${imagen.tituloVisibilidad}---Estado:${estado}`
+
+
 }
+let divModificarTituloImagen=document.getElementById('divModificarTituloImagen');
+function mostrarModificarTituloImagen(){
+   fOcultar2();
+   limpiarCampos(limpiar);
+   mostrar(divModificarTituloImagen);
+}
+let inputModificarTituloImagen=document.getElementById('inputModificarTituloImagen');
+async function modificarTituloImagen(){
+   //parametros.tamaño1
+   bandera=true;
+    inputValue=inputModificarTituloImagen.value;
+console.log(inputValue);
+console.log(imagenSeleccionada);
+}
+let divModificarCaptionImagen=document.getElementById('divModificarCaptionImagen');
+function mostrarModificarCaption(){
+    fOcultar2();
+   limpiarCampos(limpiar);
+   mostrar(divModificarCaptionImagen);
+}
+let inputModificarCaptionImagen=document.getElementById('inputModificarCaptionImagen');
+async function modificarCaptionImagen(){
+ bandera=true;
+    inputValue=inputModificarCaptionImagen.value;
+console.log(inputValue);
+console.log(imagenSeleccionada);
+}
+

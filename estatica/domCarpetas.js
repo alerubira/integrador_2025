@@ -40,6 +40,8 @@ dtlTagsFiltrar=document.getElementById('dtlTagsFiltrar');
 async function mostrarAlbumes(){
     limpiarCampos(limpiar);
     fOcultar();
+    fOcultar3();
+    fOcultar2();
     mostrar(divMostrarAlbumes);
     aux=await fechProtegidoPost('/buscarAlbumesPersonalesPorId',{ idPerfilPersonal: perfil.idPerfil });
     if(aux.success){

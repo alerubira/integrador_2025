@@ -256,5 +256,12 @@ async function fechGetProtegido(ruta) {
 function ingresarRegistro(){
     window.location.href = '/registro';
 }
+function formatearFecha(fechaISO) {
+    const fecha = new Date(fechaISO);
+    const dia = fecha.getDate().toString().padStart(2, '0');
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Los meses van de 0 a 11
+    const anio = fecha.getFullYear();
+    return `${dia}/${mes}/${anio}`;
+}
 //export{Focultar};
 

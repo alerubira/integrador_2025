@@ -1,6 +1,6 @@
 import { ImagenData } from "./imagenData.js";
 class Imagen{
-    constructor(idImagen,urlImagen,fechaCreacion,tituloImagen,captionImagen,idVisivilidad,activoImagen)
+    constructor(idImagen,urlImagen,fechaCreacion,tituloImagen,captionImagen,idVisivilidad,tituloVisibilidad,activoImagen)
     {
         this.idImagen = idImagen;
         this.urlImagen = urlImagen;
@@ -8,6 +8,7 @@ class Imagen{
         this.tituloImagen = tituloImagen;
         this.captionImagen = captionImagen;
         this.idVisivilidad = idVisivilidad;
+        this.tituloVisibilidad=tituloVisibilidad;
         this.activoImagen = activoImagen;
     }
     static async alta(imagen,idAlbumPersonal,cantidad) {
