@@ -17,5 +17,11 @@ class Imagen{
     static async buscarImagenesPorIdAlbumPersonal(idAlbumPersonal) {
         return await ImagenData.buscarImagenesPorIdAlbumPersonal(idAlbumPersonal);
     }
+    static async modificarTiyuloPorId(img){
+        return await ImagenData.modificarTituloPorId(img);
+    }
+    static async modificarCaptionPorId(img){
+        return await ImagenData.modificarCaptionPorId(img);
+    }
 }
 export { Imagen };

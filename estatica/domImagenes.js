@@ -108,9 +108,22 @@ async function modificarTituloImagen(){
    //parametros.tamaño1
    bandera=true;
     inputValue=inputModificarTituloImagen.value;
-console.log(inputValue);
-console.log(imagenSeleccionada);
-}
+   if(!validar(inputValue.length<1||inputValue.length>parametros.tamaño1,pagina,`El Titulo es obligatorio y ${parametros.cartelTamño1}`,))bandera=false;
+   if(!bandera){
+      alerta(pagina,"algo esta mal con el titulo seleccionado")
+   }else{
+      let img=imagenSeleccionada;
+      img.tituloImagen=inputValue;
+       aux =await fechProtegidoPost('/modificarTituloImagenPorId',img);
+        if(aux.success){
+                    limpiarCampos(limpiar);
+                    fOcultar2();
+                }else{alerta(pagina,`Algo sali mal al crear Album:${aux.mensaje}`)}
+   }
+     
+   }
+
+
 let divModificarCaptionImagen=document.getElementById('divModificarCaptionImagen');
 function mostrarModificarCaption(){
     fOcultar2();
@@ -121,7 +134,17 @@ let inputModificarCaptionImagen=document.getElementById('inputModificarCaptionIm
 async function modificarCaptionImagen(){
  bandera=true;
     inputValue=inputModificarCaptionImagen.value;
-console.log(inputValue);
-console.log(imagenSeleccionada);
+if(!validar(inputValue.length<1||inputValue.length>parametros.tamaño1,pagina,`El Caption es obligatorio y ${parametros.cartelTamño1}`,))bandera=false;
+   if(!bandera){
+      alerta(pagina,"algo esta mal con el Caption seleccionado")
+   }else{
+      let img=imagenSeleccionada;
+      img.captionImagen=inputValue;
+       aux =await fechProtegidoPost('/modificarCaptionImagenPorId',img);
+        if(aux.success){
+                    limpiarCampos(limpiar);
+                    fOcultar2();
+                }else{alerta(pagina,`Algo sali mal al crear Album:${aux.mensaje}`)}
+   }
 }
 

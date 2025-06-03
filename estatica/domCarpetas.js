@@ -31,7 +31,7 @@ async function crearAlbum(){
                     limpiarCampos(limpiar);
                     fOcultar();
                     selectTags.selectedIndex=0;
-                }
+                }else{alerta(pagina,`Algo sali mal al crear Album:${aux.mensaje}`)}
         }
 }
 let divMostrarAlbumes = document.getElementById("divMostrarAlbumes");

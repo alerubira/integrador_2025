@@ -41,6 +41,14 @@ class ImagenData{
           return await consulta1(query, idAlbumPersonal);
 
     }
+    static async modificarTituloPorId(img){
+         query='UPDATE imagen SET titulo_imagen=? WHERE id_imagen = ?'
+         return await consulta1(query,img.tituloImagen,img.idImagen) 
+           }
+    static async modificarCaptionPorId(img){
+        query='UPDATE imagen SET caption_imagen=? WHERE id_imagen = ?'
+         return await consulta1(query,img.captionImagen,img.idImagen) 
+    }
 }
 
 export { ImagenData };

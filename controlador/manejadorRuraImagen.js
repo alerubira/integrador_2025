@@ -80,7 +80,17 @@ export async function buscarImagenesPorIdAlbumPersonal(req, res) {
     });
     return retornarExito(res, "Imagenes encontradas", aux);
 }
+export async function modificarTituloPorId(req,res){
+console.log(req.body.img);
+return retornarExito(res,"Eltitulo em la image se modifico con exito");
+}
+export async function modificarCaptionPorId(req,res){
+console.log(req.body.img);
+return retornarExito(res,"El Caption se modofico con exito");
+}
 export default {
     subirImagen,
-    buscarImagenesPorIdAlbumPersonal
+    buscarImagenesPorIdAlbumPersonal,
+    modificarTituloPorId,
+    modificarCaptionPorId
 }
