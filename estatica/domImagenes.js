@@ -184,5 +184,12 @@ async function modificarVisibilidadImagen(){
       alerta(pagina,'Algo sali mal al modificar la visibilidad')
     }
 }
+async function modificarActivoImagen(){
+   aux=await fechProtegidoPost('/modificarActiviImagen',imagenSeleccionada)
+if(aux.success){
+   limpiarCampos(limpiar);
+       fOcultar2();
+}else{alerta(pagina,"Algo salio mal al activar inactivar la imagen")}
+}
 
 

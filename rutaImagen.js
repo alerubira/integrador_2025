@@ -5,6 +5,7 @@ import manejadorRutaCarpetas  from './controlador/manejadorRutaCarpetas.js';
 import manejadorRutaImagen from './controlador/manejadorRuraImagen.js';
 import path from 'path';
 import multer from 'multer';
+import sharp from 'sharp';
 import manejadorRuraImagen from './controlador/manejadorRuraImagen.js';
 // Configuración de almacenamiento de Multer
 const storage = multer.diskStorage({
@@ -25,4 +26,5 @@ rutaImagen.post('/modificarTituloImagenPorId',manejadorDeRutasLogin.verificarTok
 rutaImagen.post('/modificarCaptionImagenPorId',manejadorDeRutasLogin.verificarToken,manejadorRutaImagen.modificarCaptionImagenPorId);
 rutaImagen.post('/buscarVisibilidad',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarVisibilidad);
 rutaImagen.post('/modificarVisibilidadImagen',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.modificarVisibilidadImagen);
+rutaImagen.post('/modificarActiviImagen',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.modificarActiviImagen);
 export{rutaImagen}

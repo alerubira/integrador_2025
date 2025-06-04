@@ -164,11 +164,28 @@ export async function modificarVisibilidadImagen(req,res){
        }
        return retornarExito(res,'La visibilidad se modifico con exito')
 }
+export async function modificarActiviImagen(req,res){
+       let img=req.body;
+     aux =await existeBd(img.idImagen,'imagen','id_imagen');
+       if(aux instanceof Error){
+        return retornarError(res,'Error al buscar la imagen')
+       }
+       if(!aux){
+        return retornarError(res,'LA Imagen no existe');
+       }
+      
+       aux=await Imagen.modificarActivoImagen(img);
+       if(aux instanceof Error){
+        return retornarError(res,`Error al modificar el activo de la imagen ${aux}`)
+       }
+       return retornarExito(res,'El activo se modifico con exito')
+}
 export default {
     subirImagen,
     buscarImagenesPorIdAlbumPersonal,
     modificarTituloImagenPorId,
     modificarCaptionImagenPorId,
     buscarVisibilidad,
-    modificarVisibilidadImagen
+    modificarVisibilidadImagen,
+    modificarActiviImagen
 }

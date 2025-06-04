@@ -81,6 +81,7 @@ app.use('/modificarTituloImagenPorId',rutaImagen);
 app.use('/modificarCaptionImagenPorId',rutaImagen);
 app.use('/buscarVisibilidad',rutaImagen);
 app.use('/modificarVisibilidadImagen',rutaImagen);
+app.use('/modificarActiviImagen',rutaImagen);
  // Iniciar el servidor
  app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);

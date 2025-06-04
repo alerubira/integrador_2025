@@ -26,5 +26,11 @@ class Imagen{
     static async modificarVisibilidad(img){
         return await ImagenData.modificarVisibilidad(img);
     }
+    static async modificarActivoImagen(img){
+        if(img.activoImagen===1){
+            img.activoImagen=0;
+        }else{img.activoImagen=1;}
+        ImagenData.modificarActivoImagen(img)
+    }
 }
 export { Imagen };

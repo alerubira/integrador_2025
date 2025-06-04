@@ -1,13 +1,14 @@
 import express from 'express';
 import manejadorDeRutasLogin from './controlador/manejadorDeRutasLogin.js';
 import manejadorRutaPerfil  from './controlador/manejadorRutaPerfil.js';
-const rutaPerfil = express.Router();
 import path from 'path';
 import multer from 'multer';
+const rutaPerfil = express.Router();
+
 // Configuración de almacenamiento de Multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'estatica/imagenesPerfil'); // Carpeta donde se guardan las imágenes
+    cb(null, 'estatica/tmp'); // Carpeta temporal donde se guardan las imágenes
   },
   filename: function (req, file, cb) {
     // Nombre único para evitar conflictos

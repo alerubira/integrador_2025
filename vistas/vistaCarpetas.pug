@@ -8,6 +8,7 @@ block content
                 h3 USUARIO
                         label#lblNombreYApellido=`${perfil.nombrePersona}  ${perfil.apellidoPersona}`
                 img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")
+        
         #divContenedorAlbum.grid12-1-2.contenedorGrid
                         section#sectionCrearAlbum.ocultar.grid12-1-1.form
                                 h5 Crear Album
@@ -22,20 +23,20 @@ block content
                                 br
                                 button.boton(type="button", onclick='crearAlbum()') Crear Album      
         #divMostrarAlbumes.ocultar.grid12-1-3
-                    #divBuscadorTituloAlbum.form
+                #divBuscadorTituloAlbum.form
                         label(for="inputBuscarTituloAlbum") Buscar Por Titulo del Album:
                         input.limpiar(type="text", id="inputBuscarTituloAlbum", name="inputBuscarTituloAlbum",placeHolder="Titulo Album") 
                         img(id="imgLupa",src="./Iconos/lupa.svg", alt="Lupa")
-                    #divFiltrarTags.form    
+                #divFiltrarTags.form    
                         label(for="filtrarPorTags") Filtrar Por tags:
                         input.limpiar(type="text", id="filtrarPorTags", name="filtrarPorTags",list="dtlTagsFiltrar", autocomplete="off")
                         img(id="imgFiltro",src="./Iconos/filtro.svg", alt="Filtro")
                         datalist#dtlTagsFiltrar
-                    p#mensageNoEncontrado.ocultar No se encontraron resulados para su busqueda    
-                    br
-                    table#todosMedicos
+                p#mensageNoEncontrado.ocultar No se encontraron resulados para su busqueda    
+                br
+                table#todosMedicos
                         thead#cabecera
-                            tr
+                        tr
                                 th id Album
                                 th Titulo Album
                                 th Tags
@@ -57,7 +58,7 @@ block content
                 button.boton2(type="button",onclick='mostrarModificarTituloImagen()') Modificar Titulo 
                 button.boton2(type="button",onclick='mostrarModificarCaption()') Modificar Caption 
                 button.boton2(type="button",onclick='mostrarModificarVisibilidad()') Modificar Visibilidad 
-                button.boton2(type="button",onclick='ModificarActivoImagen()') Habilitar Inavilitar
+                button.boton2(type="button",onclick='modificarActivoImagen()') Habilitar Inavilitar
         #divModificarTituloImagen.form.ocultar2.grid6-4-8
                 label(for="inputModificarTituloImagen") Modificar Titulo 
                 br
@@ -104,13 +105,13 @@ block content
                                 input#idPerfil.limpiar(type="hidden", name="idPerfil")
                                 input#idAlbumSeleccionado.limpiar(type="hidden", name="idAlbumSeleccionado")
                                 button(type="submit") Subir Imagen  
-                                                                  
+                                                                        
         script.    
-                     const perfil = !{JSON.stringify(perfil)}; 
+                const perfil = !{JSON.stringify(perfil)}; 
         script. 
-                     const parametros = !{JSON.stringify(parametros)};  
+                const parametros = !{JSON.stringify(parametros)};  
         script. 
-                     const tags = !{JSON.stringify(tags)};                                                                   
+                const tags = !{JSON.stringify(tags)};                                                                   
 block boton1 
         button.boton2(type="button",onclick='volver()') volver 
 block boton2 

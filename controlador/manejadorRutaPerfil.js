@@ -2,7 +2,9 @@ import { retornarError ,retornarExito} from "./funsionesControlador.js";
 import {Perfil} from "../modelo/clasePerfil.js";
 import { verificarYup } from "../controlador/verificaryup.js";
 import { parametros } from "../parametros.js";
-
+import sharp from 'sharp';
+import path from 'path';
+import  fs from "fs";
 
 /*let object;
 let object2;
@@ -139,7 +141,22 @@ export async function paginaPersonal(req, res) {
 // Subir imagen de perfil
 export async function subirImagenPerfil(req, res) {
     try {
-        const urlImagen = '/imagenesPerfil/' + req.file.filename;
+        // Ruta original (temporal) y destino comprimido
+        const inputPath = req.file.path;
+        const outputFilename = 'perfil-' + Date.now() + path.extname(req.file.originalname);
+        const outputPath = path.join('estatica/imagenesPerfil', outputFilename);
+
+        // Procesar la imagen con sharp (redimensionar y comprimir)
+        await sharp(inputPath)
+            .resize(100, 100) // Ajusta el tamaño si lo deseas
+            .jpeg({ quality: 70 }) // Ajusta la calidad si lo deseas
+            .toFile(outputPath);
+
+        // Elimina la imagen original subida por Multer (temporal)
+        fs.unlinkSync(inputPath);
+
+        // Guarda la URL de la imagen comprimida
+        const urlImagen = '/imagenesPerfil/' + outputFilename;
         const aux = await Perfil.modificarImagenPorIdPerfil(req.body.idPerfil, urlImagen);
         if (aux instanceof Error) return retornarError(res, `Error al modificar la imagen del perfil:${aux}`);
         if (aux === 0) return retornarError(res, `No se encontro el perfil con id ${req.body.idPerfil}`);
@@ -148,6 +165,7 @@ export async function subirImagenPerfil(req, res) {
         console.error("Error en subirImagenPerfil", error);
         return retornarError(res, `Error en subirImagenPerfil: ${error}`);
     }
+    
 }
 // Modificar email del perfil
 export async function modificarEMailPerfil(req, res) {
