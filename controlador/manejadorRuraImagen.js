@@ -6,6 +6,7 @@ import { verificarYup } from "./verificaryup.js";
 import { existeBd } from "../modelo/conexxionBD.js";
 import { AlbumPersonal } from "../modelo/claseAlbumPersonal.js";
 import { Imagen } from "../modelo/claseImagen.js";
+import{Visibilidad}from"../modelo/claseVisibilidad.js";
 let aux;
 export async function subirImagen(req, res) {
     try {
@@ -73,7 +74,7 @@ export async function buscarImagenesPorIdAlbumPersonal(req, res) {
             fechaCreacion: imagen.fecha_creacion_imagen,
             tituloImagen: imagen.titulo_imagen,
             captionImagen: imagen.caption_imagen,
-            idVisivilidad: imagen.id_visibilidad,
+            idVisibilidad: imagen.id_visibilidad,
             tituloVisibilidad:imagen.titulo_visibilidad,
             activoImagen: imagen.activo_imagen
         };
@@ -93,20 +94,81 @@ export async function modificarTituloImagenPorId(req,res){
      if(aux instanceof Error){
         return retornarError(res,`Error al verificar la tipologia de la Imagen:${aux}`)
      }
-     aux await Imagen.modificarTituloImagenPorId(img);
+     aux= await Imagen.modificarTiTuloPorId(img);
      if(aux instanceof Error){
         return retornarError(res,`Error al modificar el titulo de la imagen:${aux}`)
      }
 
-return retornarExito(res,"El titulo em la image se modifico con exito");
+return retornarExito(res,"El titulo en la image se modifico con exito");
 }
 export async function modificarCaptionImagenPorId(req,res){
-console.log(req.body.img);
+let img=req.body;
+     aux=await existeBd(img.idImagen,'imagen','id_imagen');
+     if(aux instanceof Error){
+        return retornarError(res`Erroal buscar la Imagen`)
+     }
+     if(!aux){
+        return retornarError(res,'La imagen no existe')
+     }
+     aux =await verificarYup(img,'imagen');
+     if(aux instanceof Error){
+        return retornarError(res,`Error al verificar la tipologia de la Imagen:${aux}`)
+     }
+     aux= await Imagen.modificarCaptionPorId(img);
+     if(aux instanceof Error){
+        return retornarError(res,`Error al modificar el caption de la imagen:${aux}`)
+     }
 return retornarExito(res,"El Caption se modofico con exito");
+}
+export async function buscarVisibilidad(req,res){
+       let idPerf=req.body;
+       aux =await existeBd(idPerf.idPerfil,'perfil','id_perfil');
+       if(aux instanceof Error){
+        return retornarError(res,'Error al buscar visibilidades')
+       }
+       if(!aux){
+        return retornarError(res,'El perfil solicitante no existe');
+       }
+       aux=await Visibilidad.consulta();
+       if(aux instanceof Error){
+        return retornarError(res,`Error al buscar visibilidad ${aux}`)
+       }
+       aux=aux.map(vi=>{
+        return{
+            idVisibilidad:vi.id_visibilidad,
+            tituloVisibilidad:vi.titulo_visibilidad
+        }
+       });
+       return retornarExito(res,"",aux)
+
+}
+export async function modificarVisibilidadImagen(req,res){
+     let img=req.body;
+     aux =await existeBd(img.idImagen,'imagen','id_imagen');
+       if(aux instanceof Error){
+        return retornarError(res,'Error al buscar la imagen')
+       }
+       if(!aux){
+        return retornarError(res,'LA Imagen no existe');
+       }
+       aux=await existeBd(img.idVisibilidad,'visibilidad','id_visibilidad');
+       if(aux instanceof Error){
+        return retornarError(res,`Error al buscar la visivilidad ${aux}`)
+       }
+       if(!aux){
+        return retornarError(res,'La visibilidad no existe')
+       }
+       aux=await Imagen.modificarVisibilidad(img);
+       if(aux instanceof Error){
+        return retornarError(res,`Error al modificar la visibilidad ${aux}`)
+       }
+       return retornarExito(res,'La visibilidad se modifico con exito')
 }
 export default {
     subirImagen,
     buscarImagenesPorIdAlbumPersonal,
     modificarTituloImagenPorId,
-    modificarCaptionImagenPorId
+    modificarCaptionImagenPorId,
+    buscarVisibilidad,
+    modificarVisibilidadImagen
 }

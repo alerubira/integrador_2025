@@ -69,7 +69,12 @@ block content
                 br
                 input.limpiar(type="text",id="inputModificarCaptionImagen",name="inputModificarCaptionImagen",placeHolder="Caption Nuevo")
                 br
-                button.boton(type="button", onclick='modificarCaptionImagen()') Modificar Caption        
+                button.boton(type="button", onclick='modificarCaptionImagen()') Modificar Caption 
+        #divModificarVisibilidad.form.ocultar2.grid6-4-8 
+                label(for="inputVisibilidad") Visibilidad:
+                input.limpiar(type="text", id="inputVisibilidad", name="inputVisibilidad",list="dtlVisibilidad", autocomplete="off")
+                datalist#dtlVisibilidad 
+                button.boton(type="button",onclick='modificarVisibilidadImagen()') Modificar Visibilidad      
         #divModificarTitulo.ocultar3.form.grid12-1-5 
                 label(for="inputModificarTituloAlbum") Modificar Titulo del Album
                 br

@@ -49,6 +49,10 @@ class ImagenData{
         query='UPDATE imagen SET caption_imagen=? WHERE id_imagen = ?'
          return await consulta1(query,img.captionImagen,img.idImagen) 
     }
+    static async modificarVisibilidad(img){
+        query='UPDATE imagen SET id_visibilidad=? WHERE id_imagen = ?'
+        return await consulta1(query,img.idVisibilidad,img.idImagen)
+    }
 }
 
 export { ImagenData };

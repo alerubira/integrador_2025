@@ -1,13 +1,13 @@
 import { ImagenData } from "./imagenData.js";
 class Imagen{
-    constructor(idImagen,urlImagen,fechaCreacion,tituloImagen,captionImagen,idVisivilidad,tituloVisibilidad,activoImagen)
+    constructor(idImagen,urlImagen,fechaCreacion,tituloImagen,captionImagen,idVisibilidad,tituloVisibilidad,activoImagen)
     {
         this.idImagen = idImagen;
         this.urlImagen = urlImagen;
         this.fechaCreacion = fechaCreacion;
         this.tituloImagen = tituloImagen;
         this.captionImagen = captionImagen;
-        this.idVisivilidad = idVisivilidad;
+        this.idVisibilidad = idVisibilidad;
         this.tituloVisibilidad=tituloVisibilidad;
         this.activoImagen = activoImagen;
     }
@@ -17,11 +17,14 @@ class Imagen{
     static async buscarImagenesPorIdAlbumPersonal(idAlbumPersonal) {
         return await ImagenData.buscarImagenesPorIdAlbumPersonal(idAlbumPersonal);
     }
-    static async modificarTiyuloPorId(img){
+    static async modificarTiTuloPorId(img){
         return await ImagenData.modificarTituloPorId(img);
     }
     static async modificarCaptionPorId(img){
         return await ImagenData.modificarCaptionPorId(img);
+    }
+    static async modificarVisibilidad(img){
+        return await ImagenData.modificarVisibilidad(img);
     }
 }
 export { Imagen };

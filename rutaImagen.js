@@ -23,4 +23,6 @@ rutaImagen.post('/subirImagen', manejadorDeRutasLogin.verificarToken,upload.sing
 rutaImagen.post('/buscarImagenesPorIdAlbumPersonal', manejadorDeRutasLogin.verificarToken, manejadorRutaImagen.buscarImagenesPorIdAlbumPersonal);
 rutaImagen.post('/modificarTituloImagenPorId',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.modificarTituloImagenPorId);
 rutaImagen.post('/modificarCaptionImagenPorId',manejadorDeRutasLogin.verificarToken,manejadorRutaImagen.modificarCaptionImagenPorId);
+rutaImagen.post('/buscarVisibilidad',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarVisibilidad);
+rutaImagen.post('/modificarVisibilidadImagen',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.modificarVisibilidadImagen);
 export{rutaImagen}

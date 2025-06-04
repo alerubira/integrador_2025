@@ -43,7 +43,7 @@ mostrar(divMostrarImagenes);
 if(aux.success){
 //recorrer aux.urlImagen crear un div con la imagen agregarle un evento click para recuperar el idImagen y agregarlo al divMostrarImagenes
 //agregar un evento click a cada imagen para capturar el idImagen
-   aux.urlImagen.forEach(imagen => {
+   aux.retorno.forEach(imagen => {
          let divImagen = document.createElement('div');
          divImagen.className = 'divContenedorImagen';
          divImagen.innerHTML = `<img src="${imagen.urlImagen}" alt="Imagen del álbum" class="imagenAlbum">`;
@@ -59,7 +59,7 @@ if(aux.success){
          }else{titulo=imagen.tituloImagen}
          if(!imagen.captionImagen){
             caption="No contiene";
-         }else{caption=imagen.vaptionImagen}
+         }else{caption=imagen.captionImagen}
          if(imagen.activoImagen){
             estado="Activo"
          }else{estado="Inactivo"}
@@ -88,7 +88,7 @@ function capturarImagenSeleccionada(imagen) {
          }else{titulo=imagen.tituloImagen}
          if(!imagen.captionImagen){
             caption="No contiene";
-         }else{caption=imagen.vaptionImagen}
+         }else{caption=imagen.captionImagen}
          if(imagen.activoImagen){
             estado="Activo"
          }else{estado="Inactivo"}
@@ -150,4 +150,39 @@ if(!validar(inputValue.length<1||inputValue.length>parametros.tamaño1,pagina,`E
                 }else{alerta(pagina,`Algo sali mal al crear Album:${aux.mensaje}`)}
    }
 }
+let divModificarVisibilidad=document.getElementById('divModificarVisibilidad');
+let visibilidades;
+let dtlVisibilidad=document.getElementById('dtlVisibilidad');
+async function mostrarModificarVisibilidad(){
+     fOcultar2();
+   limpiarCampos(limpiar);
+   mostrar(divModificarVisibilidad);
+   let idPerf={
+      idPerfil:perfil.idPerfil
+   }
+   aux=await fechProtegidoPost('/buscarVisibilidad',idPerf)
+   if(aux.success){ 
+      visibilidades=aux.retorno;
+                    limpiarCampos(limpiar);
+                    llenarDl(dtlVisibilidad,visibilidades,'tituloVisibilidad','tituloVisibilidad');
+
+                }else{alerta(pagina,`Algo salio mal al buscar visibilidades:${aux.mensaje}`)}
+}
+let inputVisibilidad=document.getElementById('inputVisibilidad');
+async function modificarVisibilidadImagen(){
+   bandera=true;
+   let inputValue=inputVisibilidad.value;
+    aux= visibilidades.filter(vis=>vis.tituloVisibilidad===inputValue);
+    if(!validar(aux.length<1,'La visibilidad no existe o es obligatoria')){bandera=false}
+    imagenSeleccionada.idVisibilidad=aux[0].idVisibilidad;
+    aux=await fechProtegidoPost('/modificarVisibilidadImagen',imagenSeleccionada)        
+    if(aux.success){
+       limpiarCampos(limpiar);
+       fOcultar2();
+       eliminarHijos(dtlVisibilidad);
+    }else{
+      alerta(pagina,'Algo sali mal al modificar la visibilidad')
+    }
+}
+
 

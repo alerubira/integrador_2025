@@ -106,7 +106,8 @@ async function verificarYup(objeto,nombre){
                 return await verificarY(objeto,albumPersonalY);
                 break; 
             case'imagen':
-            return await verificarYup(objeto,imagenY)            
+                return await verificarY(objeto,imagenY);  
+                break;          
              default:
                 return retornarErrorSinRes('Seleccion no valida en verificar para yup');
        }

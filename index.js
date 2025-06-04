@@ -10,6 +10,7 @@ import { rutaLogin } from './rutaLogin.js';
 import { rutaPerfil } from './rutaPerfil.js';
 import { rutaCarpetas } from './rutaCarpetas.js';
 import { rutaImagen } from './rutaImagen.js';
+import manejadorDeRutasLogin from './controlador/manejadorDeRutasLogin.js';
 const app = express();
 
 // Convierte import.meta.url a __dirname
@@ -78,6 +79,8 @@ app.use('/', rutaImagen);
 app.use('/buscarImagenesPorIdAlbumPersonal', rutaImagen);
 app.use('/modificarTituloImagenPorId',rutaImagen);
 app.use('/modificarCaptionImagenPorId',rutaImagen);
+app.use('/buscarVisibilidad',rutaImagen);
+app.use('/modificarVisibilidadImagen',rutaImagen);
  // Iniciar el servidor
  app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);
