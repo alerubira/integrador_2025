@@ -271,6 +271,7 @@ export async function verificarLogin(req, res) {
                 tipoAutorizacion: login.tipoAutorizacion,
                 idSolicitante: login.idProfesionalPerfil
             };
+            
             const token = jwt.sign(payload, jwtSecret, { expiresIn: '5h' });
             return res.json({
                 token: token,

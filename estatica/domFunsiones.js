@@ -174,6 +174,7 @@ async function fechProtegidoPost(endpoin,objeto){
     const token = localStorage.getItem('token');
     
     try {
+     
       const response = await fetch(endpoin, {
         method: 'post',
         headers: {

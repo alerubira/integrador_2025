@@ -108,6 +108,7 @@ formLogin.addEventListener('submit',async function(event) {
                         localStorage.setItem('tipoAutorizacion', data.tipoAutorizacion);
                         localStorage.setItem('idSolicitante',data.idSolicitante);
                             // Redirigir o realizar acciones basadas en el tipo de autorización
+                            
                             if (data.tipoAutorizacion === 3) {
                                   let token = data.token;
                                // window.location.href = `/acceso?token=${token}`;
