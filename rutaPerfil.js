@@ -6,7 +6,7 @@ import multer from 'multer';
 const rutaPerfil = express.Router();
 
 // Configuración de almacenamiento de Multer
-const storage = multer.diskStorage({
+/*const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'estatica/tmp'); // Carpeta temporal donde se guardan las imágenes
   },
@@ -15,10 +15,10 @@ const storage = multer.diskStorage({
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
     cb(null, uniqueSuffix + path.extname(file.originalname));
   }
-});//
+});*/
 
-const upload = multer({ storage: storage });
-
+//const upload = multer({ storage: storage });
+const upload = multer({ storage: multer.memoryStorage() });
 rutaPerfil.post('/registrarPerfil', manejadorRutaPerfil.registrarPerfil)/*(req, res) => {
       // manejadorRutaPerfil(req, res, 'registrarPerfil');
 })*/

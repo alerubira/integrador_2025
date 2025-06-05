@@ -139,7 +139,7 @@ export async function paginaPersonal(req, res) {
 }
 
 // Subir imagen de perfil
-export async function subirImagenPerfil(req, res) {
+/*export async function subirImagenPerfil(req, res) {
     try {
         // Ruta original (temporal) y destino comprimido
         const inputPath = req.file.path;
@@ -151,9 +151,37 @@ export async function subirImagenPerfil(req, res) {
             .resize(100, 100) // Ajusta el tamaño si lo deseas
             .jpeg({ quality: 70 }) // Ajusta la calidad si lo deseas
             .toFile(outputPath);
-
         // Elimina la imagen original subida por Multer (temporal)
-        fs.unlinkSync(inputPath);
+        
+        fs.unlink(inputPath, (err) => {
+    if (err) {
+        console.warn('No se pudo borrar el archivo temporal:', err.message);
+    }
+      });
+       
+            
+        // Guarda la URL de la imagen comprimida
+        const urlImagen = '/imagenesPerfil/' + outputFilename;
+        const aux = await Perfil.modificarImagenPorIdPerfil(req.body.idPerfil, urlImagen);
+        if (aux instanceof Error) return retornarError(res, `Error al modificar la imagen del perfil:${aux}`);
+        if (aux === 0) return retornarError(res, `No se encontro el perfil con id ${req.body.idPerfil}`);
+        return retornarExito(res, `La imagen del perfil fue modificada con exito`, urlImagen);
+    } catch (error) {
+        console.error("Error en subirImagenPerfil", error);
+        return retornarError(res, `Error en subirImagenPerfil: ${error}`);
+    }
+    
+}*/
+export async function subirImagenPerfil(req, res) {
+    try {
+        const outputFilename = 'perfil-' + Date.now() + path.extname(req.file.originalname);
+        const outputPath = path.join('estatica/imagenesPerfil', outputFilename);
+
+        // Procesar el buffer recibido por Multer directamente con Sharp
+        await sharp(req.file.buffer)
+            .resize(100, 100)
+            .jpeg({ quality: 70 })
+            .toFile(outputPath);
 
         // Guarda la URL de la imagen comprimida
         const urlImagen = '/imagenesPerfil/' + outputFilename;

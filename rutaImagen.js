@@ -8,7 +8,7 @@ import multer from 'multer';
 import sharp from 'sharp';
 import manejadorRuraImagen from './controlador/manejadorRuraImagen.js';
 // Configuración de almacenamiento de Multer
-const storage = multer.diskStorage({
+/*const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'estatica/imagenesAlbum'); // Carpeta donde se guardan las imágenes
   },
@@ -19,7 +19,8 @@ const storage = multer.diskStorage({
   }
 });//
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage });*/
+const upload = multer({ storage: multer.memoryStorage() });
 rutaImagen.post('/subirImagen', manejadorDeRutasLogin.verificarToken,upload.single('imagenSubir') , manejadorRutaImagen.subirImagen);
 rutaImagen.post('/buscarImagenesPorIdAlbumPersonal', manejadorDeRutasLogin.verificarToken, manejadorRutaImagen.buscarImagenesPorIdAlbumPersonal);
 rutaImagen.post('/modificarTituloImagenPorId',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.modificarTituloImagenPorId);

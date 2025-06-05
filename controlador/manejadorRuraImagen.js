@@ -7,6 +7,8 @@ import { existeBd } from "../modelo/conexxionBD.js";
 import { AlbumPersonal } from "../modelo/claseAlbumPersonal.js";
 import { Imagen } from "../modelo/claseImagen.js";
 import{Visibilidad}from"../modelo/claseVisibilidad.js";
+import path from 'path';
+import sharp from 'sharp';
 let aux;
 export async function subirImagen(req, res) {
     try {
@@ -17,7 +19,7 @@ export async function subirImagen(req, res) {
         if(cantidad[0].cantidad_imagenes>parametros.tamaño5){
             return retornarError(res,`El Album esta completo ${parametros.cartelTamaño5}`)
         }
-        const urlImagen = '/imagenesAlbum/' + req.file.filename;
+        
         aux=await existeBd(req.body.idAlbumSeleccionado,'album_personal','id_album_personal');
         if (aux instanceof Error) {
             return retornarError(res, `Error al verificar el album: ${aux}`);
@@ -32,6 +34,17 @@ export async function subirImagen(req, res) {
         if (!aux) {
             return retornarError(res, "El perfil no existe");
         }
+         const outputFilename = 'img-' + Date.now() + path.extname(req.file.originalname);
+                const outputPath = path.join('estatica/imagenesAlbum', outputFilename);
+        
+                // Procesar el buffer recibido por Multer directamente con Sharp
+                await sharp(req.file.buffer)
+                    .resize(100, 100)
+                    .jpeg({ quality: 70 })
+                    .toFile(outputPath);
+        
+                // Guarda la URL de la imagen comprimida
+                const urlImagen = '/imagenesAlbum/' + outputFilename;
         let imagen = {
             urlImagen: urlImagen,
             fechaCreacion: new Date(),
@@ -45,7 +58,7 @@ export async function subirImagen(req, res) {
             return retornarError(res, `Error al guardar la imagen: ${aux}`);
         }   
        
-        return retornarExito(res, `La imagen del perfil fue modificada con exito`, urlImagen);
+        return retornarExito(res, 'La imagen fue agragada con exito', urlImagen);
     } catch (error) {
         console.error("Error al subir la imagen", error);
         return retornarError(res, `Error al subir la imagen: ${error}`);
