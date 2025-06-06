@@ -65,3 +65,39 @@ if (datosEncoded) {
             window.location.href = `/accederAlbumes?datos=${cadena}`;
                       
 }
+let sectionBuscarPersonas=document.getElementById('sectionBuscarPersonas');
+let mensageNoEncontrado=document.getElementById('mensageNoEncontrado');
+function mostrarBuscarPersonas(){
+    fOcultar();
+    limpiarCampos(limpiar);
+    mostrar(sectionBuscarPersonas);
+}
+ document.getElementById('inputBuscarPersonas').addEventListener('keyup',async function(){
+    if(this.value.length>2){
+     let frac=this.value.toLowerCase();
+     mensageNoEncontrado.style.display = 'none';
+     console.log(frac);
+     let a={
+        idPerfil:perfil.idPerfil,
+        frac:frac
+     }
+     aux =await fechProtegidoPost('/buscarPerfilPorApellido',a);
+     if(aux.success){
+       if(aux.retorno[0].length<1){
+        mensageNoEncontrado.style.display="none";
+       }else{mensageNoEncontrado.style.display="block"}
+     }
+console.log(aux.retorno[0]);
+console.log(aux.retorno[0].length)
+    }
+    
+     /*let albumesFiltrados=albumes.filter(alb=>alb.tituloAlbumPersonal.toLowerCase().includes(filtro));
+     if(albumesFiltrados.length===0){
+          mensageNoEncontrado.style.display = 'block';
+          llenarTablaAlbumes(albumes);
+     }else{
+          llenarTablaAlbumes(albumesFiltrados);
+     }*/
+     
+filtro="";//controlar que no se quede seleccionado
+ });

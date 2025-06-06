@@ -37,7 +37,7 @@ rutaPerfil.post('/modificarInteresesPerfil', manejadorDeRutasLogin.verificarToke
 rutaPerfil.post('/modificarAntecedentesPerfil', manejadorDeRutasLogin.verificarToken,manejadorRutaPerfil.modificarAntecedentesPerfil) /*(req, res) => {
        manejadorRutaPerfil(req, res, 'modificarAntecedentesPerfil');
 })*/
-
+rutaPerfil.post('/buscarPerfilPorApellido',manejadorDeRutasLogin.verificarToken,manejadorRutaPerfil.buscarPerfilPorApellido);
 // Ruta para subir imagen
 /*rutaPerfil.post('/subirImagenPerfil', upload.single('imagen'), async (req, res) => {
   try {

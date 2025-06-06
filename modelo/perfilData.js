@@ -65,6 +65,10 @@ class PerfilData extends PersonaData {
             }
         }
     }
+    static async buscarPerfilPorApellido(frac){
+        query='CALL buscar_perfil_por_apellido(?);'
+        return await consulta1(query,frac)
+    }
 //revisar para abajo
   /*  static async consultaProfesional() {
         const query = 'CALL obtenerProfesionales()';

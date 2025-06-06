@@ -75,6 +75,20 @@ block content
                                textarea.limpiar(type="text",id="inputNuevoAntecedentesPerfil",name="inputNuevoAntesedentesPerfil",placeHolder="Antesedentes Perfil") 
                                br
                                button.boton(type="button",onclick='modificarAntesedentesPerfil()') Modificar                                                 
+                    section#sectionBuscarPersonas.ocultar.grid12-1-3
+                               label(for="inputBuscarPersonas") Buscar Personas:
+                               input.limpiar(type="text", id="inputBuscarPersonas", name="inputBuscarPersonas",placeHolder="Apellido") 
+                               img(id="imgLupa",src="./Iconos/lupa.svg", alt="Lupa")
+                               p#mensageNoEncontrado.ocultar No se encontraron resulados para su busqueda  
+                               table#todosMedicos
+                                        thead#cabecera
+                                        tr
+                                                th Nombre Perfil
+                                                th Nombre
+                                                th Apellido
+                                                th imagen
+                                                th Seleccionar
+                                        tbody#cuerpo         
         script.
                      const perfil = !{JSON.stringify(perfil)}; 
         script. 
@@ -88,7 +102,7 @@ block boton11
 block boton12
         button.boton2(type="button",onclick='modificarPerfil()') Modificar Perfil      
 block boton13
-        button.boton2(type="button",onclick='buscarPersonas()') Buscar Personas                  
+        button.boton2(type="button",onclick='mostrarBuscarPersonas()') Buscar Personas                  
 block boton14
         button.boton2(type="button",onclick='redirigirCarpetas()') Ir a Albumes            
                                                                

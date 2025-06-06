@@ -5,6 +5,7 @@ import { parametros } from "../parametros.js";
 import sharp from 'sharp';
 import path from 'path';
 import  fs from "fs";
+import { existeBd } from "../modelo/conexxionBD.js";
 
 /*let object;
 let object2;
@@ -240,13 +241,29 @@ export async function modificarAntecedentesPerfil(req, res) {
         return retornarError(res, `Error en modificarAntecedentesPerfil: ${error}`);
     }
 }
+export async function buscarPerfilPorApellido(req,res){
+    let aux;
+      aux=await existeBd(req.body.idPerfil,'perfil','id_perfil')
+      if(aux instanceof Error){
+        return retornarError(res`Error al buscar el perfil ${aux}`)
+      }
+      if(!aux){
+        return retornarError(res,'El Perfil no existe')
+      }
+      aux=await Perfil.buscarPerfilPorApellido(req.body.frac)
+      if(aux instanceof Error){
+        return retornarError(res `Error al buscar el perfil por el apellido:${aux}`)
+      }
+      retornarExito(res,"",aux)
+}
 export default{
     registrarPerfil,
     paginaPersonal,
     subirImagenPerfil,
     modificarEMailPerfil,
     modificarInteresesPerfil,
-    modificarAntecedentesPerfil
+    modificarAntecedentesPerfil,
+    buscarPerfilPorApellido
 }
 
 //export{manejadorRutaPerfil}

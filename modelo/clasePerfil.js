@@ -41,5 +41,8 @@ class Perfil extends Persona{
     static async modificarAntecedentesPorIdPerfil(id,antecedentes){
         return await PerfilData.modificarAntecedentesPorIdPerfil(id,antecedentes);
     }
+    static async buscarPerfilPorApellido(frac){
+        return await PerfilData.buscarPerfilPorApellido(frac);
+    }
 }
 export{Perfil};

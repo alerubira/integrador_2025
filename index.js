@@ -69,6 +69,7 @@ app.use('/subirImagenPerfil',rutaPerfil);
 app.use('/modificarEMailPerfil',rutaPerfil);
 app.use('/modificarInteresesPerfil',rutaPerfil);
 app.use('/modificarAntecedentesPerfil',rutaPerfil);
+app.use('/buscarPerfilPorApellido',rutaPerfil);
 app.use('/', rutaCarpetas);
 app.use('/crearAlbum',rutaCarpetas);
 app.use('/buscarAlbumesPersonalesPorId',rutaCarpetas);
