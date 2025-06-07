@@ -256,6 +256,28 @@ export async function buscarPerfilPorApellido(req,res){
       }
       retornarExito(res,"",aux)
 }
+export async function buscarPerfilPorid(req,res){
+try {
+    let aux;
+    aux =await existeBd(req.body.id,'perfil','id_perfil')
+     if(aux instanceof Error){
+        return retornarError(res`Error al buscar el perfil ${aux}`)
+      }
+      if(!aux){
+        return retornarError(res,'El Perfil no existe')
+      }
+    aux=await Perfil.consultaPorId(req.body.id);
+     if(aux instanceof Error){
+        return retornarError(res `Error al buscar el perfil por el id:${aux}`)
+      }
+      retornarExito(res,"",aux)
+
+
+} catch (error) {
+    console.log(`Error al buscar Perfil:${error}`)
+    return retornarError(res,`Error al buscar Perfil:${error}`)
+}
+}
 export default{
     registrarPerfil,
     paginaPersonal,
@@ -263,7 +285,8 @@ export default{
     modificarEMailPerfil,
     modificarInteresesPerfil,
     modificarAntecedentesPerfil,
-    buscarPerfilPorApellido
+    buscarPerfilPorApellido,
+    buscarPerfilPorid
 }
 
 //export{manejadorRutaPerfil}

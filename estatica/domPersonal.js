@@ -164,13 +164,71 @@ async function solicitarAmistad(){
     }else{alerta(aux)}
 
 }
-let notificaciones;
-(async function(){
-    notificaciones=await fechProtegidoPost('/buscarNotificaciones',idPerfil)
-    //hacer endpoint
-    //hacer para mostrar las no leidas
-})()
+// Conecta el WebSocket al cargar la página
+const ws = new WebSocket('ws://localhost:3000');
 
-function VerNotificaciones(){
-    console.log(notificaciones)
+// Envía el idPerfil al conectar (para asociar el socket en el servidor)
+ws.onopen = () => {
+    ws.send(JSON.stringify({ idPerfil: perfil.idPerfil }));
+};
+
+// Escucha mensajes del servidor
+ws.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    if (data.tipo === 'nuevaNotificacion') {
+        notificacionesNoLidas(); // Llama a tu función para actualizar el DOM
+    }
+};
+let divNotificacionesNoLeidas=document.getElementById('divNotificacionesNoLeidas');
+async function notificacionesNoLidas(){
+    let id={
+        idPerfilSolicitado:perfil.idPerfil
+    }
+   aux=await fechProtegidoPost('/buscarNotificacionesNoLeidas',id)
+   if(aux.success){
+    if(aux.retorno.length>0){
+        let p=document.createElement('p');
+        p.textContent=`Tiene ${aux.retorno.length} Notificaciones sin leer`;
+        divNotificacionesNoLeidas.appendChild(p);
+    }else{eliminarHijos(divNotificacionesNoLeidas)}
+   }
 }
+notificacionesNoLidas();
+let notificaciones,perfilMomentaneo;
+let divNotificaciones=document.getElementById('divNotificaciones');
+async function VerNotificaciones(){
+    let id={
+        idPerfilSolicitado:perfil.idPerfil
+    }
+aux=await fechProtegidoPost('/buscarNotificaciones',id)
+if(aux.success){
+        notificaciones=aux.retorno;
+       console.log(notificaciones);
+       for(let notificacion of notificaciones) {
+             if(notificacion.id_tipo_notificacion===1){
+                id={
+                    id:notificacion.id_perfil_solicitante
+                }
+                let perf=await fechProtegidoPost('/buscarPerfilPorid',id)
+                if (perf.success){
+                  perfilMomentaneo= perf.retorno;
+                  console.log(perfilMomentaneo)
+                }
+                 
+               
+             }
+             if(notificacion.id_tipo_notificacion===2){
+
+             }
+             if(notificacion.id_tipo_notificacion===3){
+
+             }
+             if(notificacion.id_tipo_notificacion===4){
+
+             }
+             
+       };
+
+}
+}
+

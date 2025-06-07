@@ -98,6 +98,7 @@ block content
                                 p#PerfilSeleccionad1.limpiar 
                                 br
                                 button.boton(type="button",onclick='solicitarAmistad()') Solicitar Amistad                                  
+        #divNotificaciones 
         script.
                      const perfil = !{JSON.stringify(perfil)}; 
         script. 
@@ -117,5 +118,5 @@ block boton14
 block boton15 
         button.boton2(type="button",onclick='VerNotificaciones()') Ver Notificaciones
 block notificacionesNoLeidas 
-        p#pNotificacionesNoLeidas Notificaciones No Leidas                         
+        #divNotificacionesNoLeidas                        
                                                                

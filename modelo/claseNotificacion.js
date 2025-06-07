@@ -9,6 +9,12 @@ class Notificacion{
 static async alta(not){
     return await NotificacionData.alta(not);
 }
+static async buscarNotificacionesPorIdSolicitado(id){
+    return await NotificacionData.buscarNotificacionesPorIdSolicitado(id);
+}
+static async buscarNotificacionesNoLeidasPorIdSolicitado(id){
+    return await NotificacionData.buscarNotificacionesNoLeidasPorIdSolicitado(id);
+}
     }
 
 export{Notificacion}

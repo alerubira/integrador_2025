@@ -12,8 +12,35 @@ import { rutaCarpetas } from './rutaCarpetas.js';
 import { rutaImagen } from './rutaImagen.js';
 import manejadorDeRutasLogin from './controlador/manejadorDeRutasLogin.js';
 import { rutaComunicacion } from './rutaComunicacion.js';
+import http from 'http';
+import { WebSocketServer } from 'ws';
 const app = express();
+const server = http.createServer(app);
+// WebSocket server
+const wss = new WebSocketServer({ server });
 
+// Guarda los clientes conectados y su perfil
+const clientes = new Map();
+
+wss.on('connection', (ws, req) => {
+    // Aquí puedes autenticar y asociar el perfil si tienes token
+    ws.on('message', (msg) => {
+        // Por ejemplo, el cliente puede enviar su idPerfil al conectar
+        try {
+            const data = JSON.parse(msg);
+            if (data.idPerfil) {
+                clientes.set(data.idPerfil, ws);
+            }
+        } catch {}
+    });
+
+    ws.on('close', () => {
+        // Elimina el cliente desconectado
+        for (const [id, socket] of clientes.entries()) {
+            if (socket === ws) clientes.delete(id);
+        }
+    });
+});
 // Convierte import.meta.url a __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -71,6 +98,7 @@ app.use('/modificarEMailPerfil',rutaPerfil);
 app.use('/modificarInteresesPerfil',rutaPerfil);
 app.use('/modificarAntecedentesPerfil',rutaPerfil);
 app.use('/buscarPerfilPorApellido',rutaPerfil);
+app.use('/buscarPerfilPorid',rutaPerfil);
 app.use('/', rutaCarpetas);
 app.use('/crearAlbum',rutaCarpetas);
 app.use('/buscarAlbumesPersonalesPorId',rutaCarpetas);
@@ -85,7 +113,11 @@ app.use('/buscarVisibilidad',rutaImagen);
 app.use('/modificarVisibilidadImagen',rutaImagen);
 app.use('/modificarActiviImagen',rutaImagen);
 app.use('/',rutaComunicacion);
+app.use('/buscarNotificaciones',rutaComunicacion);
+app.use('/buscarNotificacionesNoLeidas',rutaComunicacion)
  // Iniciar el servidor
- app.listen(port, () => {
+ server.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);
   });
+// Exporta wss y clientes para usar en otros módulos
+export { wss, clientes };
