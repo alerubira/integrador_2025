@@ -82,13 +82,22 @@ block content
                                p#mensageNoEncontrado.ocultar No se encontraron resulados para su busqueda  
                                table#todosMedicos
                                         thead#cabecera
-                                        tr
+                                        tr 
+                                                th idPerfil
                                                 th Nombre Perfil
                                                 th Nombre
                                                 th Apellido
                                                 th imagen
                                                 th Seleccionar
-                                        tbody#cuerpo         
+                                        tbody#cuerpo 
+                    #divPerfilSeleccionado.ocultar.form.grid12-1-3 
+                                img#imgPerfilSeleccionado.imgPerfil
+                                br
+                                p#pPerfilSeleccionado
+                                br 
+                                p#PerfilSeleccionad1 
+                                br
+                                button.boton(type="button",onclick='solicitarAmistad()') Solicitar Amistad                                  
         script.
                      const perfil = !{JSON.stringify(perfil)}; 
         script. 

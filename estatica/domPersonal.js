@@ -72,23 +72,24 @@ function mostrarBuscarPersonas(){
     limpiarCampos(limpiar);
     mostrar(sectionBuscarPersonas);
 }
+let perfilesBuscados;
  document.getElementById('inputBuscarPersonas').addEventListener('keyup',async function(){
     if(this.value.length>2){
      let frac=this.value.toLowerCase();
      mensageNoEncontrado.style.display = 'none';
-     console.log(frac);
      let a={
         idPerfil:perfil.idPerfil,
         frac:frac
      }
      aux =await fechProtegidoPost('/buscarPerfilPorApellido',a);
+      perfilesBuscados=aux.retorno[0];
      if(aux.success){
-       if(aux.retorno[0].length<1){
-        mensageNoEncontrado.style.display="none";
-       }else{mensageNoEncontrado.style.display="block"}
-     }
-console.log(aux.retorno[0]);
-console.log(aux.retorno[0].length)
+       if(perfilesBuscados.length<1){
+        mensageNoEncontrado.style.display="block";
+       }else{mensageNoEncontrado.style.display="none"}
+     llenarTablaPerfiles(perfilesBuscados); 
+    }
+          
     }
     
      /*let albumesFiltrados=albumes.filter(alb=>alb.tituloAlbumPersonal.toLowerCase().includes(filtro));
@@ -101,3 +102,62 @@ console.log(aux.retorno[0].length)
      
 filtro="";//controlar que no se quede seleccionado
  });
+ async function llenarTablaPerfiles(perfiles){
+     eliminarHijos(cuerpo);
+     for(let perf of perfiles){
+          let tr=document.createElement('tr');
+          cuerpo.appendChild(tr);
+          agregarTdCuerpo(perf.id_perfil,tr);
+          agregarTdCuerpo(perf.nombre_perfil,tr);
+          agregarTdCuerpo(perf.nombre_persona,tr);
+          agregarTdCuerpo(perf.apellido_persona,tr)
+          let imgPerf=document.createElement('img');
+          imgPerf.className="imgPerfil";
+          imgPerf.src=perf.img_perfil;
+          let td0=document.createElement('td');
+          td0.appendChild(imgPerf)
+          tr.appendChild(td0);
+          let btn=document.createElement('button');
+          btn.textContent='Seleccionar';
+          btn.className = 'boton';
+          btn.addEventListener('click', seleccionarPerfil);
+          let td=document.createElement('td');
+          td.appendChild(btn);
+          tr.appendChild(td);
+     }
+
+ }
+ let perfilSeleccionado;
+ let divPerfilSeleccionado=document.getElementById('divPerfilSeleccionado');
+ let imgPerfilSeleccionado=document.getElementById('imgPerfilSeleccionado');
+let pPerfilSeleccionado=document.getElementById('pPerfilSeleccionado');
+let PerfilSeleccionad1=document.getElementById('PerfilSeleccionad1'); 
+function seleccionarPerfil(){
+    let idPerfilSeleccionado = parseInt(this.parentNode.parentNode.firstChild.textContent);
+    console.log(idPerfilSeleccionado);
+    console.log(perfilesBuscados);
+    perfilSeleccionado=perfilesBuscados.find(perf=>perf.id_perfil===idPerfilSeleccionado);
+    eliminarHijos(cuerpo);
+        fOcultar();
+    imgPerfilSeleccionado.src=perfilSeleccionado.img_perfil;
+    pPerfilSeleccionado.textContent=`Nombre:${perfilSeleccionado.nombre_persona}//Apellido:${perfilSeleccionado.apellido_persona}//Nombre del Perfil:${perfilSeleccionado.nombre_perfil}`;
+    let int;
+    if(perfilSeleccionado.intereses_perfil===null){
+        int="No Contiene";
+    }else{int=perfilSeleccionado.intereses_perfil}
+    let ant;
+    if(perfilSeleccionado.antecedentes_perfil===null){
+         ant="No contiene";
+    }else{ant=perfilSeleccionado.antecedentes_perfil}
+    PerfilSeleccionad1.textContent=`Intereses:${int}//Antecedentes:${ant}`
+    mostrar(divPerfilSeleccionado);     
+}
+async function solicitarAmistad(){
+    let solicitud={
+        idPerfilSolicitante:perfil.idPerfil,
+        idPerfilSolicitado:perfilSeleccionado.id_perfil
+    }
+    aux=await fechProtegidoPost('/generarSolicitudAmistad',solicitud)
+    console.log(aux);
+
+}
