@@ -91,11 +91,11 @@ block content
                                                 th Seleccionar
                                         tbody#cuerpo 
                     #divPerfilSeleccionado.ocultar.form.grid12-1-3 
-                                img#imgPerfilSeleccionado.imgPerfil
+                                img#imgPerfilSeleccionado.imgPerfil.limpiar
                                 br
-                                p#pPerfilSeleccionado
+                                p#pPerfilSeleccionado.limpiar
                                 br 
-                                p#PerfilSeleccionad1 
+                                p#PerfilSeleccionad1.limpiar 
                                 br
                                 button.boton(type="button",onclick='solicitarAmistad()') Solicitar Amistad                                  
         script.
@@ -113,5 +113,9 @@ block boton12
 block boton13
         button.boton2(type="button",onclick='mostrarBuscarPersonas()') Buscar Personas                  
 block boton14
-        button.boton2(type="button",onclick='redirigirCarpetas()') Ir a Albumes            
+        button.boton2(type="button",onclick='redirigirCarpetas()') Ir a Albumes  
+block boton15 
+        button.boton2(type="button",onclick='VerNotificaciones()') Ver Notificaciones
+block notificacionesNoLeidas 
+        p#pNotificacionesNoLeidas Notificaciones No Leidas                         
                                                                

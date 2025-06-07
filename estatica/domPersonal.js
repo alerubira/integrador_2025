@@ -134,8 +134,7 @@ let pPerfilSeleccionado=document.getElementById('pPerfilSeleccionado');
 let PerfilSeleccionad1=document.getElementById('PerfilSeleccionad1'); 
 function seleccionarPerfil(){
     let idPerfilSeleccionado = parseInt(this.parentNode.parentNode.firstChild.textContent);
-    console.log(idPerfilSeleccionado);
-    console.log(perfilesBuscados);
+    
     perfilSeleccionado=perfilesBuscados.find(perf=>perf.id_perfil===idPerfilSeleccionado);
     eliminarHijos(cuerpo);
         fOcultar();
@@ -158,6 +157,20 @@ async function solicitarAmistad(){
         idPerfilSolicitado:perfilSeleccionado.id_perfil
     }
     aux=await fechProtegidoPost('/generarSolicitudAmistad',solicitud)
-    console.log(aux);
+    if(aux.success){
+        fOcultar();
+        limpiarCampos(limpiar);
 
+    }else{alerta(aux)}
+
+}
+let notificaciones;
+(async function(){
+    notificaciones=await fechProtegidoPost('/buscarNotificaciones',idPerfil)
+    //hacer endpoint
+    //hacer para mostrar las no leidas
+})()
+
+function VerNotificaciones(){
+    console.log(notificaciones)
 }

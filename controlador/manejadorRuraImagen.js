@@ -65,7 +65,8 @@ export async function subirImagen(req, res) {
     }
 }
 export async function buscarImagenesPorIdAlbumPersonal(req, res) {
-    aux = await existeBd(req.body.idAlbum, 'album_personal', 'id_album_personal');
+    try {
+        aux = await existeBd(req.body.idAlbum, 'album_personal', 'id_album_personal');
     if (aux instanceof Error) {
         return retornarError(res, `Error al verificar el album: ${aux}`);
     }
@@ -93,9 +94,16 @@ export async function buscarImagenesPorIdAlbumPersonal(req, res) {
         };
     });
     return retornarExito(res, "Imagenes encontradas", aux);
+        
+    } catch (error) {
+        console.log(`Error al buscar Imagen:${error}`)
+        return retornarError(res,`Error al buscar imagen:${error}`)
+    }
+    
 }
 export async function modificarTituloImagenPorId(req,res){
-     let img=req.body;
+    try {
+        let img=req.body;
      aux=await existeBd(img.idImagen,'imagen','id_imagen');
      if(aux instanceof Error){
         return retornarError(res`Erroal buscar la Imagen`)
@@ -111,11 +119,17 @@ export async function modificarTituloImagenPorId(req,res){
      if(aux instanceof Error){
         return retornarError(res,`Error al modificar el titulo de la imagen:${aux}`)
      }
+     return retornarExito(res,"El titulo en la image se modifico con exito");
+    } catch (error) {
+        console.log(`Error al modoificar el titulo de la imagen:${error}`)
+        return retornarError(res,`Error al modoificar el titulo de la imagen:${error}`)
+    }
+     
 
-return retornarExito(res,"El titulo en la image se modifico con exito");
 }
 export async function modificarCaptionImagenPorId(req,res){
-let img=req.body;
+    try {
+        let img=req.body;
      aux=await existeBd(img.idImagen,'imagen','id_imagen');
      if(aux instanceof Error){
         return retornarError(res`Erroal buscar la Imagen`)
@@ -131,10 +145,16 @@ let img=req.body;
      if(aux instanceof Error){
         return retornarError(res,`Error al modificar el caption de la imagen:${aux}`)
      }
-return retornarExito(res,"El Caption se modofico con exito");
+      return retornarExito(res,"El Caption se modofico con exito");
+    } catch (error) {
+       console.log(`Error al modificar el Caption:${error}`)
+       return retornarError(res,`Error al modificar el Caption:${error}`)
+    }
+    
 }
 export async function buscarVisibilidad(req,res){
-       let idPerf=req.body;
+    try {
+         let idPerf=req.body;
        aux =await existeBd(idPerf.idPerfil,'perfil','id_perfil');
        if(aux instanceof Error){
         return retornarError(res,'Error al buscar visibilidades')
@@ -153,10 +173,16 @@ export async function buscarVisibilidad(req,res){
         }
        });
        return retornarExito(res,"",aux)
+    } catch (error) {
+        console.log(`Error al buscar Visibilidad:${error}`)
+        return retornarError(res,`Error al buscar Visibilidad:${error}`)
+    }
+      
 
 }
 export async function modificarVisibilidadImagen(req,res){
-     let img=req.body;
+    try {
+        let img=req.body;
      aux =await existeBd(img.idImagen,'imagen','id_imagen');
        if(aux instanceof Error){
         return retornarError(res,'Error al buscar la imagen')
@@ -176,10 +202,16 @@ export async function modificarVisibilidadImagen(req,res){
         return retornarError(res,`Error al modificar la visibilidad ${aux}`)
        }
        return retornarExito(res,'La visibilidad se modifico con exito')
+    } catch (error) {
+        console.log(`Error al modificar la visibilidad:${error}`)
+        return retornarError(res,`Error al modificar la visibilidad:${error}`)
+    }
+     
 }
 export async function modificarActiviImagen(req,res){
-       let img=req.body;
-     aux =await existeBd(img.idImagen,'imagen','id_imagen');
+    try {
+           let img=req.body;
+        aux =await existeBd(img.idImagen,'imagen','id_imagen');
        if(aux instanceof Error){
         return retornarError(res,'Error al buscar la imagen')
        }
@@ -192,6 +224,11 @@ export async function modificarActiviImagen(req,res){
         return retornarError(res,`Error al modificar el activo de la imagen ${aux}`)
        }
        return retornarExito(res,'El activo se modifico con exito')
+    } catch (error) {
+        console.log(`Error al activar la Imagen:${error}`)
+        return retornarError(res,`Error al activar la Imagen:${error}`)
+    }
+    
 }
 export default {
     subirImagen,
