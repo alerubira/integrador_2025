@@ -217,6 +217,18 @@ margin: auto;
 .divContenedorImagen:hover{
   transform: scale(1.15); /* Aumenta el tamaño al pasar el ratón */ 
 }
+.divNotificacion{
+  aspect-ratio: 0,25 / 1;    /* Hace que el alto sea igual al ancho */
+}
+.divNotificacion:hover{
+ transform: scale(1.15); /* Aumenta el tamaño al pasar el ratón */ 
+}
+.divNotNoLeida{
+  background-color: #FF69B4;
+}
+.divNotNoLeida:hover{
+  transform: scale(1.15); /* Aumenta el tamaño al pasar el ratón */ 
+}
  
 .div{
 border: 1px solid black;

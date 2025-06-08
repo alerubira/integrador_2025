@@ -1,10 +1,11 @@
 import { NotificacionData } from "./notificacionData.js";
 class Notificacion{
-    constructor(idNotificacion,idSolicitanteNotificacion,idTipoNotificacion,leidaNotificacion){
+    constructor(idNotificacion,idSolicitanteNotificacion,idTipoNotificacion,leidaNotificacion,fechaNotificacion){
      this.idNotificacion=idNotificacion;
      this.idSolicitanteNotificacion=idSolicitanteNotificacion;
      this.idTipoNotificacion=idTipoNotificacion;
      this.leidaNotificacion=leidaNotificacion;
+     this.fechaNotificacion=fechaNotificacion;
 }
 static async alta(not){
     return await NotificacionData.alta(not);

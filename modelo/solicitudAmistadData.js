@@ -15,7 +15,7 @@ static async altaSolicitud(sol){
     
             const id_solicitante_notificacion = idSolicitudResult.insertId;
             const [idNotificacionResult] = await connection.execute(
-                'INSERT INTO `notificacion` (`id_solicitante_notificacion`,`id_tipo_notificacion`,`leida_notificacion`) VALUES (?,?,?)',
+                'INSERT INTO `notificacion` (`id_solicitante_notificacion`,`id_tipo_notificacion`,`leida_notificacion`,`fecha_notificacion`) VALUES (?,?,?,NOW())',
                 [id_solicitante_notificacion,1,false]
             );
            

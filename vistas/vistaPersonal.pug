@@ -98,7 +98,14 @@ block content
                                 p#PerfilSeleccionad1.limpiar 
                                 br
                                 button.boton(type="button",onclick='solicitarAmistad()') Solicitar Amistad                                  
-        #divNotificaciones 
+        #divNotificaciones.grid12-1-3.form 
+        #divNotificacionSeleccionada.ocultar.form.grid12-1-3
+                   img#imgNotificacionseleccionada.imgPerfil.limpiar 
+                   h6#datosPersona.limpiar 
+                   h6#datosPerfil.limpiar 
+                   h6#interesesPerfil.limpiar 
+                   h6#antecedentesPerfil.limpiar 
+                   button.boton(type="button",onclick='aceptarSolicitud()') Aceptar Solicitud 
         script.
                      const perfil = !{JSON.stringify(perfil)}; 
         script. 

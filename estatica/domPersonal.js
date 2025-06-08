@@ -211,8 +211,27 @@ if(aux.success){
                 }
                 let perf=await fechProtegidoPost('/buscarPerfilPorid',id)
                 if (perf.success){
-                  perfilMomentaneo= perf.retorno;
-                  console.log(perfilMomentaneo)
+                   perfilMomentaneo= perf.retorno[0];
+                   console.log(perfilMomentaneo)
+                   let divNotificacion = document.createElement('div');
+                    divNotificacion.className = 'divNotificacion';
+                    let imgP=document.createElement('img');
+                    imgP.classList="imgPerfil";
+                    if (!perfilMomentaneo.img_perfil) {
+                        imgP.src = "imagenesPerfil/fotoPerfil.svg";
+                    }else{imgP.src=perfilMomentaneo.img_perfil}
+                    if(!notificacion.leida_notificacion){divNotificacion.className="divNotNoLeida"}
+                    divNotificacion.appendChild(imgP);
+                    let h6N=document.createElement('h6');
+                   // hacer otro fondo para marcar como no leida
+                   //modificae el leido notificacion en la badede datos
+                    h6N.textContent=`En la Fecha:${formatearFecha(notificacion.fecha_notificacion)},${perfilMomentaneo.nombre_persona} ${perfilMomentaneo.apellido_persona} te ha enviado una solicitud de amistad`;
+                    divNotificacion.appendChild(h6N);
+                    divNotificacion.addEventListener('click', function() {
+                        capturarNotificacionSeleccionada(notificacion,perfilMomentaneo);
+                    });
+                    divNotificaciones.appendChild(divNotificacion);
+                                
                 }
                  
                
@@ -230,5 +249,24 @@ if(aux.success){
        };
 
 }
+}
+let divNotificacionSeleccionada=document.getElementById('divNotificacionSeleccionada');
+let imgNotificacionseleccionada=document.getElementById('imgNotificacionseleccionada');
+let datosPersona=document.getElementById('datosPersona');
+let datosPerfil=document.getElementById('datosPerfil');
+let interesesPerfil=document.getElementById('interesesPerfil');
+let antecedentesPerfil=document.getElementById('antecedentesPerfil');
+async function capturarNotificacionSeleccionada(notificacion,perfilMomentaneo){
+    console.log(notificacion);
+    console.log(perfilMomentaneo);
+    eliminarHijos(divNotificaciones);
+    fOcultar()
+    limpiarCampos(limpiar);
+    mostrar(divNotificacionSeleccionada);
+    //hacer endpoin fech para marcar leida la notificacion con web socket para disminuir el contador
+//llenar los h6
+}
+async function aceptarSolicitud() {
+    //capturar datos necesarios y contestar la solicitud
 }
 
