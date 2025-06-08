@@ -115,6 +115,9 @@ app.use('/modificarActiviImagen',rutaImagen);
 app.use('/',rutaComunicacion);
 app.use('/buscarNotificaciones',rutaComunicacion);
 app.use('/buscarNotificacionesNoLeidas',rutaComunicacion)
+app.use('/marcarLeidaNotificacion',rutaComunicacion);
+app.use('/aceptarSolicitud',rutaComunicacion);
+
  // Iniciar el servidor
  server.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);

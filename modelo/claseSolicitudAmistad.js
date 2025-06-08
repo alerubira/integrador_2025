@@ -9,5 +9,8 @@ class SolicitudAmistad{
       static async alta(sol){
         return await SolocitudAmistadData.altaSolicitud(sol);
       }
+      static async aceptarSolicitud(acept){
+        return await SolocitudAmistadData.aceptarSolicitud(acept)
+      }
 }
 export{SolicitudAmistad}

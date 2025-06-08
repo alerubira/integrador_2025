@@ -34,5 +34,15 @@ static async altaSolicitud(sol){
         }
    
 }
+static async aceptarSolicitud(acepta){
+    //hacer la transaccion,modificarsolicitud aceptada,generar el album seguidor,generar la notificacion
+    /*let acep={
+        idPerfilSeguido:perfil.idPerfil,
+        idPerfilSeguidor:perfilMomentaneo.id_perfil,
+        nombreAlbumSeguidor:`${perfil.nombrePersona},${perfil.apellidoPersona},${perfi.nombrePerfil}`,
+        idSolicitanteNotificacion:notificacionSeleccionada.id_solicitante_notificacion
+    }*/
+   
+}
 }
 export{SolocitudAmistadData}

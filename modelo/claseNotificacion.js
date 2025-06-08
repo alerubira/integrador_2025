@@ -16,6 +16,9 @@ static async buscarNotificacionesPorIdSolicitado(id){
 static async buscarNotificacionesNoLeidasPorIdSolicitado(id){
     return await NotificacionData.buscarNotificacionesNoLeidasPorIdSolicitado(id);
 }
+static async modificarLeidaNotificacion(idNotificacion){
+    return await NotificacionData.modificacionNotificacionLeida(idNotificacion);
+}
     }
 
 export{Notificacion}

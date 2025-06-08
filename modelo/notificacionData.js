@@ -13,5 +13,9 @@ class NotificacionData{
       query='SELECT * FROM notificacion noti JOIN solicitud_amistad sa on noti.id_solicitante_notificacion=sa.id_solicitud_amistad WHERE sa.id_perfil_solicitado=?&&noti.leida_notificacion=0;'
        return await consulta1(query,id)
    }
+   static async modificacionNotificacionLeida(idNotificacion){
+      query='UPDATE `notificacion` SET `leida_notificacion`=1 WHERE id_notificacion=?';
+      return await consulta1(query,idNotificacion);
+   }
 }
 export{NotificacionData}
