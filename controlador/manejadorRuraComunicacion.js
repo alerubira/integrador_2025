@@ -114,14 +114,14 @@ try {
     if(!aux){
         return retornarError(res,'La solicitud de amistad no existe')
     }
-    aux=await existeBd(acepta.idPerfilSeguidor,'perfil','id_perfil_seguidor');
+    aux=await existeBd(acepta.idPerfilSeguidor,'perfil','id_perfil');
     if(aux instanceof Error){
         return retornarError(res,`Error al verificar si existe El Perfil Solicitado:${Error}`)
     }
     if(!aux){
         return retornarError(res,'El Perfil Solicitado no existe')
     }
-    aux=await existeBd(acepta.idPerfilSeguido,'perfil','id_perfil_seguidor');
+    aux=await existeBd(acepta.idPerfilSeguido,'perfil','id_perfil');
     if(aux instanceof Error){
         return retornarError(res,`Error al verificar si existe El Perfil Solicitanta:${Error}`)
     }
@@ -135,10 +135,10 @@ try {
      //devolver el mensaje a la persona que fue aceptada seguidor
      // el id es aque perfil dirige la accion
             if (clientes.has(acepta.idPerfilSeguidor)) {
-                const ws = clientes.get(req.body.idPerfil);
+                const ws = clientes.get(acepta.idPerfilSeguidor);
                 ws.send(JSON.stringify({ tipo: 'nuevaNotificacion' }));
             }
-    return retornarExito(res,"La aceptacion de la solicitud fue enviada")
+    return retornarExito(res,"La aceptacion de la solicitud fue enviada",aux)
 
 } catch (error) {
     console.log(`Error al contestar la solicitud de amistad:${error}`)

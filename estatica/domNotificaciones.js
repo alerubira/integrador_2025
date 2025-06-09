@@ -43,7 +43,12 @@ async function VerNotificaciones(){
 aux=await fechProtegidoPost('/buscarNotificaciones',id)
 if(aux.success){
         notificaciones=aux.retorno;
+        console.log(notificaciones)
+        if(notificaciones.length<1){alerta(pagina,"NoTiene Notificaciones")}
        for(let notificacion of notificaciones) {
+             let divNotificacion = document.createElement('div');
+             divNotificacion.className = 'divNotificacion';
+
              if(notificacion.id_tipo_notificacion===1){
                 id={
                     id:notificacion.id_perfil_solicitante
@@ -51,9 +56,7 @@ if(aux.success){
                 let perf=await fechProtegidoPost('/buscarPerfilPorid',id)
                 if (perf.success){
                    perfilMomentaneo= perf.retorno[0];
-                   console.log(perfilMomentaneo)
-                   let divNotificacion = document.createElement('div');
-                    divNotificacion.className = 'divNotificacion';
+                   //console.log(perfilMomentaneo)
                     let imgP=document.createElement('img');
                     imgP.classList="imgPerfil";
                     if (!perfilMomentaneo.img_perfil) {
@@ -74,7 +77,30 @@ if(aux.success){
                
              }
              if(notificacion.id_tipo_notificacion===2){
-
+                  
+                id={
+                    id:notificacion.id_perfil_solicitado
+                }
+                let perf=await fechProtegidoPost('/buscarPerfilPorid',id)
+                if (perf.success){
+                   perfilMomentaneo= perf.retorno[0];
+                   //console.log(perfilMomentaneo)
+                    let imgP=document.createElement('img');
+                    imgP.classList="imgPerfil";
+                    if (!perfilMomentaneo.img_perfil) {
+                        imgP.src = "imagenesPerfil/fotoPerfil.svg";
+                    }else{imgP.src=perfilMomentaneo.img_perfil}
+                    if(!notificacion.leida_notificacion){divNotificacion.className="divNotNoLeida"}
+                    divNotificacion.appendChild(imgP);
+                    let h6N=document.createElement('h6');
+                    h6N.textContent=`En la Fecha:${formatearFecha(notificacion.fecha_notificacion)},${perfilMomentaneo.nombre_persona} ${perfilMomentaneo.apellido_persona} acepto tu solicitud de amistad`;
+                    divNotificacion.appendChild(h6N);
+                    divNotificacion.addEventListener('click', function() {
+                        capturarNotificacionSeleccionada(notificacion,perfilMomentaneo);
+                    });
+                    divNotificaciones.appendChild(divNotificacion);
+                                
+                }
              }
              if(notificacion.id_tipo_notificacion===3){
 
@@ -121,12 +147,34 @@ async function capturarNotificacionSeleccionada(notificacion,perfilMomentaneo){
                 }
                 antecedentesPerfil.textContent=`Antecedentes:${inte}`;
                 if(notificacion.solicitud_aceptada===1){
-                    botonAceptarSolicitud.style.display='block';
+                    botonAceptarSolicitud.style.display='none';
                     pSolicitusAceptada.textContent="Esta Solicitud ya fue Aceptada"
                 }
             }
      if(notificacion.id_tipo_notificacion===2){
-        
+             mostrar(divNotificacionSeleccionada);
+                if (!perfilMomentaneo.img_perfil) {
+                    imgNotificacionseleccionada.src = "imagenesPerfil/fotoPerfil.svg";
+                }else{imgNotificacionseleccionada.src=perfilMomentaneo.img_perfil}
+                datosPersona.textContent=`Nombre:${perfilMomentaneo.nombre_persona}-Apellido:${perfilMomentaneo.apellido_persona}`;
+                datosPerfil.textContent=`Nombre del Perfil:${perfilMomentaneo.nombre_perfil}`;
+                let inte;
+                if(!perfilMomentaneo.intereses_perfil){
+                    inte="No Contiene";
+                }else{
+                    inte=perfilMomentaneo.intereses_perfil;
+                }
+                interesesPerfil.textContent=`Intereses:${inte}`;
+                if(!perfilMomentaneo.antecedentes_perfil){
+                    inte="No Contiene";
+                }else{
+                    inte=perfilMomentaneo.antecedentes_perfil;
+                }
+                antecedentesPerfil.textContent=`Antecedentes:${inte}`;
+                if(notificacion.solicitud_aceptada===1){
+                    botonAceptarSolicitud.style.display='none';
+                    pSolicitusAceptada.textContent="Acepto tu solicitud de amistad"
+                }
      }
      if(notificacion.id_tipo_notificacion===3){
         
@@ -151,7 +199,7 @@ async function aceptarSolicitud() {
     let acep={
         idPerfilSeguido:perfil.idPerfil,
         idPerfilSeguidor:perfilMomentaneo.id_perfil,
-        nombreAlbumSeguidor:`${perfil.nombrePersona},${perfil.apellidoPersona},${perfi.nombrePerfil}`,
+        nombreAlbumSeguidor:`${perfil.nombrePersona},${perfil.apellidoPersona},${perfil.nombrePerfil}`,
         idSolicitanteNotificacion:notificacionSeleccionada.id_solicitante_notificacion
     }
     aux=await fechProtegidoPost('/aceptarSolicitud',acep)

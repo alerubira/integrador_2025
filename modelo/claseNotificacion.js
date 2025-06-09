@@ -1,7 +1,9 @@
 import { NotificacionData } from "./notificacionData.js";
 class Notificacion{
-    constructor(idNotificacion,idSolicitanteNotificacion,idTipoNotificacion,leidaNotificacion,fechaNotificacion){
+    constructor(idNotificacion,idRemitente,idDestinatario,idSolicitanteNotificacion,idTipoNotificacion,leidaNotificacion,fechaNotificacion){
      this.idNotificacion=idNotificacion;
+     this.idRemitente=idRemitente;
+     this.idDestinatario=idDestinatario;
      this.idSolicitanteNotificacion=idSolicitanteNotificacion;
      this.idTipoNotificacion=idTipoNotificacion;
      this.leidaNotificacion=leidaNotificacion;
