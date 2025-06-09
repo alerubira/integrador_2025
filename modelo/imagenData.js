@@ -57,6 +57,10 @@ class ImagenData{
         query='UPDATE imagen SET activo_imagen=? WHERE id_imagen = ?'
         return await consulta1(query,img.activoImagen,img.idImagen);
     }
+    static async BuscarImagenesPublicas(){
+        query='SELECT img.id_imagen,img.url_imagen,img.fecha_creacion_imagen,img.titulo_imagen,img.caption_imagen,pe.img_perfil,pe.nombre_perfil,per.nombre_persona,per.apellido_persona FROM imagen img JOIN album_imagen ai ON img.id_imagen=ai.id_imagen JOIN album_personal ap ON ai.id_album=ap.id_album_personal JOIN perfil pe on ap.id_perfil_personal=pe.id_perfil JOIN persona per ON pe.id_persona=per.id_persona WHERE img.id_visibilidad=1&&img.activo_imagen=1;'
+        return await consulta1(query);
+    }
 }
 
 export { ImagenData };

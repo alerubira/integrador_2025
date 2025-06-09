@@ -30,7 +30,10 @@ class Imagen{
         if(img.activoImagen===1){
             img.activoImagen=0;
         }else{img.activoImagen=1;}
-        ImagenData.modificarActivoImagen(img)
+       return await ImagenData.modificarActivoImagen(img)
+    }
+    static async buscarImagenesPublicas(){
+        return await ImagenData.BuscarImagenesPublicas();
     }
 }
 export { Imagen };

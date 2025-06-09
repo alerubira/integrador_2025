@@ -4,6 +4,7 @@ block script1
     script(src="domFunsionesPersonal.js",defer)
     script(src="domDatosPersonales.js",defer)
     script(src="domNotificaciones.js",defer)
+    script(src="domImagenPersonal.js",defer) 
 block content 
         #divProfesionalAcceso.grid12-1-1 
                 h3 USUARIO
@@ -11,6 +12,7 @@ block content
                 img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")        
         #divContenedorPerfil.grid12-1-2.contenedorGrid
                     section#sectionPerfil.grid12-1-1.ocultar.form
+                        button.botonCerrar(type="button",onclick='ocultarElemento(sectionPerfil)') cerrar
                         h5=`Perfil :${perfil.nombrePerfil}`
                         img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")  
                         br
@@ -108,6 +110,8 @@ block content
                    h6#antecedentesPerfil.limpiar 
                    button#botonAceptarSolicitud.boton(type="button",onclick='aceptarSolicitud()') Aceptar Solicitud 
                    p#pSolicitusAceptada.limpiar 
+        #divImagenesUsuarios.grid12-1-4.form 
+        #divImagenUsuarioSeleccionada.grid12-1-4.form            
         script.
                      const perfil = !{JSON.stringify(perfil)}; 
         script. 

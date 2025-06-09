@@ -112,6 +112,8 @@ app.use('/modificarCaptionImagenPorId',rutaImagen);
 app.use('/buscarVisibilidad',rutaImagen);
 app.use('/modificarVisibilidadImagen',rutaImagen);
 app.use('/modificarActiviImagen',rutaImagen);
+app.use('/traerImagenesPublicas',rutaImagen);
+
 app.use('/',rutaComunicacion);
 app.use('/buscarNotificaciones',rutaComunicacion);
 app.use('/buscarNotificacionesNoLeidas',rutaComunicacion)

@@ -230,6 +230,26 @@ export async function modificarActiviImagen(req,res){
     }
     
 }
+export async function buscarImagenesPublicas(req,res){
+try {
+    let aux;
+    aux=await existeBd(req.body.idPerfil,'perfil','id_perfil');
+    if(aux instanceof Error){
+        return retornarError(res,`Error al verificar el perfil:${aux}`)
+    }
+    if(!aux){
+        return retornarError(res,'El perfil no existe')
+    }
+    aux=await Imagen.buscarImagenesPublicas();
+    if(aux instanceof Error){
+        return retornarError(res,`Error al buscar imagenes publicas:${aux}`)
+    }
+    return retornarExito(res,'',aux)
+} catch (error) {
+    console.log(`error al buscar imagenes publicas:${error}`);
+    return retornarError(res,`error al buscar imagenes publicas:${error}`)   
+}
+}
 export default {
     subirImagen,
     buscarImagenesPorIdAlbumPersonal,
@@ -237,5 +257,7 @@ export default {
     modificarCaptionImagenPorId,
     buscarVisibilidad,
     modificarVisibilidadImagen,
-    modificarActiviImagen
+    modificarActiviImagen,
+    buscarImagenesPublicas
+
 }

@@ -64,6 +64,9 @@ function eliminarHijos(div) {
         div.removeChild(div.firstChild);
     }
 }
+function ocultarElemento(elemento){
+  elemento.style.display="none"
+}
 function alerta(pagina,mensage){
     // Limpiar cualquier contenido anterior antes de añadir nuevos elementos
     divAlerta.innerHTML = '';

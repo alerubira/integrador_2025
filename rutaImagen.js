@@ -28,4 +28,6 @@ rutaImagen.post('/modificarCaptionImagenPorId',manejadorDeRutasLogin.verificarTo
 rutaImagen.post('/buscarVisibilidad',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarVisibilidad);
 rutaImagen.post('/modificarVisibilidadImagen',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.modificarVisibilidadImagen);
 rutaImagen.post('/modificarActiviImagen',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.modificarActiviImagen);
+rutaImagen.post('/traerImagenesPublicas',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarImagenesPublicas);
+
 export{rutaImagen}
