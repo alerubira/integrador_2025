@@ -63,8 +63,10 @@ let texComentario=document.getElementById('texComentario');
 
 async function enviarComentario(){
   let comen=texComentario.value;
+  console.log(comen.length)
   bandera=true;
-  if(!validar(comen.length>0||comen.lenght<parametros.tamaño4,pagina,`El comentario es obligatorio y ${parametros.cartelTamaño4}`)){
+  if(comen.length<2||comen.length>parametros.tamaño4){
+    alerta(pagina,`El comentario es obligatorio y ${parametros.cartelTamaño4}`)
     bandera=false;
   }
   if(bandera){
