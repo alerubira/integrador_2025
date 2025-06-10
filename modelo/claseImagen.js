@@ -35,5 +35,8 @@ class Imagen{
     static async buscarImagenesPublicas(){
         return await ImagenData.BuscarImagenesPublicas();
     }
+    static async buscarImagenesPublicasPublicas(){
+        return await ImagenData.buscarImagenesPublicasPublicas();
+    }
 }
 export { Imagen };

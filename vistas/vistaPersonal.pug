@@ -120,10 +120,20 @@ block content
                    h6#antecedentesPerfil.limpiar 
                    button#botonAceptarSolicitud.boton(type="button",onclick='aceptarSolicitud()') Aceptar Solicitud 
                    p#pSolicitusAceptada.limpiar 
-        #divImagenesUsuarios.grid6-4-5
-        #divImagenUsuarioSeleccionada.grid6-4-5.form.ocultar 
-                   button.botonCerrar(type="button",onclick='ocultarElemento(divImagenUsuarioSeleccionada)')
-                   img#imagenSeleccionada.divContenedorImagen            
+        #divImagenesUsuarios.grid6-4-5.ocultar
+        #divImagenUsuarioSeleccionada.grid6-4-5.divContenedorImagen1.ocultar2 
+                   button.botonCerrar(type="button",onclick='ocultarDosElementos(divImagenUsuarioSeleccionada,divImagenesUsuarios)')
+                   img#imagenSeleccionada.divContenedorImagen.limpiar 
+                   h6#datosPersonaImgSeleccionada.limpiar 
+                   h6#datosPerfilImgSeleccionado.limpiar 
+                   h6#nombreImagenSeleccionada.limpiar 
+                   h6#captionImagenSeleccionada.limpiar 
+                   button.boton2(type="button",onclick="verComentarios()") ver comentarios 
+                   button.boton2(type="button",onclick="hacerComentario()") comentar
+        #divHacerComentario.forn.grid6-4-7.ocultar
+                        textarea(nombre="texComentario" id="texComentario" placeholder="comenta..." maxlength="298") 
+                        button.botonCerrar(type="button",onclick='ocultarElemento(divHacerComentario)')
+                        button.boton(type="button",onclick="enviarComentario()") Enviar Comentario           
         script.
                      const perfil = !{JSON.stringify(perfil)}; 
         script. 

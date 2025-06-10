@@ -29,5 +29,6 @@ rutaImagen.post('/buscarVisibilidad',manejadorDeRutasLogin.verificarToken,maneja
 rutaImagen.post('/modificarVisibilidadImagen',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.modificarVisibilidadImagen);
 rutaImagen.post('/modificarActiviImagen',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.modificarActiviImagen);
 rutaImagen.post('/traerImagenesPublicas',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarImagenesPublicas);
+rutaImagen.post('/traerImagenesPublicasPublicas',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarImagenesPublicasPublicas);
 
 export{rutaImagen}

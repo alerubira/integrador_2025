@@ -67,6 +67,15 @@ function eliminarHijos(div) {
 function ocultarElemento(elemento){
   elemento.style.display="none"
 }
+function ocultarDosElementos(el1,el2){
+if(el1.style.dispaly==="none"){
+  el1.style.display="block";
+  al2.style.display="none";
+}else{
+  el2.style.display="block";
+  el1.style.display="none";
+}
+}
 function alerta(pagina,mensage){
     // Limpiar cualquier contenido anterior antes de añadir nuevos elementos
     divAlerta.innerHTML = '';
