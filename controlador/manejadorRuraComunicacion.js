@@ -3,6 +3,7 @@ import { existeBd } from "../modelo/conexxionBD.js";
 import {SolicitudAmistad} from "../modelo/claseSolicitudAmistad.js";
 import {Notificacion} from "../modelo/claseNotificacion.js";
 import{clientes }from "../index.js"
+import { verificarYup } from "./verificaryup.js";
 export async function generarSilicitudAmistad(req,res){
     try {
         
@@ -145,11 +146,24 @@ try {
     return retornarError(res,`Error al contestar la solicitud de amistad:${error}`)
 }
 }
+export async function crearComentario(req,res){
+    try {
+        console.log(req.body);
+        //aux =await verificarYup(con,'comentario')
+        //traer y adaptar el pitufo
+       return retornarExito(res,'Comentario enviado con exito') 
+    } catch (error) {
+        console.log(`Error al crear comentario:${error}`);
+        return retornarError(res,`Error al crear comentario:${error}`)
+    }
+
+}
 
 export default{
     generarSilicitudAmistad,
     buscarNotificacionesPorIdSolicitado,
     buscarNotificacionesNoLeidasPorIdSolicitado,
     marcarLeidaNotificacion,
-    aceptarSolicitud
+    aceptarSolicitud,
+    crearComentario
 }

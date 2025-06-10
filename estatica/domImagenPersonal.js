@@ -42,6 +42,7 @@ let datosPerfilImgSeleccionado=document.getElementById('datosPerfilImgSelecciona
 let imgSeleccionada;
 let nombreImagenSeleccionada=document.getElementById('nombreImagenSeleccionada');
 let captionImagenSeleccionada=document.getElementById('captionImagenSeleccionada');
+let imgPerfilSeleccionad=document.getElementById('imgPerfilSeleccionad');
 
 async function capturarImagen(imagenCapturada){
     //eliminarHijos(divImagenesUsuarios);
@@ -49,6 +50,7 @@ async function capturarImagen(imagenCapturada){
     ocultarDosElementos(divImagenUsuarioSeleccionada,divImagenesUsuarios)
     mostrar(divImagenUsuarioSeleccionada);
     imagenSeleccionada.src=imagenCapturada.url_imagen
+    imgPerfilSeleccionad.src=imagenCapturada.img_perfil;
     datosPersonaImgSeleccionada.textContent=`Usuario:${imagenCapturada.nombre_persona},${imagenCapturada.apellido_persona}`
     datosPerfilImgSeleccionado.textContent=`Perfil:${imagenCapturada.nombre_perfil}`
     nombreImagenSeleccionada.textContent=`nombre de la imagen:${imagenCapturada.titulo_imagen}`;
@@ -76,7 +78,11 @@ async function enviarComentario(){
     idPerfilImagen:imgSeleccionada.id_perfil,//agregar en la consulta idPrfil al que peryenece la imagen
     textoComentario:comen
   }
-  console.log(comentario)
+  auw=await fechProtegidoPost('/enviarComentario',comentario);
+  if(aux.success){
+ console.log(comentario)
+  }
+ 
   }
   
   

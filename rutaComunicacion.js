@@ -9,5 +9,6 @@ rutaComunicacion.post('/buscarNotificaciones',manejadorDeRutasLogin.verificarTok
 rutaComunicacion.post('/buscarNotificacionesNoLeidas',manejadorDeRutasLogin.verificarToken,manejadorRuraComunicacion.buscarNotificacionesNoLeidasPorIdSolicitado)
 rutaComunicacion.post('/marcarLeidaNotificacion',manejadorDeRutasLogin.verificarToken,manejadorRuraComunicacion.marcarLeidaNotificacion);
 rutaComunicacion.post('/aceptarSolicitud',manejadorDeRutasLogin.verificarToken,manejadorRuraComunicacion.aceptarSolicitud);
+rutaComunicacion.post('/enviarComentario',manejadorDeRutasLogin.verificarToken,manejadorRuraComunicacion.crearComentario);
 
 export{rutaComunicacion}

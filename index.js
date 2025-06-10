@@ -119,6 +119,7 @@ app.use('/buscarNotificaciones',rutaComunicacion);
 app.use('/buscarNotificacionesNoLeidas',rutaComunicacion)
 app.use('/marcarLeidaNotificacion',rutaComunicacion);
 app.use('/aceptarSolicitud',rutaComunicacion);
+app.use('/enviarComentario',rutaComunicacion);
 
  // Iniciar el servidor
  server.listen(port, () => {
