@@ -31,12 +31,16 @@ async function notificacionesNoLidas(){
 }
 notificacionesNoLidas();
 let notificaciones,perfilMomentaneo;
-let divNotificaciones=document.getElementById('divNotificaciones');
+let divNotificaciones=document.getElementById('divNotificaciones');   
 async function VerNotificaciones(){
     fOcultar();
     limpiarCampos(limpiar);
     eliminarHijos(divNotificaciones);
-
+    mostrar(divNotificaciones);
+    let btnCerrar=document.createElement('button');
+    btnCerrar.className="botonCerrar";
+    btnCerrar.onclick=() => ocultarElemento(divNotificaciones);
+    divNotificaciones.appendChild(btnCerrar);
     let id={
         idPerfilSolicitado:perfil.idPerfil
     }

@@ -90,6 +90,16 @@ h5 {
   margin: 0; 
   height: 100%;
 }
+.botonCerrar{
+  width: 32px; /* Ajusta el tamaño según tu imagen */
+  height: 32px;
+  background: url('/Iconos/icono-cerrar.svg') no-repeat center center;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  /*display: inline-block;*/
+  float:right;
+}
 
 form label {
   display: inline-block;
@@ -215,6 +225,12 @@ margin: auto;
   justify-content: center;
 }
 .divContenedorImagen:hover{
+  transform: scale(1.15); /* Aumenta el tamaño al pasar el ratón */ 
+}
+.divContenedorImagen1{
+  aspect-ratio: 1 / 0.75; 
+}
+.divContenedorImagen1:hover{
   transform: scale(1.15); /* Aumenta el tamaño al pasar el ratón */ 
 }
 .divNotificacion{
