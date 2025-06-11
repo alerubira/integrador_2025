@@ -41,7 +41,6 @@ static async aceptarSolicitud(acepta){
             connection = await pool.getConnection();
             await connection.beginTransaction();
             
-            
             const [idSolicitudResult] = await connection.execute(
                 'UPDATE `solicitud_amistad` SET solicitud_aceptada=1 WHERE id_solicitud_amistad=?',
                 [acepta.idSolicitanteNotificacion]

@@ -4,6 +4,7 @@ import {SolicitudAmistad} from "../modelo/claseSolicitudAmistad.js";
 import {Notificacion} from "../modelo/claseNotificacion.js";
 import{clientes }from "../index.js"
 import { verificarYup } from "./verificaryup.js";
+import {Comentario} from "../modelo/claseComentario.js"
 export async function generarSilicitudAmistad(req,res){
     try {
         
@@ -149,9 +150,45 @@ try {
 export async function crearComentario(req,res){
     try {
         console.log(req.body);
-        //aux =await verificarYup(con,'comentario')
-        //traer y adaptar el pitufo
-       return retornarExito(res,'Comentario enviado con exito') 
+        let aux,com;
+        com=req.body;
+        aux=await verificarYup(com,'comentario')
+        if(aux instanceof Error){
+            return retornarError(res,`Error al verificar la tipologia del comentario:${aux}`)
+        }
+        aux=await existeBd(com.idImagen,'imagen','id_imagen');
+        if(aux instanceof Error){
+            return retornarError(res,`Erro al buscar la imagen:${aux}`);
+        }
+        if(!aux){
+            return retornarError(res,'La Imagen a comentar no existe')
+        }
+        aux=await existeBd(com.idPerfilComentador,'perfil','id_perfil');
+        if(aux instanceof Error){
+            return retornarError(res,`Error al buscar el perfil comentador${aux}`)
+        }
+        if(!aux){
+            return retornarError(res,'El perfilcomentador no existe')
+        }
+        aux=await existeBd(com.idPerfilImagen,'perfil','id_perfil');
+        if(aux instanceof Error){
+            return retornarError(res,`Erroe al buscar el perfil propietario de la Imagen:${aux}`)
+        }
+        if(!aux){
+            return retornarError(res,'El perfil propietario de la imagen no existe')
+        }
+        aux=await Comentario.alta(com);
+        if(aux instanceof Error){
+            return retornarError(res,`Error al crear el comentario:${aux}`)
+        }
+        //devolver el mensaje a la persona dueña de la imagen
+     // el id es aque perfil dirige la accion
+            if (clientes.has(com.idPerfilImagen)) {
+                const ws = clientes.get(com.idPerfilImagen);
+                ws.send(JSON.stringify({ tipo: 'nuevaNotificacion' }));
+            }
+            return retornarExito(res,'Comentario enviado con exito')
+        
     } catch (error) {
         console.log(`Error al crear comentario:${error}`);
         return retornarError(res,`Error al crear comentario:${error}`)

@@ -7,7 +7,6 @@ async function traerImagenesPublicasPublicas(){
     }
     //aux=await fechProtegidoPost('/traerImagenesPublicas',perf)
     aux =await fechProtegidoPost('/traerImagenesPublicasPublicas',perf)
-    console.log(aux.retorno);
     if(aux.success){
       for(let imagen of aux.retorno){
         let divImg=document.createElement('div');
@@ -65,7 +64,6 @@ let texComentario=document.getElementById('texComentario');
 
 async function enviarComentario(){
   let comen=texComentario.value;
-  console.log(comen.length)
   bandera=true;
   if(comen.length<2||comen.length>parametros.tamaño4){
     alerta(pagina,`El comentario es obligatorio y ${parametros.cartelTamaño4}`)
@@ -80,7 +78,7 @@ async function enviarComentario(){
   }
   auw=await fechProtegidoPost('/enviarComentario',comentario);
   if(aux.success){
- console.log(comentario)
+ 
   }
  
   }

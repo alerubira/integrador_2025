@@ -29,6 +29,7 @@ async function notificacionesNoLidas(){
     }else{eliminarHijos(divNotificacionesNoLeidas)}
    }
 }
+
 notificacionesNoLidas();
 let notificaciones,perfilMomentaneo;
 let divNotificaciones=document.getElementById('divNotificaciones');   
@@ -39,7 +40,7 @@ async function VerNotificaciones(){
     mostrar(divNotificaciones);
     let btnCerrar=document.createElement('button');
     btnCerrar.className="botonCerrar";
-    btnCerrar.onclick=() => ocultarElemento(divNotificaciones);
+    btnCerrar.onclick=() => ocultarDosElementos(divNotificaciones,divImagenesUsuarios);
     divNotificaciones.appendChild(btnCerrar);
     let id={
         idPerfilSolicitado:perfil.idPerfil
@@ -54,67 +55,85 @@ if(aux.success){
              divNotificacion.className = 'divNotificacion';
 
              if(notificacion.id_tipo_notificacion===1){
-                id={
-                    id:notificacion.id_perfil_solicitante
-                }
-                let perf=await fechProtegidoPost('/buscarPerfilPorid',id)
-                if (perf.success){
-                   perfilMomentaneo= perf.retorno[0];
-                   //console.log(perfilMomentaneo)
-                    let imgP=document.createElement('img');
-                    imgP.classList="imgPerfil";
-                    if (!perfilMomentaneo.img_perfil) {
-                        imgP.src = "imagenesPerfil/fotoPerfil.svg";
-                    }else{imgP.src=perfilMomentaneo.img_perfil}
-                    if(!notificacion.leida_notificacion){divNotificacion.className="divNotNoLeida"}
-                    divNotificacion.appendChild(imgP);
-                    let h6N=document.createElement('h6');
-                    h6N.textContent=`En la Fecha:${formatearFecha(notificacion.fecha_notificacion)},${perfilMomentaneo.nombre_persona} ${perfilMomentaneo.apellido_persona} te ha enviado una solicitud de amistad`;
-                    divNotificacion.appendChild(h6N);
-                    divNotificacion.addEventListener('click', function() {
-                        capturarNotificacionSeleccionada(notificacion,perfilMomentaneo);
-                    });
-                    divNotificaciones.appendChild(divNotificacion);
-                                
-                }
-                 
-               
-             }
+                    id={
+                        id:notificacion.id_remitente
+                    }
+                    let perf=await fechProtegidoPost('/buscarPerfilPorid',id)
+                    if (perf.success){
+                    perfilMomentaneo= perf.retorno[0];
+                    //console.log(perfilMomentaneo)
+                        let imgP=document.createElement('img');
+                        imgP.classList="imgPerfil";
+                        if (!perfilMomentaneo.img_perfil) {
+                            imgP.src = "imagenesPerfil/fotoPerfil.svg";
+                        }else{imgP.src=perfilMomentaneo.img_perfil}
+                        if(!notificacion.leida_notificacion){divNotificacion.className="divNotNoLeida"}
+                        divNotificacion.appendChild(imgP);
+                        let h6N=document.createElement('h6');
+                        h6N.textContent=`En la Fecha:${formatearFecha(notificacion.fecha_notificacion)},${perfilMomentaneo.nombre_persona} ${perfilMomentaneo.apellido_persona} te ha enviado una solicitud de amistad`;
+                        divNotificacion.appendChild(h6N);
+                        divNotificacion.addEventListener('click', function() {
+                            capturarNotificacionSeleccionada(notificacion,perfilMomentaneo);
+                        });
+                        divNotificaciones.appendChild(divNotificacion);
+                        }
+                        }
              if(notificacion.id_tipo_notificacion===2){
                   
-                id={
-                    id:notificacion.id_perfil_solicitado
+                    id={
+                        id:notificacion.id_remitente
+                    }
+                    let perf=await fechProtegidoPost('/buscarPerfilPorid',id)
+                    if (perf.success){
+                    perfilMomentaneo= perf.retorno[0];
+                    //console.log(perfilMomentaneo)
+                        let imgP=document.createElement('img');
+                        imgP.classList="imgPerfil";
+                        if (!perfilMomentaneo.img_perfil) {
+                            imgP.src = "imagenesPerfil/fotoPerfil.svg";
+                        }else{imgP.src=perfilMomentaneo.img_perfil}
+                        if(!notificacion.leida_notificacion){divNotificacion.className="divNotNoLeida"}
+                        divNotificacion.appendChild(imgP);
+                        let h6N=document.createElement('h6');
+                        h6N.textContent=`En la Fecha:${formatearFecha(notificacion.fecha_notificacion)},${perfilMomentaneo.nombre_persona} ${perfilMomentaneo.apellido_persona} acepto tu solicitud de amistad`;
+                        divNotificacion.appendChild(h6N);
+                        divNotificacion.addEventListener('click', function() {
+                            capturarNotificacionSeleccionada(notificacion,perfilMomentaneo);
+                        });
+                        divNotificaciones.appendChild(divNotificacion);
+                    }
                 }
-                let perf=await fechProtegidoPost('/buscarPerfilPorid',id)
-                if (perf.success){
-                   perfilMomentaneo= perf.retorno[0];
-                   //console.log(perfilMomentaneo)
-                    let imgP=document.createElement('img');
-                    imgP.classList="imgPerfil";
-                    if (!perfilMomentaneo.img_perfil) {
-                        imgP.src = "imagenesPerfil/fotoPerfil.svg";
-                    }else{imgP.src=perfilMomentaneo.img_perfil}
-                    if(!notificacion.leida_notificacion){divNotificacion.className="divNotNoLeida"}
-                    divNotificacion.appendChild(imgP);
-                    let h6N=document.createElement('h6');
-                    h6N.textContent=`En la Fecha:${formatearFecha(notificacion.fecha_notificacion)},${perfilMomentaneo.nombre_persona} ${perfilMomentaneo.apellido_persona} acepto tu solicitud de amistad`;
-                    divNotificacion.appendChild(h6N);
-                    divNotificacion.addEventListener('click', function() {
-                        capturarNotificacionSeleccionada(notificacion,perfilMomentaneo);
-                    });
-                    divNotificaciones.appendChild(divNotificacion);
-                                
-                }
-             }
              if(notificacion.id_tipo_notificacion===3){
-
-             }
+                        id={
+                        id:notificacion.id_remitente
+                    }
+                    let perf=await fechProtegidoPost('/buscarPerfilPorid',id);
+                    if (perf.success){
+                    perfilMomentaneo= perf.retorno[0];
+                    //console.log(perfilMomentaneo)
+                        let imgP=document.createElement('img');
+                        imgP.classList="imgPerfil";
+                        if (!perfilMomentaneo.img_perfil) {
+                            imgP.src = "imagenesPerfil/fotoPerfil.svg";
+                        }else{imgP.src=perfilMomentaneo.img_perfil}
+                        if(!notificacion.leida_notificacion){divNotificacion.className="divNotNoLeida"}
+                        divNotificacion.appendChild(imgP);
+                        let h6N=document.createElement('h6');
+                        h6N.textContent=`En la Fecha:${formatearFecha(notificacion.fecha_notificacion)},${perfilMomentaneo.nombre_persona} ${perfilMomentaneo.apellido_persona} a comentado una foto tuya`;
+                        divNotificacion.appendChild(h6N);
+                        divNotificacion.addEventListener('click', function() {
+                            capturarNotificacionSeleccionada(notificacion,perfilMomentaneo);
+                        });
+                        divNotificaciones.appendChild(divNotificacion);
+                        }
+                        }
              if(notificacion.id_tipo_notificacion===4){
 
              }
              
-       };
+       
 
+}
 }
 }
 let divNotificacionSeleccionada=document.getElementById('divNotificacionSeleccionada');
@@ -130,8 +149,10 @@ async function capturarNotificacionSeleccionada(notificacion,perfilMomentaneo){
      eliminarHijos(divNotificaciones);
     fOcultar()
     limpiarCampos(limpiar);
+    console.log(notificacion)
       if(notificacion.id_tipo_notificacion===1){
                 mostrar(divNotificacionSeleccionada);
+                //hacer loa endpi completo para traer la solicirud o el comentario por id_notificacion,clases y procesar de nuevo la informacion
                 if (!perfilMomentaneo.img_perfil) {
                     imgNotificacionseleccionada.src = "imagenesPerfil/fotoPerfil.svg";
                 }else{imgNotificacionseleccionada.src=perfilMomentaneo.img_perfil}
@@ -181,14 +202,14 @@ async function capturarNotificacionSeleccionada(notificacion,perfilMomentaneo){
                 }
      }
      if(notificacion.id_tipo_notificacion===3){
-        
+        console.log(notificacion,perfilMomentaneo);
      }
      if(notificacion.id_tipo_notificacion===4){
         
      }
    
    notificacionSeleccionada=notificacion;
-    //hacer endpoin fech para marcar leida la notificacion con web socket para disminuir el contador
+
    let ids={
     idNotificacion:notificacion.id_notificacion,
     idPerfil:perfil.idPerfil

@@ -13,7 +13,7 @@ class ComentarioData{
             );
             const [idANotificacionResult] = await connection.execute(
                 'INSERT INTO `notificacion`( `id_remitente`, `id_destinatario`, `id_solicitante_notificacion`, `id_tipo_notificacion`,`leida_notificacion`,`fecha_notificacion`) VALUES (?,?,?,?,?,NOW())',
-                [com.idPerfilComentador,com.idPerfilImagen,idComentarioResult,3,false]
+                [com.idPerfilComentador,com.idPerfilImagen,idComentarioResult.insertId,3,false]
             );
            
             await connection.commit();
