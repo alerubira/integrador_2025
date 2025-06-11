@@ -29,7 +29,11 @@ class ComentarioData{
                 connection.release(); // Devolvemos la conexión al pool
             }
         }
-    }
+       }
+     static async consultaPorId(id){
+        query='SELECT * FROM `comentario` com JOIN imagen img ON com.id_imagen=img.id_imagen WHERE id_comentario=?'
+        return await consulta1(query,id)
+     }  
 
 }
 export{ComentarioData}

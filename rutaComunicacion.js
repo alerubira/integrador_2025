@@ -10,5 +10,7 @@ rutaComunicacion.post('/buscarNotificacionesNoLeidas',manejadorDeRutasLogin.veri
 rutaComunicacion.post('/marcarLeidaNotificacion',manejadorDeRutasLogin.verificarToken,manejadorRuraComunicacion.marcarLeidaNotificacion);
 rutaComunicacion.post('/aceptarSolicitud',manejadorDeRutasLogin.verificarToken,manejadorRuraComunicacion.aceptarSolicitud);
 rutaComunicacion.post('/enviarComentario',manejadorDeRutasLogin.verificarToken,manejadorRuraComunicacion.crearComentario);
+rutaComunicacion.post('/traerSolicitudPorId',manejadorDeRutasLogin.verificarToken,manejadorRuraComunicacion.traerSolicitudPorId);
+rutaComunicacion.post('/traerComentarioPorId',manejadorDeRutasLogin.verificarToken,manejadorRuraComunicacion.traerComentarioPorId);
 
 export{rutaComunicacion}

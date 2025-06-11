@@ -12,5 +12,8 @@ class SolicitudAmistad{
       static async aceptarSolicitud(acept){
         return await SolocitudAmistadData.aceptarSolicitud(acept)
       }
+      static async consultaPorId(id){
+        return await SolocitudAmistadData.consultaPorId(id);
+      }
 }
 export{SolicitudAmistad}

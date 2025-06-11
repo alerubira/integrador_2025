@@ -11,7 +11,7 @@ class NotificacionData{
    }*/
    
    static async buscarNotificacionesPorIdSolicitado(id){
-      query='SELECT * FROM notificacion noti   WHERE noti.id_destinatario=?;'
+      query='SELECT * FROM notificacion noti WHERE noti.id_destinatario=11 ORDER BY id_notificacion DESC;'
       return await consulta1(query,id)
    } 
    static async buscarNotificacionesNoLeidasPorIdSolicitado(id){

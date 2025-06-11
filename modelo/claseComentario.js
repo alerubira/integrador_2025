@@ -11,6 +11,9 @@ class Comentario{
     static async alta(com){
         return await ComentarioData.alta(com);
     }
+    static async consultaPorId(id){
+        return await ComentarioData.consultaPorId(id);
+    }
 
 }
 export {Comentario}

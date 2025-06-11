@@ -76,6 +76,10 @@ static async aceptarSolicitud(acepta){
         idSolicitanteNotificacion:notificacionSeleccionada.id_solicitante_notificacion
     }*/
    
-}
+     }
+ static async consultaPorId(id){
+    query='SELECT * FROM `solicitud_amistad` WHERE `id_solicitud_amistad`=?;'
+    return await consulta1(query,id);
+ }    
 }
 export{SolocitudAmistadData}

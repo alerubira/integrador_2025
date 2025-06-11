@@ -4,7 +4,9 @@ block script1
     script(src="domFunsionesPersonal.js",defer)
     script(src="domDatosPersonales.js",defer)
     script(src="domNotificaciones.js",defer)
-    script(src="domImagenPersonal.js",defer) 
+    script(src="domImagenPersonal.js",defer)
+    script(src="domComentarios.js",defer) 
+    script(src="donSolicitudes.js",defer)
 block content 
         #divProfesionalAcceso.grid12-1-1 
                 h3 USUARIO
@@ -119,7 +121,20 @@ block content
                    h6#interesesPerfil.limpiar 
                    h6#antecedentesPerfil.limpiar 
                    button#botonAceptarSolicitud.boton(type="button",onclick='aceptarSolicitud()') Aceptar Solicitud 
-                   p#pSolicitusAceptada.limpiar 
+                   p#pSolicitusAceptada.limpiar
+        #divNotificacionomentarioSeleccionada.ocultar.form.grid12-1-3
+                   button.botonCerrar(type="button",onclick='ocultarDosElementos(divNotificacionomentarioSeleccionada,divImagenesUsuarios)')
+                   img#imgNotificacionseleccionadaC.imgPerfil.limpiar 
+                   h6#datosPersonaC.limpiar 
+                   h6#datosPerfilC.limpiar 
+                   h6#interesesPerfilC.limpiar 
+                   h6#antecedentesPerfilC.limpiar 
+                   img#imgComentario.limpiar
+                   h6#tituloImagenComentario.limpiar 
+                   h6#comentarioImagen.limpiar 
+                   textarea.limpiar(nombre="texComentarioContestado" id="texComentarioContestado" placeholder="comenta..." maxlength="298") 
+                   button#botonContestarComentario.boton(type="button",onclick='contestarComentario()') Contestar Comentario 
+                               
         #divImagenesUsuarios.grid6-4-5.ocultar
         #divImagenUsuarioSeleccionada.grid6-4-5.divContenedorImagen1.ocultar2 
                    button.botonCerrar(type="button",onclick='ocultarDosElementos(divImagenUsuarioSeleccionada,divImagenesUsuarios)')
@@ -132,7 +147,7 @@ block content
                    button.boton2(type="button",onclick="verComentarios()") ver comentarios 
                    button.boton2(type="button",onclick="hacerComentario()") comentar
         #divHacerComentario.forn.grid6-4-7.ocultar
-                        textarea(nombre="texComentario" id="texComentario" placeholder="comenta..." maxlength="298") 
+                        textarea.limpiar(nombre="texComentario" id="texComentario" placeholder="comenta..." maxlength="298") 
                         button.botonCerrar(type="button",onclick='ocultarElemento(divHacerComentario)')
                         button.boton(type="button",onclick="enviarComentario()") Enviar Comentario           
         script.

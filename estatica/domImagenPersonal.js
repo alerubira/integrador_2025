@@ -56,35 +56,3 @@ async function capturarImagen(imagenCapturada){
     captionImagenSeleccionada.textContent=`caption de la Imagen:${imagenCapturada.caption_imagen}`
     imgSeleccionada=imagenCapturada;
 }
-let divHacerComentario=document.getElementById('divHacerComentario');
- function hacerComentario(){
-    mostrar(divHacerComentario);
-}
-let texComentario=document.getElementById('texComentario');
-
-async function enviarComentario(){
-  let comen=texComentario.value;
-  bandera=true;
-  if(comen.length<2||comen.length>parametros.tamaño4){
-    alerta(pagina,`El comentario es obligatorio y ${parametros.cartelTamaño4}`)
-    bandera=false;
-  }
-  if(bandera){
-    let comentario={
-    idImagen:imgSeleccionada.id_imagen,
-    idPerfilComentador:perfil.idPerfil,
-    idPerfilImagen:imgSeleccionada.id_perfil,//agregar en la consulta idPrfil al que peryenece la imagen
-    textoComentario:comen
-  }
-  auw=await fechProtegidoPost('/enviarComentario',comentario);
-  if(aux.success){
- 
-  }
- 
-  }
-  
-  
-}
-function verComentarios(){
-  console.log("ver comentarios")
-}

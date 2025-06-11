@@ -195,6 +195,49 @@ export async function crearComentario(req,res){
     }
 
 }
+export async function traerSolicitudPorId(req,res){
+    try {
+        let aux;
+        let id=req.body.id;
+        aux=await existeBd(id,'solicitud_amistad','id_solicitud_amistad');
+        if(aux instanceof Error){
+            return retornarError(res,`Error al buscar la solicitud:${aux}`)
+        }
+        if(!aux){
+            return retornarError(res,'la solicitud no existe')
+        }
+        aux=await SolicitudAmistad.consultaPorId(id);
+         if(aux instanceof Error){
+            return retornarError(res,`Error al buscar la solicitud por id:${aux}`)
+         }
+         retornarExito(res,"",aux)
+    } catch (error) {
+        console.log(`Error al buscar la solicitud por id;${error}`)
+        return retornarError(res,`Error al buscar la solicitud por aid;${error}`)
+    }
+}
+export async function traerComentarioPorId(req,res){
+        try {
+            let id,aux
+            id=req.body.id;
+            aux=await existeBd(id,'comentario','id_comentario')
+             if(aux instanceof Error){
+            return retornarError(res,`Error al buscar el comentario:${aux}`)
+        }
+        if(!aux){
+            return retornarError(res,'el comentario no existe')
+        }
+        aux=await Comentario.consultaPorId(id);
+        if(aux instanceof Error){
+            return retornarError(res,`Error al ha cer la consulat de comentario:${aux}`)
+        }
+        retornarExito(res,"",aux)
+            
+        } catch (error) {
+            console.log(`Error al buscar el comentario:${error}`)
+            return retornarError(res,`Error al buscar el comentario:${error}`)
+        }
+}
 
 export default{
     generarSilicitudAmistad,
@@ -202,5 +245,7 @@ export default{
     buscarNotificacionesNoLeidasPorIdSolicitado,
     marcarLeidaNotificacion,
     aceptarSolicitud,
-    crearComentario
+    crearComentario,
+    traerSolicitudPorId,
+    traerComentarioPorId
 }

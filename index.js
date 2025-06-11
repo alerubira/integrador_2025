@@ -120,6 +120,8 @@ app.use('/buscarNotificacionesNoLeidas',rutaComunicacion)
 app.use('/marcarLeidaNotificacion',rutaComunicacion);
 app.use('/aceptarSolicitud',rutaComunicacion);
 app.use('/enviarComentario',rutaComunicacion);
+app.use('/traerSolicitudPorId',rutaComunicacion);
+app.use('/traerComentarioPorId',rutaComunicacion);
 
  // Iniciar el servidor
  server.listen(port, () => {
