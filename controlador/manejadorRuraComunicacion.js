@@ -238,6 +238,17 @@ export async function traerComentarioPorId(req,res){
             return retornarError(res,`Error al buscar el comentario:${error}`)
         }
 }
+export async function contestarComentario(req,res){
+try {
+    let aux;
+    let conContestado=req.body;
+    console.log(comContestado);
+    
+} catch (error) {
+    console.log(`Error al contestar el comentario:${error}`)
+    return retornarError(res,`Error al contestar el comentario:${error}`)
+}
+}
 
 export default{
     generarSilicitudAmistad,
@@ -247,5 +258,6 @@ export default{
     aceptarSolicitud,
     crearComentario,
     traerSolicitudPorId,
-    traerComentarioPorId
+    traerComentarioPorId,
+    contestarComentario
 }

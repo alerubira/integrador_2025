@@ -20,12 +20,13 @@ async function enviarComentario(){
         }
         auw=await fechProtegidoPost('/enviarComentario',comentario);
         if(aux.success){
-           ocultarDosElementos(divImagenUsuarioSeleccionada,divImagenesUsuari)
+           ocultarDosElementos(divImagenUsuarioSeleccionada,divImagenesUsuario)
         }
 }
 }
 
-async function cargarNotificacionComentario(){
+async function cargarNotificacionComentario(notificacion,divNotificacion){
+    
         id={
                         id:notificacion.id_remitente
                     }
@@ -44,13 +45,79 @@ async function cargarNotificacionComentario(){
                         h6N.textContent=`En la Fecha:${formatearFecha(notificacion.fecha_notificacion)},${perfilMomentaneo.nombre_persona} ${perfilMomentaneo.apellido_persona} a comentado una foto tuya`;
                         divNotificacion.appendChild(h6N);
                         divNotificacion.addEventListener('click', function() {
-                            capturarNotificacionSeleccionada(notificacion,perfilMomentaneo);
+                            console.log(notificacion)
+                            capturarNotificacionSeleccionada(notificacion);
                         });
                         divNotificaciones.appendChild(divNotificacion);
                         }
 }
 async function cargarNotificacionComentarioContestado(){
     
+}
+let comentarioCapturado;
+let divNotificacionomentarioSeleccionada=document.getElementById('divNotificacionomentarioSeleccionada');
+let imgNotificacionseleccionadaC=document.getElementById('imgNotificacionseleccionadaC');
+let datosPersonaC=document.getElementById('datosPersonaC');
+let datosPerfilC=document.getElementById('datosPerfilC');
+let interesesPerfilC=document.getElementById('interesesPerfilC');
+let antecedentesPerfilC=document.getElementById('antecedentesPerfilC');
+let imgComentario=document.getElementById('imgComentario');
+let tituloImagenComentario=document.getElementById('tituloImagenComentario');
+let comentarioImagen=document.getElementById('comentarioImagen');
+async function cargarNotificacionComentarioSeleccionado(){
+                mostrar(divNotificacionomentarioSeleccionada);
+                 let id={id:notificacionSeleccionada.id_solicitante_notificacion}
+                 aux=await fechProtegidoPost('/traerComentarioPorId',id);
+                if(aux.success){
+                      comentarioCapturado=aux.retorno[0]
+                   }
+                if (!perfilMomentaneo.img_perfil) {
+                    imgNotificacionseleccionada.src = "imagenesPerfil/fotoPerfil.svg";
+                }else{imgNotificacionseleccionadaC.src=perfilMomentaneo.img_perfil}
+                datosPersonaC.textContent=`Nombre:${perfilMomentaneo.nombre_persona}-Apellido:${perfilMomentaneo.apellido_persona}`;
+                datosPerfilC.textContent=`Nombre del Perfil:${perfilMomentaneo.nombre_perfil}`;
+                let inte;
+                if(!perfilMomentaneo.intereses_perfil){
+                    inte="No Contiene";
+                }else{
+                    inte=perfilMomentaneo.intereses_perfil;
+                }
+                interesesPerfilC.textContent=`Intereses:${inte}`;
+                if(!perfilMomentaneo.antecedentes_perfil){
+                    inte="No Contiene";
+                }else{
+                    inte=perfilMomentaneo.antecedentes_perfil;
+                }
+                antecedentesPerfilC.textContent=`Antecedentes:${inte}`; 
+                imgComentario.src=comentarioCapturado.url_imagen
+
+                tituloImagenComentario.textContent=`Titulo:${comentarioCapturado.titulo_imagen}`
+                comentarioImagen.textContent=`Comentario:${comentarioCapturado.texto_comentario}` 
+
+}
+let texComentarioContestado=document.getElementById('texComentarioContestado');
+async function contestarComentario(){
+    bandera=true;
+console.log(texComentarioContestado.value)
+let value=texComentarioContestado.value;
+if(value.length<1||value.length>parametros.cartelTamaño4){
+    alerta(pagina,`La Contestacion es obligatoria y ${parametros.cartelTamaño4}`)
+    bandera=false;
+}
+if(bandera){
+        let comContestado={
+            idComentario:comentarioCapturado.id_comentario,
+            textoComentarioContestado:value,
+            idRemitente:perfil.idPerfil,
+            idDestinatario:perfilMomentaneo.id_perfil
+        }
+        aux=await fechProtegidoPost('/contestarComentario',comContestado)
+        if(aux.success){
+             limpiarCampos(limpiar);
+             ocultarDosElementos(divNotificacionomentarioSeleccionada,divImagenesUsuarios)
+        }
+}
+
 }
 function verComentarios(){
   console.log("ver comentarios")

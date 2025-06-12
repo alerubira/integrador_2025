@@ -12,5 +12,6 @@ rutaComunicacion.post('/aceptarSolicitud',manejadorDeRutasLogin.verificarToken,m
 rutaComunicacion.post('/enviarComentario',manejadorDeRutasLogin.verificarToken,manejadorRuraComunicacion.crearComentario);
 rutaComunicacion.post('/traerSolicitudPorId',manejadorDeRutasLogin.verificarToken,manejadorRuraComunicacion.traerSolicitudPorId);
 rutaComunicacion.post('/traerComentarioPorId',manejadorDeRutasLogin.verificarToken,manejadorRuraComunicacion.traerComentarioPorId);
+rutaComunicacion.post('/contestarComentario',manejadorDeRutasLogin.verificarToken,manejadorRuraComunicacion.contestarComentario);
 
 export{rutaComunicacion}

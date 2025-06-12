@@ -31,7 +31,7 @@ async function notificacionesNoLidas(){
 }
 
 notificacionesNoLidas();
-let notificaciones,perfilMomentaneo;
+let notificaciones,perfilMomentaneo,notificacionS;
 let divNotificaciones=document.getElementById('divNotificaciones');   
 async function VerNotificaciones(){
     fOcultar();
@@ -48,156 +48,56 @@ async function VerNotificaciones(){
 aux=await fechProtegidoPost('/buscarNotificaciones',id)
 if(aux.success){
         notificaciones=aux.retorno;
-        console.log(notificaciones)
         if(notificaciones.length<1){alerta(pagina,"NoTiene Notificaciones")}
        for(let notificacion of notificaciones) {
+        console.log(notificacion)
              let divNotificacion = document.createElement('div');
              divNotificacion.className = 'divNotificacion';
 
              if(notificacion.id_tipo_notificacion===1){
-                cargarNotificacionSolicitud();
+                cargarNotificacionSolicitud(notificacion,divNotificacion);
                   
                         }
              if(notificacion.id_tipo_notificacion===2){
-                  cargarNotificacionSolicitudContestada();
+                  cargarNotificacionSolicitudContestada(notificacion,divNotificacion);
                     
                 }
              if(notificacion.id_tipo_notificacion===3){
-                    cargarNotificacionComentario();
+                    cargarNotificacionComentario(notificacion,divNotificacion);
                         }
              if(notificacion.id_tipo_notificacion===4){
-                    cargarNotificacionComentarioContestado();
+                    cargarNotificacionComentarioContestado(notificacion,divNotificacion);
              }
         }
 }
 }
-//trasladar para abajo
-let divNotificacionSeleccionada=document.getElementById('divNotificacionSeleccionada');
-let imgNotificacionseleccionada=document.getElementById('imgNotificacionseleccionada');
-let datosPersona=document.getElementById('datosPersona');
-let datosPerfil=document.getElementById('datosPerfil');
-let interesesPerfil=document.getElementById('interesesPerfil');
-let antecedentesPerfil=document.getElementById('antecedentesPerfil');
-let botonAceptarSolicitud=document.getElementById('botonAceptarSolicitud');
-let pSolicitusAceptada=document.getElementById('pSolicitusAceptada');
-let solicitudCapturada;
-let comentarioCapturado;
-let divNotificacionomentarioSeleccionada=document.getElementById('divNotificacionomentarioSeleccionada');
-let imgNotificacionseleccionadaC=document.getElementById('imgNotificacionseleccionadaC');
-let datosPersonaC=document.getElementById('datosPersonaC');
-let datosPerfilC=document.getElementById('datosPerfilC');
-let interesesPerfilC=document.getElementById('interesesPerfilC');
-let antecedentesPerfilC=document.getElementById('antecedentesPerfilC');
-let imgComentario=document.getElementById('imgComentario');
-let tituloImagenComentario=document.getElementById('tituloImagenComentario');
-let comentarioImagen=document.getElementById('comentarioImagen');
 
 
-async function capturarNotificacionSeleccionada(notificacion,perfilMomentaneo){
+
+
+
+async function capturarNotificacionSeleccionada(notificacion){
      eliminarHijos(divNotificaciones);
     fOcultar()
     limpiarCampos(limpiar);
+    notificacionSeleccionada=notificacion;
       if(notificacion.id_tipo_notificacion===1){
-                mostrar(divNotificacionSeleccionada);
-                let id={id:notificacion.id_solicitante_notificacion}
-                 aux=await fechProtegidoPost('/traerSolicitudPorId',id);
-                if(aux.success){
-                      solicitudCapturada=aux.retorno[0]
-                      console.log(solicitudCapturada)
-                }
-                if (!perfilMomentaneo.img_perfil) {
-                    imgNotificacionseleccionada.src = "imagenesPerfil/fotoPerfil.svg";
-                }else{imgNotificacionseleccionada.src=perfilMomentaneo.img_perfil}
-                datosPersona.textContent=`Nombre:${perfilMomentaneo.nombre_persona}-Apellido:${perfilMomentaneo.apellido_persona}`;
-                datosPerfil.textContent=`Nombre del Perfil:${perfilMomentaneo.nombre_perfil}`;
-                let inte;
-                if(!perfilMomentaneo.intereses_perfil){
-                    inte="No Contiene";
-                }else{
-                    inte=perfilMomentaneo.intereses_perfil;
-                }
-                interesesPerfil.textContent=`Intereses:${inte}`;
-                if(!perfilMomentaneo.antecedentes_perfil){
-                    inte="No Contiene";
-                }else{
-                    inte=perfilMomentaneo.antecedentes_perfil;
-                }
-                antecedentesPerfil.textContent=`Antecedentes:${inte}`;
-                if(solicitudCapturada.solicitud_aceptada===1){
-                    botonAceptarSolicitud.style.display='none';
-                    pSolicitusAceptada.textContent="Esta Solicitud ya fue Aceptada"
-                }
+                cargarSilicitudSeleccionada()
+              
             }
      if(notificacion.id_tipo_notificacion===2){
-             mostrar(divNotificacionSeleccionada);
-               let id={id:notificacion.id_solicitante_notificacion}
-                aux=await fechProtegidoPost('/traerSolicitudPorId',id);
-                if(aux.success){
-                      solicitudCapturada=aux.retorno[0]
-                      console.log(solicitudCapturada)
-                }
-                if (!perfilMomentaneo.img_perfil) {
-                    imgNotificacionseleccionada.src = "imagenesPerfil/fotoPerfil.svg";
-                }else{imgNotificacionseleccionada.src=perfilMomentaneo.img_perfil}
-                datosPersona.textContent=`Nombre:${perfilMomentaneo.nombre_persona}-Apellido:${perfilMomentaneo.apellido_persona}`;
-                datosPerfil.textContent=`Nombre del Perfil:${perfilMomentaneo.nombre_perfil}`;
-                let inte;
-                if(!perfilMomentaneo.intereses_perfil){
-                    inte="No Contiene";
-                }else{
-                    inte=perfilMomentaneo.intereses_perfil;
-                }
-                interesesPerfil.textContent=`Intereses:${inte}`;
-                if(!perfilMomentaneo.antecedentes_perfil){
-                    inte="No Contiene";
-                }else{
-                    inte=perfilMomentaneo.antecedentes_perfil;
-                }
-                antecedentesPerfil.textContent=`Antecedentes:${inte}`;
-                
-                if(solicitudCapturada.solicitud_aceptada===1){
-                    botonAceptarSolicitud.style.display='none';
-                    pSolicitusAceptada.textContent="Acepto tu solicitud de amistad"
-                }
+             cargarSolicitudAceptadaSeleccionada()
+            
      }
      if(notificacion.id_tipo_notificacion===3){
-                console.log(notificacion,perfilMomentaneo);
-                mostrar(divNotificacionomentarioSeleccionada);
-                 let id={id:notificacion.id_solicitante_notificacion}
-                 aux=await fechProtegidoPost('/traerComentarioPorId',id);
-                if(aux.success){
-                      comentarioCapturado=aux.retorno[0]
-                      console.log(comentarioCapturado)
-                   }
-                if (!perfilMomentaneo.img_perfil) {
-                    imgNotificacionseleccionada.src = "imagenesPerfil/fotoPerfil.svg";
-                }else{imgNotificacionseleccionadaC.src=perfilMomentaneo.img_perfil}
-                datosPersonaC.textContent=`Nombre:${perfilMomentaneo.nombre_persona}-Apellido:${perfilMomentaneo.apellido_persona}`;
-                datosPerfilC.textContent=`Nombre del Perfil:${perfilMomentaneo.nombre_perfil}`;
-                let inte;
-                if(!perfilMomentaneo.intereses_perfil){
-                    inte="No Contiene";
-                }else{
-                    inte=perfilMomentaneo.intereses_perfil;
-                }
-                interesesPerfilC.textContent=`Intereses:${inte}`;
-                if(!perfilMomentaneo.antecedentes_perfil){
-                    inte="No Contiene";
-                }else{
-                    inte=perfilMomentaneo.antecedentes_perfil;
-                }
-                antecedentesPerfilC.textContent=`Antecedentes:${inte}`; 
-                imgComentario.src=comentarioCapturado.url_imagen
-
-                tituloImagenComentario.textContent=`Titulo:${comentarioCapturado.titulo_imagen}`
-                comentarioImagen.textContent=`Comentario:${comentarioCapturado.texto_comentario}` 
-
+                cargarNotificacionComentarioSeleccionado()
+               
      }
      if(notificacion.id_tipo_notificacion===4){
         
      }
    
-   notificacionSeleccionada=notificacion;
+   
 
    let ids={
     idNotificacion:notificacion.id_notificacion,
@@ -209,10 +109,5 @@ async function capturarNotificacionSeleccionada(notificacion,perfilMomentaneo){
 }
 let notificacionSeleccionada;
 
-let texComentarioContestado=document.getElementById('texComentarioContestado');
 
-async function contestarComentario(){
-console.log(texComentarioContestado.value)
-limpiarCampos(limpiar);
-ocultarDosElementos(divNotificacionomentarioSeleccionada,divImagenesUsuarios)
-}
+
