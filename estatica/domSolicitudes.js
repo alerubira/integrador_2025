@@ -13,7 +13,7 @@ async function aceptarSolicitud() {
     }
 }
 async function cargarNotificacionSolicitud(notificacion,divNotificacion){
-      id={
+                    id={
                         id:notificacion.id_remitente
                     }
                     let perf=await fechProtegidoPost('/buscarPerfilPorid',id)

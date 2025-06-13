@@ -30,5 +30,6 @@ rutaImagen.post('/modificarVisibilidadImagen',manejadorDeRutasLogin.verificarTok
 rutaImagen.post('/modificarActiviImagen',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.modificarActiviImagen);
 rutaImagen.post('/traerImagenesPublicas',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarImagenesPublicas);
 rutaImagen.post('/traerImagenesPublicasPublicas',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarImagenesPublicasPublicas);
+rutaImagen.post('/traerComentariosPorIdImagen',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.traerComentariosPorIdImagen);
 
 export{rutaImagen}

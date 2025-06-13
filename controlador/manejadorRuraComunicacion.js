@@ -243,7 +243,6 @@ export async function contestarComentario(req,res){
 try {
     let aux;
     let comContestado=req.body;
-     console.log(comContestado);
     aux=await verificarYup(comContestado,'comentarioContestado')
         if(aux instanceof Error){
             return retornarError(res,`Error al verificar la tipologia del comentario contestado:${aux}`)
@@ -275,8 +274,8 @@ try {
         }
         //devolver el mensaje a la persona dueña de la imagen
      // el id es aque perfil dirige la accion
-            if (clientes.has(comContestado.idRemitente)) {
-                const ws = clientes.get(comContestado.idRemitente);
+            if (clientes.has(comContestado.idDestinatario)) {
+                const ws = clientes.get(comContestado.idDestinatario);
                 ws.send(JSON.stringify({ tipo: 'nuevaNotificacion' }));
             }
         
@@ -302,7 +301,6 @@ export async function traerComentarioContestadoPorId(req,res){
         if(aux instanceof Error){
             return retornarError(res,`Error al hacer la consulata de comentario contestado:${aux}`)
         }
-        console.log(aux);
         retornarExito(res,"",aux)
             
         } catch (error) {

@@ -3,7 +3,7 @@ let divHacerComentario=document.getElementById('divHacerComentario');
     mostrar(divHacerComentario);
 }
 let texComentario=document.getElementById('texComentario');
-
+//let divImagenesUsuarios=document.getElementById('divImagenesUsuarios');
 async function enviarComentario(){
   let comen=texComentario.value;
   bandera=true;
@@ -20,7 +20,7 @@ async function enviarComentario(){
         }
         auw=await fechProtegidoPost('/enviarComentario',comentario);
         if(aux.success){
-           ocultarDosElementos(divImagenUsuarioSeleccionada,divImagenesUsuario)
+           ocultarDosElementos(divImagenUsuarioSeleccionada,divImagenesUsuarios)
         }
 }
 }
@@ -182,7 +182,4 @@ if(bandera){
         }
 }
 
-}
-function verComentarios(){
-  console.log("ver comentarios")
 }

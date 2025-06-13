@@ -217,6 +217,7 @@ margin: auto;
   max-height: 100%;
 }
 .divContenedorImagen {
+   
  /* width: 300px;           /* O el ancho que desees */
   aspect-ratio: 1 / 1;    /* Hace que el alto sea igual al ancho */
   /* Otros estilos que desees */
@@ -229,10 +230,12 @@ margin: auto;
 }
 .divContenedorImagen1{
   aspect-ratio: 1 / 0.50; 
+  border: 1px solid black; 
+  margin: 2%;
 }
-/*.divContenedorImagen1:hover{
-  transform: scale(1.15); /* Aumenta el tamaño al pasar el ratón */ 
-
+.divContenedorImagen1:hover{
+  transform: scale(1.05); /* Aumenta el tamaño al pasar el ratón */ 
+}
 .divNotificacion{
   aspect-ratio: 0,25 / 1;    /* Hace que el alto sea igual al ancho */
 }

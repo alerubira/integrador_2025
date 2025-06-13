@@ -56,3 +56,12 @@ async function capturarImagen(imagenCapturada){
     captionImagenSeleccionada.textContent=`caption de la Imagen:${imagenCapturada.caption_imagen}`
     imgSeleccionada=imagenCapturada;
 }
+async function verComentarios(){
+  console.log("ver comentarios")
+  let idImagen={
+       idImagen:imgSeleccionada.id_imagen
+  }
+  console.log(idImagen)
+  aux= await fechProtegidoPost('/traerComentariosPorIdImagen',idImagen)
+  console.log(aux);
+}

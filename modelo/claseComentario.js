@@ -14,6 +14,9 @@ class Comentario{
     static async consultaPorId(id){
         return await ComentarioData.consultaPorId(id);
     }
+    static async consultaPorIdImagen(idImagen){
+        return await ComentarioData.consultaPorIdImagen(idImagen)
+    }
 
 }
 export {Comentario}

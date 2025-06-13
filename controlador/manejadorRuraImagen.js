@@ -7,6 +7,7 @@ import { existeBd } from "../modelo/conexxionBD.js";
 import { AlbumPersonal } from "../modelo/claseAlbumPersonal.js";
 import { Imagen } from "../modelo/claseImagen.js";
 import{Visibilidad}from"../modelo/claseVisibilidad.js";
+import {Comentario}from"../modelo/claseComentario.js";
 import path from 'path';
 import sharp from 'sharp';
 let aux;
@@ -271,6 +272,28 @@ try {
     return retornarError(res,`Error al buscar imagenes publicas , publicasPara usuarios`)
 }
 }
+export async function traerComentariosPorIdImagen(req,res){
+try {
+    let aux,idImg;
+    idImg=req.body.idImagen;
+    aux await existeBd(idImg,'imagen','id_imagen')
+    if(aux instanceof Error){
+        return retornarError(res,`Error al buscar la Imagen que contiene los comentarios:${aux}`)
+    }
+    if(!aux){
+        return retornarError(res,'La imagen seleccionada no existe')
+    }
+    aux=await Comentario.consultaPorIdImagen();
+    if(aux instanceof Error){
+        return retornarError(res,`Error al buscar los comentarios de la imagen:${aux}`)
+    }
+
+    return retornarExito(res,"",aux)
+} catch (error) {
+    console.log(`Error al traer comentarios por id imgen`);
+    return retornarError(res`Error al traer comentarios por id imgen`,)
+}
+}
 export default {
     subirImagen,
     buscarImagenesPorIdAlbumPersonal,
@@ -280,6 +303,7 @@ export default {
     modificarVisibilidadImagen,
     modificarActiviImagen,
     buscarImagenesPublicas,
-    buscarImagenesPublicasPublicas
+    buscarImagenesPublicasPublicas,
+    traerComentariosPorIdImagen
 
 }
