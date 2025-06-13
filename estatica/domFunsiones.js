@@ -67,6 +67,10 @@ function eliminarHijos(div) {
 function ocultarElemento(elemento){
   elemento.style.display="none"
 }
+function ocultarOcultar(ele1,ele2){
+  ele1.style.display="none"
+  ele2.style.display="none"
+}
 function ocultarDosElementos(el1,el2){
 if(el1.style.dispaly==="none"){
   el1.style.display="block";

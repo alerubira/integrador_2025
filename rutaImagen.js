@@ -31,5 +31,6 @@ rutaImagen.post('/modificarActiviImagen',manejadorDeRutasLogin.verificarToken,ma
 rutaImagen.post('/traerImagenesPublicas',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarImagenesPublicas);
 rutaImagen.post('/traerImagenesPublicasPublicas',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarImagenesPublicasPublicas);
 rutaImagen.post('/traerComentariosPorIdImagen',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.traerComentariosPorIdImagen);
+rutaImagen.post('/buscarContestadosPorComentario',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarContestadosPorComentario);
 
 export{rutaImagen}

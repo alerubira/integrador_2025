@@ -1,9 +1,10 @@
 .contenedorGrid {
-    text-align: center;
+    height: 100vh;
     display: grid;
     grid-template-columns: repeat(12, 1fr);/*genera 6 columnas*/
     grid-auto-rows: min-content;/* genera filas automáticas según el contenido */
     gap: 0,5rem;/* espacio entre filas y columnas */
+    text-align: center;
 }
 .grid12-1-1{
     grid-column: span 12 / span 12;/* ocupa 12 columnas */

@@ -8,6 +8,7 @@ import { AlbumPersonal } from "../modelo/claseAlbumPersonal.js";
 import { Imagen } from "../modelo/claseImagen.js";
 import{Visibilidad}from"../modelo/claseVisibilidad.js";
 import {Comentario}from"../modelo/claseComentario.js";
+import{ComentarioContestado}from"../modelo/claseComentarioContestado.js"
 import path from 'path';
 import sharp from 'sharp';
 let aux;
@@ -276,14 +277,14 @@ export async function traerComentariosPorIdImagen(req,res){
 try {
     let aux,idImg;
     idImg=req.body.idImagen;
-    aux await existeBd(idImg,'imagen','id_imagen')
+    aux =await existeBd(idImg,'imagen','id_imagen')
     if(aux instanceof Error){
         return retornarError(res,`Error al buscar la Imagen que contiene los comentarios:${aux}`)
     }
     if(!aux){
         return retornarError(res,'La imagen seleccionada no existe')
     }
-    aux=await Comentario.consultaPorIdImagen();
+    aux=await Comentario.consultaPorIdImagen(idImg);
     if(aux instanceof Error){
         return retornarError(res,`Error al buscar los comentarios de la imagen:${aux}`)
     }
@@ -292,6 +293,28 @@ try {
 } catch (error) {
     console.log(`Error al traer comentarios por id imgen`);
     return retornarError(res`Error al traer comentarios por id imgen`,)
+}
+}
+export async function buscarContestadosPorComentario(req,res){
+try {
+    let aux,idC;
+    idC=req.body.idC;
+    aux=await existeBd(idC,'comentario','id_comentario');
+    if(aux instanceof Error){
+        return retornarError(`Error al buscar el comentario contestado:${aux}`)
+    }
+    if(!aux){
+        return retornarError(res,"El comentario no existe")
+    }
+    aux = await ComentarioContestado.consultaPorIdComentario(idC);
+    if(aux instanceof Error){
+        return retornarError(res,`Error al buscar comentario contestado:${aux}`)
+    }
+    retornarExito(res,"",aux)
+    
+} catch (error) {
+    console.log(`Error al buscar las contestaciones del comentario:${error}`);
+    return retornarError(res,`Error al buscar las contestaciones del comentario:${error}`)
 }
 }
 export default {
@@ -304,6 +327,7 @@ export default {
     modificarActiviImagen,
     buscarImagenesPublicas,
     buscarImagenesPublicasPublicas,
-    traerComentariosPorIdImagen
+    traerComentariosPorIdImagen,
+    buscarContestadosPorComentario
 
 }

@@ -115,6 +115,7 @@ app.use('/modificarActiviImagen',rutaImagen);
 app.use('/traerImagenesPublicas',rutaImagen);
 app.use('/traerImagenesPublicasPublicas',rutaImagen);
 app.use('/traerComentariosPorIdImagen',rutaImagen);
+app.use('/buscarContestadosPorComentario',rutaImagen);
 app.use('/',rutaComunicacion);
 app.use('/buscarNotificaciones',rutaComunicacion);
 app.use('/buscarNotificacionesNoLeidas',rutaComunicacion)

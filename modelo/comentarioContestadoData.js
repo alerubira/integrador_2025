@@ -34,5 +34,9 @@ class ComentarioContestadoData{
              query='SELECT * FROM `comentario_contestado` cc JOIN comentario co ON cc.id_comentario=co.id_comentario JOIN imagen img ON img.id_imagen=co.id_imagen WHERE cc.id_comentario_contestado=?;'
              return consulta1(query,id)
     }
+    static async consultaPorIdComentario(idC){
+        query='SELECT * FROM `comentario_contestado` WHERE id_comentario=?;'
+        return await consulta1(query,idC);
+    }
 }
 export{ComentarioContestadoData}

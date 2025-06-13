@@ -1,11 +1,15 @@
 pagina=`Pagina Personal de: ${perfil.nombrePersona} ${perfil.apellidoPersona}`;
 let sectionPerfil=document.getElementById("sectionPerfil");
 let sectionModificar=document.getElementById("sectionModificar");
+let divContenedorPerfil=document.getElementById('divContenedorPerfil');
+
 function verPerfil(){
 mostrar(sectionPerfil);
+divContenedorPerfil.style.display="block";
 }
 function modificarPerfil(){
 mostrar(sectionModificar);
+divContenedorPerfil.style.display="block";
 }
 function buscarPersonas(){
     
@@ -71,6 +75,7 @@ function mostrarBuscarPersonas(){
     fOcultar();
     limpiarCampos(limpiar);
     mostrar(sectionBuscarPersonas);
+    divContenedorPerfil.style.display="block";
 }
 let perfilesBuscados;
  document.getElementById('inputBuscarPersonas').addEventListener('keyup',async function(){

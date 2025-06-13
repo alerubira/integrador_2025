@@ -22,6 +22,9 @@ h6{
   margin: 0;
   text-align: left; /* Alinea el texto del  a la izquierda */
 }
+.h6cc{
+  margin-left: 6%;
+}
 h5 {
   margin-bottom: 0;
 }

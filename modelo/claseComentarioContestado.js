@@ -13,5 +13,8 @@ class ComentarioContestado{
     static async consultaPorId(id){
         return await ComentarioContestadoData.consultaPorId(id)
     }
+    static async consultaPorIdComentario(idC){
+        return await ComentarioContestadoData.consultaPorIdComentario(idC)
+    }
 }
 export{ComentarioContestado}

@@ -12,9 +12,9 @@ block content
                 h3 USUARIO
                         label#lblNombreYApellido=`${perfil.nombrePersona}  ${perfil.apellidoPersona}`
                 img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")        
-        #divContenedorPerfil.grid12-1-2.contenedorGrid
+        #divContenedorPerfil.grid12-1-2.contenedorGrid.ocultar
                     section#sectionPerfil.grid12-1-1.ocultar.form
-                        button.botonCerrar(type="button",onclick='ocultarElemento(sectionPerfil)')
+                        button.botonCerrar(type="button",onclick='ocultarOcultar(sectionPerfil,divContenedorPerfil)')
                         h5=`Perfil :${perfil.nombrePerfil}`
                         img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")  
                         br
@@ -30,7 +30,7 @@ block content
                         br
                         p#PAntecedentes=`Antecedentes: ${perfil.antecedentes}`
                     section#sectionModificar.grid12-2-1.ocultar 
-                        button.botonCerrar(type="button",onclick='ocultarElemento(sectionModificar)')
+                        button.botonCerrar(type="button",onclick='ocultarOcultart(sectionModificar,divContenedorPerfil)')
                         select#selectModificar(name="modificar")
                             option(value="0") Seleccionar
                             option(value="1") Modificar Nombre
@@ -40,7 +40,7 @@ block content
                             option(value="5") Modificar Intereses 
                             option(value="6") Modificar Antecedentes
                     section#sectionModificarImagenPerfil.ocultar 
-                        button.botonCerrar(type="button",onclick='ocultarElemento(sectionModificarImagenPerfil)')
+                        button.botonCerrar(type="button",onclick='ocultarOcultar(sectionModificarImagenPerfil,divContenedorPerfil)')
                         img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")        
                         form#formSubirImagen(method="POST", action="/subirImagenPerfil", enctype="multipart/form-data")
                                 label(for="imagen") Selecciona una imagen:
@@ -53,42 +53,42 @@ block content
                                 input(type="hidden", name="idPerfil", value=perfil.idPerfil)
                                 button(type="submit") Subir Imagen
                     section#sectionModificarNombre.ocultar
-                               button.botonCerrar(type="button",onclick='ocultarElemento(sectionModificarNombre)')
+                               button.botonCerrar(type="button",onclick='ocultarOcultar(sectionModificarNombre,divContenedorPerfil)')
                                p#pNombreActual=`Nombre Actual : ${perfil.nombrePersona}` 
                                label(for="inputNuevoNombrePersonaPerfil") Nuevo Nombre Persona 
                                input.limpiar(type="text",id="inputNuevoNombrePersonaPerfil",name="inputNuevoNombrePersonaPerfil",placeHolder="Nombre Persona") 
                                br
                                button.boton(type="button",onclick='modificarNombrePersonaPerfil()') Modificar
                     section#sectionModificarApellido.ocultar
-                               button.botonCerrar(type="button",onclick='ocultarElemento(sectionModificarApellido)')
+                               button.botonCerrar(type="button",onclick='ocultarOcultar(sectionModificarApellido,divContenedorPerfil)')
                                p#pApellidoActual=`Apellido Actual : ${perfil.apellidoPersona}` 
                                label(for="inputNuevoApellidoPersonaPerfil") Nuevo Apellido Persona 
                                input.limpiar(type="text",id="inputNuevoApellidoPersonaPerfil",name="inputNuevoApellidoPersonaPerfil",placeHolder="Apellido Persona") 
                                br
                                button.boton(type="button",onclick='modificarApellidoPersonaPerfil()') Modificar
                     section#sectionModificarEMail.ocultar
-                               button.botonCerrar(type="button",onclick='ocultarElemento(sectionModificarEMail)')
+                               button.botonCerrar(type="button",onclick='ocultarOcultart(sectionModificarEMail,divContenedorPerfil)')
                                p#pEMailActual=`E-Mail Actual : ${perfil.eMail}` 
                                label(for="inputNuevoEMailPerfil") Nuevo E-Mail Persona 
                                input.limpiar(type="email",id="inputNuevoEMailPerfil",name="inputNuevoEMailPerfil",placeHolder="E-Mail Persona") 
                                br
                                button.boton(type="button",onclick='modificarEMailPerfil()') Modificar
                     section#sectionModificarIntereses.ocultar
-                               button.botonCerrar(type="button",onclick='ocultarElemento(sectionModificarIntereses)')
+                               button.botonCerrar(type="button",onclick='ocultarOcultar(sectionModificarIntereses,divContenedorPerfil)')
                                p#pInteresesActual=`Intereses Actuales : ${perfil.intereses}` 
                                label(for="inputNuevoInteresesPerfil") Nuevos Intereses Persona 
                                textarea.limpiar(type="text",id="inputNuevoInteresesPerfil",name="inputNuevoInteresesPerfil",placeHolder="Intereses Perfil") 
                                br
                                button.boton(type="button",onclick='modificarInteresesPerfil()') Modificar      
                     section#sectionModificarAntecedentes.ocultar
-                               button.botonCerrar(type="button",onclick='ocultarElemento(sectionModificarAntecedentes)') 
+                               button.botonCerrar(type="button",onclick='ocultarOcultar(sectionModificarAntecedentes,divContenedorPerfil)') 
                                p#pAntecedentesActual=`Antecedentes Actuales : ${perfil.antecedentes}` 
                                label(for="inputNuevoAntecedentesPerfil") Nuevos Antecedentes Persona 
                                textarea.limpiar(type="text",id="inputNuevoAntecedentesPerfil",name="inputNuevoAntesedentesPerfil",placeHolder="Antesedentes Perfil") 
                                br
                                button.boton(type="button",onclick='modificarAntesedentesPerfil()') Modificar                                                 
                     section#sectionBuscarPersonas.ocultar.grid12-1-3
-                               button.botonCerrar(type="button",onclick='ocultarElemento(sectionBuscarPersonas)') 
+                               button.botonCerrar(type="button",onclick='ocultarOcultar(sectionBuscarPersonas,divContenedorPerfil)') 
                                label(for="inputBuscarPersonas") Buscar Personas:
                                input.limpiar(type="text", id="inputBuscarPersonas", name="inputBuscarPersonas",placeHolder="Apellido") 
                                img(id="imgLupa",src="./Iconos/lupa.svg", alt="Lupa")
@@ -104,7 +104,7 @@ block content
                                                 th Seleccionar
                                         tbody#cuerpo 
                     #divPerfilSeleccionado.ocultar.form.grid12-1-3 
-                                button.botonCerrar(type="button",onclick='ocultarElemento(divPerfilSeleccionado)')
+                                button.botonCerrar(type="button",onclick='ocultarOcultar(divPerfilSeleccionado,divContenedorPerfil)')
                                 img#imgPerfilSeleccionado.imgPerfil.limpiar
                                 br
                                 p#pPerfilSeleccionado.limpiar
@@ -147,6 +147,7 @@ block content
                    h6#captionImagenSeleccionada.limpiar 
                    button.boton2(type="button",onclick="verComentarios()") ver comentarios 
                    button.boton2(type="button",onclick="hacerComentario()") comentar
+                   #divComentariosImagen
         #divHacerComentario.forn.grid6-4-7.ocultar
                         textarea.limpiar(nombre="texComentario" id="texComentario" placeholder="comenta..." maxlength="298") 
                         button.botonCerrar(type="button",onclick='ocultarElemento(divHacerComentario)')
