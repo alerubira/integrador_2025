@@ -13,5 +13,6 @@ rutaComunicacion.post('/enviarComentario',manejadorDeRutasLogin.verificarToken,m
 rutaComunicacion.post('/traerSolicitudPorId',manejadorDeRutasLogin.verificarToken,manejadorRuraComunicacion.traerSolicitudPorId);
 rutaComunicacion.post('/traerComentarioPorId',manejadorDeRutasLogin.verificarToken,manejadorRuraComunicacion.traerComentarioPorId);
 rutaComunicacion.post('/contestarComentario',manejadorDeRutasLogin.verificarToken,manejadorRuraComunicacion.contestarComentario);
+rutaComunicacion.post('/traerComentarioContestadoPorId',manejadorDeRutasLogin.verificarToken,manejadorRuraComunicacion.traerComentarioContestadoPorId);
 
 export{rutaComunicacion}

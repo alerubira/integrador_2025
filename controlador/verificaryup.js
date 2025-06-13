@@ -80,9 +80,14 @@ const ProfesionalY= BasePersonaY.shape({//dejar
  const ComentarioY=yup.object().shape({
     textoComentario:yup.string()
         .required('El comentario deve tener un texto')
-        .max(parametros.tamaño4,`El texto ${parametros.cartelTamaño4}`)
+        .max(parametros.tamaño4,`El texto ${parametros.cartelTamaño4}`),
+            
  })
-    
+    const ComentarioContestadoY=yup.object().shape({
+    textoComentarioContestado:yup.string()
+        .required('El comentario contestado deve tener un texto')
+        .max(parametros.tamaño4,`El texto ${parametros.cartelTamaño4}`),
+    })
 async function verificarYup(objeto,nombre){
     let aux;
         //console.log(objeto);
@@ -114,7 +119,11 @@ async function verificarYup(objeto,nombre){
                 return await verificarY(objeto,imagenY);  
                 break; 
             case 'comentario':
-                return await verificarY(objeto,ComentarioY);             
+                return await verificarY(objeto,ComentarioY); 
+                break;
+            case 'comentarioContestado':
+                return await verificarY(objeto,ComentarioContestadoY);
+                break;                
              default:
                 return retornarErrorSinRes('Seleccion no valida en verificar para yup');
        }

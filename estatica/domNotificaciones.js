@@ -50,7 +50,7 @@ if(aux.success){
         notificaciones=aux.retorno;
         if(notificaciones.length<1){alerta(pagina,"NoTiene Notificaciones")}
        for(let notificacion of notificaciones) {
-        console.log(notificacion)
+        //console.log(notificacion)
              let divNotificacion = document.createElement('div');
              divNotificacion.className = 'divNotificacion';
 
@@ -81,6 +81,7 @@ async function capturarNotificacionSeleccionada(notificacion){
     fOcultar()
     limpiarCampos(limpiar);
     notificacionSeleccionada=notificacion;
+    console.log(notificacionSeleccionada);
       if(notificacion.id_tipo_notificacion===1){
                 cargarSilicitudSeleccionada()
               
@@ -94,7 +95,7 @@ async function capturarNotificacionSeleccionada(notificacion){
                
      }
      if(notificacion.id_tipo_notificacion===4){
-        
+        cargarNotificacionComentarioContestadoSeleccionado()
      }
    
    

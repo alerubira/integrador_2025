@@ -5,6 +5,7 @@ import {Notificacion} from "../modelo/claseNotificacion.js";
 import{clientes }from "../index.js"
 import { verificarYup } from "./verificaryup.js";
 import {Comentario} from "../modelo/claseComentario.js"
+import {ComentarioContestado}from "../modelo/claseComentarioContestado.js"
 export async function generarSilicitudAmistad(req,res){
     try {
         
@@ -241,13 +242,73 @@ export async function traerComentarioPorId(req,res){
 export async function contestarComentario(req,res){
 try {
     let aux;
-    let conContestado=req.body;
-    console.log(comContestado);
-    
+    let comContestado=req.body;
+     console.log(comContestado);
+    aux=await verificarYup(comContestado,'comentarioContestado')
+        if(aux instanceof Error){
+            return retornarError(res,`Error al verificar la tipologia del comentario contestado:${aux}`)
+        }
+        aux=await existeBd(comContestado.idComentario,'comentario','id_comentario');
+        if(aux instanceof Error){
+            return retornarError(res,`Erro al buscar el comentario:${aux}`);
+        }
+        if(!aux){
+            return retornarError(res,'El comentario a contestar no existe')
+        }
+        aux=await existeBd(comContestado.idRemitente,'perfil','id_perfil');
+        if(aux instanceof Error){
+            return retornarError(res,`Error al buscar el perfil comentador${aux}`)
+        }
+        if(!aux){
+            return retornarError(res,'El perfil comentador no existe')
+        }
+        aux=await existeBd(comContestado.idDestinatario,'perfil','id_perfil');
+        if(aux instanceof Error){
+            return retornarError(res,`Error al buscar el perfil propietario de la Imagen:${aux}`)
+        }
+        if(!aux){
+            return retornarError(res,'El perfil propietario de la imagen no existe')
+        }
+        aux=await ComentarioContestado.alta(comContestado);
+        if(aux instanceof Error){
+            return retornarError(res,`Error al crear el comentario:${aux}`)
+        }
+        //devolver el mensaje a la persona dueña de la imagen
+     // el id es aque perfil dirige la accion
+            if (clientes.has(comContestado.idRemitente)) {
+                const ws = clientes.get(comContestado.idRemitente);
+                ws.send(JSON.stringify({ tipo: 'nuevaNotificacion' }));
+            }
+        
+   
+    return retornarExito(res,"el comentario se contesto correctamente",aux)
 } catch (error) {
     console.log(`Error al contestar el comentario:${error}`)
     return retornarError(res,`Error al contestar el comentario:${error}`)
 }
+}
+export async function traerComentarioContestadoPorId(req,res){
+ try {
+            let id,aux
+            id=req.body.id;
+            aux=await existeBd(id,'comentario_contestado','id_comentario_contestado')
+             if(aux instanceof Error){
+            return retornarError(res,`Error al buscar el comentario contestado:${aux}`)
+        }
+        if(!aux){
+            return retornarError(res,'el comentariocontestado no existe')
+        }
+        aux=await ComentarioContestado.consultaPorId(id);
+        if(aux instanceof Error){
+            return retornarError(res,`Error al hacer la consulata de comentario contestado:${aux}`)
+        }
+        console.log(aux);
+        retornarExito(res,"",aux)
+            
+        } catch (error) {
+            console.log(`Error al buscar el comentario contestado:${error}`)
+            return retornarError(res,`Error al buscar el comentario contestado:${error}`)
+        }
 }
 
 export default{
@@ -259,5 +320,6 @@ export default{
     crearComentario,
     traerSolicitudPorId,
     traerComentarioPorId,
-    contestarComentario
+    contestarComentario,
+    traerComentarioContestadoPorId
 }

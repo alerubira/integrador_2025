@@ -10,4 +10,8 @@ class ComentarioContestado{
     static async alta(comContestado){
         return await ComentarioContestadoData.alta(comContestado)
     }
+    static async consultaPorId(id){
+        return await ComentarioContestadoData.consultaPorId(id)
+    }
 }
+export{ComentarioContestado}

@@ -123,6 +123,7 @@ app.use('/enviarComentario',rutaComunicacion);
 app.use('/traerSolicitudPorId',rutaComunicacion);
 app.use('/traerComentarioPorId',rutaComunicacion);
 app.use('/contestarComentario',rutaComunicacion);
+app.use('/traerComentarioContestadoPorId',rutaComunicacion);
 
 
  // Iniciar el servidor
