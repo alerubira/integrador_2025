@@ -36,6 +36,7 @@ selectModificar.addEventListener('change',async function(){
             break; 
         case "4":
             mostrar(sectionModificarImagenPerfil);
+            divContenedorPerfil.style.display="block";
             break;  
         case "5":
             modificarIntereses();
@@ -143,6 +144,8 @@ function seleccionarPerfil(){
     perfilSeleccionado=perfilesBuscados.find(perf=>perf.id_perfil===idPerfilSeleccionado);
     eliminarHijos(cuerpo);
         fOcultar();
+        divContenedorPerfil.style.display="none";
+        
     imgPerfilSeleccionado.src=perfilSeleccionado.img_perfil;
     pPerfilSeleccionado.textContent=`Nombre:${perfilSeleccionado.nombre_persona}//Apellido:${perfilSeleccionado.apellido_persona}//Nombre del Perfil:${perfilSeleccionado.nombre_perfil}`;
     let int;
@@ -154,7 +157,8 @@ function seleccionarPerfil(){
          ant="No contiene";
     }else{ant=perfilSeleccionado.antecedentes_perfil}
     PerfilSeleccionad1.textContent=`Intereses:${int}//Antecedentes:${ant}`
-    mostrar(divPerfilSeleccionado);     
+    mostrar(divPerfilSeleccionado); 
+    divContenedorPerfil.style.display="block";    
 }
 async function solicitarAmistad(){
     let solicitud={

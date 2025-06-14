@@ -6,6 +6,7 @@ let sectionCrearAlbum = document.getElementById("sectionCrearAlbum");
 function mostrarCrearAlbum(){
    limpiarCampos(limpiar);
    mostrar(sectionCrearAlbum);
+   divContenedorAlbum.style.display="block"
 }
 let inputTituloAlbum = document.getElementById("inputTituloAlbum");
 let selectTags = document.getElementById("selectTags");

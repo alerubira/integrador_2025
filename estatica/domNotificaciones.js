@@ -81,7 +81,6 @@ async function capturarNotificacionSeleccionada(notificacion){
     fOcultar()
     limpiarCampos(limpiar);
     notificacionSeleccionada=notificacion;
-    console.log(notificacionSeleccionada);
       if(notificacion.id_tipo_notificacion===1){
                 cargarSilicitudSeleccionada()
               

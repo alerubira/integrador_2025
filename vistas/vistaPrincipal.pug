@@ -26,6 +26,7 @@ block content
                img.animacion(src="./Iconos/e_mail.svg",alt="Correo Enviado")
                h5 Espere Confirmacion
         form#formularioModificarLogin.ocultar.form.grid5-4-3.gridL12-1-3(action="/modificarLogin", method="POST", autocomplete="off")
+            button.botonCerrar(type="button",onclick='ocultarElemento(formularioModificarLogin)')
             label(for="usuario2") Usuario:
             input.limpiar(type="text", id="usuario2",name="usuario2",placeholder="usuario",autocomplete="off")
             img(id="imgUsuario",src="./Iconos/usuario.svg", alt="Usuario")
@@ -49,6 +50,7 @@ block content
             
             br
         form#formularioRecuperarLogin.ocultar.form.grid5-4-4.gridL12-1-4(action="/recuperarLogin", method="POST", autocomplete="off")
+            button.botonCerrar(type="button",onclick='ocultarElemento(formularioRecuperarLogin)')
             p Para generar una clave nueva debe usar su usuario y enviar la solicitud de clave, la cual se mostraraen su mail 
             br
             label(for="usuario5") Usuario:

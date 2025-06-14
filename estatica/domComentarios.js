@@ -46,7 +46,7 @@ async function cargarNotificacionComentario(notificacion,divNotificacion){
                         h6N.textContent=`En la Fecha:${formatearFecha(notificacion.fecha_notificacion)},${perfilMomentaneo.nombre_persona} ${perfilMomentaneo.apellido_persona} a comentado una foto tuya`;
                         divNotificacion.appendChild(h6N);
                         divNotificacion.addEventListener('click', function() {
-                            console.log(notificacion)
+                            
                             capturarNotificacionSeleccionada(notificacion);
                         });
                         divNotificaciones.appendChild(divNotificacion);

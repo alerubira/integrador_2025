@@ -41,6 +41,10 @@ eliminarHijos(divMostrarImagenes);
 fOcultar3();
 mostrar(divMostrarImagenes);
 if(aux.success){
+   let btn1=document.createElement('button');
+   btn1.className="botonCerrar";
+   btn1.onclick= () => ocultarElemento(divMostrarImagenes);
+   divMostrarImagenes.appendChild(btn1);
 //recorrer aux.urlImagen crear un div con la imagen agregarle un evento click para recuperar el idImagen y agregarlo al divMostrarImagenes
 //agregar un evento click a cada imagen para capturar el idImagen
    aux.retorno.forEach(imagen => {
@@ -181,7 +185,7 @@ async function modificarVisibilidadImagen(){
        fOcultar2();
        eliminarHijos(dtlVisibilidad);
     }else{
-      alerta(pagina,'Algo sali mal al modificar la visibilidad')
+      alerta(pagina,'Algo salio mal al modificar la visibilidad')
     }
 }
 async function modificarActivoImagen(){

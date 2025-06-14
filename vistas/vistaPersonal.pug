@@ -14,7 +14,7 @@ block content
                 img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")        
         #divContenedorPerfil.grid12-1-2.contenedorGrid.ocultar
                     section#sectionPerfil.grid12-1-1.ocultar.form
-                        button.botonCerrar(type="button",onclick='ocultarOcultar(sectionPerfil,divContenedorPerfil)')
+                        button.botonCerrar(type="button",onclick='ocultarOcultar(sectionPerfil,divContenedorPerfil,divImagenesUsuarios)')
                         h5=`Perfil :${perfil.nombrePerfil}`
                         img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")  
                         br
@@ -30,7 +30,7 @@ block content
                         br
                         p#PAntecedentes=`Antecedentes: ${perfil.antecedentes}`
                     section#sectionModificar.grid12-2-1.ocultar 
-                        button.botonCerrar(type="button",onclick='ocultarOcultart(sectionModificar,divContenedorPerfil)')
+                        button.botonCerrar(type="button",onclick='ocultarOcultar(sectionModificar,divContenedorPerfil,divImagenesUsuarios)')
                         select#selectModificar(name="modificar")
                             option(value="0") Seleccionar
                             option(value="1") Modificar Nombre
@@ -40,7 +40,7 @@ block content
                             option(value="5") Modificar Intereses 
                             option(value="6") Modificar Antecedentes
                     section#sectionModificarImagenPerfil.ocultar 
-                        button.botonCerrar(type="button",onclick='ocultarOcultar(sectionModificarImagenPerfil,divContenedorPerfil)')
+                        button.botonCerrar(type="button",onclick='ocultarOcultar(sectionModificarImagenPerfil,divContenedorPerfil,divImagenesUsuarios)')
                         img.imgPerfil(src=`${perfil.imgPerfil}`, alt="Foto de perfil")        
                         form#formSubirImagen(method="POST", action="/subirImagenPerfil", enctype="multipart/form-data")
                                 label(for="imagen") Selecciona una imagen:
@@ -53,42 +53,42 @@ block content
                                 input(type="hidden", name="idPerfil", value=perfil.idPerfil)
                                 button(type="submit") Subir Imagen
                     section#sectionModificarNombre.ocultar
-                               button.botonCerrar(type="button",onclick='ocultarOcultar(sectionModificarNombre,divContenedorPerfil)')
+                               button.botonCerrar(type="button",onclick='ocultarOcultar(sectionModificarNombre,divContenedorPerfil,divImagenesUsuarios)')
                                p#pNombreActual=`Nombre Actual : ${perfil.nombrePersona}` 
                                label(for="inputNuevoNombrePersonaPerfil") Nuevo Nombre Persona 
                                input.limpiar(type="text",id="inputNuevoNombrePersonaPerfil",name="inputNuevoNombrePersonaPerfil",placeHolder="Nombre Persona") 
                                br
                                button.boton(type="button",onclick='modificarNombrePersonaPerfil()') Modificar
                     section#sectionModificarApellido.ocultar
-                               button.botonCerrar(type="button",onclick='ocultarOcultar(sectionModificarApellido,divContenedorPerfil)')
+                               button.botonCerrar(type="button",onclick='ocultarOcultar(sectionModificarApellido,divContenedorPerfil,divImagenesUsuarios)')
                                p#pApellidoActual=`Apellido Actual : ${perfil.apellidoPersona}` 
                                label(for="inputNuevoApellidoPersonaPerfil") Nuevo Apellido Persona 
                                input.limpiar(type="text",id="inputNuevoApellidoPersonaPerfil",name="inputNuevoApellidoPersonaPerfil",placeHolder="Apellido Persona") 
                                br
                                button.boton(type="button",onclick='modificarApellidoPersonaPerfil()') Modificar
                     section#sectionModificarEMail.ocultar
-                               button.botonCerrar(type="button",onclick='ocultarOcultart(sectionModificarEMail,divContenedorPerfil)')
+                               button.botonCerrar(type="button",onclick='ocultarOcultar(sectionModificarEMail,divContenedorPerfil,divImagenesUsuarios)')
                                p#pEMailActual=`E-Mail Actual : ${perfil.eMail}` 
                                label(for="inputNuevoEMailPerfil") Nuevo E-Mail Persona 
                                input.limpiar(type="email",id="inputNuevoEMailPerfil",name="inputNuevoEMailPerfil",placeHolder="E-Mail Persona") 
                                br
                                button.boton(type="button",onclick='modificarEMailPerfil()') Modificar
                     section#sectionModificarIntereses.ocultar
-                               button.botonCerrar(type="button",onclick='ocultarOcultar(sectionModificarIntereses,divContenedorPerfil)')
+                               button.botonCerrar(type="button",onclick='ocultarOcultar(sectionModificarIntereses,divContenedorPerfil,divImagenesUsuarios)')
                                p#pInteresesActual=`Intereses Actuales : ${perfil.intereses}` 
                                label(for="inputNuevoInteresesPerfil") Nuevos Intereses Persona 
                                textarea.limpiar(type="text",id="inputNuevoInteresesPerfil",name="inputNuevoInteresesPerfil",placeHolder="Intereses Perfil") 
                                br
                                button.boton(type="button",onclick='modificarInteresesPerfil()') Modificar      
                     section#sectionModificarAntecedentes.ocultar
-                               button.botonCerrar(type="button",onclick='ocultarOcultar(sectionModificarAntecedentes,divContenedorPerfil)') 
+                               button.botonCerrar(type="button",onclick='ocultarOcultar(sectionModificarAntecedentes,divContenedorPerfil,divImagenesUsuarios)') 
                                p#pAntecedentesActual=`Antecedentes Actuales : ${perfil.antecedentes}` 
                                label(for="inputNuevoAntecedentesPerfil") Nuevos Antecedentes Persona 
                                textarea.limpiar(type="text",id="inputNuevoAntecedentesPerfil",name="inputNuevoAntesedentesPerfil",placeHolder="Antesedentes Perfil") 
                                br
                                button.boton(type="button",onclick='modificarAntesedentesPerfil()') Modificar                                                 
                     section#sectionBuscarPersonas.ocultar.grid12-1-3
-                               button.botonCerrar(type="button",onclick='ocultarOcultar(sectionBuscarPersonas,divContenedorPerfil)') 
+                               button.botonCerrar(type="button",onclick='ocultarOcultar(sectionBuscarPersonas,divContenedorPerfil,divImagenesUsuarios)') 
                                label(for="inputBuscarPersonas") Buscar Personas:
                                input.limpiar(type="text", id="inputBuscarPersonas", name="inputBuscarPersonas",placeHolder="Apellido") 
                                img(id="imgLupa",src="./Iconos/lupa.svg", alt="Lupa")
@@ -104,7 +104,7 @@ block content
                                                 th Seleccionar
                                         tbody#cuerpo 
                     #divPerfilSeleccionado.ocultar.form.grid12-1-3 
-                                button.botonCerrar(type="button",onclick='ocultarOcultar(divPerfilSeleccionado,divContenedorPerfil)')
+                                button.botonCerrar(type="button",onclick='ocultarOcultar(divPerfilSeleccionado,divContenedorPerfil,divImagenesUsuarios)')
                                 img#imgPerfilSeleccionado.imgPerfil.limpiar
                                 br
                                 p#pPerfilSeleccionado.limpiar

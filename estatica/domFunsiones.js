@@ -67,9 +67,10 @@ function eliminarHijos(div) {
 function ocultarElemento(elemento){
   elemento.style.display="none"
 }
-function ocultarOcultar(ele1,ele2){
+function ocultarOcultar(ele1,ele2,ele3){
   ele1.style.display="none"
   ele2.style.display="none"
+  ele3.style.display="block"
 }
 function ocultarDosElementos(el1,el2){
 if(el1.style.dispaly==="none"){
@@ -116,6 +117,7 @@ function validar(codicion,pagina,mensage,event){
             return true;
         }}
 function llenarDl(dl,array,atributoTexto,atributoValue){
+      eliminarHijos(dl);
     for(let e of array){
         let op2=document.createElement('option');
         op2.textContent=e[atributoTexto];

@@ -3,6 +3,7 @@ function modificarNombre(){
 limpiarCampos(limpiar);
 fOcultar();
 mostrar(sectionModificarNombre);
+ divContenedorPerfil.style.display="block";
 }
 let=inputNuevoNombrePersonaPerfil=document.getElementById("inputNuevoNombrePersonaPerfil");
 let lblNombreYApellido=document.getElementById("lblNombreYApellido");
@@ -28,6 +29,7 @@ if(bandera){
                pNombreActual.textContent=inputValue;
                limpiarCampos(limpiar);
                fOcultar();
+                mostrar(divImagenesUsuarios);
           }
 }
  
@@ -38,6 +40,7 @@ limpiarCampos(limpiar);
 fOcultar();
 
 mostrar(sectionModificarApellido);
+ divContenedorPerfil.style.display="block";
 }
 let pApellidoActual=document.getElementById("pApellidoActual");
 let inputNuevoApellidoPersonaPerfil=document.getElementById("inputNuevoApellidoPersonaPerfil");
@@ -61,6 +64,7 @@ if(bandera){
                perfil.apellidoPersona=inputValue;
                limpiarCampos(limpiar);
                fOcultar();
+               mostrar(divImagenesUsuarios);
           }
         }
     }
@@ -69,6 +73,7 @@ function modificarEMail(){
     limpiarCampos(limpiar);
     fOcultar();
     mostrar(sectionModificarEMail);
+     divContenedorPerfil.style.display="block";
 }
 let inputNuevoEMailPerfil=document.getElementById("inputNuevoEMailPerfil");
 let pEMailActual=document.getElementById("pEMailActual");
@@ -93,6 +98,7 @@ async function modificarEMailPerfil(){
             pEMailActual.textContent=`Email Actual :${inputValue}`;
             limpiarCampos(limpiar);
             fOcultar();
+            mostrar(divImagenesUsuarios);
         }
     }
 }
@@ -101,6 +107,7 @@ function modificarIntereses(){
 limpiarCampos(limpiar);
 fOcultar();
 mostrar(sectionModificarIntereses);
+ divContenedorPerfil.style.display="block";
 }
 let inputNuevoInteresesPerfil=document.getElementById("inputNuevoInteresesPerfil");
 let pInteresesActual=document.getElementById("pInteresesActual");
@@ -128,6 +135,7 @@ async function modificarInteresesPerfil(){
             pInteresesActual.textContent=`Intereses Actual :${inputValue}`;
             limpiarCampos(limpiar);
             fOcultar();
+            mostrar(divImagenesUsuarios);
         }
     }
 }
@@ -136,6 +144,7 @@ function modificarAntecedentes(){
 limpiarCampos(limpiar);
 fOcultar(); 
 mostrar(sectionModificarAntecedentes);
+ divContenedorPerfil.style.display="block";
 }
 
 let inputNuevoAntecedentesPerfil=document.getElementById("inputNuevoAntecedentesPerfil");
@@ -164,6 +173,7 @@ async function modificarAntesedentesPerfil(){
             perfil.antecedentesPerfil=inputValue;
             limpiarCampos(limpiar);
             fOcultar();
+            mostrar(divImagenesUsuarios);
         }
     }
 }
