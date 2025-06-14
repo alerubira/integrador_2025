@@ -48,6 +48,7 @@ async function cargarNotificacionComentario(notificacion,divNotificacion){
                         divNotificacion.addEventListener('click', function() {
                             
                             capturarNotificacionSeleccionada(notificacion);
+                       
                         });
                         divNotificaciones.appendChild(divNotificacion);
                         }
@@ -91,6 +92,14 @@ let perfiMomentaneoComentario;
 let texConCon=document.getElementById('texConCon')
 async function cargarNotificacionComentarioSeleccionado(){
                 mostrar(divNotificacionomentarioSeleccionada);
+                     let idP={
+                            id:notificacionSeleccionada.id_remitente
+                        }
+                        let perf=await fechProtegidoPost('/buscarPerfilPorid',idP);
+                        if (perf.success){
+                            perfilMomentaneo="";
+                        perfilMomentaneo= perf.retorno[0];
+                        }
                  let id={id:notificacionSeleccionada.id_solicitante_notificacion}
                  aux=await fechProtegidoPost('/traerComentarioPorId',id);
                 if(aux.success){
@@ -126,6 +135,14 @@ let comentarioContestadoCapturado;
 async function cargarNotificacionComentarioContestadoSeleccionado(){
    //acomodar en el divNotificacionomentarioSeleccionada
     mostrar(divNotificacionomentarioSeleccionada);
+               let idP={
+                       id:notificacionSeleccionada.id_remitente
+                        }
+                      let perf=await fechProtegidoPost('/buscarPerfilPorid',idP);
+                      if (perf.success){
+                     perfilMomentaneo="";
+                    perfilMomentaneo= perf.retorno[0];
+                      }
                  let id={id:notificacionSeleccionada.id_solicitante_notificacion}
                  aux=await fechProtegidoPost('/traerComentarioContestadoPorId',id);
                 if(aux.success){

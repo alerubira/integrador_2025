@@ -38,5 +38,8 @@ class Imagen{
     static async buscarImagenesPublicasPublicas(){
         return await ImagenData.buscarImagenesPublicasPublicas();
     }
+    static async buscarImagenesPorSeguidor(idSeguidor){
+        return await ImagenData.buscarImagenesParaSeguidores(idSeguidor)
+    }
 }
 export { Imagen };

@@ -50,6 +50,7 @@ if(aux.success){
         notificaciones=aux.retorno;
         if(notificaciones.length<1){alerta(pagina,"NoTiene Notificaciones")}
        for(let notificacion of notificaciones) {
+        console.log(notificacion);
         //console.log(notificacion)
              let divNotificacion = document.createElement('div');
              divNotificacion.className = 'divNotificacion';

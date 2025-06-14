@@ -1,14 +1,25 @@
 let divImagenesUsuarios=document.getElementById('divImagenesUsuarios');
+
 async function traerImagenesPublicasPublicas(){
     eliminarHijos(divImagenesUsuarios);
     mostrar(divImagenesUsuarios);
     let perf={
         idPerfil:perfil.idPerfil
     }
-    //aux=await fechProtegidoPost('/traerImagenesPublicas',perf)
+    aux=await fechProtegidoPost('/traerImagenesParaSeguidores',perf)
+    if(aux.success){
+      llenarImagenes(aux.retorno)
+    }
     aux =await fechProtegidoPost('/traerImagenesPublicasPublicas',perf)
     if(aux.success){
-      for(let imagen of aux.retorno){
+      llenarImagenes(aux.retorno)
+    }
+    
+    
+}
+traerImagenesPublicasPublicas();
+function llenarImagenes(imagenes){
+         for(let imagen of aux.retorno){
         let divImg=document.createElement('div');
         divImg.className="divContenedorImagen1"
         let imgpublica=document.createElement('img');
@@ -34,11 +45,8 @@ async function traerImagenesPublicasPublicas(){
                     });
          divImagenesUsuarios.appendChild(divImg);
       }
-    }
-    
-    
 }
-traerImagenesPublicasPublicas();
+
 let imagenSeleccionada=document.getElementById('imagenSeleccionada');
 let divImagenUsuarioSeleccionada=document.getElementById('divImagenUsuarioSeleccionada');
 let datosPersonaImgSeleccionada=document.getElementById('datosPersonaImgSeleccionada');

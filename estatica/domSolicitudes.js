@@ -71,6 +71,7 @@ let pSolicitusAceptada=document.getElementById('pSolicitusAceptada');
 let solicitudCapturada;
 async function cargarSilicitudSeleccionada(){
            mostrar(divNotificacionSeleccionada);
+                
                 let id={id:notificacionSeleccionada.id_solicitante_notificacion}
                  aux=await fechProtegidoPost('/traerSolicitudPorId',id);
                 if(aux.success){
