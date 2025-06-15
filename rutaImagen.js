@@ -30,6 +30,7 @@ rutaImagen.post('/modificarVisibilidadImagen',manejadorDeRutasLogin.verificarTok
 rutaImagen.post('/modificarActiviImagen',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.modificarActiviImagen);
 rutaImagen.post('/traerImagenesPublicas',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarImagenesPublicas);
 rutaImagen.post('/traerImagenesPublicasPublicas',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarImagenesPublicasPublicas);
+rutaImagen.post('/traerImagenesEtiqutadasPersonal',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.traerImagenesEtiqutadasPersonal);
 rutaImagen.post('/traerImagenesParaSeguidores',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.traerImagenesParaSeguidores);
 rutaImagen.post('/traerComentariosPorIdImagen',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.traerComentariosPorIdImagen);
 rutaImagen.post('/buscarContestadosPorComentario',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarContestadosPorComentario);

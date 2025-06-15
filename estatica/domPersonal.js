@@ -72,12 +72,43 @@ if (datosEncoded) {
 }
 let sectionBuscarPersonas=document.getElementById('sectionBuscarPersonas');
 let mensageNoEncontrado=document.getElementById('mensageNoEncontrado');
+
 function mostrarBuscarPersonas(){
     fOcultar();
     limpiarCampos(limpiar);
     mostrar(sectionBuscarPersonas);
     divContenedorPerfil.style.display="block";
 }
+let sectionBuscarImagenes=document.getElementById('sectionBuscarImagenes');
+//let selectBuscarTags=document.getElementById('selectBuscarTags');
+
+function mostrarBuscadorImagenes(){
+      fOcultar();
+    limpiarCampos(limpiar);
+    mostrar(sectionBuscarImagenes);
+    divContenedorPerfil.style.display="block";
+    
+}
+let imgFiltradas,tagFiltrado;
+document.getElementById('selectBuscarTags').addEventListener('change',async function(){
+    let value=parseInt(this.value);
+     tagFiltrado=tags.find(t=>t.id_tags===value)
+    if(!tagFiltrado){
+        alerta(pagina,"seleccion no valida")
+    }else{
+             imgFiltradas=imagenePublicaPublicas.filter(im=>im.id_tags===value)
+             console.log(imgFiltradas)
+            if(imgFiltradas.length<1){
+                            alerta(pagina,"No se encuentran fotos bajo es etiqueta");
+                            this.value = "";
+            }else{
+                  traerImagenesPublicasPublicas();
+                  this.value="";
+                   }
+    }
+    
+    
+})
 let perfilesBuscados;
  document.getElementById('inputBuscarPersonas').addEventListener('keyup',async function(){
     if(this.value.length>2){

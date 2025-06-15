@@ -41,5 +41,8 @@ class Imagen{
     static async buscarImagenesPorSeguidor(idSeguidor){
         return await ImagenData.buscarImagenesParaSeguidores(idSeguidor)
     }
+    static async buscarImagenesEtiquetadaPersonal(idSeguidor){
+        return await ImagenData.buscarImagenesEtiquetadasPersonal(idSeguidor)
+    }
 }
 export { Imagen };

@@ -1,25 +1,33 @@
 let divImagenesUsuarios=document.getElementById('divImagenesUsuarios');
-
+let imagenePublicaPublicas;
 async function traerImagenesPublicasPublicas(){
     eliminarHijos(divImagenesUsuarios);
     mostrar(divImagenesUsuarios);
     let perf={
         idPerfil:perfil.idPerfil
     }
+    if(imgFiltradas){
+      llenarImagenes(imgFiltradas,6)
+    }
+    aux=await fechProtegidoPost('/traerImagenesEtiqutadasPersonal',perf)
+    if(aux.success){
+      llenarImagenes(aux.retorno,5)
+    }
     aux=await fechProtegidoPost('/traerImagenesParaSeguidores',perf)
     if(aux.success){
-      llenarImagenes(aux.retorno)
+      llenarImagenes(aux.retorno,3)
     }
     aux =await fechProtegidoPost('/traerImagenesPublicasPublicas',perf)
     if(aux.success){
-      llenarImagenes(aux.retorno)
+      imagenePublicaPublicas=aux.retorno;
+      llenarImagenes(aux.retorno,2)
     }
     
     
 }
 traerImagenesPublicasPublicas();
-function llenarImagenes(imagenes){
-         for(let imagen of aux.retorno){
+function llenarImagenes(imagenes,tipoVisibilidad){
+         for(let imagen of imagenes){
         let divImg=document.createElement('div');
         divImg.className="divContenedorImagen1"
         let imgpublica=document.createElement('img');
@@ -38,8 +46,29 @@ function llenarImagenes(imagenes){
         
         divImg.appendChild(imgPerf);
         let h6=document.createElement('h6');
+               if(tipoVisibilidad===2){
+               let h6m=document.createElement('h6');
+               h6m.textContent=`Publicacion solo para usuarios:`
+               divImg.appendChild(h6m);
+               }
+                if(tipoVisibilidad===3){
+                  let h6m=document.createElement('h6');
+                h6m.textContent=`Publicacion solo para seguidores de:`
+                divImg.appendChild(h6m);
+              }
+               if(tipoVisibilidad===5){
+                  let h6m=document.createElement('h6');
+                h6m.textContent=`Publicacion exclusiva parti:`
+                divImg.appendChild(h6m);
+              }
+               if(tipoVisibilidad===6){
+                  let h6m=document.createElement('h6');
+                h6m.textContent=`Imagen Publicada bajola Etiqueta:${tagFiltrado.nombre_tags}`
+                divImg.appendChild(h6m);
+              }
         h6.textContent=`USARIO:${imagen.nombre_persona},${imagen.apellido_persona},PERFIL:${imagen.nombre_perfil},TITULO:${imagen.titulo_imagen}`
          divImg.appendChild(h6);
+       
           divImg.addEventListener('click', function() {
                         capturarImagen(imagen);
                     });

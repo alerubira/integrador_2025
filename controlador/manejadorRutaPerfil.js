@@ -1,5 +1,6 @@
 import { retornarError ,retornarExito} from "./funsionesControlador.js";
 import {Perfil} from "../modelo/clasePerfil.js";
+import {Tags} from "../modelo/claseTags.js"
 import { verificarYup } from "../controlador/verificaryup.js";
 import { parametros } from "../parametros.js";
 import sharp from 'sharp';
@@ -132,7 +133,9 @@ export async function paginaPersonal(req, res) {
         );
         if (perfil instanceof Error) return retornarError(res, `Error al crear el objeto perfil:${perfil}`);
         if (!perfil.imgPerfil) perfil.imgPerfil = "imagenesPerfil/fotoPerfil.svg";
-        return res.render('vistaPersonal', { encabezado, parametros, perfil });
+        let tags = await Tags.consulta();
+        if (tags instanceof Error) return retornarError(res, `Error al consultar los Tags: ${tags}`);
+        return res.render('vistaPersonal', { encabezado, parametros, perfil ,tags});
     } catch (error) {
         console.error("Error en paginaPersonal", error);
         return retornarError(res, `Error en paginaPersonal: ${error}`);

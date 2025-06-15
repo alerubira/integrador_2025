@@ -103,6 +103,15 @@ block content
                                                 th imagen
                                                 th Seleccionar
                                         tbody#cuerpo 
+                    section#sectionBuscarImagenes.ocultar.grid12-1-3
+                               button.botonCerrar(type="button",onclick='ocultarOcultar(sectionBuscarImagenes,divContenedorPerfil,divImagenesUsuarios)')
+                               p Buscar imagenes por tags
+                               br
+                               select#selectBuscarTags(name="tag")
+                                        option(value="") Selecciona un tag
+                                        each tag in tags
+                                                option(value=tag.id_tags)= tag.nombre_tags 
+                                                                       
                     #divPerfilSeleccionado.ocultar.form.grid12-1-3 
                                 button.botonCerrar(type="button",onclick='ocultarOcultar(divPerfilSeleccionado,divContenedorPerfil,divImagenesUsuarios)')
                                 img#imgPerfilSeleccionado.imgPerfil.limpiar
@@ -155,7 +164,9 @@ block content
         script.
                      const perfil = !{JSON.stringify(perfil)}; 
         script. 
-                     const parametros = !{JSON.stringify(parametros)};                                                         
+                     const parametros = !{JSON.stringify(parametros)};
+        script. 
+                     const tags=!{JSON.stringify(tags)};                                                                      
 block boton1 
         button.boton2(type="button",onclick='volver()') volver  
 block boton2 
@@ -167,8 +178,10 @@ block boton12
 block boton13
         button.boton2(type="button",onclick='mostrarBuscarPersonas()') Buscar Personas                  
 block boton14
-        button.boton2(type="button",onclick='redirigirCarpetas()') Ir a Albumes  
+        button.boton2(type="button",onclick='mostrarBuscadorImagenes()') Buscar Imagenes
 block boton15 
+        button.boton2(type="button",onclick='redirigirCarpetas()') Ir a Albumes  
+block boton16 
         button.boton2(type="button",onclick='VerNotificaciones()') Ver Notificaciones
 block notificacionesNoLeidas 
         #divNotificacionesNoLeidas                        

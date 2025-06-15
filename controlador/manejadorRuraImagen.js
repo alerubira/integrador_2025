@@ -294,6 +294,29 @@ export async function traerImagenesParaSeguidores(req,res) {
     return retornarError(res,`Error al buscar imagenes para seguidores${error}`)
 }
 }
+
+export async function traerImagenesEtiqutadasPersonal(req,res){
+       try {
+    let aux;
+    aux=await existeBd(req.body.idPerfil,'perfil','id_perfil');
+    if(aux instanceof Error){
+        return retornarError(res,`Error al verificar el perfil:${aux}`)
+    }
+    if(!aux){
+        return retornarError(res,'El perfil no existe')
+    }
+    aux=await Imagen.buscarImagenesEtiquetadaPersonal(req.body.idPerfil);
+    if(aux instanceof Error){
+        return retornarError(res,`Error al buscar imagenes etiquetadas personal:${aux}`)
+    }
+    return retornarExito(res,'',aux)
+    
+} catch (error) {
+    console.log(`Error al buscar imagenes etiquetada personal:${error}`)
+    return retornarError(res,`Error al buscar imagenes etiquetada personal${error}`)
+}
+}
+
 export async function traerComentariosPorIdImagen(req,res){
 try {
     let aux,idImg;
@@ -349,6 +372,7 @@ export default {
     buscarImagenesPublicas,
     buscarImagenesPublicasPublicas,
     traerImagenesParaSeguidores,
+    traerImagenesEtiqutadasPersonal,
     traerComentariosPorIdImagen,
     buscarContestadosPorComentario,
 

@@ -116,6 +116,7 @@ app.use('/modificarVisibilidadImagen',rutaImagen);
 app.use('/modificarActiviImagen',rutaImagen);
 app.use('/traerImagenesPublicas',rutaImagen);
 app.use('/traerImagenesPublicasPublicas',rutaImagen);
+app.use('/traerImagenesEtiqutadasPersonal',rutaImagen);
 app.use('/traerImagenesParaSeguidores',rutaImagen);
 app.use('/traerComentariosPorIdImagen',rutaImagen);
 app.use('/buscarContestadosPorComentario',rutaImagen);
