@@ -10,4 +10,5 @@ rutaCarpetas.post('/buscarAlbumesPersonalesPorId', manejadorDeRutasLogin.verific
 rutaCarpetas.post('/modificarTituloAlbum', manejadorDeRutasLogin.verificarToken, manejadorRutaCarpetas.modificarTituloAlbum);
 rutaCarpetas.post('/modificarTagsAlbum', manejadorDeRutasLogin.verificarToken, manejadorRutaCarpetas.modificarTagsAlbum);
 rutaCarpetas.post('/modificarActivoAlbumPersonal', manejadorDeRutasLogin.verificarToken, manejadorRutaCarpetas.modificarActivoAlbumPersonal);
+rutaCarpetas.post('/agregarImgAlbumSeguidor',manejadorDeRutasLogin.verificarToken , manejadorRutaCarpetas.agregarImgAlbumSeguidor);
 export{rutaCarpetas}

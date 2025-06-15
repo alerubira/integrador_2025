@@ -44,5 +44,8 @@ class Perfil extends Persona{
     static async buscarPerfilPorApellido(frac){
         return await PerfilData.buscarPerfilPorApellido(frac);
     }
+    static async buscarPerfilSeguidoresPorApellido(frac,idPerf){
+        return await PerfilData.buscarPerfilSegidoresrPorApellido(frac,idPerf);
+    }
 }
 export{Perfil};

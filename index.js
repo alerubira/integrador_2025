@@ -98,6 +98,7 @@ app.use('/modificarEMailPerfil',rutaPerfil);
 app.use('/modificarInteresesPerfil',rutaPerfil);
 app.use('/modificarAntecedentesPerfil',rutaPerfil);
 app.use('/buscarPerfilPorApellido',rutaPerfil);
+app.use('/buscarPerfilSeguidoresPorApellido',rutaPerfil);
 app.use('/buscarPerfilPorid',rutaPerfil);
 app.use('/', rutaCarpetas);
 app.use('/crearAlbum',rutaCarpetas);
@@ -105,6 +106,7 @@ app.use('/buscarAlbumesPersonalesPorId',rutaCarpetas);
 app.use('/modificarTituloAlbum',rutaCarpetas);
 app.use('/modificarTagsAlbum', rutaCarpetas);
 app.use('/modificarActivoAlbumPersonal', rutaCarpetas);
+app.use('/agregarImgAlbumSeguidor',rutaCarpetas)
 app.use('/', rutaImagen);
 app.use('/buscarImagenesPorIdAlbumPersonal', rutaImagen);
 app.use('/modificarTituloImagenPorId',rutaImagen);

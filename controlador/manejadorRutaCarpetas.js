@@ -5,6 +5,8 @@ import{Tags}from "../modelo/claseTags.js";
 import { verificarYup } from "./verificaryup.js";
 import { existeBd } from "../modelo/conexxionBD.js";
 import { AlbumPersonal } from "../modelo/claseAlbumPersonal.js";
+import{AlbumImagen}from"../modelo/claseAlbumImagen.js";
+
 let aux;
 export async function accederAlbumes(req, res) {
     try {
@@ -139,11 +141,56 @@ export async function modificarActivoAlbumPersonal(req, res) {
         return retornarError(res, `Error al modificar el estado del album: ${error}`);
     }
 }
+export async function agregarImgAlbumSeguidor(req,res){
+try {
+    let aux,imgComp
+    imgComp=req.body;
+    aux=await existeBd(imgComp.idPerfilSeguido,'perfil','id_perfil')
+    if(aux instanceof Error){
+        return retornarError(res,`Error al buscar el perfil seguido:${aux}`)
+    }
+    if(!aux){
+        return retornarError(res,'el perfil seguido no existe')
+    }
+    aux=await existeBd(imgComp.idPerfilSeguidor,'perfil','id_perfil')
+    if(aux instanceof Error){
+        return retornarError(res,`Error al buscar el perfil seguidor:${aux}`)
+    }
+    if(!aux){
+        return retornarError(res,'el perfil seguidor no existe')
+    }
+    aux=await existeBd(imgComp.IdImgSeleccionada,'imagen','id_imagen')
+    if(aux instanceof Error){
+        return retornarError(res,`Error al buscar la imagen seleccionada:${aux}`)
+    }
+    if(!aux){
+        return retornarError(res,'la imagen seleccionada no existe')
+    }
+    aux=await existeBd(imgComp.idAlbumSegidor,'album_seguidor','id_album_seguidor')
+    if(aux instanceof Error){
+        return retornarError(res,`Error al buscar el album seguidor:${aux}`)
+    }
+    if(!aux){
+        return retornarError(res,'el album seguidor no existe')
+    }
+    aux=await AlbumImagen.alta(imgComp);
+    if(aux instanceof Error){
+        return retornarError(res,`Error al insertar la imagen compartida`)
+    }
+    return retornarExito(res,"La imagen se compartio con exito")
+
+    
+} catch (error) {
+    console.log(`error al agregar la imagen a album seguidor:${error}`)
+    return retornarError(res,`error al agregar la imagen a album seguidor:${error}`)
+}
+}
 export default {
     accederAlbumes,
     crearAlbum,
     buscarAlbumesPersonalesPorId,
     modificarTituloAlbum,
     modificarTagsAlbum,
-    modificarActivoAlbumPersonal
+    modificarActivoAlbumPersonal,
+    agregarImgAlbumSeguidor
 };

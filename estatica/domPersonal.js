@@ -109,10 +109,10 @@ let perfilesBuscados;
 filtro="";//controlar que no se quede seleccionado
  });
  async function llenarTablaPerfiles(perfiles){
-     eliminarHijos(cuerpo);
+     eliminarHijos(cuerpo1);
      for(let perf of perfiles){
           let tr=document.createElement('tr');
-          cuerpo.appendChild(tr);
+          cuerpo1.appendChild(tr);
           agregarTdCuerpo(perf.id_perfil,tr);
           agregarTdCuerpo(perf.nombre_perfil,tr);
           agregarTdCuerpo(perf.nombre_persona,tr);
@@ -133,6 +133,7 @@ filtro="";//controlar que no se quede seleccionado
      }
 
  }
+ 
  let perfilSeleccionado;
  let divPerfilSeleccionado=document.getElementById('divPerfilSeleccionado');
  let imgPerfilSeleccionado=document.getElementById('imgPerfilSeleccionado');
@@ -142,7 +143,7 @@ function seleccionarPerfil(){
     let idPerfilSeleccionado = parseInt(this.parentNode.parentNode.firstChild.textContent);
     
     perfilSeleccionado=perfilesBuscados.find(perf=>perf.id_perfil===idPerfilSeleccionado);
-    eliminarHijos(cuerpo);
+    eliminarHijos(cuerpo1);
         fOcultar();
         divContenedorPerfil.style.display="none";
         

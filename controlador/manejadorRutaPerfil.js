@@ -242,19 +242,46 @@ export async function modificarAntecedentesPerfil(req, res) {
     }
 }
 export async function buscarPerfilPorApellido(req,res){
-    let aux;
-      aux=await existeBd(req.body.idPerfil,'perfil','id_perfil')
-      if(aux instanceof Error){
-        return retornarError(res`Error al buscar el perfil ${aux}`)
-      }
-      if(!aux){
-        return retornarError(res,'El Perfil no existe')
-      }
-      aux=await Perfil.buscarPerfilPorApellido(req.body.frac)
-      if(aux instanceof Error){
-        return retornarError(res `Error al buscar el perfil por el apellido:${aux}`)
-      }
+    try {
+                let aux;
+            aux=await existeBd(req.body.idPerfil,'perfil','id_perfil')
+            if(aux instanceof Error){
+                return retornarError(res`Error al buscar el perfil ${aux}`)
+            }
+            if(!aux){
+                return retornarError(res,'El Perfil no existe')
+            }
+            aux=await Perfil.buscarPerfilPorApellido(req.body.frac)
+            if(aux instanceof Error){
+                return retornarError(res `Error al buscar el perfil por el apellido:${aux}`)
+            }
       retornarExito(res,"",aux)
+    } catch (error) {
+        console.log(`Error al buscar perfil por apellido`);
+        return retornarError(res,`Error al buscar perfil por apellido`)
+    }
+    
+}
+export async function buscarPerfilSeguidoresPorApellido(req,res){
+     try {
+                let aux;
+            aux=await existeBd(req.body.idPerfil,'perfil','id_perfil')
+            if(aux instanceof Error){
+                return retornarError(res`Error al buscar el perfil ${aux}`)
+            }
+            if(!aux){
+                return retornarError(res,'El Perfil no existe')
+            }
+            aux=await Perfil.buscarPerfilSeguidoresPorApellido(req.body.frac,req.body.idPerfil)
+            if(aux instanceof Error){
+                return retornarError(res `Error al buscar el perfil por el apellido:${aux}`)
+            }
+      retornarExito(res,"",aux)
+    } catch (error) {
+        console.log(`Error al buscar perfil por apellido${error}`);
+        return retornarError(res,`Error al buscar perfil por apellido${error}`)
+    }
+    
 }
 export async function buscarPerfilPorid(req,res){
 try {
@@ -286,6 +313,7 @@ export default{
     modificarInteresesPerfil,
     modificarAntecedentesPerfil,
     buscarPerfilPorApellido,
+    buscarPerfilSeguidoresPorApellido,
     buscarPerfilPorid
 }
 

@@ -69,6 +69,10 @@ class PerfilData extends PersonaData {
         query='CALL buscar_perfil_por_apellido(?);'
         return await consulta1(query,frac)
     }
+    static async buscarPerfilSegidoresrPorApellido(frac,idPerf){
+        query='CALL buscar_perfiles_seguidores_por_apellido(?,?)'
+        return await consulta1(query,frac,idPerf)
+    }
      static async consultaPerfilPorId(id){
         const query='SELECT * FROM perfil JOIN persona ON perfil.id_persona=persona.id_persona WHERE id_perfil=?;'; 
         return await consulta1(query, id);

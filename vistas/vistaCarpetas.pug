@@ -3,6 +3,7 @@ block script1
     script(src="domCarpetas.js", defer)
     script(src="domImagenes.js", defer)
     script(src="domFunsionesPersonal.js", defer)
+    script(src="domCarpetasSeguidores.js",defer)
 block content
         #divProfesionalAcceso.grid12-1-1 
                 h3 USUARIO
@@ -83,7 +84,24 @@ block content
                 label(for="inputVisibilidad") Visibilidad:
                 input.limpiar(type="text", id="inputVisibilidad", name="inputVisibilidad",list="dtlVisibilidad", autocomplete="off")
                 datalist#dtlVisibilidad 
+                br
                 button.boton(type="button",onclick='modificarVisibilidadImagen()') Modificar Visibilidad      
+                br
+                section#sectionBuscarSeguidores.grid12-1-3 
+                               label(for="inputBuscarPersonas") Buscar Seuidores:
+                               input.limpiar(type="text", id="inputBuscarSeguidoers", name="inputBuscarSeguidoers",placeHolder="Apellido") 
+                               img(id="imgLupa",src="./Iconos/lupa.svg", alt="Lupa")
+                               p#mensageNoEncontrado.ocultar No se encontraron resulados para su busqueda  
+                               table#todosMedicos
+                                        thead#cabecera
+                                        tr 
+                                                th idPerfil
+                                                th Nombre Perfil
+                                                th Nombre
+                                                th Apellido
+                                                th imagen
+                                                th Compartir
+                                        tbody#cuerpo1      
         #divModificarTitulo.ocultar3.form.grid12-1-5 
                 button.botonCerrar(type="button",onclick='ocultarElemento(divModificarTitulo)')
                 label(for="inputModificarTituloAlbum") Modificar Titulo del Album
