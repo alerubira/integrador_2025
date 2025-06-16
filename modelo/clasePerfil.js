@@ -1,6 +1,6 @@
 //import e from "express";
 import { Persona } from "./clasePersona.js";
-import { PerfilData } from "../modelo/PerfilData.js";
+import { PerfilData } from "../modelo/perfilData.js";
 class Perfil extends Persona{
     constructor(idPerfil,idPersona,intereses,antecedentes,eMail,imgPerfil,activoPerfil,nombrePerfil,dniPersona,nombrePersona,apellidoPersona,activoPersona){
         super(idPersona,dniPersona,nombrePersona,apellidoPersona,activoPersona)
