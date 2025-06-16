@@ -37,7 +37,7 @@ class ImagenData{
         }
     }
     static async buscarImagenesPorIdAlbumPersonal(idAlbumPersonal) {
-         query = "SELECT img.id_imagen,img.url_imagen,img.fecha_creacion_imagen,img.titulo_imagen,img.caption_imagen,img.id_visibilidad,vi.titulo_visibilidad,img.activo_imagen FROM imagen img JOIN album_imagen a_i ON img.id_imagen=a_i.id_imagen JOIN album_personal a_p on a_i.id_album=a_p.id_album_personal JOIN visibilidad vi on img.id_visibilidad=vi.id_visibilidad WHERE a_p.id_album_personal=?&&a_i.img_comparida=0;";
+         query = "SELECT img.id_imagen,img.url_imagen,img.fecha_creacion_imagen,img.titulo_imagen,img.caption_imagen,img.id_visibilidad,vi.titulo_visibilidad,img.activo_imagen FROM imagen img JOIN album_imagen a_i ON img.id_imagen=a_i.id_imagen JOIN album_personal a_p on a_i.id_album=a_p.id_album_personal JOIN visibilidad vi on img.id_visibilidad=vi.id_visibilidad WHERE a_p.id_album_personal=?&&a_i.img_compartida=0;";
           return await consulta1(query, idAlbumPersonal);
 
     }

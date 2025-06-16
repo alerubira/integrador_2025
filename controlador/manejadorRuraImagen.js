@@ -242,7 +242,7 @@ try {
     if(!aux){
         return retornarError(res,'El perfil no existe')
     }*/
-    aux=await Imagen.buscarImagenesPublicasPublicas();
+    aux=await Imagen.buscarImagenesPublicas();
     if(aux instanceof Error){
         return retornarError(res,`Error al buscar imagenes publicas:${aux}`)
     }

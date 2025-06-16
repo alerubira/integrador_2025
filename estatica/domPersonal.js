@@ -140,16 +140,16 @@ let perfilesBuscados;
 filtro="";//controlar que no se quede seleccionado
  });
  async function llenarTablaPerfiles(perfiles){
-     eliminarHijos(cuerpo1);
+     eliminarHijos(cuerpo);
      for(let perf of perfiles){
           let tr=document.createElement('tr');
-          cuerpo1.appendChild(tr);
+          cuerpo.appendChild(tr);
           agregarTdCuerpo(perf.id_perfil,tr);
           agregarTdCuerpo(perf.nombre_perfil,tr);
           agregarTdCuerpo(perf.nombre_persona,tr);
           agregarTdCuerpo(perf.apellido_persona,tr)
           let imgPerf=document.createElement('img');
-          imgPerf.className="imgPerfil";
+          imgPerf.className="imgPerfil2";
           imgPerf.src=perf.img_perfil;
           let td0=document.createElement('td');
           td0.appendChild(imgPerf)
@@ -174,7 +174,7 @@ function seleccionarPerfil(){
     let idPerfilSeleccionado = parseInt(this.parentNode.parentNode.firstChild.textContent);
     
     perfilSeleccionado=perfilesBuscados.find(perf=>perf.id_perfil===idPerfilSeleccionado);
-    eliminarHijos(cuerpo1);
+    eliminarHijos(cuerpo);
         fOcultar();
         divContenedorPerfil.style.display="none";
         

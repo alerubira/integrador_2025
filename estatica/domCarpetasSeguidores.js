@@ -1,4 +1,5 @@
 let perfilesBuscados;
+let mensageNoEnconreado1=document.getElementById('mensageVoEncontrado1')
  document.getElementById('inputBuscarSeguidoers').addEventListener('keyup',async function(){
     if(this.value.length>2){
      let frac=this.value.toLowerCase();
@@ -12,9 +13,10 @@ let perfilesBuscados;
       console.log(perfilesBuscados)
      if(aux.success){
        if(perfilesBuscados.length<1){
-        mensageNoEncontrado.style.display="block";
-       }else{mensageNoEncontrado.style.display="none"}
+        mensageNoEncontrado1.style.display="block";
+       }else{mensageNoEncontrado1.style.display="none"}
      llenarTablaPerfiles(perfilesBuscados); 
+
     }
           
     }
@@ -33,7 +35,7 @@ filtro="";//controlar que no se quede seleccionado
           agregarTdCuerpo(perf.nombre_persona,tr);
           agregarTdCuerpo(perf.apellido_persona,tr)
           let imgPerf=document.createElement('img');
-          imgPerf.className="imgPerfil";
+          imgPerf.className="imgPerfil2";
           if(!imgPerf){
               imgPerf.src="/imagenesPerfil/fotoPerfil.svg"
           }else{ imgPerf.src=perf.img_perfil;}

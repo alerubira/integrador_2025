@@ -35,8 +35,8 @@ block content
                         input.limpiar(type="text", id="filtrarPorTags", name="filtrarPorTags",list="dtlTagsFiltrar", autocomplete="off")
                         img(id="imgFiltro",src="./Iconos/filtro.svg", alt="Filtro")
                         datalist#dtlTagsFiltrar
-                p#mensageNoEncontrado.ocultar No se encontraron resulados para su busqueda    
-                br
+                        p#mensageNoEncontrado.ocultar No se encontraron resulados para su busqueda 
+                        br
                 table#todosMedicos
                         thead#cabecera
                         tr
@@ -46,6 +46,7 @@ block content
                                 th Estado
                                 th Seleccionar
                         tbody#cuerpo
+                   
         #divAlbumPersonalSeleccionado.ocultar2.grid12-1-4.form
                 button.botonCerrar(type="button",onclick='ocultarElemento(divAlbumPersonalSeleccionado)')
                 p#pDatosAlbumSeleccionado 
@@ -91,7 +92,7 @@ block content
                                label(for="inputBuscarPersonas") Buscar Seuidores:
                                input.limpiar(type="text", id="inputBuscarSeguidoers", name="inputBuscarSeguidoers",placeHolder="Apellido") 
                                img(id="imgLupa",src="./Iconos/lupa.svg", alt="Lupa")
-                               p#mensageNoEncontrado.ocultar No se encontraron resulados para su busqueda  
+                               
                                table#todosMedicos
                                         thead#cabecera
                                         tr 
@@ -101,7 +102,8 @@ block content
                                                 th Apellido
                                                 th imagen
                                                 th Compartir
-                                        tbody#cuerpo1      
+                                        tbody#cuerpo1 
+                p#mensageNoEncontrado1.ocultar No se encontraron resulados para su busqueda               
         #divModificarTitulo.ocultar3.form.grid12-1-5 
                 button.botonCerrar(type="button",onclick='ocultarElemento(divModificarTitulo)')
                 label(for="inputModificarTituloAlbum") Modificar Titulo del Album

@@ -10,7 +10,7 @@ static async altaSolicitud(sol){
             
             const [idSolicitudResult] = await connection.execute(
                 'INSERT INTO `solicitud_amistad` (`id_perfil_solicitante`,`id_perfil_solicitado`,`solicitud_aceptada`) VALUES (?,?,?)',
-                [sol.idPerfilSolicitante ,sol.idPerfilSolicitado,false]
+                [sol.idPerfilSolicitante ,sol.idPerfilSolicitado,null]
             );
     
             const id_solicitante_notificacion = idSolicitudResult.insertId;
@@ -42,8 +42,8 @@ static async aceptarSolicitud(acepta){
             await connection.beginTransaction();
             
             const [idSolicitudResult] = await connection.execute(
-                'UPDATE `solicitud_amistad` SET solicitud_aceptada=1 WHERE id_solicitud_amistad=?',
-                [acepta.idSolicitanteNotificacion]
+                'UPDATE `solicitud_amistad` SET solicitud_aceptada=? WHERE id_solicitud_amistad=?',
+                [acepta.solicitudAceptada,acepta.idSolicitanteNotificacion]
             );
     
             const id_solicitante_notificacion = idSolicitudResult.insertId;
@@ -51,10 +51,13 @@ static async aceptarSolicitud(acepta){
                 'INSERT INTO `notificacion` (`id_remitente`,`id_destinatario`,`id_solicitante_notificacion`,`id_tipo_notificacion`,`leida_notificacion`,`fecha_notificacion`) VALUES (?,?,?,?,?,NOW())',
                 [acepta.idPerfilSeguido,acepta.idPerfilSeguidor,acepta.idSolicitanteNotificacion,2,false]
             );
-            const [idAlbumSeguidorResult] = await connection.execute(
+            if(acepta.solicitusAceptada){
+                  const [idAlbumSeguidorResult] = await connection.execute(
                 'INSERT INTO `album_seguidor`( `id_perfil_seguidor`, `id_perfil_seguido`, `nombre_album_seguidor`, `activo_album_seguidor`) VALUES (?,?,?,?)',
                 [acepta.idPerfilSeguidor,acepta.idPerfilSeguido,acepta.nombreAlbumSeguidor,true]
             );
+            }
+           
            
             await connection.commit();
             return { success: true };
