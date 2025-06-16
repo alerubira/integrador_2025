@@ -131,7 +131,7 @@ app.use('/traerComentarioPorId',rutaComunicacion);
 app.use('/contestarComentario',rutaComunicacion);
 app.use('/traerComentarioContestadoPorId',rutaComunicacion);
 
-
+//
  // Iniciar el servidor
  server.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);

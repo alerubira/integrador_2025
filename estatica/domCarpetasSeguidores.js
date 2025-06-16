@@ -1,9 +1,9 @@
 let perfilesBuscados;
-let mensageNoEnconreado1=document.getElementById('mensageVoEncontrado1')
+let mensageNoEncontrado1=document.getElementById('mensageNoEncontrado1')
  document.getElementById('inputBuscarSeguidoers').addEventListener('keyup',async function(){
     if(this.value.length>2){
      let frac=this.value.toLowerCase();
-     mensageNoEncontrado.style.display = 'none';
+     mensageNoEncontrado1.style.display = 'none';
      let a={
         idPerfil:perfil.idPerfil,
         frac:frac
@@ -14,9 +14,9 @@ let mensageNoEnconreado1=document.getElementById('mensageVoEncontrado1')
      if(aux.success){
        if(perfilesBuscados.length<1){
         mensageNoEncontrado1.style.display="block";
-       }else{mensageNoEncontrado1.style.display="none"}
-     llenarTablaPerfiles(perfilesBuscados); 
-
+       }else{mensageNoEncontrado1.style.display="none"
+            llenarTablaPerfiles(perfilesBuscados); 
+       }
     }
           
     }

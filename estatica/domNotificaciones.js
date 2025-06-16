@@ -1,7 +1,9 @@
-
+const wsProtocol = window.location.protocol === "https:" ? "wss" : "ws";
+const wsHost = window.location.host; // incluye dominio y puerto si hay
+const ws = new WebSocket(`${wsProtocol}://${wsHost}`);
 // Conecta el WebSocket al cargar la página
-const ws = new WebSocket('ws://localhost:3000');
-
+//const ws = new WebSocket('ws://localhost:3000');
+//
 // Envía el idPerfil al conectar (para asociar el socket en el servidor)
 ws.onopen = () => {
     ws.send(JSON.stringify({ idPerfil: perfil.idPerfil }));

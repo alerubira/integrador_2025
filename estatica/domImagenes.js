@@ -5,7 +5,7 @@ function subirImagen() {
     bandera=true;
     if(!validar(albumSeleccionado.cantidadImagenes>parametros.tamaño5,pagina,`la carpeta esta completa ${parametros.cartelTamño5}`,))bandera=false;
     if(bandera){
- limpiarCampos(limpiar);
+    limpiarCampos(limpiar);
     eliminarHijos(divMostrarImagenes);
     fOcultar3();
     mostrar(divSubirImagen);

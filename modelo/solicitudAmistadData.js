@@ -51,7 +51,7 @@ static async aceptarSolicitud(acepta){
                 'INSERT INTO `notificacion` (`id_remitente`,`id_destinatario`,`id_solicitante_notificacion`,`id_tipo_notificacion`,`leida_notificacion`,`fecha_notificacion`) VALUES (?,?,?,?,?,NOW())',
                 [acepta.idPerfilSeguido,acepta.idPerfilSeguidor,acepta.idSolicitanteNotificacion,2,false]
             );
-            if(acepta.solicitusAceptada){
+            if(acepta.solicitudAceptada){
                   const [idAlbumSeguidorResult] = await connection.execute(
                 'INSERT INTO `album_seguidor`( `id_perfil_seguidor`, `id_perfil_seguido`, `nombre_album_seguidor`, `activo_album_seguidor`) VALUES (?,?,?,?)',
                 [acepta.idPerfilSeguidor,acepta.idPerfilSeguido,acepta.nombreAlbumSeguidor,true]
