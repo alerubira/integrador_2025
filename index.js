@@ -130,7 +130,7 @@ app.use('/traerSolicitudPorId',rutaComunicacion);
 app.use('/traerComentarioPorId',rutaComunicacion);
 app.use('/contestarComentario',rutaComunicacion);
 app.use('/traerComentarioContestadoPorId',rutaComunicacion);
-
+console.log('Puerto asignado:', process.env.PORT)
 //
  // Iniciar el servidor
  server.listen(port, () => {
