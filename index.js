@@ -52,8 +52,8 @@ const staticOptions = {
         }
     }
 };
-
-const port = 3000;
+const port = process.env.PORT || 3000;
+//const port = 3000;
 app.use(express.static(path.join(__dirname, 'estatica'), staticOptions));
 app.use(bodyParser.text({ type: 'text/plain' }));
 app.use(bodyParser.urlencoded({ extended: true }));
