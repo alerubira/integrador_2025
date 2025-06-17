@@ -67,8 +67,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 // Configurar Express para usar Pug como motor de plantillas y establecer la carpeta de vistas
 app.set('view engine', 'pug');
-//app.set('views', path.join(__dirname, '..','vistas'));ojo
-//app.set('views', path.join(__dirname, 'vistas'));ojo
+app.set('views', path.join(__dirname, '..','vistas'));ojo
+app.set('views', path.join(__dirname, 'vistas'));ojo
 app.use(express.json());
 // Definir una ruta para renderizar una vista Pug
 // Definir tus rutas aquí
