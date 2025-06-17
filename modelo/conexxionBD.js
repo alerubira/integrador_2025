@@ -2,7 +2,7 @@ import { query } from 'express';
 import mysql from 'mysql2/promise';
 import { retornarErrorSinRes } from '../controlador/funsionesControlador.js';
 
-const pool = mysql.createPool({
+/*const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: '',
@@ -11,7 +11,20 @@ const pool = mysql.createPool({
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
+});*/
+//CBUeQAoQQBmIYwDveypqrzsCncaSyHPf
+const pool = mysql.createPool({
+    host: 'shinkansen.proxy.rlwy.net',
+    user: 'root',
+    password: 'CBUeQAoQQBmIYwDveypqrzsCncaSyHPf',
+    database: 'railway',
+    port: 32420,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
+
+
 async function consulta2(query,connection,...params) {
     let localConnection = connection;
     let shouldRelease = false;
