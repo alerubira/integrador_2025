@@ -67,8 +67,8 @@ class PerfilData extends PersonaData {
     }
     static async buscarPerfilPorApellido(frac){
         //query='CALL buscar_perfil_por_apellido(?);'
-       query=' SELECT perfil.id_perfil, perfil.nombre_perfil,perfil.img_perfil,perfil.intereses_perfil,perfil.antecedentes_perfil,persona.nombre_persona,persona.apellido_persona FROM perfil JOIN persona ON persona.id_persona = perfil.id_persona WHERE persona.apellido_persona LIKE %?%;'
-        return await consulta1(query,frac)
+       query=' SELECT perfil.id_perfil, perfil.nombre_perfil,perfil.img_perfil,perfil.intereses_perfil,perfil.antecedentes_perfil,persona.nombre_persona,persona.apellido_persona FROM perfil JOIN persona ON persona.id_persona = perfil.id_persona WHERE persona.apellido_persona LIKE ?;'
+        return await consulta1(query,`%${frac}%`)
     }
     static async buscarPerfilSegidoresrPorApellido(frac,idPerf){
         query='CALL buscar_perfiles_seguidores_por_apellido(?,?)'
