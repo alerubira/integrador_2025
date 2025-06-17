@@ -28,7 +28,7 @@ rutaImagen.post('/modificarCaptionImagenPorId',manejadorDeRutasLogin.verificarTo
 rutaImagen.post('/buscarVisibilidad',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarVisibilidad);
 rutaImagen.post('/modificarVisibilidadImagen',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.modificarVisibilidadImagen);
 rutaImagen.post('/modificarActiviImagen',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.modificarActiviImagen);
-rutaImagen.post('/traerImagenesPublicas',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarImagenesPublicas);
+rutaImagen.post('/traerImagenesPublicas',manejadorRuraImagen.buscarImagenesPublicas);
 rutaImagen.post('/traerImagenesPublicasPublicas',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarImagenesPublicasPublicas);
 rutaImagen.post('/traerImagenesEtiqutadasPersonal',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.traerImagenesEtiqutadasPersonal);
 rutaImagen.post('/traerImagenesParaSeguidores',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.traerImagenesParaSeguidores);
