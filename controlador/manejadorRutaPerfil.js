@@ -268,13 +268,13 @@ export async function buscarPerfilPorApellido(req,res){
 export async function buscarPerfilSeguidoresPorApellido(req,res){
      try {
                 let aux;
-            aux=await existeBd(req.body.idPerfil,'perfil','id_perfil')
+            /*aux=await existeBd(req.body.idPerfil,'perfil','id_perfil')
             if(aux instanceof Error){
                 return retornarError(res`Error al buscar el perfil ${aux}`)
             }
             if(!aux){
                 return retornarError(res,'El Perfil no existe')
-            }
+            }*/
             aux=await Perfil.buscarPerfilSeguidoresPorApellido(req.body.frac,req.body.idPerfil)
             if(aux instanceof Error){
                 return retornarError(res `Error al buscar el perfil por el apellido:${aux}`)
@@ -289,13 +289,13 @@ export async function buscarPerfilSeguidoresPorApellido(req,res){
 export async function buscarPerfilPorid(req,res){
 try {
     let aux;
-    aux =await existeBd(req.body.id,'perfil','id_perfil')
+    /*aux =await existeBd(req.body.id,'perfil','id_perfil')
      if(aux instanceof Error){
         return retornarError(res`Error al buscar el perfil ${aux}`)
       }
       if(!aux){
         return retornarError(res,'El Perfil no existe')
-      }
+      }*/
     aux=await Perfil.consultaPorId(req.body.id);
      if(aux instanceof Error){
         return retornarError(res `Error al buscar el perfil por el id:${aux}`)
