@@ -21,8 +21,11 @@ const pool = mysql.createPool({
     port: 32420,
     waitForConnections: true,
     connectionLimit: 10,
-    queueLimit: 0
+    queueLimit: 0,
+     keepAliveInitialDelay: 10000, // importante
+  enableKeepAlive: true,        // importante
 });
+
 
 
 async function consulta2(query,connection,...params) {
