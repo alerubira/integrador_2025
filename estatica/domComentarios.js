@@ -51,6 +51,7 @@ async function cargarNotificacionComentario(notificacion,divNotificacion){
                        
                         });
                         divNotificaciones.appendChild(divNotificacion);
+                        return true
                         }
 }
 async function cargarNotificacionComentarioContestado(notificacion,divNotificacion){
@@ -76,6 +77,7 @@ async function cargarNotificacionComentarioContestado(notificacion,divNotificaci
             capturarNotificacionSeleccionada(notificacion);
         });
         divNotificaciones.appendChild(divNotificacion);
+        return true;
         }
 }
 let comentarioCapturado;
@@ -146,9 +148,9 @@ async function cargarNotificacionComentarioContestadoSeleccionado(){
                  let id={id:notificacionSeleccionada.id_solicitante_notificacion}
                  aux=await fechProtegidoPost('/traerComentarioContestadoPorId',id);
                 if(aux.success){
-                    console.log(aux)
+                    //console.log(aux)
                       comentarioContestadoCapturado=aux.retorno[0];
-                      console.log(comentarioContestadoCapturado)
+                      //console.log(comentarioContestadoCapturado)
                    }
                 if (!perfilMomentaneo.img_perfil) {
                     imgNotificacionseleccionada.src = "imagenesPerfil/fotoPerfil.svg";

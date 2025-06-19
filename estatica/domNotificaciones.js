@@ -17,6 +17,7 @@ ws.onmessage = (event) => {
     }
 };
 let divNotificacionesNoLeidas=document.getElementById('divNotificacionesNoLeidas');
+let imgNotificacion=document.getElementById('imgNotificacion');
 async function notificacionesNoLidas(){
     let id={
         idPerfilSolicitado:perfil.idPerfil
@@ -27,8 +28,12 @@ async function notificacionesNoLidas(){
     if(aux.retorno.length>0){
         let p=document.createElement('p');
         p.textContent=`Tiene ${aux.retorno.length} Notificaciones sin leer`;
+        imgNotificacion.style.backgroundColor="red"
         divNotificacionesNoLeidas.appendChild(p);
-    }else{eliminarHijos(divNotificacionesNoLeidas)}
+    }else{
+        eliminarHijos(divNotificacionesNoLeidas)
+        imgNotificacion.style.backgroundColor="";
+    }
    }
 }
 
@@ -52,24 +57,24 @@ if(aux.success){
         notificaciones=aux.retorno;
         if(notificaciones.length<1){alerta(pagina,"NoTiene Notificaciones")}
        for(let notificacion of notificaciones) {
-        console.log(notificacion);
+       // console.log(notificacion);
         //console.log(notificacion)
              let divNotificacion = document.createElement('div');
              divNotificacion.className = 'divNotificacion';
 
              if(notificacion.id_tipo_notificacion===1){
-                cargarNotificacionSolicitud(notificacion,divNotificacion);
+                await cargarNotificacionSolicitud(notificacion,divNotificacion);
                   
                         }
              if(notificacion.id_tipo_notificacion===2){
-                  cargarNotificacionSolicitudContestada(notificacion,divNotificacion);
+                 await cargarNotificacionSolicitudContestada(notificacion,divNotificacion);
                     
                 }
              if(notificacion.id_tipo_notificacion===3){
-                    cargarNotificacionComentario(notificacion,divNotificacion);
+                  await  cargarNotificacionComentario(notificacion,divNotificacion);
                         }
              if(notificacion.id_tipo_notificacion===4){
-                    cargarNotificacionComentarioContestado(notificacion,divNotificacion);
+                  await  cargarNotificacionComentarioContestado(notificacion,divNotificacion);
              }
         }
 }

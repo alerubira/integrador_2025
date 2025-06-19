@@ -2,7 +2,7 @@ import { query } from 'express';
 import mysql from 'mysql2/promise';
 import { retornarErrorSinRes } from '../controlador/funsionesControlador.js';
 
-/*const pool = mysql.createPool({
+const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: '',
@@ -11,9 +11,9 @@ import { retornarErrorSinRes } from '../controlador/funsionesControlador.js';
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
-});*/
+});
 //CBUeQAoQQBmIYwDveypqrzsCncaSyHPf
-const pool = mysql.createPool({
+/*const pool = mysql.createPool({
     host: 'shinkansen.proxy.rlwy.net',
     user: 'root',
     password: 'CBUeQAoQQBmIYwDveypqrzsCncaSyHPf',
@@ -24,7 +24,7 @@ const pool = mysql.createPool({
     queueLimit: 0,
      keepAliveInitialDelay: 10000, // importante
   enableKeepAlive: true,        // importante
-});
+});*/
 
 
 

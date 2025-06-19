@@ -235,7 +235,7 @@ export async function modificarActiviImagen(req,res){
 export async function buscarImagenesPublicas(req,res){
 try {
     let aux;
-   /* aux=await existeBd(req.body.idPerfil,'perfil','id_perfil');
+    /*aux=await existeBd(req.body.idPerfil,'perfil','id_perfil');
     if(aux instanceof Error){
         return retornarError(res,`Error al verificar el perfil:${aux}`)
     }
@@ -244,12 +244,13 @@ try {
     }*/
     aux=await Imagen.buscarImagenesPublicas();
     if(aux instanceof Error){
-        return retornarError(res,`Error al buscar imagenes publicas:${aux}`)
+        console.log(`error al buscar imagenes publicas:${error}`);
+        return retornarError(res)
     }
     return retornarExito(res,'',aux)
 } catch (error) {
     console.log(`error al buscar imagenes publicas:${error}`);
-    return retornarError(res,`error al buscar imagenes publicas:${error}`)   
+    return retornarError(res)   
 }
 }
 export async function buscarImagenesPublicasPublicas(req,res){

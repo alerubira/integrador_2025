@@ -54,7 +54,7 @@ header, footer {
 
 nav{
     /* width: 10%;*/
-     background-color: darkslategrey;
+     background-color: rgb(109, 136, 136);
      text-align: center;
     /* height: 400px; /* Añadir esta línea para un alto fijo */
      margin: 1rem;

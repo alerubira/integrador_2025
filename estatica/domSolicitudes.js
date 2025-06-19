@@ -49,6 +49,7 @@ async function cargarNotificacionSolicitud(notificacion,divNotificacion){
                             capturarNotificacionSeleccionada(notificacion,perfilMomentaneo);
                         });
                         divNotificaciones.appendChild(divNotificacion);
+                        return true;
                         }
 }
 async function cargarNotificacionSolicitudContestada(notificacion,divNotificacion){
@@ -73,6 +74,7 @@ async function cargarNotificacionSolicitudContestada(notificacion,divNotificacio
                             capturarNotificacionSeleccionada(notificacion,perfilMomentaneo);
                         });
                         divNotificaciones.appendChild(divNotificacion);
+                        return true;
                     }
 }
 let divNotificacionSeleccionada=document.getElementById('divNotificacionSeleccionada');
@@ -93,7 +95,7 @@ async function cargarSilicitudSeleccionada(){
                 if(aux.success){
                       solicitudCapturada=aux.retorno[0]
                     }
-                    console.log(solicitudCapturada)
+                   // console.log(solicitudCapturada)
                  id={
                     id:solicitudCapturada.id_perfil_solicitante
                 }

@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken';
 import {enviarCorreo} from './sendMail.js';
 import { existeBd } from '../modelo/conexxionBD.js';
 
-import { retornarError, retornarExito,generarNumeroAleatorio } from "./funsionesControlador.js";
+import { retornarError, retornarExito,retornarError400,generarNumeroAleatorio } from "./funsionesControlador.js";
 /*let object;
 let aux;
 let login;*/
@@ -226,7 +226,9 @@ export async function crearLogin(req, res) {
         if (aux instanceof Error) return retornarError(res, `Error al crear y guardar Login:${aux}`);
         return retornarExito(res, "Login generado y guardado con exito");
     } catch (error) {
-        return retornarError(res, `Error en crearLogin: ${error}`);
+        console.log( `Error en crearLogin: ${error}`)
+        return retornarError(res,);
+        
     }
 }
 
@@ -235,23 +237,33 @@ export async function verificarLogin(req, res) {
         const object = req.body;
         let aux = await verificarYup(object, 'login');
         if (aux.errors) {
-            return retornarError(res, `Error al verificar la tipologia del usuario:${aux.errors}`);
+            console.log(`Error al verificar la tipologia del usuario:${aux.errors}`)
+            return retornarError400(res );
         }
         let l = await Login.consultaPorUsuario(object.usuario);
         if (l instanceof Error) return retornarError(res, `Error al buscar el Login:${l}`);
-        if (l.length < 1) return retornarError(res, "El usuario no existe, intente nuevamente");
+        if (l.length < 1) return retornarError400(res);
         let login = new Login(l[0].id_login, l[0].id_profesional_perfil, l[0].usuario_login, l[0].clave_login, l[0].tipo_autorizacion, l[0].instancia_login, l[0].activo_login);
         aux = await Login.verificarHash(object.clave, l[0].clave_login);
-        if (!l[0].activo_login) return retornarError(res, 'El Login no esta activo');
-        if (!aux) return retornarError(res, "Clave o Usuario Incorrecta");
+        if (!l[0].activo_login) return retornarError400(res);
+        if (!aux) return retornarError400(res, "Clave o Usuario Incorrecta");
         if (login.tipoAutorizacion === 2 || login.tipoAutorizacion == 3) {
             aux = await Login.consultaActivosPorUsuario(object.usuario);
-            if (aux instanceof Error) return retornarError(res, `Error al buscar el Login:${aux}`);
-            if (!aux[0][0].activo_persona || !aux[0][0].activo_profesional) return retornarError(res, 'El Profesional no esta activo');
+            if (aux instanceof Error){
+              console.log(`Error al buscar el Login:${aux}`);
+               return retornarError(res);
+            } 
+            if (!aux[0][0].activo_persona || !aux[0][0].activo_profesional){
+              console.log('El Profesional no esta activo');
+              return retornarError400(res);
+            } 
         }
         if (login.tipoAutorizacion === 5 && login.instancia === 2) {
             aux = await Perfil.modificarActivoPorId(login.idProfesionalPerfil);
-            if (aux instanceof Error) return retornarError(res, `Error al dar de alta  el Login:${aux}`);
+            if (aux instanceof Error){
+              console.log( `Error al dar de alta  el Login:${aux}`)
+              return retornarError(res);
+              } 
         }
         if (login.instancia == 1 && login.tipoAutorizacion === 5) {
             return res.status(200).json({
@@ -280,7 +292,8 @@ export async function verificarLogin(req, res) {
             });
         }
     } catch (error) {
-        return retornarError(res, `Error en verificarLogin: ${error}`);
+      console.log( `Error en verificarLogin: ${error}`);
+        return retornarError(res);
     }
 }
 
@@ -288,23 +301,34 @@ export async function modificarLogin(req, res) {
     try {
         const object = req.body;
         if (object.claveN !== object.claveN2) {
-            return retornarError(res, "La Confirmacion de la Clave debe ser igual a la Clave Nueva");
+            return retornarError400(res, "La Confirmacion de la Clave debe ser igual a la Clave Nueva");
         }
         let login = await Login.consultaPorUsuario(object.usuario);
-        if (login instanceof Error) return retornarError(res, `Error al buscar el Login:${login}`);
-        if (login.length < 1) return retornarError(res, "El usuario no existe, intente nuevamente");
-        if (!login[0].activo_login) return retornarError(res, 'El Login no esta activo');
+        if (login instanceof Error){
+          console.log(`Error al buscar el Login:${login}`);
+           return retornarError(res);
+        } 
+        if (login.length < 1){
+                return retornarError400(res);
+        }
+        if (!login[0].activo_login){
+               return retornarError400(res);
+        } 
         let aux = await Login.verificarHash(object.clave, login[0].clave_login);
-        if (!aux) return retornarError(res, "Clave o Usuario Incorrecta");
+        if (!aux) return retornarError400(res, "Clave o Usuario Incorrecta");
         let log = { usuario: object.usuario, clave: object.claveN };
         aux = await verificarYup(log, 'login');
-        if (aux.errors) return retornarError(res, `Error en la tipologia del Login:${aux.errors}`);
+        if (aux.errors) return retornarError400(res);
         login = new Login(login[0].id_login, login[0].id_profesional_perfil, login[0].usuario_login, object.claveN, login[0].tipo_autorizacion, login[0].instancia_login, login[0].activo_login);
         aux = await login.modificarClave();
-        if (aux instanceof Error) return retornarError(res, `Error al modificar el Login ${aux}`);
+        if (aux instanceof Error){
+          console.log(`Error al modificar el Login ${aux}`);
+          return retornarError(res);
+        } 
         return retornarExito(res, "El Login fue modificado con exito");
     } catch (error) {
-        return retornarError(res, `Error en modificarLogin: ${error}`);
+        console.log(`Error en modificarLogin: ${error}`);
+        return retornarError(res);
     }
 }
 
@@ -313,21 +337,40 @@ export async function recuperarLogin(req, res) {
         const object = req.body;
         let login = new Login(null, null, object.usuario, object.clave, null, null, null, object.claveProvisoria);
         let aux = await verificarYup(login, 'login');
-        if (aux.errors) return retornarError(res, `Error en la tipologia del Login:${aux.errors}`);
+        if (aux.errors){
+          console.log(`Error en la tipologia del Login:${aux.errors}`);
+           return retornarError400(res);
+        } 
         let lo = await Login.consultaPorUsuario(login.usuario);
-        if (lo instanceof Error) return retornarError(res, `Error al buscar el Login:${lo}`);
-        if (lo.length < 1) return retornarError(res, "El usuario no existe, intente nuevamente");
-        if (!lo[0].activo_login) return retornarError(res, 'El Login no esta activo');
+        if (lo instanceof Error){
+          console.log( `Error al buscar el Login:${lo}`);
+          return retornarError400(res);
+        } 
+        if (lo.length < 1){
+          return retornarError400(res);
+        } 
+        if (!lo[0].activo_login){
+             return retornarError400(res);
+        } 
         aux = await Login.verificarHash(login.claveProvisoria, lo[0].clave_login_provisoria);
-        if (!aux) return retornarError(res, "Clave Provisoria Incorrecta, verificar en su email");
+        if (!aux){
+            return retornarError400(res, "Clave Provisoria Incorrecta, verificar en su email");
+        } 
         login = new Login(lo[0].id_login, lo[0].id_profesional_perfil, lo[0].usuario_login, object.clave, lo[0].tipo_autorizacion, lo[0].instancia_login, lo[0].activo_login, lo[0].clave_login_provisoria);
         aux = await login.borrarClaveProvisoria();
-        if (aux instanceof Error) return retornarError(res, `Error al borrar la clave provisoria:${aux}`);
+        if (aux instanceof Error){
+          console.log(`Error al borrar la clave provisoria:${aux}`);
+          return retornarError(res);
+        } 
         aux = await login.modificarClave();
-        if (aux instanceof Error) return retornarError(res, `Error al modificar la clave:${aux}`);
+        if (aux instanceof Error){
+          console.log(`Error al modificar la clave:${aux}`);
+          return retornarError(res);
+        } 
         return retornarExito(res, "La clave fue modificada con exito");
     } catch (error) {
-        return retornarError(res, `Error en recuperarLogin: ${error}`);
+        console.log( `Error en recuperarLogin: ${error}`)
+        return retornarError(res);
     }
 }
 
@@ -338,22 +381,37 @@ export async function enviarMail(req, res) {
         let n = generarNumeroAleatorio();
         let aux = await Login.consultaPorUsuario(object.usuario);
         if (aux instanceof Error) return retornarError(res, `Error al buscar el Login:${aux}`);
-        if (aux.length < 1) return retornarError(res, "El usuario no existe, intente nuevamente");
+        if (aux.length < 1){
+            return retornarError400(res);
+        } 
         let lP = new Login(aux[0].id_login, aux[0].id_profesional_perfil, aux[0].usuario_login, n, aux[0].tipo_autorizacion, aux[0].instancia_login, aux[0].activo_login, n);
         if (lP.tipoAutorizacion === 2 || lP.tipoAutorizacion == 3) {
             aux = await Profesional.consultaPorId(lP.idProfesional);
-            if (aux instanceof Error) return retornarError(res, `Error al buscar el Profesional:${aux}`);
-            if (aux.length < 1) return retornarError(res, "El Profesional no existe");
+            if (aux instanceof Error){
+              console.log( `Error al buscar el Profesional:${aux}`);
+              return retornarError(res);
+            } 
+            if (aux.length < 1){
+               return retornarError400(res);
+            } 
             eMail = aux[0][0].e_mail;
         }
         if (lP.tipoAutorizacion === 5) {
             aux = await Perfil.consultaPorId(lP.idProfesionalPerfil);
-            if (aux instanceof Error) return retornarError(res, `Error al buscar el Profesional:${aux}`);
-            if (aux.length < 1) return retornarError(res, "El Perfil no existe");
+            if (aux instanceof Error){
+              console.log( `Error al buscar el Profesional:${aux}`);
+              return retornarError(res);
+            } 
+            if (aux.length < 1){
+               return retornarError400(res);
+            }
             eMail = aux[0].e_mail_perfil;
         }
         aux = await lP.modificarClaveProvisoria();
-        if (aux instanceof Error) return retornarError(res, `Error al modificar la clave provisoria:${aux}`);
+        if (aux instanceof Error){
+          console.log( `Error al modificar la clave provisoria:${aux}`);
+          return retornarError(res);
+        } 
         const payload = {
             username: lP.usuario,
             tipoAutorizacion: lP.tipoAutorizacion,
@@ -362,7 +420,8 @@ export async function enviarMail(req, res) {
         const response = await enviarCorreo(eMail, 'Clave Provisoria', `Su clave provisoria es: ${n} y tiene una duracion de 4 horas`);
         res.json({ message: `Correo enviado: ${response}`, token: tokenP });
     } catch (error) {
-        return retornarError(res, `Error en enviarMail: ${error}`);
+        console.log(`Error en enviarMail: ${error}`)
+        return retornarError(res);
     }
 }
 export default {

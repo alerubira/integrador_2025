@@ -1,6 +1,6 @@
 import express from 'express';
 import { parametros } from './parametros.js';
-import  manejadordeRutasLogin from './controlador/manejadorDeRutasLogin.js';
+//import  manejadordeRutasLogin from './controlador/manejadorDeRutasLogin.js';
 //import { verificarToken } from './controlador/manejadorDeRutasLogin.js';
 //import { Login } from './modelo/claseLogin';
 const ruta1 = express.Router();

@@ -1,4 +1,4 @@
-import { retornarError, retornarExito } from "./funsionesControlador.js";
+import { retornarError, retornarExito,retornarError400 } from "./funsionesControlador.js";
 import { existeBd } from "../modelo/conexxionBD.js";
 import {SolicitudAmistad} from "../modelo/claseSolicitudAmistad.js";
 import {Notificacion} from "../modelo/claseNotificacion.js";
@@ -11,22 +11,25 @@ export async function generarSilicitudAmistad(req,res){
         
         let aux=await existeBd(req.body.idPerfilSolicitante,'perfil','id_perfil')
         if(aux instanceof Error){
-            return retornarError(res,`Error al buscar el perfil Solicitante:${aux}`)
+            console.log(`Error al buscar el perfil Solicitante:${aux}`);
+            return retornarError(res)
         }
         if(!aux){
-            return retornarError(res,'El Perfil solicitante no existe')
+            return retornarError400(res)
         }
         aux=await existeBd(req.body.idPerfilSolicitado,'perfil','id_perfil')
         if(aux instanceof Error){
-            return retornarError(res,`Error al buscar el perfil solicitado:${aux}`)
+            console.log(`Error al buscar el perfil solicitado:${aux}`)
+            return retornarError(res)
         }
         if(!aux){
-            return retornarError(res,`El Perfil solicitado no existe`)
+            return retornarError400(res)
         }
         let sol=req.body;
         aux=await SolicitudAmistad.alta(sol);
         if(aux instanceof Error){
-            return retornarError(res,`Error al crear la solicitud:${Error}`)
+            console.log(`Error al crear la solicitud:${aux}`)
+            return retornarError(res)
         }
         // el id es aque perfil dirige la accion
             if (clientes.has(req.body.idPerfilSolicitado)) {
@@ -36,8 +39,8 @@ export async function generarSilicitudAmistad(req,res){
        
        return retornarExito(res,"Solicitud Enviada con exito")
     } catch (error) {
-        console.log(`Error al generar la solicitud:${error}`)
-        return retornarError(res,`Error al generar la solicitud:${error}`)
+        console.log(`Error al generar la solicitud de amistad:${error}`)
+        return retornarError(res)
     }
 
 }
@@ -46,21 +49,21 @@ try {
     let id=req.body.idPerfilSolicitado;
     let aux=await existeBd(id,'perfil','id_perfil');
     if(aux instanceof Error){
-        return retornarError(res,`Error al verificar si existe el perfil:${Error}`)
+        console.log(`Error al verificar si existe el perfil:${aux}`)
+        return retornarError(res)
     }
     if(!aux){
-        return retornarError(res,'El Perfil no existe')
+        return retornarError400(res)
     }
     aux=await Notificacion.buscarNotificacionesPorIdSolicitado(id);
     if(aux instanceof Error){
-        return retornarError(res,`Error al buscar notificaciones:${aux}`)
+        console.log(`Error al buscar notificaciones:${aux}`)
+        return retornarError(res)
     }
-    
-    
     return retornarExito(res,'',aux)
 } catch (error) {
     console.log(`Error al buscar Notificaciones:${error}`)
-    return retornarError(res,`Error al buscar Notificaciones:${error}`)
+    return retornarError(res)
 }
 }
 export async function buscarNotificacionesNoLeidasPorIdSolicitado(req,res){

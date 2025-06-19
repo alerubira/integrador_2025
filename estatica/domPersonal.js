@@ -97,7 +97,7 @@ document.getElementById('selectBuscarTags').addEventListener('change',async func
         alerta(pagina,"seleccion no valida")
     }else{
              imgFiltradas=imagenePublicaPublicas.filter(im=>im.id_tags===value)
-             console.log(imgFiltradas)
+             //console.log(imgFiltradas)
             if(imgFiltradas.length<1){
                             alerta(pagina,"No se encuentran fotos bajo es etiqueta");
                             this.value = "";

@@ -2,8 +2,14 @@ function retornarError(res,mensaje){
     
     return res.status(500).send({
         success: false,
-        message: mensaje,
+        message:`Error interno del servidor:${mensaje}`,
     });
+}
+function retornarError400(res,mensaje){
+    return res.status(400).send({
+        success:false,
+        message:`Solicitud no encontrada:${mensaje}`
+    })
 }
 function retornarErrorSinRes(message) {
     //console.log(message);
@@ -28,4 +34,4 @@ function generarNumeroAleatorio() {
 
 
 
-export{retornarError,retornarErrorSinRes,retornarExito,transformarstrinAExpReg,generarNumeroAleatorio}
+export{ retornarError400,retornarError,retornarErrorSinRes,retornarExito,transformarstrinAExpReg,generarNumeroAleatorio}
