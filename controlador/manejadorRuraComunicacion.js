@@ -71,19 +71,21 @@ export async function buscarNotificacionesNoLeidasPorIdSolicitado(req,res){
         let id=req.body.idPerfilSolicitado;
     let aux=await existeBd(id,'perfil','id_perfil');
     if(aux instanceof Error){
-        return retornarError(res,`Error al verificar si existe el perfil:${Error}`)
+        console.log(`Error al verificar si existe el perfil:${Error}`);
+        return retornarError(res)
     }
     if(!aux){
-        return retornarError(res,'El Perfil no existe')
+        return retornarError400(res)
     }
     aux=await Notificacion.buscarNotificacionesNoLeidasPorIdSolicitado(id);
     if(aux instanceof Error){
-        return retornarError(res,`Error al buscar notificaciones:${aux}`)
+        console.log(`Error al buscar notificaciones:${aux}`)
+        return retornarError(res)
     }
     return retornarExito(res,'',aux)
     } catch (error) {
         console.log(`Error al buscar notificaciones no leidas:${error}`)
-        return retornarError(res,`Error al buscar notificaciones no leidas:${error}`)
+        return retornarError(res)
     }
 
 }
@@ -92,13 +94,17 @@ try {
     let idNotificacion=req.body.idNotificacion;
     let aux=await existeBd(idNotificacion,'notificacion','id_notificacion');
     if(aux instanceof Error){
-        return retornarError(res,`Error al verificar si existe la notificacion:${Error}`)
+        console.log(`Error al verificar si existe la notificacion:${aux}`)
+        return retornarError(res)
     }
     if(!aux){
-        return retornarError(res,'La Notificacion no existe')
+        return retornarError400(res)
     }
     aux=await Notificacion.modificarLeidaNotificacion(idNotificacion);
-    if(aux instanceof Error){return retornarError(res,`Error al marcar la notificacion leida${aux}`)}
+    if(aux instanceof Error){
+        console.log(`Error al marcar la notificacion leida${aux}`)
+        return retornarError(res)
+    }
 // el id es aque perfil dirige la accion
             if (clientes.has(req.body.idPerfil)) {
                 const ws = clientes.get(req.body.idPerfil);
@@ -107,7 +113,7 @@ try {
     return retornarExito(res,"")
 } catch (error) {
    console.log(`Error al mercar como leida la Notificacion:${error}`)
-   return retornarError(res,`Error al mercar como leida la Notificacion:${error}`) 
+   return retornarError(res) 
 }
 }
 export async function aceptarSolicitud(req,res){
@@ -115,28 +121,32 @@ try {
     let acepta=req.body;
     let aux=await existeBd(acepta.idSolicitanteNotificacion,'solicitud_amistad','id_solicitud_amistad');
     if(aux instanceof Error){
-        return retornarError(res,`Error al verificar si existe la solicitud de amistad:${Error}`)
+        console.log(`Error al verificar si existe la solicitud de amistad:${aux}`)
+        return retornarError(res)
     }
     if(!aux){
-        return retornarError(res,'La solicitud de amistad no existe')
+        return retornarError400(res)
     }
     aux=await existeBd(acepta.idPerfilSeguidor,'perfil','id_perfil');
     if(aux instanceof Error){
-        return retornarError(res,`Error al verificar si existe El Perfil Solicitado:${Error}`)
+        console.log(`Error al verificar si existe El Perfil Solicitado:${aux}`)
+        return retornarError(res)
     }
     if(!aux){
-        return retornarError(res,'El Perfil Solicitado no existe')
+        return retornarError400(res)
     }
     aux=await existeBd(acepta.idPerfilSeguido,'perfil','id_perfil');
     if(aux instanceof Error){
-        return retornarError(res,`Error al verificar si existe El Perfil Solicitanta:${Error}`)
+        console.log(`Error al verificar si existe El Perfil Solicitanta:${aux}`)
+        return retornarError(res)
     }
     if(!aux){
-        return retornarError(res,'El Perfil Solicitanta no existe')
+        return retornarError400(res)
     }
      aux=await SolicitudAmistad.aceptarSolicitud(acepta)
      if(aux instanceof Error){
-        return retornarError(res,`Error al aceptar la solicitud:${aux}`)
+        console.log(`Error al aceptar la solicitud:${aux}`)
+        return retornarError(res)
      }
      //devolver el mensaje a la persona que fue aceptada seguidor
      // el id es aque perfil dirige la accion
@@ -148,7 +158,7 @@ try {
 
 } catch (error) {
     console.log(`Error al contestar la solicitud de amistad:${error}`)
-    return retornarError(res,`Error al contestar la solicitud de amistad:${error}`)
+    return retornarError(res)
 }
 }
 export async function crearComentario(req,res){
@@ -158,32 +168,37 @@ export async function crearComentario(req,res){
         com=req.body;
         aux=await verificarYup(com,'comentario')
         if(aux instanceof Error){
-            return retornarError(res,`Error al verificar la tipologia del comentario:${aux}`)
+            console.log(`Error al verificar la tipologia del comentario:${aux}`)
+            return retornarError(res)
         }
         aux=await existeBd(com.idImagen,'imagen','id_imagen');
         if(aux instanceof Error){
-            return retornarError(res,`Erro al buscar la imagen:${aux}`);
+            console.log(`Error al buscar la imagen:${aux}`)
+            return retornarError(res);
         }
         if(!aux){
-            return retornarError(res,'La Imagen a comentar no existe')
+            return retornarError400(res)
         }
         aux=await existeBd(com.idPerfilComentador,'perfil','id_perfil');
         if(aux instanceof Error){
-            return retornarError(res,`Error al buscar el perfil comentador${aux}`)
+            console.log(`Error al buscar el perfil comentador${aux}`)
+            return retornarError(res)
         }
         if(!aux){
-            return retornarError(res,'El perfilcomentador no existe')
+            return retornarError400(res)
         }
         aux=await existeBd(com.idPerfilImagen,'perfil','id_perfil');
         if(aux instanceof Error){
-            return retornarError(res,`Erroe al buscar el perfil propietario de la Imagen:${aux}`)
+            console.log(`Erroe al buscar el perfil propietario de la Imagen:${aux}`)
+            return retornarError(res)
         }
         if(!aux){
-            return retornarError(res,'El perfil propietario de la imagen no existe')
+            return retornarError400(res)
         }
         aux=await Comentario.alta(com);
         if(aux instanceof Error){
-            return retornarError(res,`Error al crear el comentario:${aux}`)
+            console.log(`Error al crear el comentario:${aux}`)
+            return retornarError(res)
         }
         //devolver el mensaje a la persona dueña de la imagen
      // el id es aque perfil dirige la accion
@@ -195,7 +210,7 @@ export async function crearComentario(req,res){
         
     } catch (error) {
         console.log(`Error al crear comentario:${error}`);
-        return retornarError(res,`Error al crear comentario:${error}`)
+        return retornarError(res)
     }
 
 }
@@ -205,19 +220,21 @@ export async function traerSolicitudPorId(req,res){
         let id=req.body.id;
         aux=await existeBd(id,'solicitud_amistad','id_solicitud_amistad');
         if(aux instanceof Error){
-            return retornarError(res,`Error al buscar la solicitud:${aux}`)
+            console.log(`Error al buscar la solicitud:${aux}`)
+            return retornarError(res)
         }
         if(!aux){
-            return retornarError(res,'la solicitud no existe')
+            return retornarError400(res)
         }
         aux=await SolicitudAmistad.consultaPorId(id);
          if(aux instanceof Error){
-            return retornarError(res,`Error al buscar la solicitud por id:${aux}`)
+            console.log(`Error al buscar la solicitud por id:${aux}`)
+            return retornarError(res)
          }
          retornarExito(res,"",aux)
     } catch (error) {
         console.log(`Error al buscar la solicitud por id;${error}`)
-        return retornarError(res,`Error al buscar la solicitud por aid;${error}`)
+        return retornarError(res)
     }
 }
 export async function traerComentarioPorId(req,res){
@@ -226,20 +243,22 @@ export async function traerComentarioPorId(req,res){
             id=req.body.id;
             aux=await existeBd(id,'comentario','id_comentario')
              if(aux instanceof Error){
-            return retornarError(res,`Error al buscar el comentario:${aux}`)
+                console.log(`Error al buscar el comentario:${aux}`)
+            return retornarError(res)
         }
         if(!aux){
-            return retornarError(res,'el comentario no existe')
+            return retornarError400(res)
         }
         aux=await Comentario.consultaPorId(id);
         if(aux instanceof Error){
-            return retornarError(res,`Error al ha cer la consulat de comentario:${aux}`)
+            console.log(`Error al ha cer la consulat de comentario:${aux}`)
+            return retornarError(res)
         }
         retornarExito(res,"",aux)
             
         } catch (error) {
             console.log(`Error al buscar el comentario:${error}`)
-            return retornarError(res,`Error al buscar el comentario:${error}`)
+            return retornarError(res)
         }
 }
 export async function contestarComentario(req,res){
@@ -248,32 +267,37 @@ try {
     let comContestado=req.body;
     aux=await verificarYup(comContestado,'comentarioContestado')
         if(aux instanceof Error){
-            return retornarError(res,`Error al verificar la tipologia del comentario contestado:${aux}`)
+            console.log(`Error al verificar la tipologia del comentario contestado:${aux}`)
+            return retornarError(res)
         }
         aux=await existeBd(comContestado.idComentario,'comentario','id_comentario');
         if(aux instanceof Error){
-            return retornarError(res,`Erro al buscar el comentario:${aux}`);
+            console.log(`Error al buscar el comentario:${aux}`)
+            return retornarError(res);
         }
         if(!aux){
-            return retornarError(res,'El comentario a contestar no existe')
+            return retornarError400(res)
         }
         aux=await existeBd(comContestado.idRemitente,'perfil','id_perfil');
         if(aux instanceof Error){
-            return retornarError(res,`Error al buscar el perfil comentador${aux}`)
+            console.log(`Error al buscar el perfil comentador${aux}`)
+            return retornarError(res)
         }
         if(!aux){
-            return retornarError(res,'El perfil comentador no existe')
+            return retornarError(res)
         }
         aux=await existeBd(comContestado.idDestinatario,'perfil','id_perfil');
         if(aux instanceof Error){
-            return retornarError(res,`Error al buscar el perfil propietario de la Imagen:${aux}`)
+            console.log(`Error al buscar el perfil propietario de la Imagen:${aux}`)
+            return retornarError(res)
         }
         if(!aux){
-            return retornarError(res,'El perfil propietario de la imagen no existe')
+            return retornarError400(res)
         }
         aux=await ComentarioContestado.alta(comContestado);
         if(aux instanceof Error){
-            return retornarError(res,`Error al crear el comentario:${aux}`)
+            console.log(`Error al crear el comentario:${aux}`)
+            return retornarError(res)
         }
         //devolver el mensaje a la persona dueña de la imagen
      // el id es aque perfil dirige la accion
@@ -286,7 +310,7 @@ try {
     return retornarExito(res,"el comentario se contesto correctamente",aux)
 } catch (error) {
     console.log(`Error al contestar el comentario:${error}`)
-    return retornarError(res,`Error al contestar el comentario:${error}`)
+    return retornarError(res)
 }
 }
 export async function traerComentarioContestadoPorId(req,res){
@@ -295,20 +319,22 @@ export async function traerComentarioContestadoPorId(req,res){
             id=req.body.id;
             aux=await existeBd(id,'comentario_contestado','id_comentario_contestado')
              if(aux instanceof Error){
-            return retornarError(res,`Error al buscar el comentario contestado:${aux}`)
+                console.log(`Error al buscar el comentario contestado:${aux}`)
+            return retornarError(res)
         }
         if(!aux){
-            return retornarError(res,'el comentariocontestado no existe')
+            return retornarError(res)
         }
         aux=await ComentarioContestado.consultaPorId(id);
         if(aux instanceof Error){
-            return retornarError(res,`Error al hacer la consulata de comentario contestado:${aux}`)
+            console.log(`Error al hacer la consulata de comentario contestado:${aux}`)
+            return retornarError(res)
         }
         retornarExito(res,"",aux)
             
         } catch (error) {
             console.log(`Error al buscar el comentario contestado:${error}`)
-            return retornarError(res,`Error al buscar el comentario contestado:${error}`)
+            return retornarError(res)
         }
 }
 

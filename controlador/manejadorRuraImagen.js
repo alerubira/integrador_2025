@@ -1,5 +1,5 @@
 import { Perfil } from "../modelo/clasePerfil.js";
-import { retornarError, retornarExito } from "./funsionesControlador.js";
+import { retornarError, retornarError400, retornarExito } from "./funsionesControlador.js";
 import{parametros} from "../parametros.js";
 import{Tags}from "../modelo/claseTags.js";
 import { verificarYup } from "./verificaryup.js";
@@ -16,25 +16,28 @@ export async function subirImagen(req, res) {
     try {
         let cantidad=await AlbumPersonal.consultaCantidaImagenesPorId(req.body.idAlbumSeleccionado);
         if(cantidad instanceof Error){
-            return retornarError(res,`Error al buscar la cantidad de imagenes en la carpeta ${cantidad}`)
+            console.log(`Error al buscar la cantidad de imagenes en la carpeta ${cantidad}`)
+            return retornarError(res)
         }
         if(cantidad[0].cantidad_imagenes>parametros.tamaño5){
-            return retornarError(res,`El Album esta completo ${parametros.cartelTamaño5}`)
+            return retornarError400(res,`El Album esta completo ${parametros.cartelTamaño5}`)
         }
         
         aux=await existeBd(req.body.idAlbumSeleccionado,'album_personal','id_album_personal');
         if (aux instanceof Error) {
-            return retornarError(res, `Error al verificar el album: ${aux}`);
+            console.log( `Error al verificar el album: ${aux}`)
+            return retornarError(res);
         }
         if (!aux) {
-            return retornarError(res, "El album no existe");
+            return retornarError400(res);
         }
         aux=await existeBd(req.body.idPerfil,'album_personal','id_perfil_personal');
         if (aux instanceof Error) {
-            return retornarError(res, `Error al verificar el perfil: ${aux}`);
+            console.log( `Error al verificar el perfil: ${aux}`)
+            return retornarError(res);
         }
         if (!aux) {
-            return retornarError(res, "El perfil no existe");
+            return retornarError400(res);
         }
          const outputFilename = 'img-' + Date.now() + path.extname(req.file.originalname);
                 const outputPath = path.join('estatica/imagenesAlbum', outputFilename);
@@ -57,27 +60,30 @@ export async function subirImagen(req, res) {
         }
         aux=await Imagen.alta(imagen, req.body.idAlbumSeleccionado,cantidad[0].cantidad_imagenes);
         if(aux instanceof Error) {
-            return retornarError(res, `Error al guardar la imagen: ${aux}`);
+            console.log(`Error al guardar la imagen: ${aux}`)
+            return retornarError(res);
         }   
        
         return retornarExito(res, 'La imagen fue agragada con exito', urlImagen);
     } catch (error) {
         console.error("Error al subir la imagen", error);
-        return retornarError(res, `Error al subir la imagen: ${error}`);
+        return retornarError(res);
     }
 }
 export async function buscarImagenesPorIdAlbumPersonal(req, res) {
     try {
         aux = await existeBd(req.body.idAlbum, 'album_personal', 'id_album_personal');
     if (aux instanceof Error) {
-        return retornarError(res, `Error al verificar el album: ${aux}`);
+        console.log( `Error al verificar el album: ${aux}`)
+        return retornarError(res);
     }
     if (!aux) {
-        return retornarError(res, "El album no existe");
+        return retornarError400(res);
     }
     aux = await Imagen.buscarImagenesPorIdAlbumPersonal(req.body.idAlbum);
     if (aux instanceof Error) {
-        return retornarError(res, `Error al buscar las imagenes: ${aux}`);
+        console.log( `Error al buscar las imagenes: ${aux}`)
+        return retornarError(res);
     }
     if (aux.length === 0) {
         return retornarExito(res, "No se encontraron imagenes para el album seleccionado", []);
@@ -99,7 +105,7 @@ export async function buscarImagenesPorIdAlbumPersonal(req, res) {
         
     } catch (error) {
         console.log(`Error al buscar Imagen:${error}`)
-        return retornarError(res,`Error al buscar imagen:${error}`)
+        return retornarError(res)
     }
     
 }
@@ -108,23 +114,26 @@ export async function modificarTituloImagenPorId(req,res){
         let img=req.body;
      aux=await existeBd(img.idImagen,'imagen','id_imagen');
      if(aux instanceof Error){
-        return retornarError(res`Erroal buscar la Imagen`)
+        console.log(`Error al buscar la Imagen:${aux}`)
+        return retornarError(res)
      }
      if(!aux){
-        return retornarError(res,'La imagen no existe')
+        return retornarError400(res)
      }
      aux =await verificarYup(img,'imagen');
      if(aux instanceof Error){
-        return retornarError(res,`Error al verificar la tipologia de la Imagen:${aux}`)
+        console.log(`Error al verificar la tipologia de la Imagen:${aux}`)
+        return retornarError(res)
      }
      aux= await Imagen.modificarTiTuloPorId(img);
      if(aux instanceof Error){
-        return retornarError(res,`Error al modificar el titulo de la imagen:${aux}`)
+        console.log(`Error al modificar el titulo de la imagen:${aux}`)
+        return retornarError(res)
      }
      return retornarExito(res,"El titulo en la image se modifico con exito");
     } catch (error) {
         console.log(`Error al modoificar el titulo de la imagen:${error}`)
-        return retornarError(res,`Error al modoificar el titulo de la imagen:${error}`)
+        return retornarError(res)
     }
      
 
@@ -134,23 +143,26 @@ export async function modificarCaptionImagenPorId(req,res){
         let img=req.body;
      aux=await existeBd(img.idImagen,'imagen','id_imagen');
      if(aux instanceof Error){
-        return retornarError(res`Erroal buscar la Imagen`)
+        console.log(`Erroal buscar la Imagen:${aux}`)
+        return retornarError(res)
      }
      if(!aux){
-        return retornarError(res,'La imagen no existe')
+        return retornarError400(res)
      }
      aux =await verificarYup(img,'imagen');
      if(aux instanceof Error){
-        return retornarError(res,`Error al verificar la tipologia de la Imagen:${aux}`)
+        console.log(`Error al verificar la tipologia de la Imagen:${aux}`)
+        return retornarError(res)
      }
      aux= await Imagen.modificarCaptionPorId(img);
      if(aux instanceof Error){
-        return retornarError(res,`Error al modificar el caption de la imagen:${aux}`)
+        console.log(`Error al modificar el caption de la imagen:${aux}`)
+        return retornarError(res)
      }
       return retornarExito(res,"El Caption se modofico con exito");
     } catch (error) {
        console.log(`Error al modificar el Caption:${error}`)
-       return retornarError(res,`Error al modificar el Caption:${error}`)
+       return retornarError(res)
     }
     
 }
@@ -159,14 +171,16 @@ export async function buscarVisibilidad(req,res){
          let idPerf=req.body;
        aux =await existeBd(idPerf.idPerfil,'perfil','id_perfil');
        if(aux instanceof Error){
-        return retornarError(res,'Error al buscar visibilidades')
+        console.log(`Error al buscar visibilidades:${aux}`)
+        return retornarError(res)
        }
        if(!aux){
-        return retornarError(res,'El perfil solicitante no existe');
+        return retornarError400(res);
        }
        aux=await Visibilidad.consulta();
        if(aux instanceof Error){
-        return retornarError(res,`Error al buscar visibilidad ${aux}`)
+        console.log(`Error al buscar visibilidad ${aux}`)
+        return retornarError(res)
        }
        aux=aux.map(vi=>{
         return{
@@ -177,7 +191,7 @@ export async function buscarVisibilidad(req,res){
        return retornarExito(res,"",aux)
     } catch (error) {
         console.log(`Error al buscar Visibilidad:${error}`)
-        return retornarError(res,`Error al buscar Visibilidad:${error}`)
+        return retornarError(res)
     }
       
 
@@ -187,26 +201,29 @@ export async function modificarVisibilidadImagen(req,res){
         let img=req.body;
      aux =await existeBd(img.idImagen,'imagen','id_imagen');
        if(aux instanceof Error){
-        return retornarError(res,'Error al buscar la imagen')
+        console.log(`Error al buscar la Imagen:${aux}`)
+        return retornarError(res)
        }
        if(!aux){
-        return retornarError(res,'LA Imagen no existe');
+        return retornarError400(res);
        }
        aux=await existeBd(img.idVisibilidad,'visibilidad','id_visibilidad');
        if(aux instanceof Error){
-        return retornarError(res,`Error al buscar la visivilidad ${aux}`)
+        console.log(`Error al buscar la visivilidad ${aux}`)
+        return retornarError(res)
        }
        if(!aux){
-        return retornarError(res,'La visibilidad no existe')
+        return retornarError400(res)
        }
        aux=await Imagen.modificarVisibilidad(img);
        if(aux instanceof Error){
-        return retornarError(res,`Error al modificar la visibilidad ${aux}`)
+        console.log(`Error al modificar la visibilidad ${aux}`)
+        return retornarError(res)
        }
        return retornarExito(res,'La visibilidad se modifico con exito')
     } catch (error) {
         console.log(`Error al modificar la visibilidad:${error}`)
-        return retornarError(res,`Error al modificar la visibilidad:${error}`)
+        return retornarError(res)
     }
      
 }
@@ -215,20 +232,22 @@ export async function modificarActiviImagen(req,res){
            let img=req.body;
         aux =await existeBd(img.idImagen,'imagen','id_imagen');
        if(aux instanceof Error){
-        return retornarError(res,'Error al buscar la imagen')
+        console.log(`Error al buscar la Imagen:${aux}`)
+        return retornarError(res)
        }
        if(!aux){
-        return retornarError(res,'LA Imagen no existe');
+        return retornarError400(res);
        }
       
        aux=await Imagen.modificarActivoImagen(img);
        if(aux instanceof Error){
-        return retornarError(res,`Error al modificar el activo de la imagen ${aux}`)
+        console.log(`Error al modificar el activo de la imagen ${aux}`)
+        return retornarError(res)
        }
        return retornarExito(res,'El activo se modifico con exito')
     } catch (error) {
         console.log(`Error al activar la Imagen:${error}`)
-        return retornarError(res,`Error al activar la Imagen:${error}`)
+        return retornarError(res)
     }
     
 }
@@ -258,20 +277,22 @@ try {
     let aux;
     aux=await existeBd(req.body.idPerfil,'perfil','id_perfil');
     if(aux instanceof Error){
-        return retornarError(res,`Error al verificar el perfil:${aux}`)
+        console.log(`Error al verificar el perfil:${aux}`)
+        return retornarError(res)
     }
     if(!aux){
-        return retornarError(res,'El perfil no existe')
+        return retornarError400(res)
     }
     aux=await Imagen.buscarImagenesPublicasPublicas();
     if(aux instanceof Error){
-        return retornarError(res,`Error al buscar imagenes publicas:${aux}`)
+        console.log(`Error al buscar imagenes publicas:${aux}`)
+        return retornarError(res)
     }
     return retornarExito(res,'',aux)
     
 } catch (error) {
-    console.log(`Error al buscar imagenes publicas , publicasPara usuarios`)
-    return retornarError(res,`Error al buscar imagenes publicas , publicasPara usuarios`)
+    console.log(`Error al buscar imagenes publicas , publicasPara usuarios:${error}`)
+    return retornarError(res)
 }
 }
 export async function traerImagenesParaSeguidores(req,res) {
@@ -279,20 +300,22 @@ export async function traerImagenesParaSeguidores(req,res) {
     let aux;
     aux=await existeBd(req.body.idPerfil,'perfil','id_perfil');
     if(aux instanceof Error){
-        return retornarError(res,`Error al verificar el perfil:${aux}`)
+        console.log(`Error al verificar el perfil:${aux}`)
+        return retornarError(res)
     }
     if(!aux){
-        return retornarError(res,'El perfil no existe')
+        return retornarError400(res)
     }
     aux=await Imagen.buscarImagenesPorSeguidor(req.body.idPerfil);
     if(aux instanceof Error){
-        return retornarError(res,`Error al buscar imagenes publicas:${aux}`)
+        console.log(`Error al buscar imagenes publicas:${aux}`)
+        return retornarError(res)
     }
     return retornarExito(res,'',aux)
     
 } catch (error) {
     console.log(`Error al buscar imagenes para seguidores:${error}`)
-    return retornarError(res,`Error al buscar imagenes para seguidores${error}`)
+    return retornarError(res)
 }
 }
 
@@ -301,20 +324,22 @@ export async function traerImagenesEtiqutadasPersonal(req,res){
     let aux;
     aux=await existeBd(req.body.idPerfil,'perfil','id_perfil');
     if(aux instanceof Error){
-        return retornarError(res,`Error al verificar el perfil:${aux}`)
+        console.log(`Error al verificar el perfil:${aux}`)
+        return retornarError(res)
     }
     if(!aux){
-        return retornarError(res,'El perfil no existe')
+        return retornarError400(res)
     }
     aux=await Imagen.buscarImagenesEtiquetadaPersonal(req.body.idPerfil);
     if(aux instanceof Error){
-        return retornarError(res,`Error al buscar imagenes etiquetadas personal:${aux}`)
+        console.log(`Error al buscar imagenes etiquetadas personal:${aux}`)
+        return retornarError(res)
     }
     return retornarExito(res,'',aux)
     
 } catch (error) {
     console.log(`Error al buscar imagenes etiquetada personal:${error}`)
-    return retornarError(res,`Error al buscar imagenes etiquetada personal${error}`)
+    return retornarError(res)
 }
 }
 
@@ -324,20 +349,22 @@ try {
     idImg=req.body.idImagen;
     aux =await existeBd(idImg,'imagen','id_imagen')
     if(aux instanceof Error){
-        return retornarError(res,`Error al buscar la Imagen que contiene los comentarios:${aux}`)
+        console.log(`Error al buscar la Imagen que contiene los comentarios:${aux}`)
+        return retornarError(res)
     }
     if(!aux){
-        return retornarError(res,'La imagen seleccionada no existe')
+        return retornarError400(res)
     }
     aux=await Comentario.consultaPorIdImagen(idImg);
     if(aux instanceof Error){
-        return retornarError(res,`Error al buscar los comentarios de la imagen:${aux}`)
+        console.log(`Error al buscar los comentarios de la imagen:${aux}`)
+        return retornarError(res)
     }
 
     return retornarExito(res,"",aux)
 } catch (error) {
-    console.log(`Error al traer comentarios por id imgen`);
-    return retornarError(res`Error al traer comentarios por id imgen`,)
+    console.log(`Error al traer comentarios por id imgen:${error}`);
+    return retornarError(res)
 }
 }
 export async function buscarContestadosPorComentario(req,res){
@@ -346,20 +373,22 @@ try {
     idC=req.body.idC;
     aux=await existeBd(idC,'comentario','id_comentario');
     if(aux instanceof Error){
-        return retornarError(`Error al buscar el comentario contestado:${aux}`)
+        console.log(`Error al buscar el comentario contestado:${aux}`)
+        return retornarError(res)
     }
     if(!aux){
-        return retornarError(res,"El comentario no existe")
+        return retornarError400(res)
     }
     aux = await ComentarioContestado.consultaPorIdComentario(idC);
     if(aux instanceof Error){
-        return retornarError(res,`Error al buscar comentario contestado:${aux}`)
+        console.log(`Error al buscar comentario contestado:${aux}`)
+        return retornarError(res)
     }
     retornarExito(res,"",aux)
     
 } catch (error) {
     console.log(`Error al buscar las contestaciones del comentario:${error}`);
-    return retornarError(res,`Error al buscar las contestaciones del comentario:${error}`)
+    return retornarError(res)
 }
 }
 export default {
