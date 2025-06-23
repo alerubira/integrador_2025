@@ -12,6 +12,7 @@ import { rutaCarpetas } from './rutaCarpetas.js';
 import { rutaImagen } from './rutaImagen.js';
 import manejadorDeRutasLogin from './controlador/manejadorDeRutasLogin.js';
 import { rutaComunicacion } from './rutaComunicacion.js';
+import { rutaDenuncia } from './rutaDenuncia.js';
 import http from 'http';
 import { WebSocketServer } from 'ws';
 const app = express();
@@ -130,6 +131,7 @@ app.use('/traerSolicitudPorId',rutaComunicacion);
 app.use('/traerComentarioPorId',rutaComunicacion);
 app.use('/contestarComentario',rutaComunicacion);
 app.use('/traerComentarioContestadoPorId',rutaComunicacion);
+app.use('/',rutaDenuncia)
 console.log('Puerto asignado:', process.env.PORT)
 //
  // Iniciar el servidor

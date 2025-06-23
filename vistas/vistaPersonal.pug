@@ -7,6 +7,7 @@ block script1
     script(src="domImagenPersonal.js",defer)
     script(src="domComentarios.js",defer) 
     script(src="domSolicitudes.js",defer)
+    script(src="domDenuncia.js",defer)
 block content 
         #divProfesionalAcceso.grid12-1-1 
                 h3 USUARIO
@@ -157,7 +158,14 @@ block content
                    h6#captionImagenSeleccionada.limpiar 
                    button.boton2(type="button",onclick="verComentarios()") ver comentarios 
                    button.boton2(type="button",onclick="hacerComentario()") comentar
+                   button.boton2(type="button",onclick="denunciar()") Denunciar Imagen 
+
                    #divComentariosImagen
+        #divHacerDenuncia.forn.grid6-4-7.ocultar
+                         input.limpiar(type="input",id="inputDenuncia",name="inputDenuncia",list="dlMotivosDenuncia",placeholder="Motivo de la denuncia") 
+                         datalist#dlMotivosDenuncia
+                         button.botonCerrar(type="button",onclick='ocultarElemento(divHacerDenuncia)')
+                         button.boton(type="button",onclick="enviarDenuncia()") Enviar Denuncia           
         #divHacerComentario.forn.grid6-4-7.ocultar
                         textarea.limpiar(nombre="texComentario" id="texComentario" placeholder="comenta..." maxlength="298") 
                         button.botonCerrar(type="button",onclick='ocultarElemento(divHacerComentario)')
