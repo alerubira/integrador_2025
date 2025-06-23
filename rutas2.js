@@ -1,52 +1,23 @@
 import express from 'express';
-import { manejadorSecundaria } from './controlador/manejadorRutaSecundaria.js';
-import { verificarToken } from './controlador/manejadorDeRutasLogin.js';
+import manejadorRutaSecundaria  from './controlador/manejadorRutaSecundaria.js';
+import manejadorRutaLogin from './controlador/manejadorDeRutasLogin.js';
 const ruta2 = express.Router();
 
-ruta2.get('/secundaria',(req,res)=>{
-    manejadorSecundaria(req,res,'ingresar');
-    
-  }) 
-ruta2.post('/crearProfesion',verificarToken,(req,res)=>{
-    manejadorSecundaria(req,res,'crearProfesion');
-  })   
-ruta2.get('/buscarProfesiones',verificarToken,(req,res)=>{
-    manejadorSecundaria(req,res,'buscarProfesiones');
-})
-ruta2.post('/modificarEstadoProfesion',verificarToken,(req,res)=>{
-    manejadorSecundaria(req,res,'modificarEstadoProfesion');
-})
-ruta2.post('/modificarNombreProfesion',verificarToken,(req,res)=>{
-    manejadorSecundaria(req,res,'modificarNombreProfesion');
-})
-ruta2.get('/buscarProfesionales',verificarToken,(req,res)=>{
-  manejadorSecundaria(req,res,'buscarProfesionales');
-})
+ruta2.get('/secundaria',manejadorRutaSecundaria.ingresar) 
+ruta2.post('/crearProfesion',manejadorRutaLogin.verificarToken,manejadorRutaSecundaria.crearProfesion)   
+ruta2.get('/buscarProfesiones',manejadorRutaLogin.verificarToken,manejadorRutaSecundaria.buscarProfesiones)
+ruta2.post('/modificarEstadoProfesion',manejadorRutaLogin.verificarToken,manejadorRutaSecundaria.buscarProfesiones)
+ruta2.post('/modificarNombreProfesion',manejadorRutaLogin.verificarToken,manejadorRutaSecundaria.modificarNombreProfesion)
+ruta2.get('/buscarProfesionales',manejadorRutaLogin.verificarToken,manejadorRutaSecundaria.buscarProfesionales)
 
-ruta2.post('/crearProfesional',verificarToken,(req,res)=>{
-  manejadorSecundaria(req,res,'crearProfesional');
-})
-ruta2.post('/modificarEstadoPersona',verificarToken,(req,res)=>{
-  manejadorSecundaria(req,res,'modificarEstadoPersona');
-}) 
-ruta2.post('/modificarEstadoProfesional',verificarToken,(req,res)=>{
-  manejadorSecundaria(req,res,'modificarEstadoProfesional');
-}) 
-ruta2.post('/modificarProfesionProfesional',verificarToken,(req,res)=>{
-  manejadorSecundaria(req,res,'modificarProfesionProfesional');
-})
-ruta2.post('/modificarEMailProfesional',verificarToken,(req,res)=>{
-  manejadorSecundaria(req,res,'modificarEMailProfesional');
-})
-ruta2.post('/modificarNombrePersona',verificarToken,(req,res)=>{
-  manejadorSecundaria(req,res,'modificarNombrePersona');
-})
-ruta2.post('/modificarApellidoPersona',verificarToken,(req,res)=>{
-  manejadorSecundaria(req,res,'modificarApellidoPersona');
-})
-ruta2.post('/modificarDniPersona',verificarToken,(req,res)=>{
-  manejadorSecundaria(req,res,'modificarDniPersona');
-})
+ruta2.post('/crearProfesional',manejadorRutaLogin.verificarToken,manejadorRutaSecundaria.crearProfesional)
+ruta2.post('/modificarEstadoPersona',manejadorRutaLogin.verificarToken,manejadorRutaSecundaria.modificarEstadoPersona) 
+ruta2.post('/modificarEstadoProfesional',manejadorRutaLogin.verificarToken,manejadorRutaSecundaria.modificarEstadoProfesional) 
+ruta2.post('/modificarProfesionProfesional',manejadorRutaLogin.verificarToken,manejadorRutaSecundaria.modificarProfesionProfesional)
+ruta2.post('/modificarEMailProfesional',manejadorRutaLogin.verificarToken,manejadorRutaSecundaria.modificarEmailProfesional)
+ruta2.post('/modificarNombrePersona',manejadorRutaLogin.verificarToken,manejadorRutaSecundaria.modificarNombrePersona)
+ruta2.post('/modificarApellidoPersona',manejadorRutaLogin.verificarToken,manejadorRutaSecundaria.modificarApellidoPersona)
+ruta2.post('/modificarDniPersona',manejadorRutaLogin.verificarToken,manejadorRutaSecundaria.modificarDniPersona)
 
 
 export{ruta2};  

@@ -5,17 +5,15 @@ import { parametros } from "../parametros.js";
 import { verificarYup } from "./verificaryup.js";
 import { existeBd, existeNombreBd } from "../modelo/conexxionBD.js";
 import { Login } from "../modelo/claseLogin.js";
-async function manejadorSecundaria(req,res,accion){
 let aux;
 let object;
 let encabezado;
 let profesion;
 let profesional;
 let persona;
-try{
-    switch (accion) {
-        case 'ingresar':
-            const datosEncoded = req.query.datos; 
+export async function ingresar(req,res){
+try {
+     const datosEncoded = req.query.datos; 
             const datosDecoded = decodeURIComponent(datosEncoded);
              const toke = JSON.parse(datosDecoded);
     
@@ -32,9 +30,14 @@ try{
                 
             res.render('vistasecundaria',{encabezado,parametros,profesional});
                  }
-            break;
-        case 'buscarProfesiones':
-            aux=await Profesion.consulta();
+} catch (error) {
+     console.log(`Error al ingresar a la pagina secundaria:${error}`);
+        return retornarError(res)
+}
+}
+export async function buscarProfesiones(req,res){
+    try {
+        aux=await Profesion.consulta();
             if(aux instanceof Error){return retornarError(res,`Error al buscar profesiones :${aux}`)}
             let prs=[];
             for(let p of aux){
@@ -42,9 +45,14 @@ try{
                 prs.push(pr);
             }
             return res.send(prs);
-            break;
-        case 'crearProfesion':
-            object=req.body;
+    } catch (error) {
+         console.log(`Error al buscar profesiones:${error}`);
+        return retornarError(res)
+    }
+}
+export async function crearProfesion(req,res){
+    try {
+        object=req.body;
             aux=await verificarYup(object,'profesion');
             if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
             aux=await existeNombreBd(object.nombreProfesion,'profesion','nombre_profesion');
@@ -53,9 +61,14 @@ try{
             aux=await Profesion.alta(object);
             if(aux instanceof Error){return retornarError(res,`Error al crear y guardar Profesion:${aux}`)}
             return retornarExito(res,"Profesion generada y guardada con exito");
-            break;     
-        case 'modificarEstadoProfesion':
-            object=req.body;
+    } catch (error) {
+         console.log(`Error al crear la profesion:${error}`);
+        return retornarError(res)
+    }
+}
+export async function modificarEstadoProfesionn(req,res){
+    try {
+        object=req.body;
             aux=await existeBd(object.idProfesion,'profesion','id_profesion');  
             if(aux instanceof Error){return retornarError(res,`Error al verificar si exite la profesion :${aux}`)}
             if(!aux){return retornarError(res,'La Profesion no existe')}
@@ -63,9 +76,14 @@ try{
             aux=await profesion.modificarActivo();
             if(aux instanceof Error){return retornarError(res,`Error al modificar el estado de la Profesion:${aux}`)}   
             return retornarExito(res,"Estado de la Profesion modificado con exito");
-            break;
-        case 'modificarNombreProfesion':
-            object=req.body;
+    } catch (error) {
+         console.log(`Error al modificar el estado de la profesion:${error}`);
+        return retornarError(res)
+    }
+}
+export async function modificarNombreProfesion(req,res){
+    try {
+         object=req.body;
             aux=await existeBd(object.idProfesion,'profesion','id_profesion');  
             if(aux instanceof Error){return retornarError(res,`Error al verificar si exite la profesion :${aux}`)}
             if(!aux){return retornarError(res,'La Profesion no existe')}
@@ -77,9 +95,15 @@ try{
              profesion=new Profesion(object.idProfesion,object.nombreProfesion,object.activoProfesion);
             aux=await profesion.modificarNombre();
             if(aux instanceof Error){return retornarError(res,`Error al modificar el nombre de la Profesion:${aux}`)}   
-            return retornarExito(res,"Nombre de la Profesion modificado con exito");        
-        case 'buscarProfesionales':
-            aux=await Profesional.consulta();
+            return retornarExito(res,"Nombre de la Profesion modificado con exito");     
+    } catch (error) {
+         console.log(`Error al modificar el nombre de la profesion:${error}`);
+        return retornarError(res)
+    }
+}
+export async function buscarProfesionales(req,res){
+    try {
+        aux=await Profesional.consulta();
             if(aux instanceof Error){return retornarError(res,`Error al buscar profesionales :${aux}`)}
             //
             let profesionales=[];
@@ -88,20 +112,30 @@ try{
                 profesionales.push(pr);
             }
             return res.send(profesionales);
-            break;    
-        case 'crearProfesion':
-            object=req.body;
+    } catch (error) {
+         console.log(`Error al buscar profesionales:${error}`);
+        return retornarError(res)
+    }
+}
+/*export async function crearProfesion(req,res){
+    try {
+         object=req.body;
             aux= verificarYup(object,'profesion');
             if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
             aux=await existeNombreBd(object.nombreProfesion,'profesion','nombre_profesion');
             if(aux instanceof Error){return retornarError(res,`Error al verificar si la Profesion existe :${aux}`)}
             if(aux){return retornarError(res,'El nombre de la Profesion ya existe en la base de datos')}
             aux=await Profesion.alta(object);
-            console.log(aux);
+           // console.log(aux);
             return res.send(aux);
-            break;  
-        case 'crearProfesional':
-            object=req.body;
+    } catch (error) {
+         console.log(`Error al crear profesion:${error}`);
+        return retornarError(res)
+    }
+}*/
+export async function crearProfesional(req,res){
+    try {
+         object=req.body;
             aux=await existeBd(object.idProfesionProfesional,'profesion','id_profesion');
             if(aux instanceof Error){return retornarError(res,`Error al verificar si exite la profesion :${aux}`)}
             if(!aux){return retornarError(res,'La Profesion en el Profesional no existe')}
@@ -111,9 +145,14 @@ try{
             aux=await Profesional.alta(object);
             if(aux instanceof Error){return retornarError(res,`Error al crear y guardar Profesional:${aux}`)}
             return retornarExito(res,"Profesional generado y guardado con exito");
-            break; 
-        case 'modificarEstadoPersona':
-            object=req.body;
+    } catch (error) {
+         console.log(`Error al crear profesional:${error}`);
+        return retornarError(res)
+    }
+}
+export async function modificarEstadoPersona(req,res){
+    try {
+        object=req.body;
             aux=await existeBd(object.idPersona,'persona','id_persona');
             if(aux instanceof Error){return retornarError(res,`Error al verificar si exite la persona :${aux}`)}    
             if(!aux){return retornarError(res,'La Persona no existe')}
@@ -123,9 +162,14 @@ try{
             aux=await persona.modificarActivoPer();
             if(aux instanceof Error){return retornarError(res,`Error al modificar el estado de la Persona:${aux}`)}
             return retornarExito(res,"Estado de la Persona modificado con exito");
-            break; 
-        case 'modificarEstadoProfesional':
-            object=req.body;
+    } catch (error) {
+         console.log(`Error al modificar el estado del la persona:${error}`);
+        return retornarError(res)
+    }
+}
+export async function modificarEstadoProfesional(req,res){
+    try {
+         object=req.body;
             aux=await existeBd(object.idProfesional,'profesional','id_profesional');
             if(aux instanceof Error){return retornarError(res,`Error al verificar si exite el Profesional :${aux}`)}    
             if(!aux){return retornarError(res,'El Profesional no existe')}
@@ -135,9 +179,14 @@ try{
             aux=await profesional.modificarActivoPro();
             if(aux instanceof Error){return retornarError(res,`Error al modificar el estado del Profesional:${aux}`)}
             return retornarExito(res,"Estado del Profesional modificado con exito");
-            break; 
-        case 'modificarProfesionProfesional':
-            object=req.body;
+    } catch (error) {
+         console.log(`Error al modificar el estado del profesional:${error}`);
+        return retornarError(res)
+    }
+}
+export async function modificarProfesionProfesional(req,res){
+    try {
+        object=req.body;
             aux=await existeBd(object.idProfesion,'profesion','id_profesion');
             if(aux instanceof Error){return retornarError(res,`Error al verificar si exite la profesion :${aux}`)}    
             if(!aux){return retornarError(res,'La Profesion no existe')}
@@ -148,9 +197,14 @@ try{
             aux=await profesional.modificarProfesion();
             if(aux instanceof Error){return retornarError(res,`Error al modificar la Profesion del Profesional:${aux}`)}
             return retornarExito(res,"Profesion del Profesional modificada con exito");
-            break;
-        case 'modificarEMailProfesional':
-            object=req.body;
+    } catch (error) {
+         console.log(`Error al modificar la profesion del profesional:${error}`);
+        return retornarError(res)
+    }
+}
+export async function modificarEmailProfesional(req,res){
+    try {
+         object=req.body;
             aux=await verificarYup(object,'profesional');
             if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
             aux=await existeBd(object.idProfesional,'profesional','id_profesional');
@@ -160,9 +214,14 @@ try{
             aux=await profesional.modificarEMail();
             if(aux instanceof Error){return retornarError(res,`Error al modificar el EMail del Profesional:${aux}`)}
             return retornarExito(res,"EMail del Profesional modificado con exito");
-            break;
-        case 'modificarNombrePersona':
-            object=req.body;
+    } catch (error) {
+         console.log(`Error al modificar el eMail:${error}`);
+        return retornarError(res)
+    }
+}
+export async function modificarNombrePersona(req,res){
+    try {
+         object=req.body;
             aux=await verificarYup(object,'persona');
             if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
             aux=await existeBd(object.idPersona,'persona','id_persona');
@@ -172,9 +231,14 @@ try{
             aux=await persona.modificarNombre();
             if(aux instanceof Error){return retornarError(res,`Error al modificar el nombre de la Persona:${aux}`)}
             return retornarExito(res,"Nombre de la Persona modificado con exito");
-            break; 
-        case 'modificarApellidoPersona':
-            object=req.body;
+    } catch (error) {
+         console.log(`Error al modificar el nombre:${error}`);
+        return retornarError(res)
+    }
+}
+export async function modificarApellidoPersona(req,res){
+    try {
+         object=req.body;
             aux=await verificarYup(object,'persona');
             if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
             aux=await existeBd(object.idPersona,'persona','id_persona');
@@ -184,9 +248,14 @@ try{
             aux=await persona.modificarApellido();
             if(aux instanceof Error){return retornarError(res,`Error al modificar el apellido de la Persona:${aux}`)}
             return retornarExito(res,"Apellido de la Persona modificado con exito");
-            break;
-        case 'modificarDniPersona':
-            object=req.body;
+    } catch (error) {
+         console.log(`Error al modificar el apellido:${error}`);
+        return retornarError(res)
+    }
+}
+export async function modificarDniPersona(req,res){
+    try {
+        object=req.body;
             aux=await verificarYup(object,'persona');
             if(aux instanceof Error){return retornarError(res,`Error al verificar yup:${aux}`)}
             aux=await existeBd(object.idPersona,'persona','id_persona');
@@ -196,6 +265,59 @@ try{
             aux=await persona.modificarDni();
             if(aux instanceof Error){return retornarError(res,`Error al modificar el dni de la Persona:${aux}`)}
             return retornarExito(res,"Dni de la Persona modificado con exito");
+    } catch (error) {
+        console.log(`Error al modificar el dni:${error}`);
+        return retornarError(res)
+    }
+}
+ /*async function manejadorSecundaria(req,res,accion){
+
+
+try{
+    switch (accion) {
+        case 'ingresar':
+           
+            break;
+        case 'buscarProfesiones':
+            
+            break;
+        case 'crearProfesion':
+            
+            break;     
+        case 'modificarEstadoProfesion':
+            
+            break;
+        case 'modificarNombreProfesion':
+              
+        case 'buscarProfesionales':
+            
+            break;    
+        case 'crearProfesion':
+           
+            break;  
+        case 'crearProfesional':
+           
+            break; 
+        case 'modificarEstadoPersona':
+            
+            break; 
+        case 'modificarEstadoProfesional':
+           
+            break; 
+        case 'modificarProfesionProfesional':
+            
+            break;
+        case 'modificarEMailProfesional':
+           
+            break;
+        case 'modificarNombrePersona':
+           
+            break; 
+        case 'modificarApellidoPersona':
+           
+            break;
+        case 'modificarDniPersona':
+            
             break;                            
         default:
             let m=`Seleccion ${accion} dentro del manejador secundaria Invalida `  ;
@@ -209,5 +331,21 @@ try{
     return retornarError(res,m);
 }
 
+}*/
+//export{manejadorSecundaria};
+export default{
+    ingresar,
+    buscarProfesiones,
+    crearProfesion,
+    modificarEstadoProfesionn,
+    modificarNombreProfesion,
+    buscarProfesionales,
+    crearProfesional,
+    modificarEstadoPersona,
+    modificarEstadoProfesional,
+    modificarProfesionProfesional,
+    modificarEmailProfesional,
+    modificarNombrePersona,
+    modificarApellidoPersona,
+    modificarDniPersona
 }
-export{manejadorSecundaria};

@@ -235,6 +235,7 @@ export async function crearLogin(req, res) {
 export async function verificarLogin(req, res) {
     try {
         const object = req.body;
+        
         let aux = await verificarYup(object, 'login');
         if (aux.errors) {
             console.log(`Error al verificar la tipologia del usuario:${aux.errors}`)

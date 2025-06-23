@@ -70,7 +70,8 @@ class ImagenData{
         return await consulta1(query,idSeguidor)
     }
     static async buscarImagenesEtiquetadasPersonal(idSeguidor){
-        query='SELECT img.id_imagen,img.url_imagen,img.fecha_creacion_imagen,img.titulo_imagen,img.caption_imagen,pe.img_perfil,pe.nombre_perfil,pe.id_perfil,per.nombre_persona,per.apellido_persona FROM imagen img JOIN album_imagen ai ON img.id_imagen=ai.id_imagen JOIN album_personal ap ON ai.id_album=ap.id_album_personal JOIN perfil pe on ap.id_perfil_personal=pe.id_perfil JOIN persona per ON pe.id_persona=per.id_persona JOIN album_seguidor als on als.id_perfil_seguido=pe.id_perfil WHERE(img.activo_imagen=1)&&ai.img_compartida=1 &&(als.id_perfil_seguidor)=? ORDER BY img.fecha_creacion_imagen DESC;'
+        //query='SELECT img.id_imagen,img.url_imagen,img.fecha_creacion_imagen,img.titulo_imagen,img.caption_imagen,pe.img_perfil,pe.nombre_perfil,pe.id_perfil,per.nombre_persona,per.apellido_persona FROM imagen img JOIN album_imagen ai ON img.id_imagen=ai.id_imagen JOIN album_personal ap ON ai.id_album=ap.id_album_personal JOIN perfil pe on ap.id_perfil_personal=pe.id_perfil JOIN persona per ON pe.id_persona=per.id_persona JOIN album_seguidor als on als.id_perfil_seguido=pe.id_perfil WHERE(img.activo_imagen=1)&&ai.img_compartida=1 &&(als.id_perfil_seguidor)=? ORDER BY img.fecha_creacion_imagen DESC;'
+        query='SELECT img.id_imagen,img.url_imagen,img.fecha_creacion_imagen,img.titulo_imagen,img.caption_imagen,pe.img_perfil,pe.nombre_perfil,pe.id_perfil,per.nombre_persona,per.apellido_persona FROM imagen img JOIN album_imagen ai ON img.id_imagen=ai.id_imagen JOIN album_seguidor als on als.id_album_seguidor=ai.id_album JOIN perfil pe on als.id_perfil_seguido=pe.id_perfil JOIN persona per ON pe.id_persona=per.id_persona WHERE(img.activo_imagen=1)&&ai.img_compartida=1 &&(als.id_perfil_seguidor)=? ORDER BY img.fecha_creacion_imagen DESC;'
         return await consulta1(query,idSeguidor);
     }
     
