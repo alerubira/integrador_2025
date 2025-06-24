@@ -1,9 +1,11 @@
 pagina="secundaria";
 let aux;
-let profesiones,profesionales;
+let profesiones,profesionales,denuncias;
 let divCrearLogin=document.getElementById('divCrearLogin');
 let dtlProfesionProfesional=document.getElementById('dtlProfesionProfesional');
 let dtlProfesionFiltrar=document.getElementById('dtlProfesionFiltrar');
+let divMostrarDenuncias=document.getElementById('divMostrarDenuncias');
+
 slctCrudProfesion.addEventListener('change',async function() {
     limpiarCampos(limpiar);
     fOcultar();
@@ -102,7 +104,20 @@ slctCrudProfesion.addEventListener('change',async function() {
                     eliminarHijos(dtlProfesionFiltrar);
                     llenarDl(dtlProfesionFiltrar,profesiones,'nombreProfesion','idProfesion');
           
-              break;         
+              break;    
+              case'verDenuncias':
+                 mostrar(divMostrarDenuncias);
+                 let id={
+                    idProfesional:profesionalDePagina.idProfesional
+                 }
+                 aux=await fechProtegidoPost('/buscarDenuncias',id);
+                 if(aux.success){
+                    denuncias=aux.retorno;
+                    if(denuncias.length>0){
+                         console.log(denuncias)
+                    }
+                 }
+              break;     
               
          default:
               console.log('Selección no válida');
@@ -114,7 +129,7 @@ async function buscarProfesiones(){
      aux=await fechGetProtegido('/buscarProfesiones');
     // profesiones=aux.data;
      if(!aux.error){
-       console.log(aux.data);
+      // console.log(aux.data);
      }
      return aux.data;
 }

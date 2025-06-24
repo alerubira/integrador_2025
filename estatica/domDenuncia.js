@@ -8,7 +8,6 @@ async function denunciar(){
     }
   aux=await fechProtegidoPost('/traerMotivosDenuncia',id)
   if(aux.success){
-    console.log(aux.retorno)
     llenarDl(dlMotivosDenuncia,aux.retorno,'nombreMotivoDenuncia','nombreMotivoDenuncia')
     motivosDenuncia=aux.retorno;
   }
@@ -17,20 +16,26 @@ let inputDenuncia=document.getElementById('inputDenuncia');
 async function enviarDenuncia(){
     let bandera=true;
     let value=inputDenuncia.value;
-    console.log(value);
     let motivoDenuncia=motivosDenuncia.find(motivo => motivo.nombreMotivoDenuncia === value);
     if(!validar(!motivoDenuncia,pagina,"el motivo de la denuncia  no existe")){
         bandera=false;
     }
-    console.log(imgSeleccionada)
+    if(!validar(!imgSeleccionada,pagina,"no hay imagen seleccionada para denunciar")){
+        bandera=false;
+    }
     if(bandera){
            let denuncia={
         idMotivoDenuncia:motivoDenuncia.idMotivoDenuncia,
-        idImagenDenunciada:imagenSeleccionada.id_imagen,
+        idImagenDenunciada:imgSeleccionada.id_imagen,
         idPerfilDenunciante:perfil.idPerfil,
-        idPerfilDenunciado:imagenSeleccionada.id_perfil,
-    }
-    console.log(denuncia);
+        idPerfilDenunciado:imgSeleccionada.id_perfil,
+           }
+          aux=await fechProtegidoPost('/enviarDenuncia',denuncia);
+          if(aux.success){      
+           
+           inputDenuncia.value="";
+           fOcultar();
+          }
     }
     
 
