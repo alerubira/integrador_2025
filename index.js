@@ -121,6 +121,7 @@ app.use('/traerImagenesEtiqutadasPersonal',rutaImagen);
 app.use('/traerImagenesParaSeguidores',rutaImagen);
 app.use('/traerComentariosPorIdImagen',rutaImagen);
 app.use('/buscarContestadosPorComentario',rutaImagen);
+app.use('/buscarImagenPorId',rutaImagen)
 app.use('/',rutaComunicacion);
 app.use('/buscarNotificaciones',rutaComunicacion);
 app.use('/buscarNotificacionesNoLeidas',rutaComunicacion)

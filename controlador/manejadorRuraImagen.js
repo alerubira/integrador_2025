@@ -391,6 +391,29 @@ try {
     return retornarError(res)
 }
 }
+export async function buscarImagenPorId(req,res){
+    try {
+        let aux;
+        aux=await existeBd(req.body.idImagen,'imagen','id_imagen');
+        if(aux instanceof Error){
+            console.log(`Error al buscar la imagen por id:${aux}`);
+            return retornarError(res)
+        }
+        if(!aux){
+            return retornarError400(res)
+        }
+        aux=await Imagen.consultaPorId(req.body.idImagen);
+        if(aux instanceof Error){
+            console.log(`Error al buscar la imagen por id:${aux}`);
+            return retornarError(res)
+        }
+        return retornarExito(res,"",aux[0])
+    } catch (error) {
+        console.log(`Error al buscar la imagen por id:${error}`);
+        return retornarError(res)
+        
+    }
+}
 export default {
     subirImagen,
     buscarImagenesPorIdAlbumPersonal,
@@ -405,6 +428,7 @@ export default {
     traerImagenesEtiqutadasPersonal,
     traerComentariosPorIdImagen,
     buscarContestadosPorComentario,
+    buscarImagenPorId
 
 
 }

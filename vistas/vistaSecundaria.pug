@@ -4,7 +4,9 @@ block script1
 block script2 
     script(src="domSecundarioProfesion.js",defer)    
 block script3 
-    script(src="domSecundarioProfesional.js",defer)        
+    script(src="domSecundarioProfesional.js",defer) 
+block script4 
+    script(src="domSecundarioDenuncia.js",defer)       
 block content
             #divProfesionalAcceso.grid12-1-1 
                                 h3 PROFESIONAL
@@ -114,11 +116,30 @@ block content
                                 th Id Imagen Denunciada
                                 th Id Perfil Denunciante
                                 th Id Perfil Denunciado
+                                th Motivo Denuncia
                                 th Activo Denuncia
                                 th Fecha  denuncia
-                                th Motivo Denuncia
                                 th Seleccionar
-                        tbody#cuerpoD   
+                        tbody#cuerpoD  
+            #divDenunciaSeleccionada.ocultar.form.grid12-1-3.divContenedorImagen1 
+                   button.botonCerrar(type="button",onclick='ocultarElemento(divDenunciaSeleccionada)') 
+                   h5#motivoDenunciaI
+                   img#imagenDenunciadaI.divContenedorImagen.limpiar 
+                   h6#nombreImagenDenunciada.limpiar 
+                   h6#captionImagenDenunciada.limpiar 
+                   img#imgPerfilDenunciado.limpiar.imgPerfil
+                   h6#datosPersonaDenunciada.limpiar 
+                   h6#datosPerfilDenunciado.limpiar 
+                   h5 Denuncia realizada Por
+                   img#imgPerfilDenunciante.limpiar.imgPerfil
+                   h6#datosPersonaDenunciante.limpiar 
+                   h6#datosPerfilDenunciante.limpiar
+                   button.boton2(type="button",onclick="verComentarios()") ver comentarios 
+                   button.boton2(type="button",onclick="bajaImagen()") Dar Baja Imagen
+                   button.boton2(type="button",onclick="bajaPerfilDenunciado()") Dar Baja Denunciado 
+                   button.boton2(type="button",onclick="bajaPerfilDenunciante()") Dar Baja Denunciante 
+
+                   #divComentariosImagen    
             #divModificarProfesional.ocultar2.grid12-1-3  
                     button.botonCerrar(type="button",onclick='ocultarElemento(divModificarProfesional)')
                     table#medico

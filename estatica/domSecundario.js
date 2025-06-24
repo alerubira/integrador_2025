@@ -114,7 +114,7 @@ slctCrudProfesion.addEventListener('change',async function() {
                  if(aux.success){
                     denuncias=aux.retorno;
                     if(denuncias.length>0){
-                         console.log(denuncias)
+                         llenarTablaDenuncias(denuncias)
                     }
                  }
               break;     

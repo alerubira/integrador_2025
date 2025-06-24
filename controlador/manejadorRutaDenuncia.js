@@ -7,7 +7,8 @@ import { existeBd } from "../modelo/conexxionBD.js";
 export async function traerMotivosDenuncia(req,res){
     try {
         let aux;
-        aux=await existeBd(req.body.idPerfil,'perfil','id_perfil');
+        if(req.body.idPerfil){
+            aux=await existeBd(req.body.idPerfil,'perfil','id_perfil');
         if(aux instanceof  Error){
             console.log(`Error al traer loa motivos de denuncia: ${aux.message}`);
             return retornarError(res)
@@ -15,6 +16,19 @@ export async function traerMotivosDenuncia(req,res){
         if(!aux){
             return retornarError400(res);
         }
+        }else if(req.body.idProfesional){
+                aux=await existeBd(req.body.idProfesional,'profesional','id_profesional');
+        if(aux instanceof  Error){
+            console.log(`Error al traer loa motivos de denuncia: ${aux.message}`);
+            return retornarError(res)
+        }
+        if(!aux){
+            return retornarError400(res);
+        }
+        }else{
+            return retornarError400(res);
+        }
+       
         aux=await MotivoDenuncia.consulta();
         if(aux instanceof Error){
             console.log(`Error al traer loa motivos de denuncia: ${aux.message}`);

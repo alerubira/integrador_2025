@@ -34,5 +34,6 @@ rutaImagen.post('/traerImagenesEtiqutadasPersonal',manejadorDeRutasLogin.verific
 rutaImagen.post('/traerImagenesParaSeguidores',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.traerImagenesParaSeguidores);
 rutaImagen.post('/traerComentariosPorIdImagen',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.traerComentariosPorIdImagen);
 rutaImagen.post('/buscarContestadosPorComentario',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarContestadosPorComentario);
+rutaImagen.post('/buscarImagenPorId',manejadorDeRutasLogin.verificarToken,manejadorRuraImagen.buscarImagenPorId);
 
 export{rutaImagen}

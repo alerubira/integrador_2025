@@ -102,61 +102,10 @@ async function capturarImagen(imagenCapturada){
 let divComentariosImagen=document.getElementById('divComentariosImagen');
 
 async function verComentarios(){
-  eliminarHijos(divComentariosImagen);
-  
-  let idImagen={
+let idImagen={
        idImagen:imgSeleccionada.id_imagen
   }
-  aux= await fechProtegidoPost('/traerComentariosPorIdImagen',idImagen)
-  
-  if(aux.success){
-    let comentarios=aux.retorno;
-        if(comentarios.length<1){
-          let h6=document.createElement('h6');
-          h6.textContent="Esta imagen no contiene comentarios";
-          divComentariosImagen.appendChild(h6)
-        }else{
-               for(let com of comentarios){
-                  let idP={
-                      id:com.id_perfil_comentador
-                      }
-                   let perf=await fechProtegidoPost('/buscarPerfilPorid',idP);
-                    if (perf.success){
-                                  let perfi=perf.retorno[0];
-                                  
-                                  let imgP=document.createElement('img');
-                                  imgP.className="imgPerfil";
-                                  if(!perfi.img_perfil){
-                                         imgP.src="/imagenesPerfil/fotoPerfil.svg"
-                                  }else{
-                                         imgP.src=perfi.img_perfil;
-                                  }
-                                  let h66=document.createElement('h6');
-                                  h66.appendChild(imgP);
-                                  h66.append(`${perfi.nombre_persona} ${perfi.apellido_persona}Comento:${com.texto_comentario}`);
-                                  divComentariosImagen.appendChild(h66);
-                                  
-                                  let idC={
-                                    idC:com.id_comentario
-                                  }
-                                  
-                                  let cC=await fechProtegidoPost('/buscarContestadosPorComentario',idC);
-                                  if(cC.success){
-                                    
-                                    if(cC.retorno.length>0){
-                                      for(let cc of cC.retorno){
-                                           let h6C=document.createElement('h6');
-                                           h6C.className="h6cc";
-                                           h6C.textContent=`Respuesta:${cc.texto_comentario_contestado}`
-                                           divComentariosImagen.appendChild(h6C);
-                                      }
-                                      
-
-                                  }
-                                  }
-        }
-  }
-  
-        }}}
+  aux=await traerComentarios(idImagen)
+}  
 
   
