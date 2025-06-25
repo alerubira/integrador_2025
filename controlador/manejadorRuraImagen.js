@@ -360,8 +360,8 @@ try {
         console.log(`Error al buscar los comentarios de la imagen:${aux}`)
         return retornarError(res)
     }
-
-    return retornarExito(res,"",aux)
+    
+     return retornarExito(res,"",aux)
 } catch (error) {
     console.log(`Error al traer comentarios por id imgen:${error}`);
     return retornarError(res)
@@ -407,7 +407,19 @@ export async function buscarImagenPorId(req,res){
             console.log(`Error al buscar la imagen por id:${aux}`);
             return retornarError(res)
         }
-        return retornarExito(res,"",aux[0])
+        let img=aux.map(imagen => {
+            return new Imagen(
+                imagen.id_imagen,
+                imagen.url_imagen,
+                imagen.fecha_creacion_imagen,
+                imagen.titulo_imagen,
+                imagen.caption_imagen,
+                imagen.id_visibilidad,
+                imagen.titulo_visibilidad,
+                imagen.activo_imagen
+            );
+        });
+        return retornarExito(res,"",img[0])
     } catch (error) {
         console.log(`Error al buscar la imagen por id:${error}`);
         return retornarError(res)

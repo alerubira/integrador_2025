@@ -55,6 +55,8 @@ let imgPerfilDenunciante=document.getElementById('imgPerfilDenunciante');
 let datosPersonaDenunciante=document.getElementById('datosPersonaDenunciante');
 let datosPerfilDenunciante=document.getElementById('datosPerfilDenunciante');
 let motivoDenunciaI=document.getElementById('motivoDenunciaI');
+let contactoPerfilDenunciado=document.getElementById('contactoPerfilDenunciado');
+let contactoPerfilDenunciante=document.getElementById('contactoPerfilDenunciante');
 async function seleccionarDenuncia(event){
      eliminarHijos(cuerpoD); 
      eliminarHijos(divComentariosImagen)
@@ -73,38 +75,36 @@ async function seleccionarDenuncia(event){
      denuncia={};
       // Recorrer las celdas y obtener los valores
       denuncia=await denuncias.find(den=>den.idDenuncia===parseInt(celdas[0].textContent));
-      console.log(denuncia);
       aux=await fechProtegidoPost('/buscarImagenPorId', {idImagen: denuncia.idImagenDenunciada});
      if(aux.success){
         imagenDenunciada=aux.retorno;
-        console.log(imagenDenunciada)
-        imagenDenunciadaI.src=imagenDenunciada.url_imagen;
-        nombreImagenDenunciada.textContent=`Titulo:${imagenDenunciada.titulo_imagen}`;
-        captionImagenDenunciada.textContent=`Caption:${imagenDenunciada.caption_imagen}`;
+        imagenDenunciadaI.src=imagenDenunciada.urlImagen;
+        nombreImagenDenunciada.textContent=`Titulo:${imagenDenunciada.tituloImagen}`;
+        captionImagenDenunciada.textContent=`Caption:${imagenDenunciada.captionImagen}`;
          }
      aux=await fechProtegidoPost('/buscarPerfilPorid', {id: denuncia.idPerfilDenunciado});
      if(aux.success){
         perfilDenunciado=aux.retorno[0];
-        console.log(perfilDenunciado);
         if(!perfilDenunciado.img_perfil){
             imgPerfilDenunciado.src='/Iconos/usuario.svg'
         }else{
             imgPerfilDenunciado.src=perfilDenunciado.img_perfil; 
         }
         datosPersonaDenunciada.textContent=`Nombre: ${perfilDenunciado.nombre_persona} Apellido :${perfilDenunciado.apellido_persona}`;
-
-       
+        datosPerfilDenunciado.textContent=`Nombre del perfil:${perfilDenunciado.nombre_perfil} Antecedntes:${perfilDenunciado.antecedentes_perfil} Intereses:${perfilDenunciado.intereses_perfil}`
+        contactoPerfilDenunciado.textContent=`Contacto:${perfilDenunciado.e_mail_perfil}`
         }
     aux=await fechProtegidoPost('/buscarPerfilPorid', {id: denuncia.idPerfilDenunciante});
      if(aux.success){
         perfilDenunciante=aux.retorno[0];
-        console.log(perfilDenunciante);
-        if(!perfilDenunciado.img_perfil){
-            imgPerfilDenunciado.src='/Iconos/usuario.svg'
+        if(!perfilDenunciante.img_perfil){
+            imgPerfilDenunciante.src='/Iconos/usuario.svg'
         }else{
             imgPerfilDenunciante.src=perfilDenunciante.img_perfil;
         }
-
+       datosPersonaDenunciante.textContent=`Nombre: ${perfilDenunciante.nombre_persona} Apellido :${perfilDenunciante.apellido_persona}`;
+        datosPerfilDenunciante.textContent=`Nombre del perfil:${perfilDenunciante.nombre_perfil} Antecedntes:${perfilDenunciante.antecedentes_perfil} Intereses:${perfilDenunciante.intereses_perfil}`
+       contactoPerfilDenunciante.textContent=`Contacto:${perfilDenunciante.e_mail_perfil}`
         
      }
     }    
@@ -116,11 +116,36 @@ let idImagen={
 }  
 async function bajaImagen(){
 
+       aux=await llenarDivCorroborar('Imagen Denunciada');
+       if(aux){
+         console.log(imagenDenunciada)
+       }
 }   
 async function bajaPerfilDenunciado(){
-
+    let idPerfil={
+        idPerfil:perfilDenunciado.id_perfil
+    }
+    aux=await llenarDivCorroborar('Perfil Denunciado');
+    if(aux){
+    console.log(idPerfil)
+    }
 }  
 async function bajaPerfilDenunciante() {
-    
+    let idPerfil = {
+        idPerfil: perfilDenunciante.id_perfil
+    }
+    aux = await llenarDivCorroborar('Perfil Denunciante');
+    if (aux) {
+    console.log(idPerfil)
+    }
 }
-
+async function bajaDenuncia(){
+    let idDenuncia={
+        idDenuncia:denuncia.idDenuncia
+    }
+    aux=await llenarDivCorroborar('Denuncia');
+    if(aux){
+        console.log(idDenuncia)
+    }
+}
+  

@@ -339,6 +339,30 @@ async function traerComentarios(idImagen){
   }
   
         }}}
-
+let divCorroborar=document.getElementById('divCorroborar');        
+function llenarDivCorroborar(objetoBajar){
+  eliminarHijos(divCorroborar);
+  return new Promise((resolve) => {
+      let titulo=document.createElement('h5');
+      titulo.textContent=`Esta seguro que desea dar de baja:${objetoBajar}`
+      divCorroborar.appendChild(titulo);
+      let btnSi=document.createElement('button');
+      btnSi.textContent="si";
+      btnSi.className='boton';
+      btnSi.addEventListener('click',function(){
+            eliminarHijos(divCorroborar);
+            resolve(true);
+          });
+      let btnNo=document.createElement('button');
+      btnNo.textContent="no"; 
+      btnNo.className='boton';
+      btnNo.addEventListener('click',function(){
+            eliminarHijos(divCorroborar);
+            resolve(false) ;
+          })
+      divCorroborar.appendChild(btnSi);
+      divCorroborar.appendChild(btnNo);
+      })
+}
 //export{Focultar};
 

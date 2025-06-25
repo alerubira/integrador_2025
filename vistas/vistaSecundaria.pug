@@ -11,6 +11,7 @@ block content
             #divProfesionalAcceso.grid12-1-1 
                                 h3 PROFESIONAL
                                         label=`${profesional.nombrePersona}  ${profesional.apellidoPersona}` 
+            
             select.grid5-4-2(id="slctCrudProfesion", name="slctCrudProfesion")
                         option(value="") Elija una opcion
                         option(value="crearProfesion") Inscribir Profesion
@@ -129,16 +130,18 @@ block content
                    h6#captionImagenDenunciada.limpiar 
                    img#imgPerfilDenunciado.limpiar.imgPerfil
                    h6#datosPersonaDenunciada.limpiar 
-                   h6#datosPerfilDenunciado.limpiar 
+                   h6#datosPerfilDenunciado.limpiar
+                   h6#contactoPerfilDenunciado.limpiar 
                    h5 Denuncia realizada Por
                    img#imgPerfilDenunciante.limpiar.imgPerfil
                    h6#datosPersonaDenunciante.limpiar 
                    h6#datosPerfilDenunciante.limpiar
+                   h6#contactoPerfilDenunciante
                    button.boton2(type="button",onclick="verComentarios()") ver comentarios 
                    button.boton2(type="button",onclick="bajaImagen()") Dar Baja Imagen
                    button.boton2(type="button",onclick="bajaPerfilDenunciado()") Dar Baja Denunciado 
                    button.boton2(type="button",onclick="bajaPerfilDenunciante()") Dar Baja Denunciante 
-
+                   button.boton2(type="button",onclick="bajaDenuncia()") Dar de Baja Denuncia
                    #divComentariosImagen    
             #divModificarProfesional.ocultar2.grid12-1-3  
                     button.botonCerrar(type="button",onclick='ocultarElemento(divModificarProfesional)')

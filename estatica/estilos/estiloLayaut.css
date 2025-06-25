@@ -65,7 +65,19 @@ footer{
     color: black; /* Color del texto */
     margin: 1rem;
   }
-
+#divCorroborar{
+  position: fixed; /* Para que se sobreponga a otros elementos */
+    top: 12%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrar horizontal y verticalmente */
+    width: 60vw; /* 60% del ancho de la ventana */
+    background-color: #998a91; /* Fondo rosa */
+    /*border: 5px solid red; /* Bordes rojos */
+    /*padding: 20px;*/
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto de sobreposición */
+    z-index: 9999; /* Para asegurar que esté al frente */
+}
 
 /* Estilos para la alerta */
 #divAlerta {
@@ -115,7 +127,7 @@ footer{
     /*box-shadow: 0 0 0 10px rgb(0, 255, 191);*/ 
 } 
 .imgPerfil{
-    width: 10%;
+    width: 8%;
     height: auto; /* Mantiene la proporción de la imagen */
     border-radius: 50%; /* Hace que la imagen sea circular */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto de profundidad */
