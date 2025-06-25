@@ -361,12 +361,41 @@ try {
         console.log( `Error al buscar el perfil por el id:${aux}`)
         return retornarError(res)
       }
-      retornarExito(res,"",aux)
+      let prf=aux.map(p => new Perfil(
+        p.id_perfil, p.id_persona, p.intereses_perfil, p.antecedentes_perfil,
+        p.e_mail_perfil, p.img_perfil, p.activo_perfil, p.nombre_perfil,
+        p.dni_persona, p.nombre_persona, p.apellido_persona, p.activo_persona
+    ));
+      retornarExito(res,"",prf[0])
 
 
 } catch (error) {
     console.log(`Error al buscar Perfil:${error}`)
     return retornarError(res)
+}
+}
+export async function modificarActivoPerfil(req,res){
+try {
+    let aux;
+    aux=await existeBd(req.body.idPerfil,'perfil','id_perfil')
+    if(aux instanceof Error){
+        console.log(`Error al buscar el perfil ${aux}`)
+        return retornarError(res)
+      }
+      if(!aux){
+        return retornarError400(res)
+      }
+      
+      aux=await Perfil.modificarActivoPerfil(req.body);
+      if(aux instanceof Error){
+        console.log(`Error al modificar el activo del perfil:${aux}`);
+        return retornarError(res);      
+      }
+      retornarExito(res,`El activo del perfil fue modificado con exito`,aux);
+} catch (error) {
+    console.log(`Error al modificar el activo del perfil:${error}`);
+    return retornarError(res);
+    
 }
 }
 export default{
@@ -378,7 +407,8 @@ export default{
     modificarAntecedentesPerfil,
     buscarPerfilPorApellido,
     buscarPerfilSeguidoresPorApellido,
-    buscarPerfilPorid
+    buscarPerfilPorid,
+    modificarActivoPerfil
 }
 
 //export{manejadorRutaPerfil}

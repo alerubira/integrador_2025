@@ -78,15 +78,11 @@ class PerfilData extends PersonaData {
         const query='SELECT * FROM perfil JOIN persona ON perfil.id_persona=persona.id_persona WHERE id_perfil=?;'; 
         return await consulta1(query, id);
     }
-//revisar para abajo
-  /*  static async consultaProfesional() {
-        const query = 'CALL obtenerProfesionales()';
-        return await consulta1(query);
-    }*/
+
    
     static async modificarActivoPerfil(perf) {
-        const query = 'UPDATE `perfil` SET `activo_perfil` = ? WHERE `id_profesional` = ?';
-        return await consulta1(query, perf.activoProfesional, perf.idProfesional);
+        const query = 'UPDATE `perfil` SET `activo_perfil` = ? WHERE `id_perfil` = ?';
+        return await consulta1(query, perf.activoPerfil, perf.idPerfil);
     }
     static async modificarActivoPorId(id) {
         const query = 'UPDATE `perfil` SET `activo_perfil` = ? WHERE `id_perfil` = ?';

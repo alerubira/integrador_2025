@@ -40,6 +40,7 @@ rutaPerfil.post('/modificarAntecedentesPerfil', manejadorDeRutasLogin.verificarT
 rutaPerfil.post('/buscarPerfilPorApellido',manejadorDeRutasLogin.verificarToken,manejadorRutaPerfil.buscarPerfilPorApellido);
 rutaPerfil.post('/buscarPerfilSeguidoresPorApellido',manejadorDeRutasLogin.verificarToken,manejadorRutaPerfil.buscarPerfilSeguidoresPorApellido);
 rutaPerfil.post('/buscarPerfilPorid',manejadorDeRutasLogin.verificarToken,manejadorRutaPerfil.buscarPerfilPorid)
+rutaPerfil.post('/modificarActivoPerfil', manejadorDeRutasLogin.verificarToken, manejadorRutaPerfil.modificarActivoPerfil) /*(req, res) => {
 // Ruta para subir imagen
 /*rutaPerfil.post('/subirImagenPerfil', upload.single('imagen'), async (req, res) => {
   try {

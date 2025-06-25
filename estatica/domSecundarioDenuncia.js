@@ -84,27 +84,28 @@ async function seleccionarDenuncia(event){
          }
      aux=await fechProtegidoPost('/buscarPerfilPorid', {id: denuncia.idPerfilDenunciado});
      if(aux.success){
-        perfilDenunciado=aux.retorno[0];
-        if(!perfilDenunciado.img_perfil){
+        perfilDenunciado=aux.retorno;
+        console.log(perfilDenunciado);
+        if(!perfilDenunciado.imgPerfil){
             imgPerfilDenunciado.src='/Iconos/usuario.svg'
         }else{
-            imgPerfilDenunciado.src=perfilDenunciado.img_perfil; 
+            imgPerfilDenunciado.src=perfilDenunciado.imgPerfil; 
         }
-        datosPersonaDenunciada.textContent=`Nombre: ${perfilDenunciado.nombre_persona} Apellido :${perfilDenunciado.apellido_persona}`;
-        datosPerfilDenunciado.textContent=`Nombre del perfil:${perfilDenunciado.nombre_perfil} Antecedntes:${perfilDenunciado.antecedentes_perfil} Intereses:${perfilDenunciado.intereses_perfil}`
-        contactoPerfilDenunciado.textContent=`Contacto:${perfilDenunciado.e_mail_perfil}`
+        datosPersonaDenunciada.textContent=`Nombre: ${perfilDenunciado.nombrePersona} Apellido :${perfilDenunciado.apellidoPersona}`;
+        datosPerfilDenunciado.textContent=`Nombre del perfil:${perfilDenunciado.nombrePerfil} Antecedntes:${perfilDenunciado.antecedentes} Intereses:${perfilDenunciado.intereses}`
+        contactoPerfilDenunciado.textContent=`Contacto:${perfilDenunciado.eMail}`
         }
     aux=await fechProtegidoPost('/buscarPerfilPorid', {id: denuncia.idPerfilDenunciante});
      if(aux.success){
-        perfilDenunciante=aux.retorno[0];
-        if(!perfilDenunciante.img_perfil){
+        perfilDenunciante=aux.retorno;
+        if(!perfilDenunciante.imgPerfil){
             imgPerfilDenunciante.src='/Iconos/usuario.svg'
         }else{
-            imgPerfilDenunciante.src=perfilDenunciante.img_perfil;
+            imgPerfilDenunciante.src=perfilDenunciante.imgPerfil;
         }
-       datosPersonaDenunciante.textContent=`Nombre: ${perfilDenunciante.nombre_persona} Apellido :${perfilDenunciante.apellido_persona}`;
-        datosPerfilDenunciante.textContent=`Nombre del perfil:${perfilDenunciante.nombre_perfil} Antecedntes:${perfilDenunciante.antecedentes_perfil} Intereses:${perfilDenunciante.intereses_perfil}`
-       contactoPerfilDenunciante.textContent=`Contacto:${perfilDenunciante.e_mail_perfil}`
+       datosPersonaDenunciante.textContent=`Nombre: ${perfilDenunciante.nombrePersona} Apellido :${perfilDenunciante.apellidoPersona}`;
+        datosPerfilDenunciante.textContent=`Nombre del perfil:${perfilDenunciante.nombrePerfil} Antecedntes:${perfilDenunciante.antecedentes} Intereses:${perfilDenunciante.intereses}`
+       contactoPerfilDenunciante.textContent=`Contacto:${perfilDenunciante.eMail}`
         
      }
     }    
@@ -118,16 +119,15 @@ async function bajaImagen(){
 
        aux=await llenarDivCorroborar('Imagen Denunciada');
        if(aux){
-         console.log(imagenDenunciada)
+         aux=await fechProtegidoPost('/modificarActiviImagen',imagenDenunciada);
+
        }
 }   
 async function bajaPerfilDenunciado(){
-    let idPerfil={
-        idPerfil:perfilDenunciado.id_perfil
-    }
+   
     aux=await llenarDivCorroborar('Perfil Denunciado');
     if(aux){
-    console.log(idPerfil)
+           aux=await fechProtegidoPost('/modificarActivoPerfil',perfilDenunciado) 
     }
 }  
 async function bajaPerfilDenunciante() {

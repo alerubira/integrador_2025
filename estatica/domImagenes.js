@@ -189,11 +189,16 @@ async function modificarVisibilidadImagen(){
     }
 }
 async function modificarActivoImagen(){
-   aux=await fechProtegidoPost('/modificarActiviImagen',imagenSeleccionada)
-if(aux.success){
-   limpiarCampos(limpiar);
-       fOcultar2();
-}else{alerta(pagina,"Algo salio mal al activar inactivar la imagen")}
+    aux=await llenarDivCorroborar('Alta o Baja de Imagen');
+       if(aux){
+               aux=await fechProtegidoPost('/modificarActiviImagen',imagenSeleccionada)
+               if(aux.success){
+                  limpiarCampos(limpiar);
+                     fOcultar2();
+               }else{alerta(pagina,"Algo salio mal al activar inactivar la imagen")}
+         
+       }
+
 }
 
 

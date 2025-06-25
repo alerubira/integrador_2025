@@ -344,7 +344,7 @@ function llenarDivCorroborar(objetoBajar){
   eliminarHijos(divCorroborar);
   return new Promise((resolve) => {
       let titulo=document.createElement('h5');
-      titulo.textContent=`Esta seguro que desea dar de baja:${objetoBajar}`
+      titulo.textContent=`Esta seguro que desea realizar la accion:${objetoBajar}`
       divCorroborar.appendChild(titulo);
       let btnSi=document.createElement('button');
       btnSi.textContent="si";

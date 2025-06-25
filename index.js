@@ -101,6 +101,7 @@ app.use('/modificarAntecedentesPerfil',rutaPerfil);
 app.use('/buscarPerfilPorApellido',rutaPerfil);
 app.use('/buscarPerfilSeguidoresPorApellido',rutaPerfil);
 app.use('/buscarPerfilPorid',rutaPerfil);
+app.use('/modificarActivoPerfil',rutaPerfil);
 app.use('/', rutaCarpetas);
 app.use('/crearAlbum',rutaCarpetas);
 app.use('/buscarAlbumesPersonalesPorId',rutaCarpetas);

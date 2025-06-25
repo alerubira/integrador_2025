@@ -22,9 +22,13 @@ class Perfil extends Persona{
     static async consultaPorId(id){
         return await PerfilData.consultaPerfilPorId(id);
     }
-     static async modificarActivoPerfil(){
-        this.activoPerfil = !this.activoPerfil;
-        return await PerfilData.modificarActivoProfesional(this)
+     static async modificarActivoPerfil(perf){
+        if(perf.activoPerfil===1){
+            perf.activoPerfil=0;
+        }else{
+            perf.activoPerfil=1;
+        }
+        return await PerfilData.modificarActivoPerfil(perf)
     }
     static async modificarActivoPorId(id){
         return await PerfilData.modificarActivoPorId(id);
