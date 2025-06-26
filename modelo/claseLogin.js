@@ -3,10 +3,11 @@ import {  hash as _hash, compare } from 'bcrypt';
 import { LoginData } from './loginData.js';
 
 class Login {
-    constructor(idLogin,idProfesionalPerfil,usuario, clave,tipoAutorizacion,instancia,activoLogin,claveProvisoria) {
+    constructor(idLogin,idProfesional,idPerfil,usuario, clave,tipoAutorizacion,instancia,activoLogin,claveProvisoria) {
        
         this.idLogin=idLogin;
-        this.idProfesionalPerfil=idProfesionalPerfil;
+        this.idProfesional=idProfesional;
+        this.idPerfil=idPerfil;
         this.usuario=usuario;
         this.clave=clave;
         this.tipoAutorizacion=tipoAutorizacion;

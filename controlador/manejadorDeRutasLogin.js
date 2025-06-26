@@ -237,6 +237,7 @@ export async function verificarLogin(req, res) {
         const object = req.body;
         
         let aux = await verificarYup(object, 'login');
+
         if (aux.errors) {
             console.log(`Error al verificar la tipologia del usuario:${aux.errors}`)
             return retornarError400(res );
@@ -244,7 +245,8 @@ export async function verificarLogin(req, res) {
         let l = await Login.consultaPorUsuario(object.usuario);
         if (l instanceof Error) return retornarError(res, `Error al buscar el Login:${l}`);
         if (l.length < 1) return retornarError400(res);
-        let login = new Login(l[0].id_login, l[0].id_profesional_perfil, l[0].usuario_login, l[0].clave_login, l[0].tipo_autorizacion, l[0].instancia_login, l[0].activo_login);
+        let login = new Login(l[0].id_login, l[0].id_profesional,l[0].id_perfil, l[0].usuario_login, l[0].clave_login, l[0].tipo_autorizacion, l[0].instancia_login, l[0].activo_login);
+       
         aux = await Login.verificarHash(object.clave, l[0].clave_login);
         if (!l[0].activo_login) return retornarError400(res);
         if (!aux) return retornarError400(res, "Clave o Usuario Incorrecta");
@@ -260,7 +262,7 @@ export async function verificarLogin(req, res) {
             } 
         }
         if (login.tipoAutorizacion === 5 && login.instancia === 2) {
-            aux = await Perfil.modificarActivoPorId(login.idProfesionalPerfil);
+            aux = await Perfil.modificarActivoPorId(login.idPerfil);
             if (aux instanceof Error){
               console.log( `Error al dar de alta  el Login:${aux}`)
               return retornarError(res);
@@ -278,20 +280,32 @@ export async function verificarLogin(req, res) {
                 codigoPersonalizado: 801
             });
         }
-        if ([3, 2, 5].includes(login.tipoAutorizacion)) {
+        if ([3, 2].includes(login.tipoAutorizacion)) {
             const payload = {
                 username: login.usuario,
                 tipoAutorizacion: login.tipoAutorizacion,
-                idSolicitante: login.idProfesionalPerfil
+                idSolicitante: login.idProfesional
             };
-            
             const token = jwt.sign(payload, jwtSecret, { expiresIn: '5h' });
             return res.json({
                 token: token,
                 tipoAutorizacion: login.tipoAutorizacion,
-                idSolicitante: login.idProfesionalPerfil
+                idSolicitante: login.idProfesional
             });
         }
+         if(login.tipoAutorizacion===5){
+          const payload = {
+                username: login.usuario,
+                tipoAutorizacion: login.tipoAutorizacion,
+                idSolicitante: login.idPerfil
+            };
+            const token = jwt.sign(payload, jwtSecret, { expiresIn: '5h' });
+            return res.json({
+                token: token,
+                tipoAutorizacion: login.tipoAutorizacion,
+                idSolicitante: login.idPerfil
+            });
+        } 
     } catch (error) {
       console.log( `Error en verificarLogin: ${error}`);
         return retornarError(res);
@@ -320,7 +334,7 @@ export async function modificarLogin(req, res) {
         let log = { usuario: object.usuario, clave: object.claveN };
         aux = await verificarYup(log, 'login');
         if (aux.errors) return retornarError400(res);
-        login = new Login(login[0].id_login, login[0].id_profesional_perfil, login[0].usuario_login, object.claveN, login[0].tipo_autorizacion, login[0].instancia_login, login[0].activo_login);
+        login = new Login(login[0].id_login, login[0].id_profesional,login[0].id_perfil, login[0].usuario_login, object.claveN, login[0].tipo_autorizacion, login[0].instancia_login, login[0].activo_login);
         aux = await login.modificarClave();
         if (aux instanceof Error){
           console.log(`Error al modificar el Login ${aux}`);
@@ -336,7 +350,7 @@ export async function modificarLogin(req, res) {
 export async function recuperarLogin(req, res) {
     try {
         const object = req.body;
-        let login = new Login(null, null, object.usuario, object.clave, null, null, null, object.claveProvisoria);
+        let login = new Login(null, null,null, object.usuario, object.clave, null, null, null, object.claveProvisoria);
         let aux = await verificarYup(login, 'login');
         if (aux.errors){
           console.log(`Error en la tipologia del Login:${aux.errors}`);
@@ -357,7 +371,7 @@ export async function recuperarLogin(req, res) {
         if (!aux){
             return retornarError400(res, "Clave Provisoria Incorrecta, verificar en su email");
         } 
-        login = new Login(lo[0].id_login, lo[0].id_profesional_perfil, lo[0].usuario_login, object.clave, lo[0].tipo_autorizacion, lo[0].instancia_login, lo[0].activo_login, lo[0].clave_login_provisoria);
+        login = new Login(lo[0].id_login, lo[0].id_profesional,lo[0].id_perfil, lo[0].usuario_login, object.clave, lo[0].tipo_autorizacion, lo[0].instancia_login, lo[0].activo_login, lo[0].clave_login_provisoria);
         aux = await login.borrarClaveProvisoria();
         if (aux instanceof Error){
           console.log(`Error al borrar la clave provisoria:${aux}`);
@@ -385,7 +399,7 @@ export async function enviarMail(req, res) {
         if (aux.length < 1){
             return retornarError400(res);
         } 
-        let lP = new Login(aux[0].id_login, aux[0].id_profesional_perfil, aux[0].usuario_login, n, aux[0].tipo_autorizacion, aux[0].instancia_login, aux[0].activo_login, n);
+        let lP = new Login(aux[0].id_login, aux[0].id_profesional,aux[0].id_perfil, aux[0].usuario_login, n, aux[0].tipo_autorizacion, aux[0].instancia_login, aux[0].activo_login, n);
         if (lP.tipoAutorizacion === 2 || lP.tipoAutorizacion == 3) {
             aux = await Profesional.consultaPorId(lP.idProfesional);
             if (aux instanceof Error){
@@ -398,7 +412,7 @@ export async function enviarMail(req, res) {
             eMail = aux[0][0].e_mail;
         }
         if (lP.tipoAutorizacion === 5) {
-            aux = await Perfil.consultaPorId(lP.idProfesionalPerfil);
+            aux = await Perfil.consultaPorId(lP.idPerfil);
             if (aux instanceof Error){
               console.log( `Error al buscar el Profesional:${aux}`);
               return retornarError(res);

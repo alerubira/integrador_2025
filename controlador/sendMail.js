@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 // Función para enviar correo electrónico
 function enviarCorreo(destinatario, asunto, mensaje) {
     const mailOptions = {
-        from:  '"Login Pagina de Salud" <arubira60@gmail.com>', // Reemplaza con tu nombre y correo electrónico
+        from:  '"Login Pagina de ArtesanosPuntoCom" <arubira60@gmail.com>', // Reemplaza con tu nombre y correo electrónico
         to: destinatario,
         subject: asunto,
         text: mensaje

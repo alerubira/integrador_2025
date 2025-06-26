@@ -29,24 +29,35 @@ class PerfilData extends PersonaData {
                 [id_persona, null,null, false,perf.eMailPerfil,null,perf.nombrePerfil]
             );
     
-            const id_profesional_perfil = perfilResult.insertId;
-            let log=new Login(0,id_profesional_perfil,login.usuario,login.clave,5,1,false,null);
+            const id_perfil = perfilResult.insertId;
+           // let log=new Login(0,null,id_perfil,login.usuario,login.clave,5,1,false,null);
             
            //hacer el alta del login con el id_perfil
              // Hashea la clave antes de guardar
            const claveHasheada = await Login.crearHash(login.clave);
+           console.log({
+  id_profesional: null,
+  id_perfil,
+  usuario: login.usuario,
+  clave: claveHasheada,
+  tipo_autorizacion: 5,
+  instancia_login: 1,
+  activo_login: true,
+  clave_login_provisoria: null
+});
            const [loginResult] = await connection.execute(
-             'INSERT INTO `login`(`id_profesional_perfil`, `usuario_login`, `clave_login`, `tipo_autorizacion`, `instancia_login`, `activo_login`, `clave_login_provisoria`) VALUES (?,?,?,?,?,?,?)',
-            [
-                id_profesional_perfil,
-                login.usuario,
-                claveHasheada,
-                5, // tipo_autorizacion
-                1, // instancia_login
-                true, // activo_login
-                null // clave_login_provisoria
-            ]
-        );
+                    'INSERT INTO `login`(`id_profesional`,`id_perfil`, `usuario_login`, `clave_login`, `tipo_autorizacion`, `instancia_login`, `activo_login`, `clave_login_provisoria`) VALUES (?,?,?,?,?,?,?,?)',
+                    [
+                        null, // id_profesional
+                        id_perfil,
+                        login.usuario,
+                        claveHasheada,
+                        5,
+                        1,
+                        true,
+                        null // clave_login_provisoria
+                    ]
+                    );
             
             await connection.commit();
             return { success: true };
