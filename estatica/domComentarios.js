@@ -33,17 +33,17 @@ async function cargarNotificacionComentario(notificacion,divNotificacion){
                     let perf=await fechProtegidoPost('/buscarPerfilPorid',id);
                     if (perf.success){
                         perfilMomentaneo="";
-                    perfilMomentaneo= perf.retorno[0];
+                    perfilMomentaneo= perf.retorno;
                     //console.log(perfilMomentaneo)
                         let imgP=document.createElement('img');
                         imgP.classList="imgPerfil";
-                        if (!perfilMomentaneo.img_perfil) {
+                        if (!perfilMomentaneo.imgPerfil) {
                             imgP.src = "imagenesPerfil/fotoPerfil.svg";
-                        }else{imgP.src=perfilMomentaneo.img_perfil}
+                        }else{imgP.src=perfilMomentaneo.imgPerfil}
                         if(!notificacion.leida_notificacion){divNotificacion.className="divNotNoLeida"}
                         divNotificacion.appendChild(imgP);
                         let h6N=document.createElement('h6');
-                        h6N.textContent=`En la Fecha:${formatearFecha(notificacion.fecha_notificacion)},${perfilMomentaneo.nombre_persona} ${perfilMomentaneo.apellido_persona} a comentado una foto tuya`;
+                        h6N.textContent=`En la Fecha:${formatearFecha(notificacion.fecha_notificacion)},${perfilMomentaneo.nombrePersona} ${perfilMomentaneo.apellidoPersona} a comentado una foto tuya`;
                         divNotificacion.appendChild(h6N);
                         divNotificacion.addEventListener('click', function() {
                             
@@ -61,17 +61,17 @@ async function cargarNotificacionComentarioContestado(notificacion,divNotificaci
     let perf=await fechProtegidoPost('/buscarPerfilPorid',id);
     if (perf.success){
         perfilMomentaneo="";
-    perfilMomentaneo= perf.retorno[0];
+    perfilMomentaneo= perf.retorno;
     //console.log(perfilMomentaneo)
         let imgP=document.createElement('img');
         imgP.classList="imgPerfil";
-        if (!perfilMomentaneo.img_perfil) {
+        if (!perfilMomentaneo.imgPerfil) {
             imgP.src = "imagenesPerfil/fotoPerfil.svg";
-        }else{imgP.src=perfilMomentaneo.img_perfil}
+        }else{imgP.src=perfilMomentaneo.imgPerfil}
         if(!notificacion.leida_notificacion){divNotificacion.className="divNotNoLeida"}
         divNotificacion.appendChild(imgP);
         let h6N=document.createElement('h6');
-        h6N.textContent=`En la Fecha:${formatearFecha(notificacion.fecha_notificacion)},${perfilMomentaneo.nombre_persona} ${perfilMomentaneo.apellido_persona} a respondido aun comentario`;
+        h6N.textContent=`En la Fecha:${formatearFecha(notificacion.fecha_notificacion)},${perfilMomentaneo.nombrePersona} ${perfilMomentaneo.apellidoPersona} a respondido aun comentario`;
         divNotificacion.appendChild(h6N);
         divNotificacion.addEventListener('click', function() {
             capturarNotificacionSeleccionada(notificacion);
@@ -100,29 +100,29 @@ async function cargarNotificacionComentarioSeleccionado(){
                         let perf=await fechProtegidoPost('/buscarPerfilPorid',idP);
                         if (perf.success){
                             perfilMomentaneo="";
-                        perfilMomentaneo= perf.retorno[0];
+                        perfilMomentaneo= perf.retorno;
                         }
                  let id={id:notificacionSeleccionada.id_solicitante_notificacion}
                  aux=await fechProtegidoPost('/traerComentarioPorId',id);
                 if(aux.success){
                       comentarioCapturado=aux.retorno[0]
                    }
-                if (!perfilMomentaneo.img_perfil) {
+                if (!perfilMomentaneo.imgPerfil) {
                     imgNotificacionseleccionada.src = "imagenesPerfil/fotoPerfil.svg";
-                }else{imgNotificacionseleccionadaC.src=perfilMomentaneo.img_perfil}
-                datosPersonaC.textContent=`Nombre:${perfilMomentaneo.nombre_persona}-Apellido:${perfilMomentaneo.apellido_persona}`;
-                datosPerfilC.textContent=`Nombre del Perfil:${perfilMomentaneo.nombre_perfil}`;
+                }else{imgNotificacionseleccionadaC.src=perfilMomentaneo.imgPerfil}
+                datosPersonaC.textContent=`Nombre:${perfilMomentaneo.nombrePersona}-Apellido:${perfilMomentaneo.apellidoPersona}`;
+                datosPerfilC.textContent=`Nombre del Perfil:${perfilMomentaneo.nombrePerfil}`;
                 let inte;
-                if(!perfilMomentaneo.intereses_perfil){
+                if(!perfilMomentaneo.interesesPerfil){
                     inte="No Contiene";
                 }else{
-                    inte=perfilMomentaneo.intereses_perfil;
+                    inte=perfilMomentaneo.interesesPerfil;
                 }
                 interesesPerfilC.textContent=`Intereses:${inte}`;
-                if(!perfilMomentaneo.antecedentes_perfil){
+                if(!perfilMomentaneo.antecedentesPerfil){
                     inte="No Contiene";
                 }else{
-                    inte=perfilMomentaneo.antecedentes_perfil;
+                    inte=perfilMomentaneo.antecedentesPerfil;
                 }
                 antecedentesPerfilC.textContent=`Antecedentes:${inte}`; 
                 imgComentario.src=comentarioCapturado.url_imagen
@@ -143,7 +143,7 @@ async function cargarNotificacionComentarioContestadoSeleccionado(){
                       let perf=await fechProtegidoPost('/buscarPerfilPorid',idP);
                       if (perf.success){
                      perfilMomentaneo="";
-                    perfilMomentaneo= perf.retorno[0];
+                    perfilMomentaneo= perf.retorno;
                       }
                  let id={id:notificacionSeleccionada.id_solicitante_notificacion}
                  aux=await fechProtegidoPost('/traerComentarioContestadoPorId',id);
@@ -152,22 +152,22 @@ async function cargarNotificacionComentarioContestadoSeleccionado(){
                       comentarioContestadoCapturado=aux.retorno[0];
                       //console.log(comentarioContestadoCapturado)
                    }
-                if (!perfilMomentaneo.img_perfil) {
+                if (!perfilMomentaneo.imgPerfil) {
                     imgNotificacionseleccionada.src = "imagenesPerfil/fotoPerfil.svg";
-                }else{imgNotificacionseleccionadaC.src=perfilMomentaneo.img_perfil}
-                datosPersonaC.textContent=`Nombre:${perfilMomentaneo.nombre_persona}-Apellido:${perfilMomentaneo.apellido_persona}`;
-                datosPerfilC.textContent=`Nombre del Perfil:${perfilMomentaneo.nombre_perfil}`;
+                }else{imgNotificacionseleccionadaC.src=perfilMomentaneo.imgPerfil}
+                datosPersonaC.textContent=`Nombre:${perfilMomentaneo.nombrePersona}-Apellido:${perfilMomentaneo.apellidoPersona}`;
+                datosPerfilC.textContent=`Nombre del Perfil:${perfilMomentaneo.nombrePerfil}`;
                 let inte;
-                if(!perfilMomentaneo.intereses_perfil){
+                if(!perfilMomentaneo.interesesPerfil){
                     inte="No Contiene";
                 }else{
-                    inte=perfilMomentaneo.intereses_perfil;
+                    inte=perfilMomentaneo.interesesPerfil;
                 }
                 interesesPerfilC.textContent=`Intereses:${inte}`;
-                if(!perfilMomentaneo.antecedentes_perfil){
+                if(!perfilMomentaneo.antecedentesPerfil){
                     inte="No Contiene";
                 }else{
-                    inte=perfilMomentaneo.antecedentes_perfil;
+                    inte=perfilMomentaneo.antecedentesPerfil;
                 }
                 antecedentesPerfilC.textContent=`Antecedentes:${inte}`; 
                 imgComentario.src=comentarioContestadoCapturado.url_imagen
@@ -192,7 +192,7 @@ if(bandera){
             idComentario:comentarioCapturado.id_comentario,
             textoComentarioContestado:value,
             idRemitente:perfil.idPerfil,
-            idDestinatario:perfilMomentaneo.id_perfil
+            idDestinatario:perfilMomentaneo.idPerfil
         }
         aux=await fechProtegidoPost('/contestarComentario',comContestado)
         if(aux.success){

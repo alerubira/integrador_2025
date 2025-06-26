@@ -297,6 +297,15 @@ border: 1px solid black;
     border: 3px solid white;
     
   }
+  textarea {
+  width: 100%;
+  min-height: 2.5em;
+  resize: none; /* El usuario no podrá cambiar el tamaño manualmente */
+  box-sizing: border-box;
+  overflow-y: hidden; /* Oculta el scroll vertical mientras se expande */
+  font: inherit; /* Hereda la fuente del contenedor */
+  padding: 0.5em;
+}
   
   
 

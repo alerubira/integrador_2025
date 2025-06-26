@@ -6,8 +6,12 @@ static async alta(denuncia){
     return await consulta1(query,denuncia.idMotivoDenuncia,denuncia.idImagenDenunciada,denuncia.idPerfilDenunciante,denuncia.idPerfilDenunciado,1,)
 }
 static async consulta(){
-    query='SELECT * FROM `denuncia` WHERE 1';
+    query='SELECT * FROM `denuncia` WHERE 1  ORDER BY fecha_denuncia DESC;';
     return await consulta1(query);
+}
+static async modificarActivo(denuncia){
+    query='UPDATE `denuncia` SET `activo_denuncia`=? WHERE id_denuncia=?';
+    return await consulta1(query,denuncia.activoDenuncia,denuncia.idDenuncia);
 }
 
 }

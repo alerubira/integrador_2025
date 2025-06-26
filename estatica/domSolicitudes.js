@@ -33,17 +33,17 @@ async function cargarNotificacionSolicitud(notificacion,divNotificacion){
                     }
                     let perf=await fechProtegidoPost('/buscarPerfilPorid',id)
                     if (perf.success){
-                    perfilMomentaneo= perf.retorno[0];
+                    perfilMomentaneo= perf.retorno;
                     //console.log(perfilMomentaneo)
                         let imgP=document.createElement('img');
                         imgP.classList="imgPerfil";
-                        if (!perfilMomentaneo.img_perfil) {
+                        if (!perfilMomentaneo.imgPerfil) {
                             imgP.src = "imagenesPerfil/fotoPerfil.svg";
-                        }else{imgP.src=perfilMomentaneo.img_perfil}
+                        }else{imgP.src=perfilMomentaneo.imgPerfil}
                         if(!notificacion.leida_notificacion){divNotificacion.className="divNotNoLeida"}
                         divNotificacion.appendChild(imgP);
                         let h6N=document.createElement('h6');
-                        h6N.textContent=`En la Fecha:${formatearFecha(notificacion.fecha_notificacion)},${perfilMomentaneo.nombre_persona} ${perfilMomentaneo.apellido_persona} te ha enviado una solicitud de amistad`;
+                        h6N.textContent=`En la Fecha:${formatearFecha(notificacion.fecha_notificacion)},${perfilMomentaneo.nombrePersona} ${perfilMomentaneo.apellidoPersona} te ha enviado una solicitud de amistad`;
                         divNotificacion.appendChild(h6N);
                         divNotificacion.addEventListener('click', function() {
                             capturarNotificacionSeleccionada(notificacion,perfilMomentaneo);
@@ -58,17 +58,17 @@ async function cargarNotificacionSolicitudContestada(notificacion,divNotificacio
                     }
                     let perf=await fechProtegidoPost('/buscarPerfilPorid',id)
                     if (perf.success){
-                    perfilMomentaneo= perf.retorno[0];
+                    perfilMomentaneo= perf.retorno;
                     //console.log(perfilMomentaneo)
                         let imgP=document.createElement('img');
                         imgP.classList="imgPerfil";
-                        if (!perfilMomentaneo.img_perfil) {
+                        if (!perfilMomentaneo.imgPerfil) {
                             imgP.src = "imagenesPerfil/fotoPerfil.svg";
-                        }else{imgP.src=perfilMomentaneo.img_perfil}
+                        }else{imgP.src=perfilMomentaneo.imgPerfil}
                         if(!notificacion.leida_notificacion){divNotificacion.className="divNotNoLeida"}
                         divNotificacion.appendChild(imgP);
                         let h6N=document.createElement('h6');
-                        h6N.textContent=`En la Fecha:${formatearFecha(notificacion.fecha_notificacion)},${perfilMomentaneo.nombre_persona} ${perfilMomentaneo.apellido_persona} respondio tu solicitud de amistad`;
+                        h6N.textContent=`En la Fecha:${formatearFecha(notificacion.fecha_notificacion)},${perfilMomentaneo.nombrePersona} ${perfilMomentaneo.apellidoPersona} respondio tu solicitud de amistad`;
                         divNotificacion.appendChild(h6N);
                         divNotificacion.addEventListener('click', function() {
                             capturarNotificacionSeleccionada(notificacion,perfilMomentaneo);
@@ -147,24 +147,24 @@ async function cargarSolicitudAceptadaSeleccionada(){
                 }
                 let perf=await fechProtegidoPost('/buscarPerfilPorid',id);
                     if (perf.success){
-                    perfilMomentaneo= perf.retorno[0];
+                    perfilMomentaneo= perf.retorno;
                     }
-                if (!perfilMomentaneo.img_perfil) {
+                if (!perfilMomentaneo.imgPerfil) {
                     imgNotificacionseleccionada.src = "imagenesPerfil/fotoPerfil.svg";
-                }else{imgNotificacionseleccionada.src=perfilMomentaneo.img_perfil}
-                datosPersona.textContent=`Nombre:${perfilMomentaneo.nombre_persona}-Apellido:${perfilMomentaneo.apellido_persona}`;
-                datosPerfil.textContent=`Nombre del Perfil:${perfilMomentaneo.nombre_perfil}`;
+                }else{imgNotificacionseleccionada.src=perfilMomentaneo.imgPerfil}
+                datosPersona.textContent=`Nombre:${perfilMomentaneo.nombrePersona}-Apellido:${perfilMomentaneo.apellidoPersona}`;
+                datosPerfil.textContent=`Nombre del Perfil:${perfilMomentaneo.nombrePerfil}`;
                 let inte;
-                if(!perfilMomentaneo.intereses_perfil){
+                if(!perfilMomentaneo.interesesPerfil){
                     inte="No Contiene";
                 }else{
-                    inte=perfilMomentaneo.intereses_perfil;
+                    inte=perfilMomentaneo.interesesPerfil;
                 }
                 interesesPerfil.textContent=`Intereses:${inte}`;
-                if(!perfilMomentaneo.antecedentes_perfil){
+                if(!perfilMomentaneo.antecedentesPerfil){
                     inte="No Contiene";
                 }else{
-                    inte=perfilMomentaneo.antecedentes_perfil;
+                    inte=perfilMomentaneo.antecedentesPerfil;
                 }
                 antecedentesPerfil.textContent=`Antecedentes:${inte}`;
                 

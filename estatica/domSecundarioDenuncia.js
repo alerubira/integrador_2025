@@ -85,7 +85,6 @@ async function seleccionarDenuncia(event){
      aux=await fechProtegidoPost('/buscarPerfilPorid', {id: denuncia.idPerfilDenunciado});
      if(aux.success){
         perfilDenunciado=aux.retorno;
-        console.log(perfilDenunciado);
         if(!perfilDenunciado.imgPerfil){
             imgPerfilDenunciado.src='/Iconos/usuario.svg'
         }else{
@@ -111,7 +110,7 @@ async function seleccionarDenuncia(event){
     }    
 async function verComentarios(){
 let idImagen={
-       idImagen:imagenDenunciada.id_imagen
+       idImagen:imagenDenunciada.idImagen
   }
   aux=await traerComentarios(idImagen)
 }  
@@ -131,21 +130,17 @@ async function bajaPerfilDenunciado(){
     }
 }  
 async function bajaPerfilDenunciante() {
-    let idPerfil = {
-        idPerfil: perfilDenunciante.id_perfil
-    }
+   
     aux = await llenarDivCorroborar('Perfil Denunciante');
     if (aux) {
-    console.log(idPerfil)
+    aux=await fechProtegidoPost('/modificarActivoPerfil',perfilDenunciado) 
     }
 }
 async function bajaDenuncia(){
-    let idDenuncia={
-        idDenuncia:denuncia.idDenuncia
-    }
+   
     aux=await llenarDivCorroborar('Denuncia');
     if(aux){
-        console.log(idDenuncia)
+        aux=await fechProtegidoPost('/modificarActivoDenuncia',denuncia)
     }
 }
   

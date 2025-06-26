@@ -136,6 +136,8 @@ app.use('/traerComentarioContestadoPorId',rutaComunicacion);
 app.use('/',rutaDenuncia);
 app.use('/enviarDenuncia',rutaDenuncia)
 app.use('/buscarDenuncias',rutaDenuncia);
+app.use('/modificarActivoDenuncia',rutaDenuncia);
+
 
 console.log('Puerto asignado:', process.env.PORT)
 //

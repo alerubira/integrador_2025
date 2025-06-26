@@ -16,5 +16,13 @@ class Denuncia{
     static async consulta(){
         return await DenunciaData.consulta();
     }
+    static async modificarActivo(denuncia){
+        if(denuncia.activoDenuncia===1){
+            denuncia.activoDenuncia=0;
+        }else{
+            denuncia.activoDenuncia=1;
+        }
+        return await DenunciaData.modificarActivo(denuncia);
+    }
 }
 export { Denuncia };

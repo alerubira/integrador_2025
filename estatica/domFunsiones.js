@@ -303,18 +303,17 @@ async function traerComentarios(idImagen){
                       }
                    let perf=await fechProtegidoPost('/buscarPerfilPorid',idP);
                     if (perf.success){
-                                  let perfi=perf.retorno[0];
-                                  
+                                  let perfi=perf.retorno;
                                   let imgP=document.createElement('img');
                                   imgP.className="imgPerfil";
-                                  if(!perfi.img_perfil){
+                                  if(!perfi.imgPerfil){
                                          imgP.src="/imagenesPerfil/fotoPerfil.svg"
                                   }else{
-                                         imgP.src=perfi.img_perfil;
+                                         imgP.src=perfi.imgPerfil;
                                   }
                                   let h66=document.createElement('h6');
                                   h66.appendChild(imgP);
-                                  h66.append(`${perfi.nombre_persona} ${perfi.apellido_persona}Comento:${com.texto_comentario}`);
+                                  h66.append(`${perfi.nombrePersona} ${perfi.apellidoPersona}Comento:${com.texto_comentario}`);
                                   divComentariosImagen.appendChild(h66);
                                   
                                   let idC={

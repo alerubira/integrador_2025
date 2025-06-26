@@ -124,8 +124,31 @@ export async function buscarDenuncias(req,res){
         return retornarError(res);
     }
 }
+export async function modificarActivoDenuncia(req,res){
+    try {
+        let aux;
+        aux=await existeBd(req.body.idDenuncia,'denuncia','id_denuncia');
+        if(aux instanceof  Error){
+            console.log(`Error verificar si existe la denuncia: ${aux.message}`);
+            return retornarError(res)
+        }
+        if(!aux){
+            return retornarError400(res);
+        }
+        aux=await Denuncia.modificarActivo(req.body);
+        if(aux instanceof Error){
+            console.log(`Error al modificar el estado de la denuncia: ${aux.message}`);
+            return retornarError(res);
+        }
+        retornarExito(res,"Estado de la denuncia modificado correctamente",aux);
+    } catch (error) {
+        console.log(`Error al modificar el estado de la denuncia:${error}`);
+        return retornarError(res);
+    }
+}
 export default{
     traerMotivosDenuncia,
     enviarDenuncia,
-    buscarDenuncias
+    buscarDenuncias,
+    modificarActivoDenuncia
 }
