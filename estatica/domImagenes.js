@@ -21,7 +21,7 @@ document.getElementById('formSubirImagenAlbum').addEventListener('submit', async
     e.preventDefault();
    aux=await subirImagenConToken('/subirImagen', this);
    if(aux.success){
-       // Aquí puedes mostrar un mensaje de éxito en español
+       cartelExito(pagina,aux.responseBody.message)
        
        // Actualizar todas las imágenes con la nueva URL
     document.getElementById('nombreArchivoSubir').textContent = 'No se ha seleccionado archivo';

@@ -214,13 +214,17 @@ async function modificarEstadoAlbumPersonal(){
         return;
     }
    
-    aux = await fechProtegidoPost('/modificarActivoAlbumPersonal', albumSeleccionado);
-    if(aux.success){
-        limpiarCampos(limpiar);
-        fOcultar3();
-    }else{
-        alerta(pagina,aux.mensaje);
+    aux=await llenarDivCorroborar('Modificar estado Album');
+    if(aux){
+         aux = await fechProtegidoPost('/modificarActivoAlbumPersonal', albumSeleccionado);
+                if(aux.success){
+                    limpiarCampos(limpiar);
+                    fOcultar3();
+                }else{
+                    alerta(pagina,aux.mensaje);
+                }
     }
+   
 }
 
         
