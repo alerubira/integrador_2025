@@ -102,7 +102,7 @@ async function cargarNotificacionComentarioSeleccionado(){
                             perfilMomentaneo="";
                         perfilMomentaneo= perf.retorno;
                         }
-                 let id={id:notificacionSeleccionada.id_solicitante_notificacion}
+                 let id={id:notificacionSeleccionada.id_comentario}
                  aux=await fechProtegidoPost('/traerComentarioPorId',id);
                 if(aux.success){
                       comentarioCapturado=aux.retorno[0]
@@ -113,16 +113,16 @@ async function cargarNotificacionComentarioSeleccionado(){
                 datosPersonaC.textContent=`Nombre:${perfilMomentaneo.nombrePersona}-Apellido:${perfilMomentaneo.apellidoPersona}`;
                 datosPerfilC.textContent=`Nombre del Perfil:${perfilMomentaneo.nombrePerfil}`;
                 let inte;
-                if(!perfilMomentaneo.interesesPerfil){
+                if(!perfilMomentaneo.intereses){
                     inte="No Contiene";
                 }else{
-                    inte=perfilMomentaneo.interesesPerfil;
+                    inte=perfilMomentaneo.intereses;
                 }
                 interesesPerfilC.textContent=`Intereses:${inte}`;
-                if(!perfilMomentaneo.antecedentesPerfil){
+                if(!perfilMomentaneo.antecedentes){
                     inte="No Contiene";
                 }else{
-                    inte=perfilMomentaneo.antecedentesPerfil;
+                    inte=perfilMomentaneo.antecedentes;
                 }
                 antecedentesPerfilC.textContent=`Antecedentes:${inte}`; 
                 imgComentario.src=comentarioCapturado.url_imagen
@@ -145,7 +145,8 @@ async function cargarNotificacionComentarioContestadoSeleccionado(){
                      perfilMomentaneo="";
                     perfilMomentaneo= perf.retorno;
                       }
-                 let id={id:notificacionSeleccionada.id_solicitante_notificacion}
+                      console.log(notificacionSeleccionada)
+                 let id={id:notificacionSeleccionada.id_comentario_contestado}
                  aux=await fechProtegidoPost('/traerComentarioContestadoPorId',id);
                 if(aux.success){
                     //console.log(aux)
@@ -158,16 +159,16 @@ async function cargarNotificacionComentarioContestadoSeleccionado(){
                 datosPersonaC.textContent=`Nombre:${perfilMomentaneo.nombrePersona}-Apellido:${perfilMomentaneo.apellidoPersona}`;
                 datosPerfilC.textContent=`Nombre del Perfil:${perfilMomentaneo.nombrePerfil}`;
                 let inte;
-                if(!perfilMomentaneo.interesesPerfil){
+                if(!perfilMomentaneo.intereses){
                     inte="No Contiene";
                 }else{
-                    inte=perfilMomentaneo.interesesPerfil;
+                    inte=perfilMomentaneo.intereses;
                 }
                 interesesPerfilC.textContent=`Intereses:${inte}`;
-                if(!perfilMomentaneo.antecedentesPerfil){
+                if(!perfilMomentaneo.antecedentes){
                     inte="No Contiene";
                 }else{
-                    inte=perfilMomentaneo.antecedentesPerfil;
+                    inte=perfilMomentaneo.antecedentes;
                 }
                 antecedentesPerfilC.textContent=`Antecedentes:${inte}`; 
                 imgComentario.src=comentarioContestadoCapturado.url_imagen

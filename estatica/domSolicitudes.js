@@ -90,7 +90,7 @@ let solicitudCapturada;
 async function cargarSilicitudSeleccionada(){
            mostrar(divNotificacionSeleccionada);
                 
-                let id={id:notificacionSeleccionada.id_solicitante_notificacion}
+                let id={id:notificacionSeleccionada.id_solicitud_amistad}
                  aux=await fechProtegidoPost('/traerSolicitudPorId',id);
                 if(aux.success){
                       solicitudCapturada=aux.retorno[0]
@@ -101,24 +101,23 @@ async function cargarSilicitudSeleccionada(){
                 }
                 let perf=await fechProtegidoPost('/buscarPerfilPorid',id);
                     if (perf.success){
-                    perfilMomentaneo= perf.retorno[0];
-                    
-                        if (!perfilMomentaneo.img_perfil) {
+                    perfilMomentaneo= perf.retorno;
+                        if (!perfilMomentaneo.imgPerfil) {
                             imgNotificacionseleccionada.src = "imagenesPerfil/fotoPerfil.svg";
-                        }else{imgNotificacionseleccionada.src=perfilMomentaneo.img_perfil}
-                        datosPersona.textContent=`Nombre:${perfilMomentaneo.nombre_persona}-Apellido:${perfilMomentaneo.apellido_persona}`;
-                        datosPerfil.textContent=`Nombre del Perfil:${perfilMomentaneo.nombre_perfil}`;
+                        }else{imgNotificacionseleccionada.src=perfilMomentaneo.imgPerfil}
+                        datosPersona.textContent=`Nombre:${perfilMomentaneo.nombrePersona}-Apellido:${perfilMomentaneo.apellidoPersona}`;
+                        datosPerfil.textContent=`Nombre del Perfil:${perfilMomentaneo.nombrePerfil}`;
                         let inte;
-                        if(!perfilMomentaneo.intereses_perfil){
+                        if(!perfilMomentaneo.intereses){
                             inte="No Contiene";
                         }else{
-                            inte=perfilMomentaneo.intereses_perfil;
+                            inte=perfilMomentaneo.intereses;
                         }
                         interesesPerfil.textContent=`Intereses:${inte}`;
-                        if(!perfilMomentaneo.antecedentes_perfil){
+                        if(!perfilMomentaneo.antecedentes){
                             inte="No Contiene";
                         }else{
-                            inte=perfilMomentaneo.antecedentes_perfil;
+                            inte=perfilMomentaneo.antecedentes;
                         }
                         antecedentesPerfil.textContent=`Antecedentes:${inte}`;
                         if(solicitudCapturada.solicitud_aceptada===1){
@@ -136,7 +135,7 @@ async function cargarSilicitudSeleccionada(){
 
 async function cargarSolicitudAceptadaSeleccionada(){
      mostrar(divNotificacionSeleccionada);
-               let id={id:notificacionSeleccionada.id_solicitante_notificacion}
+               let id={id:notificacionSeleccionada.id_solicitud_amistad}
                 aux=await fechProtegidoPost('/traerSolicitudPorId',id);
                 if(aux.success){
                       solicitudCapturada=aux.retorno[0]
@@ -155,16 +154,16 @@ async function cargarSolicitudAceptadaSeleccionada(){
                 datosPersona.textContent=`Nombre:${perfilMomentaneo.nombrePersona}-Apellido:${perfilMomentaneo.apellidoPersona}`;
                 datosPerfil.textContent=`Nombre del Perfil:${perfilMomentaneo.nombrePerfil}`;
                 let inte;
-                if(!perfilMomentaneo.interesesPerfil){
+                if(!perfilMomentaneo.intereses){
                     inte="No Contiene";
                 }else{
-                    inte=perfilMomentaneo.interesesPerfil;
+                    inte=perfilMomentaneo.intereses;
                 }
                 interesesPerfil.textContent=`Intereses:${inte}`;
-                if(!perfilMomentaneo.antecedentesPerfil){
+                if(!perfilMomentaneo.antecedentes){
                     inte="No Contiene";
                 }else{
-                    inte=perfilMomentaneo.antecedentesPerfil;
+                    inte=perfilMomentaneo.antecedentes;
                 }
                 antecedentesPerfil.textContent=`Antecedentes:${inte}`;
                 
