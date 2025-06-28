@@ -119,7 +119,7 @@ try {
 export async function aceptarSolicitud(req,res){
 try {
     let acepta=req.body;
-    let aux=await existeBd(acepta.idSolicitanteNotificacion,'solicitud_amistad','id_solicitud_amistad');
+    let aux=await existeBd(acepta.idSolicitanteNotificacion,'solicitante_notificacion','id_solicitante_notificacion');
     if(aux instanceof Error){
         console.log(`Error al verificar si existe la solicitud de amistad:${aux}`)
         return retornarError(res)
@@ -163,7 +163,6 @@ try {
 }
 export async function crearComentario(req,res){
     try {
-        console.log(req.body);
         let aux,com;
         com=req.body;
         aux=await verificarYup(com,'comentario')

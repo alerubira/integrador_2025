@@ -11,9 +11,13 @@ class ComentarioContestadoData{
                          'INSERT INTO `comentario_contestado` (`id_comentario`,`texto_comentario_contestado`,`activo_comentario_contestado`,`fecha_comentario_contestado`) VALUES (?,?,?,NOW())',
                          [comContestado.idComentario,comContestado.textoComentarioContestado,true]
                      );
+                     const[SolicitudNotificacion]=await connection.execute(
+                        'INSERT INTO `solicitante_notificacion`(`id_comentario_contestado`) VALUES (?)',
+                        [idComentarioContestadoResult.insertId] 
+                        );
                      const [idANotificacionResult] = await connection.execute(
                          'INSERT INTO `notificacion`( `id_remitente`, `id_destinatario`, `id_solicitante_notificacion`, `id_tipo_notificacion`,`leida_notificacion`,`fecha_notificacion`) VALUES (?,?,?,?,?,NOW())',
-                         [comContestado.idRemitente,comContestado.idDestinatario,idComentarioContestadoResult.insertId,4,false]
+                         [comContestado.idRemitente,comContestado.idDestinatario,SolicitudNotificacion.insertId,4,false]
                      );
                     
                      await connection.commit();

@@ -1,11 +1,12 @@
 async function aceptarSolicitud() {
     //y contestar la solicitud
     let acep={
+        idSolicitudAmistad:notificacionSeleccionada.id_solicitud_amistad,
         idPerfilSeguido:perfil.idPerfil,
-        idPerfilSeguidor:perfilMomentaneo.id_perfil,
+        idPerfilSeguidor:perfilMomentaneo.idPerfil,
         nombreAlbumSeguidor:`${perfil.nombrePersona},${perfil.apellidoPersona},${perfil.nombrePerfil}`,
         idSolicitanteNotificacion:notificacionSeleccionada.id_solicitante_notificacion,
-        solicitudAceptada:true    
+        solicitudAceptada:true
     }
     aux=await fechProtegidoPost('/aceptarSolicitud',acep)
     if(aux.success){
@@ -15,8 +16,9 @@ async function aceptarSolicitud() {
 }
 async function rechazarSolicitud(){
     let acep={
+        idSolicitudAmistad:notificacionSeleccionada.id_solicitud_amistad,
         idPerfilSeguido:perfil.idPerfil,
-        idPerfilSeguidor:perfilMomentaneo.id_perfil,
+        idPerfilSeguidor:perfilMomentaneo.idPerfil,
         nombreAlbumSeguidor:`${perfil.nombrePersona},${perfil.apellidoPersona},${perfil.nombrePerfil}`,
         idSolicitanteNotificacion:notificacionSeleccionada.id_solicitante_notificacion,
         solicitudAceptada:false
