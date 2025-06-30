@@ -6,6 +6,7 @@ import{clientes }from "../index.js"
 import { verificarYup } from "./verificaryup.js";
 import {Comentario} from "../modelo/claseComentario.js"
 import {ComentarioContestado}from "../modelo/claseComentarioContestado.js"
+import { AlbumSeguidor } from "../modelo/claseAlbumSeguidor.js";
 export async function generarSilicitudAmistad(req,res){
     try {
         
@@ -24,6 +25,15 @@ export async function generarSilicitudAmistad(req,res){
         }
         if(!aux){
             return retornarError400(res)
+        }
+        aux=await AlbumSeguidor.buscarPorIds(req.body.idPerfilSolicitante,req.body.idPerfilSolicitado);
+        if(aux instanceof Error){
+            console.log(`Error al buscar el album seguidor:${aux}`)
+            return retornarError(res)
+        }
+        if(aux.length>0){
+            console.log("El Perfil que solicita la amistad ya es seguidor del perfil seleccionado");
+            return retornarError400(res,"El Perfil que solicita la amistad ya es seguidor del perfil seleccionado")
         }
         let sol=req.body;
         aux=await SolicitudAmistad.alta(sol);

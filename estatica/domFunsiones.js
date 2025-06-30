@@ -216,12 +216,12 @@ async function fechProtegidoPost(endpoin,objeto){
         const errorData = await response.json();
         console.log(errorData.message);
         alerta(pagina,`Hubo un inconveniente al realizar la tarea: ${errorData.message}`);
-        return succes=false;
+        return success=false;
       }
     } catch (error) {
      alerta(pagina,`Error al acceder al servidor: ${error.message}`);
       console.error('Error al acceder al endpoint protegido:', error.message);
-      return succes=false;
+      return success=false;
     }
      }
 

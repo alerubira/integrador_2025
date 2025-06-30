@@ -202,7 +202,7 @@ async function solicitarAmistad(){
         fOcultar();
         limpiarCampos(limpiar);
 
-    }else{alerta(aux)}
+    }
 
 }
 
