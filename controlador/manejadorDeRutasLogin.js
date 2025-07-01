@@ -267,6 +267,11 @@ export async function verificarLogin(req, res) {
               console.log( `Error al dar de alta  el Login:${aux}`)
               return retornarError(res);
               } 
+              aux=await login.adelantarInstancia();
+              if(aux instanceof Error){
+                console.log(`Error al adelantar la intancia del login:${aux}`);
+                return retornarError(res);
+              }
         }
         if (login.instancia == 1 && login.tipoAutorizacion === 5) {
             return res.status(200).json({
@@ -292,6 +297,16 @@ export async function verificarLogin(req, res) {
                 tipoAutorizacion: login.tipoAutorizacion,
                 idSolicitante: login.idProfesional
             });
+        }
+        aux =await Perfil.buscarActivoPorIdPerfil(login.idPerfil);
+        if(aux instanceof Error){
+          console.log(`Error al buscar el activo Perfil:${aux}`);
+          return retornarError(res,)
+        }
+        console.log(aux[0])
+        if(aux===0){
+          console.log('El Perfil no esta activo');
+          return retornarError400(res,"El Perfil  esta dado de baja,consulte con administracion");
         }
          if(login.tipoAutorizacion===5){
           const payload = {

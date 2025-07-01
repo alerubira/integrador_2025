@@ -59,6 +59,10 @@ class Login {
         const match = await compare(password, hashedPassword);
         return match; // Devuelve true si la contraseña coincide, de lo contrario false
     }
+     async adelantarInstancia(){
+        this.instancia = this.instancia+1;
+        return await LoginData.adelantarInstancia(this);
+    }
 }
 
 

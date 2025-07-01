@@ -51,5 +51,8 @@ class Perfil extends Persona{
     static async buscarPerfilSeguidoresPorApellido(frac,idPerf){
         return await PerfilData.buscarPerfilSegidoresrPorApellido(frac,idPerf);
     }
+    static async buscarActivoPorIdPerfil(id){
+        return await PerfilData.buscarActivoPoIdPerfil(id);
+    }
 }
 export{Perfil};

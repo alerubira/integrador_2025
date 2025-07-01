@@ -28,8 +28,13 @@ static async modificarActivoLogin(log){
 static async borrarClaveProvisoriaLogin(log){
   query = "UPDATE `login` SET `clave_login_provisoria`=null WHERE id_login=?";
   return await consulta1(query,log.idLogin);
-   }   
+   } 
+ static async adelantarInstancia(log){
+              query='UPDATE `login` SET instancia_login=? WHERE id_login=?';
+              return await consulta1(query,log.instancia,log.idLogin)
   }
+  }
+ 
 
 
 
