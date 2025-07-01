@@ -18,7 +18,7 @@ async function enviarComentario(){
         idPerfilImagen:imgSeleccionada.id_perfil,//agregar en la consulta idPrfil al que peryenece la imagen
         textoComentario:comen
         }
-        auw=await fechProtegidoPost('/enviarComentario',comentario);
+        aux=await fechProtegidoPost('/enviarComentario',comentario);
         if(aux.success){
            ocultarDosElementos(divImagenUsuarioSeleccionada,divImagenesUsuarios)
         }
@@ -145,7 +145,6 @@ async function cargarNotificacionComentarioContestadoSeleccionado(){
                      perfilMomentaneo="";
                     perfilMomentaneo= perf.retorno;
                       }
-                      console.log(notificacionSeleccionada)
                  let id={id:notificacionSeleccionada.id_comentario_contestado}
                  aux=await fechProtegidoPost('/traerComentarioContestadoPorId',id);
                 if(aux.success){

@@ -10,7 +10,6 @@ let mensageNoEncontrado1=document.getElementById('mensageNoEncontrado1')
      }
      aux =await fechProtegidoPost('/buscarPerfilSeguidoresPorApellido',a);
       perfilesBuscados=aux.retorno[0];
-      console.log(perfilesBuscados)
      if(aux.success){
        if(perfilesBuscados.length<1){
         mensageNoEncontrado1.style.display="block";
@@ -65,7 +64,6 @@ filtro="";//controlar que no se quede seleccionado
           idPerfilSeguidor:perfilSeleccionado.id_perfil,
           IdImgSeleccionada:imagenSeleccionada.idImagen
         }
-        console.log(imgComp)
         aux=await fechProtegidoPost('/agregarImgAlbumSeguidor',imgComp)
         if(aux.success){
           limpiarCampos(limpiar);

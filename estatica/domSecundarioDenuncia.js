@@ -126,9 +126,11 @@ async function bajaPerfilDenunciado(){
    
     aux=await llenarDivCorroborar('Perfil Denunciado');
     if(aux){
+       // console.log(perfilDenunciado);
            aux=await fechProtegidoPost('/modificarActivoPerfil',perfilDenunciado) 
     }
 }  
+
 async function bajaPerfilDenunciante() {
    
     aux = await llenarDivCorroborar('Perfil Denunciante');

@@ -141,7 +141,6 @@ async function cargarSolicitudAceptadaSeleccionada(){
                 aux=await fechProtegidoPost('/traerSolicitudPorId',id);
                 if(aux.success){
                       solicitudCapturada=aux.retorno[0]
-                      console.log(solicitudCapturada)
                 }
                 id={
                     id:solicitudCapturada.id_perfil_solicitado
