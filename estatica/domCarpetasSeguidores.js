@@ -64,10 +64,16 @@ filtro="";//controlar que no se quede seleccionado
           idPerfilSeguidor:perfilSeleccionado.id_perfil,
           IdImgSeleccionada:imagenSeleccionada.idImagen
         }
-        aux=await fechProtegidoPost('/agregarImgAlbumSeguidor',imgComp)
-        if(aux.success){
+         aux = await llenarDivCorroborar('Compartir esta Imagen');
+        if (aux) {
+          aux=await fechProtegidoPost('/agregarImgAlbumSeguidor',imgComp)
+            if(aux.success){
+              limpiarCampos(limpiar);
+            }
+        }else{
           limpiarCampos(limpiar);
         }
+       
         //divContenedorPerfil.style.display="none";
         
     /*imgPerfilSeleccionado.src=perfilSeleccionado.img_perfil;

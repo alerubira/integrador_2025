@@ -66,10 +66,12 @@ function llenarImagenes(imagenes,tipoVisibilidad){
                 h6m.textContent=`Imagen Publicada bajola Etiqueta:${tagFiltrado.nombre_tags}`
                 divImg.appendChild(h6m);
               }
-        h6.textContent=`USARIO:${imagen.nombre_persona},${imagen.apellido_persona},PERFIL:${imagen.nombre_perfil},TITULO:${imagen.titulo_imagen}`
-         divImg.appendChild(h6);
-       
-          divImg.addEventListener('click', function() {
+                h6.textContent=`USARIO:${imagen.nombre_persona},${imagen.apellido_persona},PERFIL:${imagen.nombre_perfil},TITULO:${imagen.titulo_imagen}`
+                divImg.appendChild(h6);
+               let h66=document.createElement('h6');
+                h66.textContent=`Fecha De Creacion :${formatearFecha(imagen.fecha_creacion_imagen)}`;
+                divImg.appendChild(h66)
+                divImg.addEventListener('click', function() {
                         capturarImagen(imagen);
                     });
          divImagenesUsuarios.appendChild(divImg);

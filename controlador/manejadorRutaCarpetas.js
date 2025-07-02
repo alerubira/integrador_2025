@@ -248,6 +248,7 @@ try {
     if(!aux){
         return retornarError400(res)
     }
+    //corroborar que la imagen a compartir ya no este compartida,que no este en el album seguidor
     aux=await AlbumImagen.alta(imgComp);
     if(aux instanceof Error){
         console.log(`Error al insertar la imagen compartida:${aux}`)

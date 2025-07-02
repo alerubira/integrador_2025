@@ -303,8 +303,7 @@ export async function verificarLogin(req, res) {
           console.log(`Error al buscar el activo Perfil:${aux}`);
           return retornarError(res,)
         }
-        console.log(aux[0])
-        if(aux===0){
+        if(aux[0].activo_perfil===0){
           console.log('El Perfil no esta activo');
           return retornarError400(res,"El Perfil  esta dado de baja,consulte con administracion");
         }

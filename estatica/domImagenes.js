@@ -179,14 +179,22 @@ async function modificarVisibilidadImagen(){
     aux= visibilidades.filter(vis=>vis.tituloVisibilidad===inputValue);
     if(!validar(aux.length<1,'La visibilidad no existe o es obligatoria')){bandera=false}
     imagenSeleccionada.idVisibilidad=aux[0].idVisibilidad;
-    aux=await fechProtegidoPost('/modificarVisibilidadImagen',imagenSeleccionada)        
-    if(aux.success){
-       limpiarCampos(limpiar);
-       fOcultar2();
-       eliminarHijos(dtlVisibilidad);
+     aux = await llenarDivCorroborar('Modificar Visibilidad Imagen');
+    if (aux) {
+      aux=await fechProtegidoPost('/modificarVisibilidadImagen',imagenSeleccionada)        
+               if(aux.success){
+                  limpiarCampos(limpiar);
+                  fOcultar2();
+                  eliminarHijos(dtlVisibilidad);
+               }else{
+                  alerta(pagina,'Algo salio mal al modificar la visibilidad')
+               }
     }else{
-      alerta(pagina,'Algo salio mal al modificar la visibilidad')
+                 limpiarCampos(limpiar);
+                  fOcultar2();
+                  eliminarHijos(dtlVisibilidad);
     }
+   
 }
 async function modificarActivoImagen(){
     aux=await llenarDivCorroborar('Alta o Baja de Imagen');

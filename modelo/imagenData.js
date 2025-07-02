@@ -62,7 +62,7 @@ class ImagenData{
         return await consulta1(query,img.activoImagen,img.idImagen);
     }
     static async BuscarImagenesPublicas(){
-        query='SELECT img.id_imagen,img.url_imagen,img.fecha_creacion_imagen,img.titulo_imagen,img.caption_imagen,pe.img_perfil,pe.nombre_perfil,per.nombre_persona,per.apellido_persona FROM imagen img JOIN album_personal ap ON img.id_album_personal=ap.id_album_personal JOIN perfil pe on ap.id_perfil_personal=pe.id_perfil JOIN persona per ON pe.id_persona=per.id_persona WHERE img.id_visibilidad=1&&img.activo_imagen=1;'
+        query='SELECT img.id_imagen,img.url_imagen,img.fecha_creacion_imagen,img.titulo_imagen,img.caption_imagen,pe.img_perfil,pe.nombre_perfil,per.nombre_persona,per.apellido_persona FROM imagen img JOIN album_personal ap ON img.id_album_personal=ap.id_album_personal JOIN perfil pe on ap.id_perfil_personal=pe.id_perfil JOIN persona per ON pe.id_persona=per.id_persona WHERE img.id_visibilidad=1&&img.activo_imagen=1 ORDER BY img.fecha_creacion_imagen DESC;'
         return await consulta1(query);
     }
     static async buscarImagenesPublicasPublicas(){
