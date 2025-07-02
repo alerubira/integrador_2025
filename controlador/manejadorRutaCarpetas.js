@@ -248,7 +248,14 @@ try {
     if(!aux){
         return retornarError400(res)
     }
-    //corroborar que la imagen a compartir ya no este compartida,que no este en el album seguidor
+    aux=await AlbumImagen.buscarPorIds(imgComp.idAlbumSegidor,imgComp.IdImgSeleccionada);
+    if(aux instanceof Error){
+        console.log(`Error al buscar Album seguidor por ids:${aux}`);
+        return retornarError(res);
+    }
+    if(aux.length>0){
+        return retornarError400(res,'Esta imagen ya fue compartida con el mismo Perfil Seguidor')
+    }
     aux=await AlbumImagen.alta(imgComp);
     if(aux instanceof Error){
         console.log(`Error al insertar la imagen compartida:${aux}`)

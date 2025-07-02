@@ -10,6 +10,9 @@ class AlbumImagen{
     static async alta(imgComp){
        return await AlbumImagenData.alta(imgComp)
     }
+    static async buscarPorIds(idAlbumSeguidor,idImagen){
+        return await AlbumImagenData.buscarPorIds(idAlbumSeguidor,idImagen);
+    }
 }
 
 export{AlbumImagen}
